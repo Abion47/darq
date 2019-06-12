@@ -1,6 +1,5 @@
-import 'package:darq/darq.dart';
-
-import 'package:darq/src/enumerable_iterable.dart';
+import 'enumerable.dart';
+import 'errors.dart';
 
 class EnumerableReducers {
   static num SumNum(Enumerable<num> enumerable) {

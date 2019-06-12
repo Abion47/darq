@@ -11,3 +11,4 @@ environment:
 
 dev_dependencies: 
   test: ^1.6.4
+  pedantic: ^1.7.0

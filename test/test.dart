@@ -1,5 +1,3 @@
-import 'dart:math' as Math;
-
 import 'package:darq/darq.dart';
 import 'package:darq/src/errors.dart';
 import 'package:darq/src/enumerable.dart';

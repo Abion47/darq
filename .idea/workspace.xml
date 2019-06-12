@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5419590-18ab-45db-a839-6b69d11e2235" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerable.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/range_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/range_enumerable.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/repeat_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/repeat_enumerable.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/ordered_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/ordered_enumerable.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/src/reducers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/reducers.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/set.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/set.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,22 +29,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/test.dart">
+        <entry file="file://$PROJECT_DIR$/lib/src/ordered_enumerable.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3211">
-              <caret line="578" column="17" selection-start-line="578" selection-start-column="17" selection-end-line="578" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/enumerable.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25381">
-              <caret line="1493" column="74" selection-start-line="1493" selection-start-column="74" selection-end-line="1493" selection-end-column="74" />
+            <state relative-caret-position="865">
+              <caret line="141" column="6" selection-start-line="141" selection-start-column="6" selection-end-line="141" selection-end-column="6" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -40,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/src/reducers.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+            <state relative-caret-position="848">
+              <caret line="211" column="7" selection-start-line="211" selection-start-column="7" selection-end-line="211" selection-end-column="7" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -53,55 +53,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/typedefs.dart">
+        <entry file="file://$PROJECT_DIR$/lib/src/set.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="48" column="61" selection-start-line="48" selection-start-column="61" selection-end-line="48" selection-end-column="61" />
+            <state relative-caret-position="850">
+              <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/main.dart">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/test.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pubspec.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/src/equality_comparer.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+            <state>
+              <folding>
+                <element signature="e#2#34#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -132,10 +101,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/src/enumerables/of_type_enumerable.dart" />
-        <option value="$PROJECT_DIR$/lib/src/enumerables/prepend_enumerable.dart" />
-        <option value="$PROJECT_DIR$/lib/src/enumerables/range_enumerable.dart" />
-        <option value="$PROJECT_DIR$/lib/src/enumerables/repeat_enumerable.dart" />
         <option value="$PROJECT_DIR$/lib/src/enumerables/reverse_enumerable.dart" />
         <option value="$PROJECT_DIR$/lib/src/enumerables/select_enumerable.dart" />
         <option value="$PROJECT_DIR$/lib/src/enumerables/select_many_enumerable.dart" />
@@ -171,18 +136,22 @@
         <option value="$PROJECT_DIR$/lib/src/iterators/where_iterator.dart" />
         <option value="$PROJECT_DIR$/lib/src/iterators/zip_iterator.dart" />
         <option value="$PROJECT_DIR$/lib/src/enumerable_iterator.dart" />
-        <option value="$PROJECT_DIR$/lib/src/set.dart" />
-        <option value="$PROJECT_DIR$/lib/src/ordered_enumerable.dart" />
-        <option value="$PROJECT_DIR$/test/test.dart" />
         <option value="$PROJECT_DIR$/lib/src/equality_comparer.dart" />
         <option value="$PROJECT_DIR$/lib/src/typedefs.dart" />
         <option value="$PROJECT_DIR$/example/main.dart" />
         <option value="$PROJECT_DIR$/LICENSE" />
         <option value="$PROJECT_DIR$/CHANGELOG" />
-        <option value="$PROJECT_DIR$/lib/src/enumerable.dart" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
+        <option value="$PROJECT_DIR$/analysis_options.yaml" />
+        <option value="$PROJECT_DIR$/lib/src/enumerable.dart" />
+        <option value="$PROJECT_DIR$/lib/src/enumerables/range_enumerable.dart" />
+        <option value="$PROJECT_DIR$/lib/src/enumerables/repeat_enumerable.dart" />
+        <option value="$PROJECT_DIR$/lib/src/ordered_enumerable.dart" />
         <option value="$PROJECT_DIR$/lib/src/reducers.dart" />
+        <option value="$PROJECT_DIR$/lib/src/set.dart" />
+        <option value="$PROJECT_DIR$/test/test.dart" />
       </list>
     </option>
   </component>
@@ -192,7 +161,9 @@
     <option name="width" value="2576" />
     <option name="height" value="1456" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -267,12 +238,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DARQ_Tests - 2019.06.12 at 08h 56m 29s.xml">
-      <configuration name="DARQ Tests" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="DARQ_Tests - 2019.06.12 at 08h 56m 55s.xml">
-      <configuration name="DARQ Tests" configurationId="DartTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="DARQ_Tests - 2019.06.12 at 08h 57m 59s.xml">
       <configuration name="DARQ Tests" configurationId="DartTestRunConfigurationType" />
     </history-entry>
@@ -297,6 +262,12 @@
     <history-entry file="DARQ_Tests - 2019.06.12 at 09h 58m 14s.xml">
       <configuration name="DARQ Tests" configurationId="DartTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="DARQ_Tests - 2019.06.12 at 11h 36m 29s.xml">
+      <configuration name="DARQ Tests" configurationId="DartTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="DARQ_Tests - 2019.06.12 at 11h 51m 47s.xml">
+      <configuration name="DARQ Tests" configurationId="DartTestRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -311,59 +282,39 @@
     <frame x="-8" y="-8" width="2576" height="1456" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Image Layers" />
       <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
+      <window_info id="Image Layers" />
       <window_info id="Favorites" side_tool="true" />
+      <window_info id="Capture Tool" />
+      <window_info id="UI Designer" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13314785" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Dart Analysis" weight="0.2244898" />
-      <window_info anchor="bottom" id="Version Control" />
+      <window_info active="true" anchor="bottom" id="Dart Analysis" visible="true" weight="0.2244898" />
       <window_info anchor="bottom" id="Terminal" weight="0.32199547" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Flutter Performance" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" weight="0.32955405" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32955405" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32955405" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32955405" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32955405" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Flutter Inspector" />
       <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Flutter Inspector" />
       <window_info anchor="right" id="Flutter Outline" visible="true" weight="0.24165341" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Capture Analysis" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/src/enumerables/repeat_enumerable.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="37" selection-start-column="37" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/enumerables/reverse_enumerable.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="37" selection-start-column="37" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/enumerables/select_enumerable.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/enumerables/select_many_enumerable.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -640,23 +591,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/set.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/ordered_enumerable.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="39" column="28" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/lookup.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-306">
@@ -694,23 +628,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3211">
-          <caret line="578" column="17" selection-start-line="578" selection-start-column="17" selection-end-line="578" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/equality_comparer.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -725,13 +642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/enumerable_iterable.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="524">
@@ -739,10 +649,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="48" lean-forward="true" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis_options.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/enumerable.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25381">
-          <caret line="1493" column="74" selection-start-line="1493" selection-start-column="74" selection-end-line="1493" selection-end-column="74" />
+        <state relative-caret-position="344">
+          <caret line="1426" column="5" selection-start-line="1426" selection-start-column="5" selection-end-line="1426" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/enumerables/range_enumerable.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="28" selection-start-column="28" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/enumerables/repeat_enumerable.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="28" selection-start-column="28" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/ordered_enumerable.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="865">
+          <caret line="141" column="6" selection-start-line="141" selection-start-column="6" selection-end-line="141" selection-end-column="6" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -751,10 +702,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/reducers.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+        <state relative-caret-position="848">
+          <caret line="211" column="7" selection-start-line="211" selection-start-column="7" selection-end-line="211" selection-end-column="7" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/set.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="59" column="7" selection-start-line="59" selection-start-column="7" selection-end-line="59" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#2#34#0" expanded="true" />
           </folding>
         </state>
       </provider>

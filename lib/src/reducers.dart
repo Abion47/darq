@@ -107,10 +107,11 @@ class EnumerableReducers {
     num min;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
-      if (min == null)
+      if (min == null) {
         min = iterator.current;
-      else
+      } else {
         min = min < iterator.current ? min : iterator.current;
+      }
     } while (iterator.moveNext());
     return min;
   }
@@ -120,10 +121,11 @@ class EnumerableReducers {
     int min;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
-      if (min == null)
+      if (min == null) {
         min = iterator.current;
-      else
+      } else {
         min = min < iterator.current ? min : iterator.current;
+      }
     } while (iterator.moveNext());
     return min;
   }
@@ -133,10 +135,11 @@ class EnumerableReducers {
     double min;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
-      if (min == null)
+      if (min == null) {
         min = iterator.current;
-      else
+      } else {
         min = min < iterator.current ? min : iterator.current;
+      }
     } while (iterator.moveNext());
     return min;
   }
@@ -146,10 +149,11 @@ class EnumerableReducers {
     String min;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
-      if (min == null)
+      if (min == null) {
         min = iterator.current;
-      else
+      } else {
         min = min.compareTo(iterator.current) < 0 ? min : iterator.current;
+      }
     } while (iterator.moveNext());
     return min;
   }
@@ -159,10 +163,11 @@ class EnumerableReducers {
     num max;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
-      if (max == null)
+      if (max == null) {
         max = iterator.current;
-      else
+      } else {
         max = max > iterator.current ? max : iterator.current;
+      }
     } while (iterator.moveNext());
     return max;
   }
@@ -172,10 +177,11 @@ class EnumerableReducers {
     int max;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
-      if (max == null)
+      if (max == null) {
         max = iterator.current;
-      else
+      } else {
         max = max > iterator.current ? max : iterator.current;
+      }
     } while (iterator.moveNext());
     return max;
   }
@@ -185,10 +191,11 @@ class EnumerableReducers {
     double max;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
-      if (max == null)
+      if (max == null) {
         max = iterator.current;
-      else
+      } else {
         max = max > iterator.current ? max : iterator.current;
+      }
     } while (iterator.moveNext());
     return max;
   }
@@ -198,10 +205,11 @@ class EnumerableReducers {
     String max;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
-      if (max == null)
+      if (max == null) {
         max = iterator.current;
-      else
+      } else {
         max = max.compareTo(iterator.current) > 0 ? max : iterator.current;
+      }
     } while (iterator.moveNext());
     return max;
   }

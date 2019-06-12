@@ -23,7 +23,9 @@ class ComparableSet<TValue> {
   bool contains(TValue value) => find(value, false);
 
   void addAll(Iterable<TValue> other) {
-    for (final value in other) add(value);
+    for (final value in other) {
+      add(value);
+    }
   }
 
   bool remove(TValue value) {
@@ -33,10 +35,11 @@ class ComparableSet<TValue> {
     for (int i = buckets[bucket] - 1; i >= 0; last = i, i = slots[i].next) {
       if (slots[i].hashCode == hash &&
           comparer.compare(slots[i].value, value)) {
-        if (last < 0)
+        if (last < 0) {
           buckets[bucket] = slots[i].next + 1;
-        else
+        } else {
           slots[last].next = slots[i].next;
+        }
         slots[i].hashCode = -1;
         slots[i].value = null;
         slots[i].next = freeList;
@@ -52,8 +55,10 @@ class ComparableSet<TValue> {
     for (int i = buckets[hash % buckets.length] - 1;
         i >= 0;
         i = slots[i].next) {
-      if (slots[i].hashCode == hash && comparer.compare(slots[i].value, value))
+      if (slots[i].hashCode == hash &&
+          comparer.compare(slots[i].value, value)) {
         return true;
+      }
     }
 
     if (shouldAdd) {

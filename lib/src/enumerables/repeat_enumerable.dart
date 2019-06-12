@@ -1,5 +1,4 @@
 import '../enumerable.dart';
-import '../enumerable_with_source.dart';
 
 class RepeatEnumerable<T> extends Enumerable<T> {
   final T value;

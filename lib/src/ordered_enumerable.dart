@@ -36,7 +36,7 @@ class InternalOrderedEnumerable<TValue, TKey>
   Iterator<TValue> get iterator => iterate().iterator;
   Iterable<TValue> iterate() sync* {
     final buffer = source.ToList();
-    if (buffer.length > 0) {
+    if (buffer.isNotEmpty) {
       final sorter = getEnumerableSorter(null);
       final map = sorter.sort(buffer, buffer.length);
       yield* OrderedBuffer(buffer, map);
@@ -68,8 +68,12 @@ abstract class EnumerableSorter<T> {
       int j = right;
       int x = map[i + ((j - i) >> 1)];
       do {
-        while (i < map.length && compareKeys(x, map[i]) > 0) i++;
-        while (j >= 0 && compareKeys(x, map[j]) < 0) j--;
+        while (i < map.length && compareKeys(x, map[i]) > 0) {
+          i++;
+        }
+        while (j >= 0 && compareKeys(x, map[j]) < 0) {
+          j--;
+        }
         if (i > j) break;
         if (i < j) {
           int temp = map[i];
@@ -108,7 +112,9 @@ class InternalEnumerableSorter<TValue, TKey> extends EnumerableSorter<TValue> {
   @override
   void computeKeys(List<TValue> elements, int count) {
     keys = List<TKey>(count);
-    for (int i = 0; i < count; i++) keys[i] = keySelector(elements[i]);
+    for (int i = 0; i < count; i++) {
+      keys[i] = keySelector(elements[i]);
+    }
     if (next != null) next.computeKeys(elements, count);
   }
 
@@ -132,6 +138,8 @@ class OrderedBuffer<T> extends Iterable<T> {
   @override
   Iterator<T> get iterator => iterate().iterator;
   Iterable<T> iterate() sync* {
-    for (var index in orderedMap) yield data[index];
+    for (var index in orderedMap) {
+      yield data[index];
+    }
   }
 }

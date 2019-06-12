@@ -128,8 +128,9 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// [count] must be a non-negative number.
   factory Enumerable.repeat(T value, int count) {
-    if (count < 0)
+    if (count < 0) {
       throw ArgumentError('`count` must be a non-negative integer.');
+    }
     if (count == 0) return Enumerable<T>.empty();
     return RepeatEnumerable<T>(value, count);
   }
@@ -144,10 +145,12 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// [increment] must be a non-zero number.
   static Enumerable<int> range(int start, int count, {int increment = 1}) {
-    if (count < 0)
+    if (count < 0) {
       throw ArgumentError('`count` must be a non-negative integer.');
-    if (increment == 0)
+    }
+    if (increment == 0) {
       throw ArgumentError('`increment` must be a non-zero integer.');
+    }
     if (count == 0) return Enumerable<int>.empty();
     return RangeEnumerable(start, count, increment);
   }
@@ -188,7 +191,7 @@ abstract class Enumerable<T> extends Iterable<T> {
         T != num &&
         T != int &&
         T != double &&
-        T != String)
+        T != String) {
       throw ArgumentError(
           '`aggregator` must not be null or the type of this enumerable must be one of the following: ${[
         num,
@@ -196,16 +199,21 @@ abstract class Enumerable<T> extends Iterable<T> {
         double,
         String
       ]}');
+    }
 
     if (aggregator == null) {
-      if (T == num)
+      if (T == num) {
         return EnumerableReducers.SumNum(this as Enumerable<num>) as T;
-      if (T == int)
+      }
+      if (T == int) {
         return EnumerableReducers.SumInt(this as Enumerable<int>) as T;
-      if (T == double)
+      }
+      if (T == double) {
         return EnumerableReducers.SumDouble(this as Enumerable<double>) as T;
-      if (T == String)
+      }
+      if (T == String) {
         return EnumerableReducers.SumString(this as Enumerable<String>) as T;
+      }
       throw UnexpectedStateError();
     }
 
@@ -224,7 +232,9 @@ abstract class Enumerable<T> extends Iterable<T> {
     if (!iterator.moveNext()) return result;
 
     result = aggregator(result, iterator.current);
-    while (iterator.moveNext()) result = aggregator(result, iterator.current);
+    while (iterator.moveNext()) {
+      result = aggregator(result, iterator.current);
+    }
 
     return result;
   }
@@ -248,8 +258,9 @@ abstract class Enumerable<T> extends Iterable<T> {
     assert(condition != null || T == bool);
 
     if (condition == null) {
-      if (T == bool)
+      if (T == bool) {
         return EnumerableReducers.AllBool(this as Enumerable<bool>);
+      }
       throw UnexpectedStateError();
     }
 
@@ -280,8 +291,9 @@ abstract class Enumerable<T> extends Iterable<T> {
     assert(condition != null || T == bool);
 
     if (condition == null) {
-      if (T == bool)
+      if (T == bool) {
         return EnumerableReducers.AnyBool(this as Enumerable<bool>);
+      }
       throw UnexpectedStateError();
     }
 
@@ -312,15 +324,19 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// The [Average] function will iterate over every element in the enumerable.
   T Average() {
-    if (T != num && T != int && T != double)
+    if (T != num && T != int && T != double) {
       throw IncompatibleTypeError([num, int, double]);
+    }
 
-    if (T == num)
+    if (T == num) {
       return EnumerableReducers.AverageNum(this as Enumerable<num>) as T;
-    if (T == int)
+    }
+    if (T == int) {
       return EnumerableReducers.AverageInt(this as Enumerable<int>) as T;
-    if (T == double)
+    }
+    if (T == double) {
       return EnumerableReducers.AverageDouble(this as Enumerable<double>) as T;
+    }
     throw UnexpectedStateError();
   }
 
@@ -860,7 +876,11 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// The [Max] function will iterate over every element in the enumerable.
   T Max([EqualityComparer<T> comparer]) {
-    if (comparer == null && T != num && T != int && T != double && T != String)
+    if (comparer == null &&
+        T != num &&
+        T != int &&
+        T != double &&
+        T != String) {
       throw ArgumentError(
           '`comparer` must not be null or the type of this enumerable must be one of the following: ${[
         num,
@@ -868,23 +888,28 @@ abstract class Enumerable<T> extends Iterable<T> {
         double,
         String
       ]}');
+    }
 
     if (comparer == null) {
-      if (T == num)
+      if (T == num) {
         return EnumerableReducers.MaxNum(this as Enumerable<num>) as T;
-      if (T == int)
+      }
+      if (T == int) {
         return EnumerableReducers.MaxInt(this as Enumerable<int>) as T;
-      if (T == double)
+      }
+      if (T == double) {
         return EnumerableReducers.MaxDouble(this as Enumerable<double>) as T;
-      if (T == String)
+      }
+      if (T == String) {
         return EnumerableReducers.MaxString(this as Enumerable<String>) as T;
+      }
       throw UnexpectedStateError();
     }
 
     final iterator = this.iterator;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
 
-    T max = null;
+    T max;
     do {
       if (max == null)
         max = iterator.current;
@@ -917,7 +942,11 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// The [Min] function will iterate over every element in the enumerable.
   T Min([EqualityComparer<T> comparer]) {
-    if (comparer == null && T != num && T != int && T != double && T != String)
+    if (comparer == null &&
+        T != num &&
+        T != int &&
+        T != double &&
+        T != String) {
       throw ArgumentError(
           '`comparer` must not be null or the type of this enumerable must be one of the following: ${[
         num,
@@ -925,23 +954,28 @@ abstract class Enumerable<T> extends Iterable<T> {
         double,
         String
       ]}');
+    }
 
     if (comparer == null) {
-      if (T == num)
+      if (T == num) {
         return EnumerableReducers.MinNum(this as Enumerable<num>) as T;
-      if (T == int)
+      }
+      if (T == int) {
         return EnumerableReducers.MinInt(this as Enumerable<int>) as T;
-      if (T == double)
+      }
+      if (T == double) {
         return EnumerableReducers.MinDouble(this as Enumerable<double>) as T;
-      if (T == String)
+      }
+      if (T == String) {
         return EnumerableReducers.MinString(this as Enumerable<String>) as T;
+      }
       throw UnexpectedStateError();
     }
 
     final iterator = this.iterator;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
 
-    T min = null;
+    T min;
     do {
       if (min == null)
         min = iterator.current;
@@ -1084,8 +1118,9 @@ abstract class Enumerable<T> extends Iterable<T> {
 
     while (_thisIterator.moveNext()) {
       if (_otherIterator.moveNext()) {
-        if (!comparer.compare(_thisIterator.current, _otherIterator.current))
+        if (!comparer.compare(_thisIterator.current, _otherIterator.current)) {
           return false;
+        }
       } else {
         return false;
       }
@@ -1130,9 +1165,10 @@ abstract class Enumerable<T> extends Iterable<T> {
     if (condition != null) {
       do {
         if (condition(_iterator.current)) {
-          if (valueSet)
+          if (valueSet) {
             throw OperationError(
                 'More than one element matches the condition.');
+          }
 
           value = _iterator.current;
           valueSet = true;
@@ -1145,8 +1181,9 @@ abstract class Enumerable<T> extends Iterable<T> {
     }
 
     do {
-      if (valueSet)
+      if (valueSet) {
         throw OperationError('More than one element exists in the enumerable.');
+      }
 
       value = _iterator.current;
       valueSet = true;
@@ -1189,9 +1226,10 @@ abstract class Enumerable<T> extends Iterable<T> {
     if (condition != null) {
       do {
         if (condition(_iterator.current)) {
-          if (valueSet)
+          if (valueSet) {
             throw OperationError(
                 'More than one element matches the condition.');
+          }
 
           value = _iterator.current;
           valueSet = true;
@@ -1204,8 +1242,9 @@ abstract class Enumerable<T> extends Iterable<T> {
     }
 
     do {
-      if (valueSet)
+      if (valueSet) {
         throw OperationError('More than one element exists in the enumerable.');
+      }
 
       value = _iterator.current;
       valueSet = true;
@@ -1266,30 +1305,34 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// If the type of the enumerable is not a numeric primitive, the [selector]
   /// function must be provided. Otherwise, an [ArgumentError] is thrown.
   TResult Sum<TResult extends num>([Selector<T, TResult> selector]) {
-    if (selector == null && T != num && T != int && T != double)
+    if (selector == null && T != num && T != int && T != double) {
       throw ArgumentError(
           '`selector` must not be null or the type of this enumerable must be one of the following: ${[
         num,
         int,
         double
       ]}');
+    }
 
     if (selector == null) {
       if (T == num) return EnumerableReducers.SumNum(this as Enumerable<num>);
-      if (T == int)
+      if (T == int) {
         return EnumerableReducers.SumInt(this as Enumerable<int>) as TResult;
-      if (T == double)
+      }
+      if (T == double) {
         return EnumerableReducers.SumDouble(this as Enumerable<double>)
             as TResult;
+      }
       throw UnexpectedStateError();
     }
 
     num sum;
 
-    if (TResult == int)
+    if (TResult == int) {
       sum = 0;
-    else
+    } else {
       sum = 0.0;
+    }
 
     final _iterator = this.iterator;
 
@@ -1355,9 +1398,10 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// enumerable will be unchanged.
   Enumerable<T> ThenBy<TKey>(Selector<T, TKey> keySelector,
       {EqualityComparer<TKey> keyComparer}) {
-    if (!(this is InternalOrderedEnumerable))
+    if (!(this is InternalOrderedEnumerable)) {
       throw OperationError(
           'ThenBy must be called immediately following a call to OrderBy, OrderByDescending, ThenBy, or ThenByDescending.');
+    }
     return (this as dynamic)
         .createOrderedEnumerable<TKey>(keySelector, keyComparer, false);
   }
@@ -1385,9 +1429,10 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// enumerable will be unchanged.
   Enumerable<T> ThenByDescending<TKey>(Selector<T, TKey> keySelector,
       {EqualityComparer<TKey> keyComparer}) {
-    if (!(this is InternalOrderedEnumerable))
+    if (!(this is InternalOrderedEnumerable)) {
       throw OperationError(
           'ThenByDescending must be called immediately following a call to OrderBy, OrderByDescending, ThenBy, or ThenByDescending.');
+    }
     return (this as dynamic)
         .createOrderedEnumerable<TKey>(keySelector, keyComparer, true);
   }

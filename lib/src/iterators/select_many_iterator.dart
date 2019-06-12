@@ -1,8 +1,10 @@
 import '../enumerables/select_many_enumerable.dart';
 import '../enumerable_iterator.dart';
 
-class SelectManyIterator<TSource, TResult> extends EnumerableIterator<TSource, TResult> {
-  SelectManyIterator(SelectManyEnumerable<TSource, TResult> enumerable) : super.of(enumerable);
+class SelectManyIterator<TSource, TResult>
+    extends EnumerableIterator<TSource, TResult> {
+  SelectManyIterator(SelectManyEnumerable<TSource, TResult> enumerable)
+      : super.of(enumerable);
 
   Iterator<TResult> _innerIterator;
 
@@ -23,7 +25,9 @@ class SelectManyIterator<TSource, TResult> extends EnumerableIterator<TSource, T
 
     if (_innerIterator == null) {
       if (sourceIterator.moveNext()) {
-        _innerIterator = (enumerable as SelectManyEnumerable<TSource, TResult>).selector(sourceIterator.current).iterator;
+        _innerIterator = (enumerable as SelectManyEnumerable<TSource, TResult>)
+            .selector(sourceIterator.current)
+            .iterator;
 
         if (_innerIterator.moveNext()) {
           current = _innerIterator.current;

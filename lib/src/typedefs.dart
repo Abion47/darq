@@ -42,7 +42,8 @@ typedef TResult GroupSelector<TKey, TSource, TResult>(TKey key, TSource group);
 
 /// Takes an element of type `TFirst` and an element of type `TSecond` and maps
 /// them into a value of type `TResult`, returning the value.
-typedef TResult ZipSelector<TFirst, TSecond, TResult>(TFirst first, TSecond second);
+typedef TResult ZipSelector<TFirst, TSecond, TResult>(
+    TFirst first, TSecond second);
 
 /// Takes an key of type `TKey` and a value of type `TValue` and maps
 /// them into a value of type `TResult`, returning the value.

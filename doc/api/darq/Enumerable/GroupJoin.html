@@ -193,9 +193,16 @@ collection that match on the key.</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">Enumerable&lt;TResult&gt; GroupJoin&lt;TInner, TKey, TResult&gt;(Iterable&lt;TInner&gt; inner, Selector&lt;T, TKey&gt; outerKeySelector, Selector&lt;TInner, TKey&gt; innerKeySelector, GroupSelector&lt;T, Iterable&lt;TInner&gt;, TResult&gt; resultSelector, {EqualityComparer&lt;TKey&gt; keyComparer}) {
-  assert(inner != null &amp;&amp; outerKeySelector != null &amp;&amp; innerKeySelector != null);
-  return GroupJoinEnumerable&lt;T, TInner, TKey, TResult&gt;(this, inner, outerKeySelector, innerKeySelector, resultSelector, keyComparer);
+      <pre class="language-dart"><code class="language-dart">Enumerable&lt;TResult&gt; GroupJoin&lt;TInner, TKey, TResult&gt;(
+    Iterable&lt;TInner&gt; inner,
+    Selector&lt;T, TKey&gt; outerKeySelector,
+    Selector&lt;TInner, TKey&gt; innerKeySelector,
+    GroupSelector&lt;T, Iterable&lt;TInner&gt;, TResult&gt; resultSelector,
+    {EqualityComparer&lt;TKey&gt; keyComparer}) {
+  assert(
+      inner != null &amp;&amp; outerKeySelector != null &amp;&amp; innerKeySelector != null);
+  return GroupJoinEnumerable&lt;T, TInner, TKey, TResult&gt;(this, inner,
+      outerKeySelector, innerKeySelector, resultSelector, keyComparer);
 }</code></pre>
     </section>
 
@@ -208,7 +215,7 @@ collection that match on the key.</p>
 
 <footer>
   <span class="no-break">
-    darq 0.0.1
+    darq 0.1.0
   </span>
 
   

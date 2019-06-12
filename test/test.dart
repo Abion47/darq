@@ -7,7 +7,6 @@ import 'package:darq/src/enumerables/value_enumerable.dart';
 import 'package:test/test.dart';
 
 void main() {
-
   test('Creating an enumerable', () {
     var list = [0, 1, 2, 3, 4];
     var e = E(list);
@@ -23,10 +22,10 @@ void main() {
     var list2 = ['a', 'b', 'c', 'd', 'e'];
     var result2 = E(list2).Aggregate((a, b) => a + b);
     expect(result2, equals('abcde'));
-    
+
     var result3 = E(list2).Aggregate((a, b) => a + b, 'xyz');
     expect(result3, equals('xyzabcde'));
-    
+
     var list4 = [2, 2, 2, 2, 2, 2, 2, 2];
     var result4 = E(list4).Aggregate((a, b) => a * b, 1);
     expect(result4, equals(256));
@@ -44,7 +43,7 @@ void main() {
     var list3 = [2, 4, 6, 8];
     var result3 = E(list3).All((x) => x.isEven);
     expect(result3, isTrue);
-    
+
     var list4 = [2, 4, 6, 7];
     var result4 = E(list4).All((x) => x.isEven);
     expect(result4, isFalse);
@@ -62,7 +61,7 @@ void main() {
     var list3 = [2, 4, 6, 8];
     var result3 = E(list3).Any((x) => x.isOdd);
     expect(result3, isFalse);
-    
+
     var list4 = [2, 4, 6, 7];
     var result4 = E(list4).Any((x) => x.isOdd);
     expect(result4, isTrue);
@@ -116,7 +115,7 @@ void main() {
     );
     var result2 = E(list2).Contains('D', comparer: comparer);
     expect(result2, isTrue);
-    
+
     var list3 = [0, 1, 2, 3, 4];
     var result3 = E(list3).Contains(5);
     expect(result3, isFalse);
@@ -126,7 +125,7 @@ void main() {
     var list = [];
     var result = E(list).Count();
     expect(result, equals(0));
-    
+
     var list2 = [0, 1, 2, 3, 4, 5];
     var result2 = E(list2).Count();
     expect(result2, equals(6));
@@ -136,7 +135,7 @@ void main() {
     var list = <int>[];
     var result = E(list).DefaultIfEmpty(5);
     expect(result, orderedEquals([5]));
-    
+
     var list2 = [0, 1, 2, 3, 4];
     var result2 = E(list2).DefaultIfEmpty(5);
     expect(result2, orderedEquals([0, 1, 2, 3, 4]));
@@ -146,11 +145,11 @@ void main() {
     var list = <int>[0, 1, 2, 3, 4];
     var result = E(list).Distinct();
     expect(result, orderedEquals([0, 1, 2, 3, 4]));
-    
+
     var list2 = [0, 1, 1, 2, 2, 2, 3, 4, 4, 4, 4, 4, 4];
     var result2 = E(list2).Distinct();
     expect(result2, orderedEquals([0, 1, 2, 3, 4]));
-    
+
     var list3 = ['a', 'b', 'c', 'A', 'B', 'C'];
     var comparer = EqualityComparer<String>(
       comparer: (a, b) => a.toLowerCase() == b.toLowerCase(),
@@ -164,7 +163,7 @@ void main() {
     var list = <int>[0, 1, 2, 3, 4];
     var result = E(list).ElementAt(3);
     expect(result, equals(3));
-    
+
     var result2 = () => E(list).ElementAt(6);
     expect(result2, throwsA(isA<ElementNotFoundError>()));
   });
@@ -174,10 +173,10 @@ void main() {
 
     var result = E(list).ElementAtOrDefault(3);
     expect(result, equals(3));
-    
+
     var result2 = E(list).ElementAtOrDefault(6);
     expect(result2, isNull);
-    
+
     var result3 = E(list).ElementAtOrDefault(6, defaultValue: 5);
     expect(result3, equals(5));
   });
@@ -193,10 +192,10 @@ void main() {
 
     var result = E(a).Except(b);
     expect(result, orderedEquals([0, 1]));
-    
+
     var result2 = E(b).Except(a);
     expect(result2, orderedEquals([4, 5]));
-    
+
     var result3 = E(a).Except(a);
     expect(result3, orderedEquals([]));
 
@@ -214,10 +213,10 @@ void main() {
 
     var result4 = E(c).Except(d, comparer: comparer);
     expect(result4, orderedEquals(['a', 'b']));
-    
+
     var result5 = E(d).Except(c, comparer: comparer2);
     expect(result5, orderedEquals(['E', 'F']));
-    
+
     var result6 = E(c).Except(c, comparer: comparer);
     expect(result6, orderedEquals([]));
   });
@@ -240,16 +239,24 @@ void main() {
     var test2 = [];
     var result2 = E(test2).FirstOrDefault();
     expect(result2, null);
-    
+
     var result3 = E(test2).FirstOrDefault(defaultValue: 4);
     expect(result3, 4);
   });
 
   test('GroupBy', () {
-    final barley = Pet()..name = 'Barley'..age = 8;
-    final boots = Pet()..name = 'Boots'..age = 4;
-    final whiskers = Pet()..name = 'Whiskers'..age = 1;
-    final daisy = Pet()..name = 'Daisy'..age = 4;
+    final barley = Pet()
+      ..name = 'Barley'
+      ..age = 8;
+    final boots = Pet()
+      ..name = 'Boots'
+      ..age = 4;
+    final whiskers = Pet()
+      ..name = 'Whiskers'
+      ..age = 1;
+    final daisy = Pet()
+      ..name = 'Daisy'
+      ..age = 4;
 
     final pets = [barley, boots, whiskers, daisy];
 
@@ -258,9 +265,24 @@ void main() {
     );
 
     expect(results, [
-      [Pet()..name = 'Barley'..age = 8],
-      [Pet()..name = 'Boots'..age = 4, Pet()..name = 'Daisy'..age = 4],
-      [Pet()..name = 'Whiskers'..age = 1],
+      [
+        Pet()
+          ..name = 'Barley'
+          ..age = 8
+      ],
+      [
+        Pet()
+          ..name = 'Boots'
+          ..age = 4,
+        Pet()
+          ..name = 'Daisy'
+          ..age = 4
+      ],
+      [
+        Pet()
+          ..name = 'Whiskers'
+          ..age = 1
+      ],
     ]);
 
     final resultList = results.ToList();
@@ -270,10 +292,18 @@ void main() {
   });
 
   test('GroupByValue', () {
-    final barley = Pet()..name = 'Barley'..age = 8;
-    final boots = Pet()..name = 'Boots'..age = 4;
-    final whiskers = Pet()..name = 'Whiskers'..age = 1;
-    final daisy = Pet()..name = 'Daisy'..age = 4;
+    final barley = Pet()
+      ..name = 'Barley'
+      ..age = 8;
+    final boots = Pet()
+      ..name = 'Boots'
+      ..age = 4;
+    final whiskers = Pet()
+      ..name = 'Whiskers'
+      ..age = 1;
+    final daisy = Pet()
+      ..name = 'Daisy'
+      ..age = 4;
 
     final pets = [barley, boots, whiskers, daisy];
 
@@ -302,10 +332,18 @@ void main() {
 
     final people = [travis, terry, charlotte, benny];
 
-    final barley = Pet()..name = 'Barley'..owner = terry;
-    final boots = Pet()..name = 'Boots'..owner = terry;
-    final whiskers = Pet()..name = 'Whiskers'..owner = charlotte;
-    final daisy = Pet()..name = 'Daisy'..owner = travis;
+    final barley = Pet()
+      ..name = 'Barley'
+      ..owner = terry;
+    final boots = Pet()
+      ..name = 'Boots'
+      ..owner = terry;
+    final whiskers = Pet()
+      ..name = 'Whiskers'
+      ..owner = charlotte;
+    final daisy = Pet()
+      ..name = 'Daisy'
+      ..owner = travis;
 
     final pets = [barley, boots, whiskers, daisy];
 
@@ -313,13 +351,25 @@ void main() {
       pets,
       (person) => person.name,
       (pet) => pet.owner.name,
-      (person, pets) => {'ownerName': person.name, 'pets': E(pets).Select((pet) => pet.name).ToList()},
+      (person, pets) => {
+            'ownerName': person.name,
+            'pets': E(pets).Select((pet) => pet.name).ToList()
+          },
     );
 
     expect(result, [
-      {'ownerName': 'Travis', 'pets': ['Daisy']},
-      {'ownerName': 'Terry', 'pets': ['Barley', 'Boots']},
-      {'ownerName': 'Charlotte', 'pets': ['Whiskers']},
+      {
+        'ownerName': 'Travis',
+        'pets': ['Daisy']
+      },
+      {
+        'ownerName': 'Terry',
+        'pets': ['Barley', 'Boots']
+      },
+      {
+        'ownerName': 'Charlotte',
+        'pets': ['Whiskers']
+      },
       {'ownerName': 'Benny', 'pets': []},
     ]);
 
@@ -327,7 +377,10 @@ void main() {
       pets,
       (person) => person.name,
       (pet) => pet.owner.name,
-      (person, pets) => {'ownerName': person.name, 'pets': E(pets).Select((pet) => pet.name).ToList()},
+      (person, pets) => {
+            'ownerName': person.name,
+            'pets': E(pets).Select((pet) => pet.name).ToList()
+          },
       keyComparer: EqualityComparer(
         comparer: (k1, k2) => k1.substring(0, 1) == k2.substring(0, 1),
         hasher: (key) => key.substring(0, 1).hashCode,
@@ -335,18 +388,35 @@ void main() {
     );
 
     expect(result2, [
-      {'ownerName': 'Travis', 'pets': ['Barley', 'Boots', 'Daisy']},
-      {'ownerName': 'Terry', 'pets': ['Barley', 'Boots', 'Daisy']},
-      {'ownerName': 'Charlotte', 'pets': ['Whiskers']},
+      {
+        'ownerName': 'Travis',
+        'pets': ['Barley', 'Boots', 'Daisy']
+      },
+      {
+        'ownerName': 'Terry',
+        'pets': ['Barley', 'Boots', 'Daisy']
+      },
+      {
+        'ownerName': 'Charlotte',
+        'pets': ['Whiskers']
+      },
       {'ownerName': 'Benny', 'pets': []},
     ]);
   });
 
   test('GroupSelect', () {
-    final barley = Pet()..name = 'Barley'..age = 8.3;
-    final boots = Pet()..name = 'Boots'..age = 4.9;
-    final whiskers = Pet()..name = 'Whiskers'..age = 1.5;
-    final daisy = Pet()..name = 'Daisy'..age = 4.3;
+    final barley = Pet()
+      ..name = 'Barley'
+      ..age = 8.3;
+    final boots = Pet()
+      ..name = 'Boots'
+      ..age = 4.9;
+    final whiskers = Pet()
+      ..name = 'Whiskers'
+      ..age = 1.5;
+    final daisy = Pet()
+      ..name = 'Daisy'
+      ..age = 4.3;
 
     final pets = [barley, boots, whiskers, daisy];
 
@@ -357,27 +427,54 @@ void main() {
     final result = E(pets).GroupSelect(
       (pet) => pet.age.floor(),
       (age, pets) => {
-        'key': age, 
-        'count': E(pets).Count(),
-        'min': E(pets).Min(ageComparer),
-        'max': E(pets).Max(ageComparer),
-      },
+            'key': age,
+            'count': E(pets).Count(),
+            'min': E(pets).Min(ageComparer),
+            'max': E(pets).Max(ageComparer),
+          },
     );
 
     expect(result, [
-      {'key': 8, 'count': 1, 'min': Pet()..name = 'Barley' ..age = 8.3, 'max': Pet()..name = 'Barley' ..age = 8.3},
-      {'key': 4, 'count': 2, 'min': Pet()..name = 'Daisy' ..age = 4.3, 'max': Pet()..name = 'Boots' ..age = 4.9},
-      {'key': 1, 'count': 1, 'min': Pet()..name = 'Whiskers' ..age = 1.5, 'max': Pet()..name = 'Whiskers' ..age = 1.5},
+      {
+        'key': 8,
+        'count': 1,
+        'min': Pet()
+          ..name = 'Barley'
+          ..age = 8.3,
+        'max': Pet()
+          ..name = 'Barley'
+          ..age = 8.3
+      },
+      {
+        'key': 4,
+        'count': 2,
+        'min': Pet()
+          ..name = 'Daisy'
+          ..age = 4.3,
+        'max': Pet()
+          ..name = 'Boots'
+          ..age = 4.9
+      },
+      {
+        'key': 1,
+        'count': 1,
+        'min': Pet()
+          ..name = 'Whiskers'
+          ..age = 1.5,
+        'max': Pet()
+          ..name = 'Whiskers'
+          ..age = 1.5
+      },
     ]);
-    
+
     final result2 = E(pets).GroupSelect(
       (pet) => pet.age,
       (age, pets) => {
-        'key': age, 
-        'count': E(pets).Count(),
-        'min': E(pets).Min(ageComparer),
-        'max': E(pets).Max(ageComparer),
-      },
+            'key': age,
+            'count': E(pets).Count(),
+            'min': E(pets).Min(ageComparer),
+            'max': E(pets).Max(ageComparer),
+          },
       keyComparer: EqualityComparer(
         comparer: (k1, k2) => k1.floor() == k2.floor(),
         hasher: (key) => key.floor().hashCode,
@@ -385,17 +482,52 @@ void main() {
     );
 
     expect(result2, [
-      {'key': 8.3, 'count': 1, 'min': Pet()..name = 'Barley' ..age = 8.3, 'max': Pet()..name = 'Barley' ..age = 8.3},
-      {'key': 4.9, 'count': 2, 'min': Pet()..name = 'Daisy' ..age = 4.3, 'max': Pet()..name = 'Boots' ..age = 4.9},
-      {'key': 1.5, 'count': 1, 'min': Pet()..name = 'Whiskers' ..age = 1.5, 'max': Pet()..name = 'Whiskers' ..age = 1.5},
+      {
+        'key': 8.3,
+        'count': 1,
+        'min': Pet()
+          ..name = 'Barley'
+          ..age = 8.3,
+        'max': Pet()
+          ..name = 'Barley'
+          ..age = 8.3
+      },
+      {
+        'key': 4.9,
+        'count': 2,
+        'min': Pet()
+          ..name = 'Daisy'
+          ..age = 4.3,
+        'max': Pet()
+          ..name = 'Boots'
+          ..age = 4.9
+      },
+      {
+        'key': 1.5,
+        'count': 1,
+        'min': Pet()
+          ..name = 'Whiskers'
+          ..age = 1.5,
+        'max': Pet()
+          ..name = 'Whiskers'
+          ..age = 1.5
+      },
     ]);
   });
 
   test('GroupSelectValue', () {
-    final barley = Pet()..name = 'Barley'..age = 8.3;
-    final boots = Pet()..name = 'Boots'..age = 4.9;
-    final whiskers = Pet()..name = 'Whiskers'..age = 1.5;
-    final daisy = Pet()..name = 'Daisy'..age = 4.3;
+    final barley = Pet()
+      ..name = 'Barley'
+      ..age = 8.3;
+    final boots = Pet()
+      ..name = 'Boots'
+      ..age = 4.9;
+    final whiskers = Pet()
+      ..name = 'Whiskers'
+      ..age = 1.5;
+    final daisy = Pet()
+      ..name = 'Daisy'
+      ..age = 4.3;
 
     final pets = [barley, boots, whiskers, daisy];
 
@@ -403,26 +535,38 @@ void main() {
       (pet) => pet.age.floor(),
       (pet) => pet.name,
       (age, pets) => {
-        'key': age,
-        'names': pets,
-        'count': E(pets).Count(),
-      },
+            'key': age,
+            'names': pets,
+            'count': E(pets).Count(),
+          },
     );
 
     expect(result, [
-      {'key': 8, 'names': ['Barley'], 'count': 1},
-      {'key': 4, 'names': ['Boots', 'Daisy'], 'count': 2},
-      {'key': 1, 'names': ['Whiskers'], 'count': 1},
+      {
+        'key': 8,
+        'names': ['Barley'],
+        'count': 1
+      },
+      {
+        'key': 4,
+        'names': ['Boots', 'Daisy'],
+        'count': 2
+      },
+      {
+        'key': 1,
+        'names': ['Whiskers'],
+        'count': 1
+      },
     ]);
 
     final result2 = E(pets).GroupSelectValue(
       (pet) => pet.age,
       (pet) => pet.name,
       (age, pets) => {
-        'key': age,
-        'names': pets,
-        'count': E(pets).Count(),
-      },
+            'key': age,
+            'names': pets,
+            'count': E(pets).Count(),
+          },
       keyComparer: EqualityComparer(
         comparer: (k1, k2) => k1.floor() == k2.floor(),
         hasher: (key) => key.floor().hashCode,
@@ -430,9 +574,21 @@ void main() {
     );
 
     expect(result2, [
-      {'key': 8.3, 'names': ['Barley'], 'count': 1},
-      {'key': 4.9, 'names': ['Boots', 'Daisy'], 'count': 2},
-      {'key': 1.5, 'names': ['Whiskers'], 'count': 1},
+      {
+        'key': 8.3,
+        'names': ['Barley'],
+        'count': 1
+      },
+      {
+        'key': 4.9,
+        'names': ['Boots', 'Daisy'],
+        'count': 2
+      },
+      {
+        'key': 1.5,
+        'names': ['Whiskers'],
+        'count': 1
+      },
     ]);
   });
 
@@ -442,10 +598,10 @@ void main() {
 
     var result = E(a).Intersect(b);
     expect(result.ToList(), orderedEquals([2, 3]));
-    
+
     var result2 = E(b).Intersect(a);
     expect(result2.ToList(), orderedEquals([3, 2]));
-    
+
     var result3 = E(a).Intersect(a);
     expect(result3.ToList(), orderedEquals([0, 1, 2, 3]));
 
@@ -463,19 +619,20 @@ void main() {
 
     var result4 = E(c).Intersect(d, comparer: comparer);
     expect(result4, orderedEquals(['c', 'D']));
-    
+
     var result5 = E(d).Intersect(c, comparer: comparer2);
     expect(result5, orderedEquals(['C', 'd']));
-    
+
     var result6 = E(c).Intersect(c, comparer: comparer);
     expect(result6, orderedEquals(['a', 'b', 'c', 'D']));
   });
 
   test('Join', () {
-    final a = { '1': 1, '2': 2, '3': 3, '4': 4 };
-    final b = { '1': 1.0, '2': 2.0, '3': 3.0, '5': 5.0 };
+    final a = {'1': 1, '2': 2, '3': 3, '4': 4};
+    final b = {'1': 1.0, '2': 2.0, '3': 3.0, '5': 5.0};
 
-    final output = E(a.entries).Join(b.entries, (x) => x.key, (y) => y.key, (x, y) => '${x.value}_${y.value}');
+    final output = E(a.entries).Join(b.entries, (x) => x.key, (y) => y.key,
+        (x, y) => '${x.value}_${y.value}');
     expect(output, orderedEquals(['1_1.0', '2_2.0', '3_3.0']));
   });
 
@@ -497,7 +654,7 @@ void main() {
     var test2 = [];
     var result2 = E(test2).LastOrDefault();
     expect(result2, null);
-    
+
     var result3 = E(test2).LastOrDefault(defaultValue: 4);
     expect(result3, 4);
   });
@@ -510,9 +667,10 @@ void main() {
     var test2 = <int>[];
     var result2 = () => E(test2).Max();
     expect(result2, throwsA(isA<EmptyEnumerableError>()));
-    
+
     var test3 = ['0', '1', '2', '3'];
-    var comparer = EqualityComparer<String>(sorter:(a, b) => int.parse(a).compareTo(int.parse(b)));
+    var comparer = EqualityComparer<String>(
+        sorter: (a, b) => int.parse(a).compareTo(int.parse(b)));
     var result3 = E(test3).Max(comparer);
     expect(result3, '3');
   });
@@ -525,9 +683,10 @@ void main() {
     var test2 = <int>[];
     var result2 = () => E(test2).Min();
     expect(result2, throwsA(isA<EmptyEnumerableError>()));
-    
+
     var test3 = ['0', '1', '2', '3'];
-    var comparer = EqualityComparer<String>(sorter:(a, b) => int.parse(a).compareTo(int.parse(b)));
+    var comparer = EqualityComparer<String>(
+        sorter: (a, b) => int.parse(a).compareTo(int.parse(b)));
     var result3 = E(test3).Min(comparer);
     expect(result3, '0');
   });
@@ -590,20 +749,21 @@ void main() {
       [10, 11, 12, 13, 14],
     ];
     final output = E(input).SelectMany((x) => x).ToList();
-    expect(output, orderedEquals([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]));
+    expect(output,
+        orderedEquals([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]));
   });
 
   test('SequenceEqual', () {
     final input = ['a', 'b', 'c', 'd', 'e'];
     final output = E(input).SequenceEqual(['a', 'b', 'c', 'd', 'e']);
     expect(output, isTrue);
-    
+
     final output2 = E(input).SequenceEqual(['b', 'c', 'd', 'e', 'a']);
     expect(output2, isFalse);
-    
+
     final output3 = E(input).SequenceEqual(['a', 'b', 'c', 'd']);
     expect(output3, isFalse);
-    
+
     final output4 = E(input).SequenceEqual(['a', 'b', 'c', 'd', 'e', 'f']);
     expect(output4, isFalse);
   });
@@ -612,11 +772,11 @@ void main() {
     final input = [0];
     final output = E(input).Single();
     expect(output, equals(0));
-  
+
     final input2 = [0, 1];
     final output2 = () => E(input2).Single();
     expect(output2, throwsA(isA<OperationError>()));
-    
+
     final input3 = [0, 1, 2, 3, 4];
     final output3 = E(input3).Single((x) => x == 2);
     expect(output3, equals(2));
@@ -628,7 +788,7 @@ void main() {
     final input5 = [];
     final output5 = () => E(input5).Single();
     expect(output5, throwsA(isA<OperationError>()));
-    
+
     final input6 = [];
     final output6 = () => E(input6).Single((x) => x == 2);
     expect(output6, throwsA(isA<OperationError>()));
@@ -638,11 +798,11 @@ void main() {
     final input = [0];
     final output = E(input).SingleOrDefault(5);
     expect(output, equals(0));
-  
+
     final input2 = [0, 1];
     final output2 = () => E(input2).SingleOrDefault(5);
     expect(output2, throwsA(isA<OperationError>()));
-    
+
     final input3 = [0, 1, 2, 3, 4];
     final output3 = E(input3).SingleOrDefault(5, (x) => x == 2);
     expect(output3, equals(2));
@@ -654,7 +814,7 @@ void main() {
     final input5 = [];
     final output5 = E(input5).SingleOrDefault(5);
     expect(output5, 5);
-    
+
     final input6 = [];
     final output6 = E(input6).SingleOrDefault(5, (x) => x == 2);
     expect(output6, 5);
@@ -676,7 +836,7 @@ void main() {
     final input = [1, 2, 3, 4, 5];
     final output = E(input).Sum();
     expect(output, 15);
-    
+
     final input2 = ['1', '2', '3', '4', '5'];
     final output2 = E(input2).Sum((x) => int.parse(x));
     expect(output2, 15);
@@ -695,76 +855,105 @@ void main() {
   });
 
   test('ThenBy', () {
-    final barley = Pet()..name = 'Barley'..age = 8;
-    final daisy = Pet()..name = 'Daisy'..age = 4;
-    final whiskers = Pet()..name = 'Whiskers'..age = 1;
-    final boots = Pet()..name = 'Boots'..age = 4;
+    final barley = Pet()
+      ..name = 'Barley'
+      ..age = 8;
+    final daisy = Pet()
+      ..name = 'Daisy'
+      ..age = 4;
+    final whiskers = Pet()
+      ..name = 'Whiskers'
+      ..age = 1;
+    final boots = Pet()
+      ..name = 'Boots'
+      ..age = 4;
 
     final pets = [barley, daisy, whiskers, boots];
 
-    expect(pets, orderedEquals([
-      barley,
-      daisy,
-      whiskers,
-      boots,
-    ]));
+    expect(
+        pets,
+        orderedEquals([
+          barley,
+          daisy,
+          whiskers,
+          boots,
+        ]));
 
     final interim = E(pets).OrderBy((p) => p.age);
 
-    expect(interim, orderedEquals([
-      whiskers,
-      daisy,
-      boots,
-      barley,
-    ]));
+    expect(
+        interim,
+        orderedEquals([
+          whiskers,
+          daisy,
+          boots,
+          barley,
+        ]));
 
     final result = interim.ThenBy((p) => p.name);
 
-    expect(result, orderedEquals([
-      whiskers,
-      boots,
-      daisy,
-      barley,
-    ]));
+    expect(
+        result,
+        orderedEquals([
+          whiskers,
+          boots,
+          daisy,
+          barley,
+        ]));
 
     final errorTest = () => E([0, 1, 2]).Select((i) => i + 1).ThenBy((i) => i);
     expect(errorTest, throwsA(isA<OperationError>()));
   });
 
   test('ThenByDescending', () {
-    final barley = Pet()..name = 'Barley'..age = 8;
-    final boots = Pet()..name = 'Boots'..age = 4;
-    final daisy = Pet()..name = 'Daisy'..age = 4;
-    final whiskers = Pet()..name = 'Whiskers'..age = 1;
+    final barley = Pet()
+      ..name = 'Barley'
+      ..age = 8;
+    final boots = Pet()
+      ..name = 'Boots'
+      ..age = 4;
+    final daisy = Pet()
+      ..name = 'Daisy'
+      ..age = 4;
+    final whiskers = Pet()
+      ..name = 'Whiskers'
+      ..age = 1;
 
     final pets = [barley, boots, daisy, whiskers];
 
-    expect(pets, orderedEquals([
-      barley,
-      boots,
-      daisy,
-      whiskers,
-    ]));
+    expect(
+        pets,
+        orderedEquals([
+          barley,
+          boots,
+          daisy,
+          whiskers,
+        ]));
 
     final interim = E(pets).OrderBy((p) => p.age);
 
-    expect(interim, orderedEquals([
-      whiskers,
-      boots,
-      daisy,
-      barley,
-    ]));
+    expect(
+        interim,
+        orderedEquals([
+          whiskers,
+          boots,
+          daisy,
+          barley,
+        ]));
 
     final result = interim.ThenByDescending((p) => p.name);
 
-    expect(result, orderedEquals([
-      whiskers,
-      daisy,
-      boots,
-      barley,
-    ]));
+    expect(
+        result,
+        orderedEquals([
+          whiskers,
+          daisy,
+          boots,
+          barley,
+        ]));
 
-    final errorTest = () => E([0, 1, 2]).Select((i) => i + 1).ThenByDescending((i) => i);
+    final errorTest =
+        () => E([0, 1, 2]).Select((i) => i + 1).ThenByDescending((i) => i);
     expect(errorTest, throwsA(isA<OperationError>()));
   });
 
@@ -803,16 +992,16 @@ void main() {
 
     var result = E(a).Union(b);
     expect(result, orderedEquals([0, 1, 2, 3, 4, 5]));
-    
+
     var result2 = E(b).Union(a);
     expect(result2, orderedEquals([2, 3, 4, 5, 0, 1]));
-    
+
     var result3 = E(a).Union(a);
     expect(result3, orderedEquals([0, 1, 2, 3]));
 
     var c = ['a', 'b', 'c', 'D'];
     var d = ['C', 'd', 'E', 'F'];
-    
+
     var result4 = E(c).Union(d);
     expect(result4, orderedEquals(['a', 'b', 'c', 'D', 'C', 'd', 'E', 'F']));
 
@@ -827,10 +1016,10 @@ void main() {
 
     var result5 = E(c).Union(d, comparer: comparer);
     expect(result5, orderedEquals(['a', 'b', 'c', 'D', 'E', 'F']));
-    
+
     var result6 = E(d).Union(c, comparer: comparer2);
     expect(result6, orderedEquals(['C', 'd', 'E', 'F', 'a', 'b']));
-    
+
     var result7 = E(c).Union(c, comparer: comparer);
     expect(result7, orderedEquals(['a', 'b', 'c', 'D']));
   });
@@ -848,7 +1037,6 @@ void main() {
     final output = E(a).Zip(b, (x, y) => '$x-$y');
     expect(output, orderedEquals(['1-5.0', '2-6.0', '3-7.0']));
   });
-
 }
 
 class Person {
@@ -862,9 +1050,7 @@ class Pet {
 
   bool operator ==(dynamic other) {
     if (other is Pet) {
-      return name == other.name &&
-             age == other.age &&
-             owner == other.owner;
+      return name == other.name && age == other.age && owner == other.owner;
     }
     return false;
   }

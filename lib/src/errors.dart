@@ -2,14 +2,16 @@ class UnexpectedStateError extends Error {
   UnexpectedStateError();
 
   @override
-  String toString() => 'Code execution has entered a state that should not have been possible.';
+  String toString() =>
+      'Code execution has entered a state that should not have been possible.';
 }
 
 class NullEnumerableError extends Error {
   NullEnumerableError();
 
   @override
-  String toString() => 'Cannot perform operation on an enumeration with a backing data of null.';
+  String toString() =>
+      'Cannot perform operation on an enumeration with a backing data of null.';
 }
 
 class EmptyEnumerableError extends Error {
@@ -34,14 +36,16 @@ class ConversionError<TSource, TResult> extends Error {
   ConversionError(this.object);
 
   @override
-  String toString() => 'Unable to convert $object from type $TSource to type $TResult.';
+  String toString() =>
+      'Unable to convert $object from type $TSource to type $TResult.';
 }
 
 class ElementNotFoundError extends Error {
   ElementNotFoundError();
 
   @override
-  String toString() => 'An element was requested, but the enumeration ended before it oculd be found.';
+  String toString() =>
+      'An element was requested, but the enumeration ended before it oculd be found.';
 }
 
 class OperationError extends Error {
@@ -64,5 +68,6 @@ class IncompatibleTypeError extends Error {
 
   IncompatibleTypeError(this.allowedTypes);
 
-  String toString() => 'Type parameter must be one of these types: $allowedTypes';
+  String toString() =>
+      'Type parameter must be one of these types: $allowedTypes';
 }

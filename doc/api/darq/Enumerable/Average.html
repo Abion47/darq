@@ -183,13 +183,15 @@ and <code>double</code> enumerables, the result will be a <code>double</code>.</
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">T Average() {
-  if (T != num &amp;&amp;
-      T != int &amp;&amp;
-      T != double) throw IncompatibleTypeError([num, int, double]);
+  if (T != num &amp;&amp; T != int &amp;&amp; T != double)
+    throw IncompatibleTypeError([num, int, double]);
 
-  if (T == num) return EnumerableReducers.AverageNum(this as Enumerable&lt;num&gt;) as T;
-  if (T == int) return EnumerableReducers.AverageInt(this as Enumerable&lt;int&gt;) as T;
-  if (T == double) return EnumerableReducers.AverageDouble(this as Enumerable&lt;double&gt;) as T;
+  if (T == num)
+    return EnumerableReducers.AverageNum(this as Enumerable&lt;num&gt;) as T;
+  if (T == int)
+    return EnumerableReducers.AverageInt(this as Enumerable&lt;int&gt;) as T;
+  if (T == double)
+    return EnumerableReducers.AverageDouble(this as Enumerable&lt;double&gt;) as T;
   throw UnexpectedStateError();
 }</code></pre>
     </section>
@@ -203,7 +205,7 @@ and <code>double</code> enumerables, the result will be a <code>double</code>.</
 
 <footer>
   <span class="no-break">
-    darq 0.0.1
+    darq 0.1.0
   </span>
 
   

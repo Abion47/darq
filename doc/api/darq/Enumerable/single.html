@@ -204,7 +204,9 @@ second element that matches the <code>condition</code>. In the worst-case scenar
   if (condition != null) {
     do {
       if (condition(_iterator.current)) {
-        if (valueSet) throw OperationError(&#39;More than one element matches the condition.&#39;);
+        if (valueSet)
+          throw OperationError(
+              &#39;More than one element matches the condition.&#39;);
 
         value = _iterator.current;
         valueSet = true;
@@ -217,7 +219,8 @@ second element that matches the <code>condition</code>. In the worst-case scenar
   }
 
   do {
-    if (valueSet) throw OperationError(&#39;More than one element exists in the enumerable.&#39;);
+    if (valueSet)
+      throw OperationError(&#39;More than one element exists in the enumerable.&#39;);
 
     value = _iterator.current;
     valueSet = true;
@@ -238,7 +241,7 @@ second element that matches the <code>condition</code>. In the worst-case scenar
 
 <footer>
   <span class="no-break">
-    darq 0.0.1
+    darq 0.1.0
   </span>
 
   

@@ -188,9 +188,13 @@ enumerable will be unchanged.</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">Enumerable&lt;T&gt; ThenByDescending&lt;TKey&gt;(Selector&lt;T, TKey&gt; keySelector, {EqualityComparer&lt;TKey&gt; keyComparer}) {
-  if (!(this is InternalOrderedEnumerable)) throw OperationError(&#39;ThenByDescending must be called immediately following a call to OrderBy, OrderByDescending, ThenBy, or ThenByDescending.&#39;);
-  return (this as dynamic).createOrderedEnumerable&lt;TKey&gt;(keySelector, keyComparer, true);
+      <pre class="language-dart"><code class="language-dart">Enumerable&lt;T&gt; ThenByDescending&lt;TKey&gt;(Selector&lt;T, TKey&gt; keySelector,
+    {EqualityComparer&lt;TKey&gt; keyComparer}) {
+  if (!(this is InternalOrderedEnumerable))
+    throw OperationError(
+        &#39;ThenByDescending must be called immediately following a call to OrderBy, OrderByDescending, ThenBy, or ThenByDescending.&#39;);
+  return (this as dynamic)
+      .createOrderedEnumerable&lt;TKey&gt;(keySelector, keyComparer, true);
 }</code></pre>
     </section>
 
@@ -203,7 +207,7 @@ enumerable will be unchanged.</p>
 
 <footer>
   <span class="no-break">
-    darq 0.0.1
+    darq 0.1.0
   </span>
 
   

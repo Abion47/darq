@@ -11,7 +11,8 @@ class DistinctIterator<T> extends EnumerableIterator<T, T> {
   bool moveNext() {
     if (sourceIterator == null) {
       sourceIterator = enumerable.source.iterator;
-      _elementCache = ComparableSet<T>((enumerable as DistinctEnumerable<T>).comparer);
+      _elementCache =
+          ComparableSet<T>((enumerable as DistinctEnumerable<T>).comparer);
     }
 
     T value;
@@ -21,7 +22,7 @@ class DistinctIterator<T> extends EnumerableIterator<T, T> {
       if (_elementCache.add(value)) {
         current = value;
         return true;
-      } 
+      }
     }
 
     sourceIterator = null;

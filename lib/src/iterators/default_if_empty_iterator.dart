@@ -2,7 +2,8 @@ import '../enumerables/default_if_empty_enumerable.dart';
 import '../enumerable_iterator.dart';
 
 class DefaultIfEmptyIterator<T> extends EnumerableIterator<T, T> {
-  DefaultIfEmptyIterator(DefaultIfEmptyEnumerable<T> enumerable) : super.of(enumerable);
+  DefaultIfEmptyIterator(DefaultIfEmptyEnumerable<T> enumerable)
+      : super.of(enumerable);
 
   bool valueReturned;
 

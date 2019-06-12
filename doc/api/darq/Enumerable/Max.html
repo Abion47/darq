@@ -187,17 +187,24 @@ must be provided. Otherwise, an <code>ArgumentError</code> will be thrown.</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">T Max([EqualityComparer&lt;T&gt; comparer]) {
-  if(comparer == null &amp;&amp;
-      T != num &amp;&amp;
-      T != int &amp;&amp;
-      T != double &amp;&amp;
-      T != String) throw ArgumentError(&#39;`comparer` must not be null or the type of this enumerable must be one of the following: ${[num, int, double, String]}&#39;);
+  if (comparer == null &amp;&amp; T != num &amp;&amp; T != int &amp;&amp; T != double &amp;&amp; T != String)
+    throw ArgumentError(
+        &#39;`comparer` must not be null or the type of this enumerable must be one of the following: ${[
+      num,
+      int,
+      double,
+      String
+    ]}&#39;);
 
   if (comparer == null) {
-    if (T == num) return EnumerableReducers.MaxNum(this as Enumerable&lt;num&gt;) as T;
-    if (T == int) return EnumerableReducers.MaxInt(this as Enumerable&lt;int&gt;) as T;
-    if (T == double) return EnumerableReducers.MaxDouble(this as Enumerable&lt;double&gt;) as T;
-    if (T == String) return EnumerableReducers.MaxString(this as Enumerable&lt;String&gt;) as T;
+    if (T == num)
+      return EnumerableReducers.MaxNum(this as Enumerable&lt;num&gt;) as T;
+    if (T == int)
+      return EnumerableReducers.MaxInt(this as Enumerable&lt;int&gt;) as T;
+    if (T == double)
+      return EnumerableReducers.MaxDouble(this as Enumerable&lt;double&gt;) as T;
+    if (T == String)
+      return EnumerableReducers.MaxString(this as Enumerable&lt;String&gt;) as T;
     throw UnexpectedStateError();
   }
 
@@ -206,7 +213,8 @@ must be provided. Otherwise, an <code>ArgumentError</code> will be thrown.</p>
 
   T max = null;
   do {
-    if (max == null) max = iterator.current;
+    if (max == null)
+      max = iterator.current;
     else if (comparer.sort(max, iterator.current) &lt; 0) {
       max = iterator.current;
     }
@@ -225,7 +233,7 @@ must be provided. Otherwise, an <code>ArgumentError</code> will be thrown.</p>
 
 <footer>
   <span class="no-break">
-    darq 0.0.1
+    darq 0.1.0
   </span>
 
   

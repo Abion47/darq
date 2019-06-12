@@ -3,8 +3,10 @@ import '../grouping.dart';
 import '../enumerable_iterator.dart';
 import '../enumerables/join_enumerable.dart';
 
-class JoinIterator<TFirst, TSecond, TKey, TResult> extends EnumerableIterator<TFirst, TResult> {
-  JoinIterator(JoinEnumerable<TFirst, TSecond, TKey, TResult> enumerable) : super.of(enumerable);
+class JoinIterator<TFirst, TSecond, TKey, TResult>
+    extends EnumerableIterator<TFirst, TResult> {
+  JoinIterator(JoinEnumerable<TFirst, TSecond, TKey, TResult> enumerable)
+      : super.of(enumerable);
 
   Lookup<TKey, TSecond> _lookup;
   TFirst _outerValue;
@@ -12,11 +14,13 @@ class JoinIterator<TFirst, TSecond, TKey, TResult> extends EnumerableIterator<TF
 
   @override
   bool moveNext() {
-    final castEnum = enumerable as JoinEnumerable<TFirst, TSecond, TKey, TResult>;
+    final castEnum =
+        enumerable as JoinEnumerable<TFirst, TSecond, TKey, TResult>;
 
     if (sourceIterator == null) {
       sourceIterator = enumerable.source.iterator;
-      _lookup = Lookup.createForJoin(castEnum.second, castEnum.innerKeySelector, castEnum.keyComparer);
+      _lookup = Lookup.createForJoin(
+          castEnum.second, castEnum.innerKeySelector, castEnum.keyComparer);
     }
 
     if (_groupIterator != null) {

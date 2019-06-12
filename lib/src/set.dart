@@ -31,9 +31,12 @@ class ComparableSet<TValue> {
     int bucket = hash % buckets.length;
     int last = -1;
     for (int i = buckets[bucket] - 1; i >= 0; last = i, i = slots[i].next) {
-      if (slots[i].hashCode == hash && comparer.compare(slots[i].value, value)) {
-        if (last < 0) buckets[bucket] = slots[i].next + 1;
-        else slots[last].next = slots[i].next;
+      if (slots[i].hashCode == hash &&
+          comparer.compare(slots[i].value, value)) {
+        if (last < 0)
+          buckets[bucket] = slots[i].next + 1;
+        else
+          slots[last].next = slots[i].next;
         slots[i].hashCode = -1;
         slots[i].value = null;
         slots[i].next = freeList;
@@ -46,8 +49,11 @@ class ComparableSet<TValue> {
 
   bool find(TValue value, bool shouldAdd) {
     int hash = _internalGetHash(value);
-    for (int i = buckets[hash % buckets.length] - 1; i >= 0; i = slots[i].next) {
-      if (slots[i].hashCode == hash && comparer.compare(slots[i].value, value)) return true;
+    for (int i = buckets[hash % buckets.length] - 1;
+        i >= 0;
+        i = slots[i].next) {
+      if (slots[i].hashCode == hash && comparer.compare(slots[i].value, value))
+        return true;
     }
 
     if (shouldAdd) {
@@ -75,9 +81,10 @@ class ComparableSet<TValue> {
     if (newSize < count) throw IntegerOverflowError();
 
     final newBuckets = List<int>.filled(newSize, 0, growable: false);
-    final newSlots = List<_Slot>.generate(newSize, (_) => _Slot(), growable: false);
+    final newSlots =
+        List<_Slot>.generate(newSize, (_) => _Slot(), growable: false);
     newSlots.setRange(0, slots.length, slots);
-    
+
     for (int i = 0; i < count; i++) {
       int bucket = newSlots[i].hashCode % newSize;
       newSlots[i].next = newBuckets[bucket] - 1;
@@ -92,8 +99,9 @@ class ComparableSet<TValue> {
   String toString() {
     String output = '{';
     for (int i = 0; i < count; i++) {
-      output += '${output.length > 1 ? ", " : ""}${slots[i].value} (0x${slots[i].hashCode.toRadixString(16)})';
-    } 
+      output +=
+          '${output.length > 1 ? ", " : ""}${slots[i].value} (0x${slots[i].hashCode.toRadixString(16)})';
+    }
     return '$output}';
   }
 }

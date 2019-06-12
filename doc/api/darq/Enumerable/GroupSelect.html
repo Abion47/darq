@@ -190,9 +190,12 @@ the <a href="darq/EqualityComparer-class.html">EqualityComparer</a> need be supp
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">Enumerable&lt;TResult&gt; GroupSelect&lt;TKey, TResult&gt;(Selector&lt;T, TKey&gt; keySelector, GroupSelector&lt;TKey, Iterable&lt;T&gt;, TResult&gt; resultSelector, {EqualityComparer&lt;TKey&gt; keyComparer}) {
+      <pre class="language-dart"><code class="language-dart">Enumerable&lt;TResult&gt; GroupSelect&lt;TKey, TResult&gt;(Selector&lt;T, TKey&gt; keySelector,
+    GroupSelector&lt;TKey, Iterable&lt;T&gt;, TResult&gt; resultSelector,
+    {EqualityComparer&lt;TKey&gt; keyComparer}) {
   assert(keySelector != null &amp;&amp; resultSelector != null);
-  return GroupSelectEnumerable&lt;T, TKey, TResult&gt;(this, keySelector, resultSelector, keyComparer);
+  return GroupSelectEnumerable&lt;T, TKey, TResult&gt;(
+      this, keySelector, resultSelector, keyComparer);
 }</code></pre>
     </section>
 
@@ -205,7 +208,7 @@ the <a href="darq/EqualityComparer-class.html">EqualityComparer</a> need be supp
 
 <footer>
   <span class="no-break">
-    darq 0.0.1
+    darq 0.1.0
   </span>
 
   

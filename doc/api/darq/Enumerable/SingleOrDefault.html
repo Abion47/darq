@@ -202,7 +202,9 @@ scenario, <a href="darq/Enumerable/SingleOrDefault.html">SingleOrDefault</a> wil
   if (condition != null) {
     do {
       if (condition(_iterator.current)) {
-        if (valueSet) throw OperationError(&#39;More than one element matches the condition.&#39;);
+        if (valueSet)
+          throw OperationError(
+              &#39;More than one element matches the condition.&#39;);
 
         value = _iterator.current;
         valueSet = true;
@@ -215,7 +217,8 @@ scenario, <a href="darq/Enumerable/SingleOrDefault.html">SingleOrDefault</a> wil
   }
 
   do {
-    if (valueSet) throw OperationError(&#39;More than one element exists in the enumerable.&#39;);
+    if (valueSet)
+      throw OperationError(&#39;More than one element exists in the enumerable.&#39;);
 
     value = _iterator.current;
     valueSet = true;
@@ -236,7 +239,7 @@ scenario, <a href="darq/Enumerable/SingleOrDefault.html">SingleOrDefault</a> wil
 
 <footer>
   <span class="no-break">
-    darq 0.0.1
+    darq 0.1.0
   </span>
 
   

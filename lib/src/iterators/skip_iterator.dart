@@ -8,7 +8,7 @@ class SkipIterator<T> extends EnumerableIterator<T, T> {
   int _skipCountMax;
 
   @override
-  bool moveNext() {    
+  bool moveNext() {
     if (sourceIterator == null) {
       sourceIterator = enumerable.source.iterator;
       _skipCount = 0;

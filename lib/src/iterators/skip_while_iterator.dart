@@ -16,7 +16,8 @@ class SkipWhileIterator<T> extends EnumerableIterator<T, T> {
     }
 
     while (_skipping) {
-      if (!(enumerable as SkipWhileEnumerable<T>).condition(sourceIterator.current)) {
+      if (!(enumerable as SkipWhileEnumerable<T>)
+          .condition(sourceIterator.current)) {
         _skipping = false;
         current = sourceIterator.current;
         return true;

@@ -5,13 +5,14 @@ import 'grouping.dart';
 
 abstract class ILookup<TKey, TValue> {
   int get count;
-  
+
   bool containsKey(TKey key);
 
   Iterable<TValue> operator [](TKey key);
 }
 
-class Lookup<TKey, TValue> extends Iterable<IGrouping<TKey, TValue>> implements ILookup<TKey, TValue> {
+class Lookup<TKey, TValue> extends Iterable<IGrouping<TKey, TValue>>
+    implements ILookup<TKey, TValue> {
   final EqualityComparer<TKey> comparer;
   List<Grouping<TKey, TValue>> groupings;
   Grouping<TKey, TValue> lastGrouping;
@@ -23,27 +24,27 @@ class Lookup<TKey, TValue> extends Iterable<IGrouping<TKey, TValue>> implements 
   }
 
   static Lookup<TKey, TValue> create<TSource, TKey, TValue>(
-    Iterable<TSource> source, 
-    Selector<TSource, TKey> keySelector, 
-    Selector<TSource, TValue> valueSelector, 
+    Iterable<TSource> source,
+    Selector<TSource, TKey> keySelector,
+    Selector<TSource, TValue> valueSelector,
     EqualityComparer<TKey> comparer,
   ) {
     assert(source != null && keySelector != null && valueSelector != null);
     final lookup = Lookup<TKey, TValue>._internal(comparer);
-    for(final item in source) {
+    for (final item in source) {
       lookup.getGrouping(keySelector(item), true).add(valueSelector(item));
     }
     return lookup;
   }
 
   static Lookup<TKey, TValue> createForJoin<TKey, TValue>(
-    Iterable<TValue> source, 
-    Selector<TValue, TKey> keySelector, 
+    Iterable<TValue> source,
+    Selector<TValue, TKey> keySelector,
     EqualityComparer<TKey> comparer,
   ) {
     assert(source != null && keySelector != null);
     final lookup = Lookup<TKey, TValue>._internal(comparer);
-    for(final item in source) {
+    for (final item in source) {
       final key = keySelector(item);
       if (key != null) lookup.getGrouping(key, true).add(item);
     }
@@ -81,7 +82,8 @@ class Lookup<TKey, TValue> extends Iterable<IGrouping<TKey, TValue>> implements 
     return (value == null) ? 0 : comparer.hash(value);
   }
 
-  Iterable<TResult> applyResultSelector<TResult>(GroupSelector<TKey, Iterable<TValue>, TResult> resultSelector) sync* {
+  Iterable<TResult> applyResultSelector<TResult>(
+      GroupSelector<TKey, Iterable<TValue>, TResult> resultSelector) sync* {
     var g = lastGrouping;
     if (g != null) {
       do {
@@ -94,7 +96,9 @@ class Lookup<TKey, TValue> extends Iterable<IGrouping<TKey, TValue>> implements 
 
   Grouping<TKey, TValue> getGrouping(TKey key, bool shouldCreate) {
     var hash = _internalGetHash(key);
-    for (var g = groupings[hash % groupings.length]; g != null; g = g.hashNext) {
+    for (var g = groupings[hash % groupings.length];
+        g != null;
+        g = g.hashNext) {
       if (g.hashCode == hash && comparer.compare(g.key, key)) return g;
     }
 

@@ -10,7 +10,7 @@ class DistinctEnumerable<T> extends Enumerable<T> with EnumerableWithSource<T> {
     this.src = source;
     if (comparer == null) comparer = EqualityComparer.forType<T>();
   }
-  
+
   @override
   Iterator<T> get iterator => DistinctIterator(this);
 }

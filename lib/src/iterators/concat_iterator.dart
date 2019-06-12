@@ -16,8 +16,8 @@ class ConcatIterator<T> extends EnumerableIterator<T, T> {
     if (sourceIterator.moveNext()) {
       current = sourceIterator.current;
       return true;
-    } 
-    
+    }
+
     if (_otherIterator.moveNext()) {
       current = _otherIterator.current;
       return true;

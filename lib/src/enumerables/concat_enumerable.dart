@@ -8,7 +8,7 @@ class ConcatEnumerable<T> extends Enumerable<T> with EnumerableWithSource<T> {
   ConcatEnumerable(Iterable<T> source, this.other) {
     this.src = source;
   }
-  
+
   @override
   Iterator<T> get iterator => ConcatIterator(this);
 }

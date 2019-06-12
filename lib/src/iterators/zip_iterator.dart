@@ -1,8 +1,10 @@
 import '../enumerable_iterator.dart';
 import '../enumerables/zip_enumerable.dart';
 
-class ZipIterator<TFirst, TSecond, TResult> extends EnumerableIterator<TFirst, TResult> {
-  ZipIterator(ZipEnumerable<TFirst, TSecond, TResult> enumerable) : super.of(enumerable);
+class ZipIterator<TFirst, TSecond, TResult>
+    extends EnumerableIterator<TFirst, TResult> {
+  ZipIterator(ZipEnumerable<TFirst, TSecond, TResult> enumerable)
+      : super.of(enumerable);
 
   Iterator<TSecond> _secondIterator;
 
@@ -16,7 +18,8 @@ class ZipIterator<TFirst, TSecond, TResult> extends EnumerableIterator<TFirst, T
     }
 
     if (sourceIterator.moveNext() && _secondIterator.moveNext()) {
-      current = castEnum.selector(sourceIterator.current, _secondIterator.current);
+      current =
+          castEnum.selector(sourceIterator.current, _secondIterator.current);
       return true;
     }
 

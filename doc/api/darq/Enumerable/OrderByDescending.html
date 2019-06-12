@@ -188,7 +188,8 @@ enumerable will be unchanged.</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">Enumerable&lt;T&gt; OrderByDescending&lt;TKey&gt;(Selector&lt;T, TKey&gt; keySelector, {EqualityComparer&lt;TKey&gt; keyComparer}) {
+      <pre class="language-dart"><code class="language-dart">Enumerable&lt;T&gt; OrderByDescending&lt;TKey&gt;(Selector&lt;T, TKey&gt; keySelector,
+    {EqualityComparer&lt;TKey&gt; keyComparer}) {
   return InternalOrderedEnumerable(this, keySelector, keyComparer, true);
 }</code></pre>
     </section>
@@ -202,7 +203,7 @@ enumerable will be unchanged.</p>
 
 <footer>
   <span class="no-break">
-    darq 0.0.1
+    darq 0.1.0
   </span>
 
   

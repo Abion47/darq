@@ -52,27 +52,32 @@ class EqualityComparer<T> {
   final Sorter<T> sort;
 
   EqualityComparer({
-    Comparer<T> comparer, 
+    Comparer<T> comparer,
     Hasher<T> hasher,
     Sorter<T> sorter,
-  }) : this.compare = comparer ?? _getDefaultComparer<T>(),
-       this.hash = hasher ?? _getDefaultHasher<T>(),
-       this.sort = sorter ?? _getDefaultSorter<T>();
+  })  : this.compare = comparer ?? _getDefaultComparer<T>(),
+        this.hash = hasher ?? _getDefaultHasher<T>(),
+        this.sort = sorter ?? _getDefaultSorter<T>();
 
   static EqualityComparer<T> forType<T>() => EqualityComparer<T>(
-    comparer: null, 
-    hasher: null,
-    sorter: null,
-  );
+        comparer: null,
+        hasher: null,
+        sorter: null,
+      );
 
-  static Comparer<T> _getDefaultComparer<T>() => (T left, T right) => left == right;
+  static Comparer<T> _getDefaultComparer<T>() =>
+      (T left, T right) => left == right;
   static Hasher<T> _getDefaultHasher<T>() => (T value) => value.hashCode;
   static Sorter<T> _getDefaultSorter<T>() {
-    switch(T) {
-      case num: return _numSorter as Sorter<T>;
-      case int: return _intSorter as Sorter<T>;
-      case double: return _doubleSorter as Sorter<T>;
-      case String: return _stringSorter as Sorter<T>;
+    switch (T) {
+      case num:
+        return _numSorter as Sorter<T>;
+      case int:
+        return _intSorter as Sorter<T>;
+      case double:
+        return _doubleSorter as Sorter<T>;
+      case String:
+        return _stringSorter as Sorter<T>;
     }
     return (left, right) => 0;
   }

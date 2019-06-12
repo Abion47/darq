@@ -2,7 +2,8 @@ abstract class IGrouping<TKey, TValue> {
   TKey get key;
 }
 
-class Grouping<TKey, TValue> extends Iterable<TValue> implements IGrouping<TKey, TValue> {
+class Grouping<TKey, TValue> extends Iterable<TValue>
+    implements IGrouping<TKey, TValue> {
   List<TValue> elements;
   Grouping hashNext;
   Grouping next;

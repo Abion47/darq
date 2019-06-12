@@ -11,7 +11,8 @@ class WhereIterator<T> extends EnumerableIterator<T, T> {
     }
 
     while (sourceIterator.moveNext()) {
-      if ((enumerable as WhereEnumerable<T>).condition(sourceIterator.current)) {
+      if ((enumerable as WhereEnumerable<T>)
+          .condition(sourceIterator.current)) {
         current = sourceIterator.current;
         return true;
       }

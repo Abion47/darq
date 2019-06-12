@@ -190,7 +190,8 @@ enumerable.</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">Enumerable&lt;IGrouping&lt;TKey, T&gt;&gt; GroupBy&lt;TKey&gt;(Selector&lt;T, TKey&gt; keySelector, {EqualityComparer&lt;TKey&gt; keyComparer}) {
+      <pre class="language-dart"><code class="language-dart">Enumerable&lt;IGrouping&lt;TKey, T&gt;&gt; GroupBy&lt;TKey&gt;(Selector&lt;T, TKey&gt; keySelector,
+    {EqualityComparer&lt;TKey&gt; keyComparer}) {
   assert(keySelector != null);
   return GroupByEnumerable&lt;T, TKey&gt;(this, keySelector, keyComparer);
 }</code></pre>
@@ -205,7 +206,7 @@ enumerable.</p>
 
 <footer>
   <span class="no-break">
-    darq 0.0.1
+    darq 0.1.0
   </span>
 
   

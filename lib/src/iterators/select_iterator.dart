@@ -1,8 +1,10 @@
 import '../enumerables/select_enumerable.dart';
 import '../enumerable_iterator.dart';
 
-class SelectIterator<TSource, TResult> extends EnumerableIterator<TSource, TResult> {
-  SelectIterator(SelectEnumerable<TSource, TResult> enumerable) : super.of(enumerable);
+class SelectIterator<TSource, TResult>
+    extends EnumerableIterator<TSource, TResult> {
+  SelectIterator(SelectEnumerable<TSource, TResult> enumerable)
+      : super.of(enumerable);
 
   @override
   bool moveNext() {
@@ -11,7 +13,8 @@ class SelectIterator<TSource, TResult> extends EnumerableIterator<TSource, TResu
     }
 
     if (sourceIterator.moveNext()) {
-      current = (enumerable as SelectEnumerable<TSource, TResult>).selector(sourceIterator.current);
+      current = (enumerable as SelectEnumerable<TSource, TResult>)
+          .selector(sourceIterator.current);
       return true;
     }
 

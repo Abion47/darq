@@ -11,10 +11,11 @@ class ExceptIterator<T> extends EnumerableIterator<T, T> {
   bool moveNext() {
     if (sourceIterator == null) {
       sourceIterator = enumerable.source.iterator;
-      _elementCache = ComparableSet<T>((enumerable as ExceptEnumerable<T>).comparer);
+      _elementCache =
+          ComparableSet<T>((enumerable as ExceptEnumerable<T>).comparer);
       _elementCache.addAll((enumerable as ExceptEnumerable<T>).other);
     }
-    
+
     T value;
     while (sourceIterator.moveNext()) {
       value = sourceIterator.current;

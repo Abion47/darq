@@ -11,7 +11,8 @@ class TakeWhileIterator<T> extends EnumerableIterator<T, T> {
     }
 
     if (sourceIterator.moveNext()) {
-      if ((enumerable as TakeWhileEnumerable<T>).condition(sourceIterator.current)) {
+      if ((enumerable as TakeWhileEnumerable<T>)
+          .condition(sourceIterator.current)) {
         current = sourceIterator.current;
         return true;
       }

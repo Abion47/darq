@@ -13,9 +13,10 @@ class UnionIterator<T> extends EnumerableIterator<T, T> {
     if (sourceIterator == null) {
       sourceIterator = enumerable.source.iterator;
       _otherIterator = (enumerable as UnionEnumerable<T>).other.iterator;
-      _elementCache = ComparableSet<T>((enumerable as UnionEnumerable<T>).comparer);
+      _elementCache =
+          ComparableSet<T>((enumerable as UnionEnumerable<T>).comparer);
     }
-    
+
     T value;
 
     while (sourceIterator.moveNext()) {
@@ -26,7 +27,7 @@ class UnionIterator<T> extends EnumerableIterator<T, T> {
         return true;
       }
     }
-    
+
     while (_otherIterator.moveNext()) {
       value = _otherIterator.current;
 

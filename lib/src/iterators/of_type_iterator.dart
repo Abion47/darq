@@ -1,8 +1,10 @@
 import '../enumerables/of_type_enumerable.dart';
 import '../enumerable_iterator.dart';
 
-class OfTypeIterator<TSource, TResult> extends EnumerableIterator<TSource, TResult> {
-  OfTypeIterator(OfTypeEnumerable<TSource, TResult> enumerable) : super.of(enumerable);
+class OfTypeIterator<TSource, TResult>
+    extends EnumerableIterator<TSource, TResult> {
+  OfTypeIterator(OfTypeEnumerable<TSource, TResult> enumerable)
+      : super.of(enumerable);
 
   @override
   bool moveNext() {

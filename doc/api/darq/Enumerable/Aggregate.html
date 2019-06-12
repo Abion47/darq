@@ -197,25 +197,39 @@ must be provided. Otherwise, an <code>ArgumentError</code> will be thrown.</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">T Aggregate([Aggregator&lt;T&gt; aggregator, T initialValue]) {
-  if(aggregator == null &amp;&amp;
+  if (aggregator == null &amp;&amp;
       T != num &amp;&amp;
       T != int &amp;&amp;
       T != double &amp;&amp;
-      T != String) throw ArgumentError(&#39;`aggregator` must not be null or the type of this enumerable must be one of the following: ${[num, int, double, String]}&#39;);
+      T != String)
+    throw ArgumentError(
+        &#39;`aggregator` must not be null or the type of this enumerable must be one of the following: ${[
+      num,
+      int,
+      double,
+      String
+    ]}&#39;);
 
   if (aggregator == null) {
-    if (T == num) return EnumerableReducers.SumNum(this as Enumerable&lt;num&gt;) as T;
-    if (T == int) return EnumerableReducers.SumInt(this as Enumerable&lt;int&gt;) as T;
-    if (T == double) return EnumerableReducers.SumDouble(this as Enumerable&lt;double&gt;) as T;
-    if (T == String) return EnumerableReducers.SumString(this as Enumerable&lt;String&gt;) as T;
+    if (T == num)
+      return EnumerableReducers.SumNum(this as Enumerable&lt;num&gt;) as T;
+    if (T == int)
+      return EnumerableReducers.SumInt(this as Enumerable&lt;int&gt;) as T;
+    if (T == double)
+      return EnumerableReducers.SumDouble(this as Enumerable&lt;double&gt;) as T;
+    if (T == String)
+      return EnumerableReducers.SumString(this as Enumerable&lt;String&gt;) as T;
     throw UnexpectedStateError();
   }
 
   dynamic result = initialValue;
   if (result == null) {
-    if (T == int) result = 0;
-    else if (T == double || T == num) result = 0.0;
-    else if (T == bool) result = false;
+    if (T == int)
+      result = 0;
+    else if (T == double || T == num)
+      result = 0.0;
+    else if (T == bool)
+      result = false;
     else if (T == String) result = &#39;&#39;;
   }
 
@@ -238,7 +252,7 @@ must be provided. Otherwise, an <code>ArgumentError</code> will be thrown.</p>
 
 <footer>
   <span class="no-break">
-    darq 0.0.1
+    darq 0.1.0
   </span>
 
   

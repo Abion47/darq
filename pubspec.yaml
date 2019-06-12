@@ -1,0 +1,10 @@
+name: darq
+description: A port of functional LINQ from the .NET library.
+author: Andrew Ackerman
+version: 0.0.1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dev_dependencies: 
+  test: ^1.6.4

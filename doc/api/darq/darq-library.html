@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="darq library API docs, for the Dart programming language.">
+  <title>darq library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+  
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">darq</a></li>
+    <li class="self-crumb">darq library</li>
+  </ol>
+  <div class="self-name">darq</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">darq</a></li>
+      <li class="self-crumb">darq library</li>
+    </ol>
+    
+    <h5><span class="package-name">darq</span> <span class="package-kind">package</span></h5>
+    <ol>
+          <li class="section-title">Libraries</li>
+          <li><a href="darq/darq-library.html">darq</a></li>
+    </ol>
+  </div>
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-library">darq</span> library </h1></div>
+
+    
+    <section class="summary offset-anchor" id="classes">
+      <h2>Classes</h2>
+
+      <dl>
+        <dt id="Enumerable">
+          <span class="name "><a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>         
+        </dt>
+        <dd>
+          The base class for all enumerables. Allows advanced enumeration methods
+to be performed on the underlying collection. <a href="darq/Enumerable-class.html">[...]</a>
+        </dd>
+        <dt id="EqualityComparer">
+          <span class="name "><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>         
+        </dt>
+        <dd>
+          Used in various enumeration methods for allowing user-defined comparisons
+between complex elements. <a href="darq/EqualityComparer-class.html">[...]</a>
+        </dd>
+      </dl>
+    </section>
+
+
+
+
+    <section class="summary offset-anchor" id="functions">
+      <h2>Functions</h2>
+
+      <dl class="callables">
+        <dt id="E" class="callable">
+          <span class="name"><a href="darq/E.html">E</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="E-param-iterable"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">iterable</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          A convenience method to transform an Iterable into an Enumerable.
+                  
+</dd>
+      </dl>
+    </section>
+
+
+    <section class="summary offset-anchor" id="typedefs">
+      <h2>Typedefs</h2>
+
+      <dl class="callables">
+        <dt id="Aggregator" class="callable">
+          <span class="name"><a href="darq/Aggregator.html">Aggregator</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="Aggregator-param-accumulate"><span class="type-annotation">T</span> <span class="parameter-name">accumulate</span>, </span> <span class="parameter" id="Aggregator-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span></span>)
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Takes an accumulate and a value of type <code>T</code>, then aggregates the value
+into the accumulate and returns the result.
+                  
+</dd>
+        <dt id="CastTransformer" class="callable">
+          <span class="name"><a href="darq/CastTransformer.html">CastTransformer</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TSource</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="CastTransformer-param-element"><span class="type-annotation">TSource</span> <span class="parameter-name">element</span></span>)
+            <span class="returntype parameter">&#8594; TResult</span>
+          </span>
+                  </dt>
+        <dd>
+          Takes an element of type <code>TSource</code> and casts it to type <code>TResult</code>, returning
+the result of the cast.
+                  
+</dd>
+        <dt id="Comparer" class="callable">
+          <span class="name"><a href="darq/Comparer.html">Comparer</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="Comparer-param-left"><span class="type-annotation">T</span> <span class="parameter-name">left</span>, </span> <span class="parameter" id="Comparer-param-right"><span class="type-annotation">T</span> <span class="parameter-name">right</span></span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd>
+          Takes two elements of type <code>T</code> and checks them for equality, returning <code>true</code>
+if the elements are equal and <code>false</code> otherwise.
+                  
+</dd>
+        <dt id="Condition" class="callable">
+          <span class="name"><a href="darq/Condition.html">Condition</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="Condition-param-element"><span class="type-annotation">T</span> <span class="parameter-name">element</span></span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd>
+          Takes an element and defines a condition, then returns <code>true</code> if the element
+satisfies the condition and <code>false</code> otherwise.
+                  
+</dd>
+        <dt id="GroupSelector" class="callable">
+          <span class="name"><a href="darq/GroupSelector.html">GroupSelector</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>, <span class="type-parameter">TSource</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="GroupSelector-param-key"><span class="type-annotation">TKey</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="GroupSelector-param-group"><span class="type-annotation">TSource</span> <span class="parameter-name">group</span></span>)
+            <span class="returntype parameter">&#8594; TResult</span>
+          </span>
+                  </dt>
+        <dd>
+          Takes a key of type <code>TKey</code> and a group of type <code>TSource</code> and maps them to a
+value of type <code>TResult</code>, returning the result of the mapping. (The group will
+typically be an instance of <code>IGrouping</code>.)
+                  
+</dd>
+        <dt id="Hasher" class="callable">
+          <span class="name"><a href="darq/Hasher.html">Hasher</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="Hasher-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span></span>)
+            <span class="returntype parameter">&#8594; int</span>
+          </span>
+                  </dt>
+        <dd>
+          Takes an element of type <code>T</code> and computes its hash code, returning the code's
+integer value.
+                  
+</dd>
+        <dt id="LookupSelector" class="callable">
+          <span class="name"><a href="darq/LookupSelector.html">LookupSelector</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>, <span class="type-parameter">TValue</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="LookupSelector-param-key"><span class="type-annotation">TKey</span> <span class="parameter-name">key</span>, </span> <span class="parameter" id="LookupSelector-param-value"><span class="type-annotation">TValue</span> <span class="parameter-name">value</span></span>)
+            <span class="returntype parameter">&#8594; TResult</span>
+          </span>
+                  </dt>
+        <dd>
+          Takes an key of type <code>TKey</code> and a value of type <code>TValue</code> and maps
+them into a value of type <code>TResult</code>, returning the value.
+                  
+</dd>
+        <dt id="ManySelector" class="callable">
+          <span class="name"><a href="darq/ManySelector.html">ManySelector</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TSource</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="ManySelector-param-element"><span class="type-annotation">TSource</span> <span class="parameter-name">element</span></span>)
+            <span class="returntype parameter">&#8594; Iterable<span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Takes an element of type <code>TSource</code> and transforms it into an <code>Iterable</code> of
+type <tresult>, returning the result of the transformation.</tresult>
+                  
+</dd>
+        <dt id="Selector" class="callable">
+          <span class="name"><a href="darq/Selector.html">Selector</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TSource</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="Selector-param-element"><span class="type-annotation">TSource</span> <span class="parameter-name">element</span></span>)
+            <span class="returntype parameter">&#8594; TResult</span>
+          </span>
+                  </dt>
+        <dd>
+          Takes an element of type <code>TSource</code> and maps it to a value of type <code>TResult</code>.
+                  
+</dd>
+        <dt id="Sorter" class="callable">
+          <span class="name"><a href="darq/Sorter.html">Sorter</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="Sorter-param-left"><span class="type-annotation">T</span> <span class="parameter-name">left</span>, </span> <span class="parameter" id="Sorter-param-right"><span class="type-annotation">T</span> <span class="parameter-name">right</span></span>)
+            <span class="returntype parameter">&#8594; int</span>
+          </span>
+                  </dt>
+        <dd>
+          Takes two values of type <code>T</code> and computes their sort order, represented by
+a returned integer value. <a href="darq/Sorter.html">[...]</a>
+                  
+</dd>
+        <dt id="ZipSelector" class="callable">
+          <span class="name"><a href="darq/ZipSelector.html">ZipSelector</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TFirst</span>, <span class="type-parameter">TSecond</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="ZipSelector-param-first"><span class="type-annotation">TFirst</span> <span class="parameter-name">first</span>, </span> <span class="parameter" id="ZipSelector-param-second"><span class="type-annotation">TSecond</span> <span class="parameter-name">second</span></span>)
+            <span class="returntype parameter">&#8594; TResult</span>
+          </span>
+                  </dt>
+        <dd>
+          Takes an element of type <code>TFirst</code> and an element of type <code>TSecond</code> and maps
+them into a value of type <code>TResult</code>, returning the value.
+                  
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="exceptions">
+      <h2>Exceptions / Errors</h2>
+
+      <dl>
+        <dt id="ConversionError">
+          <span class="name "><a href="darq/ConversionError-class.html">ConversionError</a><span class="signature">&lt;<wbr><span class="type-parameter">TSource</span>, <span class="type-parameter">TResult</span>&gt;</span></span>         
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="ElementNotFoundError">
+          <span class="name "><a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a></span>         
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="EmptyEnumerableError">
+          <span class="name "><a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a></span>         
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="IncompatibleTypeError">
+          <span class="name "><a href="darq/IncompatibleTypeError-class.html">IncompatibleTypeError</a></span>         
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="IntegerOverflowError">
+          <span class="name "><a href="darq/IntegerOverflowError-class.html">IntegerOverflowError</a></span>         
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="KeyExistsError">
+          <span class="name "><a href="darq/KeyExistsError-class.html">KeyExistsError</a></span>         
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="NullEnumerableError">
+          <span class="name "><a href="darq/NullEnumerableError-class.html">NullEnumerableError</a></span>         
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="OperationError">
+          <span class="name "><a href="darq/OperationError-class.html">OperationError</a></span>         
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="UnexpectedStateError">
+          <span class="name "><a href="darq/UnexpectedStateError-class.html">UnexpectedStateError</a></span>         
+        </dt>
+        <dd>
+          
+        </dd>
+      </dl>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+    <h5>darq library</h5>
+    <ol>
+      <li class="section-title"><a href="darq/darq-library.html#classes">Classes</a></li>
+      <li><a href="darq/Enumerable-class.html">Enumerable</a></li>
+      <li><a href="darq/EqualityComparer-class.html">EqualityComparer</a></li>
+    
+    
+    
+    
+      <li class="section-title"><a href="darq/darq-library.html#functions">Functions</a></li>
+      <li><a href="darq/E.html">E</a></li>
+    
+    
+      <li class="section-title"><a href="darq/darq-library.html#typedefs">Typedefs</a></li>
+      <li><a href="darq/Aggregator.html">Aggregator</a></li>
+      <li><a href="darq/CastTransformer.html">CastTransformer</a></li>
+      <li><a href="darq/Comparer.html">Comparer</a></li>
+      <li><a href="darq/Condition.html">Condition</a></li>
+      <li><a href="darq/GroupSelector.html">GroupSelector</a></li>
+      <li><a href="darq/Hasher.html">Hasher</a></li>
+      <li><a href="darq/LookupSelector.html">LookupSelector</a></li>
+      <li><a href="darq/ManySelector.html">ManySelector</a></li>
+      <li><a href="darq/Selector.html">Selector</a></li>
+      <li><a href="darq/Sorter.html">Sorter</a></li>
+      <li><a href="darq/ZipSelector.html">ZipSelector</a></li>
+    
+      <li class="section-title"><a href="darq/darq-library.html#exceptions">Exceptions</a></li>
+      <li><a href="darq/ConversionError-class.html">ConversionError</a></li>
+      <li><a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a></li>
+      <li><a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a></li>
+      <li><a href="darq/IncompatibleTypeError-class.html">IncompatibleTypeError</a></li>
+      <li><a href="darq/IntegerOverflowError-class.html">IntegerOverflowError</a></li>
+      <li><a href="darq/KeyExistsError-class.html">KeyExistsError</a></li>
+      <li><a href="darq/NullEnumerableError-class.html">NullEnumerableError</a></li>
+      <li><a href="darq/OperationError-class.html">OperationError</a></li>
+      <li><a href="darq/UnexpectedStateError-class.html">UnexpectedStateError</a></li>
+    </ol>
+  </div><!--/sidebar-offcanvas-right-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    darq 0.0.1
+  </span>
+
+  
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the Enumerable class from the darq library, for the Dart programming language.">
+  <title>Enumerable class - darq library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+  
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">darq</a></li>
+    <li><a href="darq/darq-library.html">darq</a></li>
+    <li class="self-crumb">Enumerable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> abstract class</li>
+  </ol>
+  <div class="self-name">Enumerable</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">darq</a></li>
+      <li><a href="darq/darq-library.html">darq</a></li>
+      <li class="self-crumb">Enumerable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> abstract class</li>
+    </ol>
+    
+    <h5>darq library</h5>
+    <ol>
+      <li class="section-title"><a href="darq/darq-library.html#classes">Classes</a></li>
+      <li><a href="darq/Enumerable-class.html">Enumerable</a></li>
+      <li><a href="darq/EqualityComparer-class.html">EqualityComparer</a></li>
+    
+    
+    
+    
+      <li class="section-title"><a href="darq/darq-library.html#functions">Functions</a></li>
+      <li><a href="darq/E.html">E</a></li>
+    
+    
+      <li class="section-title"><a href="darq/darq-library.html#typedefs">Typedefs</a></li>
+      <li><a href="darq/Aggregator.html">Aggregator</a></li>
+      <li><a href="darq/CastTransformer.html">CastTransformer</a></li>
+      <li><a href="darq/Comparer.html">Comparer</a></li>
+      <li><a href="darq/Condition.html">Condition</a></li>
+      <li><a href="darq/GroupSelector.html">GroupSelector</a></li>
+      <li><a href="darq/Hasher.html">Hasher</a></li>
+      <li><a href="darq/LookupSelector.html">LookupSelector</a></li>
+      <li><a href="darq/ManySelector.html">ManySelector</a></li>
+      <li><a href="darq/Selector.html">Selector</a></li>
+      <li><a href="darq/Sorter.html">Sorter</a></li>
+      <li><a href="darq/ZipSelector.html">ZipSelector</a></li>
+    
+      <li class="section-title"><a href="darq/darq-library.html#exceptions">Exceptions</a></li>
+      <li><a href="darq/ConversionError-class.html">ConversionError</a></li>
+      <li><a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a></li>
+      <li><a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a></li>
+      <li><a href="darq/IncompatibleTypeError-class.html">IncompatibleTypeError</a></li>
+      <li><a href="darq/IntegerOverflowError-class.html">IntegerOverflowError</a></li>
+      <li><a href="darq/KeyExistsError-class.html">KeyExistsError</a></li>
+      <li><a href="darq/NullEnumerableError-class.html">NullEnumerableError</a></li>
+      <li><a href="darq/OperationError-class.html">OperationError</a></li>
+      <li><a href="darq/UnexpectedStateError-class.html">UnexpectedStateError</a></li>
+    </ol>
+  </div>
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-class">Enumerable&lt;<wbr><span class="type-parameter">T</span>&gt;</span> class </h1></div>
+
+    <section class="desc markdown">
+      <p>The base class for all enumerables. Allows advanced enumeration methods
+to be performed on the underlying collection.</p>
+<p>Enumeration methods are separated into two categories: value methods and
+lazy-execution methods.</p>
+<p>Value methods are methods that condense the enumerable into a single static
+value. These methods will iterate over the enumerable when the method is
+called, and may iterate over the entire enumerable (possibly more than once)
+or may short-circuit the iteration after certain conditions have been met.
+Examples of value methods include <a href="darq/Enumerable/Aggregate.html">Aggregate</a>, <a href="darq/Enumerable/Max.html">Max</a>, and <a href="darq/Enumerable/Count.html">Count</a>.</p>
+<p>Lazy-execution methods are methods that modify the enumeration using a
+particular tactic. These methods do not execute until the enumeration is
+iterated over, which can drastically improve performance when dealing with
+large collections of data. These methods will themselves return an instance
+of <a href="darq/Enumerable-class.html">Enumerable</a>, so they can be chained together to perform multiple
+transformations at once, further improving performance. Examples of
+lazy-execution methods include <a href="darq/Enumerable/Select.html">Select</a>, <a href="darq/Enumerable/GroupBy.html">GroupBy</a>, and <a href="darq/Enumerable/Distinct.html">Distinct</a>.</p>
+<p>(Note: as part of their iteration, some deferred-execution methods must
+first iterate over the entire underlying collection before they can begin
+their own iteration. Take caution when applying these methods to large
+collections as they can block the thread while the initial computation
+takes place. Examples of this are <a href="darq/Enumerable/Reverse.html">Reverse</a> and <a href="darq/Enumerable/OrderBy.html">OrderBy</a>.)</p>
+<p>To create an <a href="darq/Enumerable-class.html">Enumerable</a> out of a <code>List</code>, <code>Set</code>, or any other <code>Iterable</code>,
+use the <a href="darq/Enumerable/Enumerable.from.html">Enumerable.from</a> factory method or use the <code>E</code> convenience global
+function:</p>
+<pre class="language-dart"><code class="language-dart">final list = [0, 1, 2, 3, 4];
+
+// This works
+final first = Enumerable.from(list);
+
+// This also works
+final second = E(list);
+</code></pre>
+<p><a href="darq/Enumerable-class.html">Enumerable</a> extends <code>Iterable</code>, so any instance of <a href="darq/Enumerable-class.html">Enumerable</a> can be
+iterated over using a traditional for loop:</p>
+<pre class="language-dart"><code class="language-dart">final list = [0, 1, 2, 3, 4];
+for (var element in E(list).Select((i) =&gt; i * 2)) {
+  print(element);
+}
+
+// Output:
+// 0
+// 2
+// 4
+// 6
+// 8
+</code></pre>
+<p><a href="darq/Enumerable-class.html">Enumerable</a> objects can be converted back into Dart collections by utilizing
+the <a href="darq/Enumerable/ToList.html">Enumerable.ToList</a>, <a href="darq/Enumerable/ToMap.html">Enumerable.ToMap</a>, or <a href="darq/Enumerable/ToSet.html">Enumerable.ToSet</a> methods.</p>
+<pre class="language-dart"><code class="language-dart">final list = [0, 1, 2, 3, 4];
+final result = E(list).Select((i) =&gt; i * 2).ToList();
+print(result);
+
+// Output:
+// [0, 2, 4, 6, 8]
+</code></pre>
+    </section>
+    
+    <section>
+      <dl class="dl-horizontal">
+        <dt>Inheritance</dt>
+        <dd><ul class="gt-separated dark clazz-relationships">
+          <li>Object</li>
+          <li>Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></li>
+          <li>Enumerable</li>
+        </ul></dd>
+
+
+
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="Enumerable" class="callable">
+          <span class="name"><a href="darq/Enumerable/Enumerable.html">Enumerable</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="Enumerable.empty" class="callable">
+          <span class="name"><a href="darq/Enumerable/Enumerable.empty.html">Enumerable.empty</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          Creates an empty enumerable. <a href="darq/Enumerable/Enumerable.empty.html">[...]</a>
+          <div class="constructor-modifier features">factory</div>
+        </dd>
+        <dt id="Enumerable.from" class="callable">
+          <span class="name"><a href="darq/Enumerable/Enumerable.from.html">Enumerable.from</a></span><span class="signature">(<span class="parameter" id="from-param-iterable"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">iterable</span></span>)</span>
+        </dt>
+        <dd>
+          
+          <div class="constructor-modifier features">factory</div>
+        </dd>
+        <dt id="Enumerable.repeat" class="callable">
+          <span class="name"><a href="darq/Enumerable/Enumerable.repeat.html">Enumerable.repeat</a></span><span class="signature">(<span class="parameter" id="repeat-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span>, </span> <span class="parameter" id="repeat-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span></span>)</span>
+        </dt>
+        <dd>
+          Creates an enumerable <a href="darq/Enumerable/Enumerable.repeat.html">[...]</a>
+          <div class="constructor-modifier features">factory</div>
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="first" class="property inherited">
+          <span class="name"><a href="darq/Enumerable/first.html">first</a></span>
+          <span class="signature">&#8594; T</span>         
+        </dt>
+        <dd class="inherited">
+          Returns the first element. <a href="darq/Enumerable/first.html">[...]</a>
+                  <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="hashCode" class="property inherited">
+          <span class="name"><a href="darq/Enumerable/hashCode.html">hashCode</a></span>
+          <span class="signature">&#8594; int</span>         
+        </dt>
+        <dd class="inherited">
+          The hash code for this object. <a href="darq/Enumerable/hashCode.html">[...]</a>
+                  <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="isEmpty" class="property inherited">
+          <span class="name"><a href="darq/Enumerable/isEmpty.html">isEmpty</a></span>
+          <span class="signature">&#8594; bool</span>         
+        </dt>
+        <dd class="inherited">
+          Returns <code>true</code> if there are no elements in this collection. <a href="darq/Enumerable/isEmpty.html">[...]</a>
+                  <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="isNotEmpty" class="property inherited">
+          <span class="name"><a href="darq/Enumerable/isNotEmpty.html">isNotEmpty</a></span>
+          <span class="signature">&#8594; bool</span>         
+        </dt>
+        <dd class="inherited">
+          Returns true if there is at least one element in this collection. <a href="darq/Enumerable/isNotEmpty.html">[...]</a>
+                  <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="iterator" class="property inherited">
+          <span class="name"><a href="darq/Enumerable/iterator.html">iterator</a></span>
+          <span class="signature">&#8594; Iterator<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>         
+        </dt>
+        <dd class="inherited">
+          Returns a new <code>Iterator</code> that allows iterating the elements of this
+<code>Iterable</code>. <a href="darq/Enumerable/iterator.html">[...]</a>
+                  <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="last" class="property inherited">
+          <span class="name"><a href="darq/Enumerable/last.html">last</a></span>
+          <span class="signature">&#8594; T</span>         
+        </dt>
+        <dd class="inherited">
+          Returns the last element. <a href="darq/Enumerable/last.html">[...]</a>
+                  <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="length" class="property inherited">
+          <span class="name"><a href="darq/Enumerable/length.html">length</a></span>
+          <span class="signature">&#8594; int</span>         
+        </dt>
+        <dd class="inherited">
+          Returns the number of elements in <a href="darq/Enumerable-class.html">this</a>. <a href="darq/Enumerable/length.html">[...]</a>
+                  <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="runtimeType" class="property inherited">
+          <span class="name"><a href="darq/Enumerable/runtimeType.html">runtimeType</a></span>
+          <span class="signature">&#8594; Type</span>         
+        </dt>
+        <dd class="inherited">
+          A representation of the runtime type of the object.
+                  <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="single" class="property inherited">
+          <span class="name"><a href="darq/Enumerable/single.html">single</a></span>
+          <span class="signature">&#8594; T</span>         
+        </dt>
+        <dd class="inherited">
+          Checks that this iterable has only one element, and returns that element. <a href="darq/Enumerable/single.html">[...]</a>
+                  <div class="features">read-only, inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="Aggregate" class="callable">
+          <span class="name"><a href="darq/Enumerable/Aggregate.html">Aggregate</a></span><span class="signature">(<wbr>[<span class="parameter" id="Aggregate-param-aggregator"><span class="type-annotation"><a href="darq/Aggregator.html">Aggregator</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">aggregator</span>, </span> <span class="parameter" id="Aggregate-param-initialValue"><span class="type-annotation">T</span> <span class="parameter-name">initialValue</span></span> ])
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Aggregates the enumerable into a single value. <a href="darq/Enumerable/Aggregate.html">[...]</a>
+                  
+</dd>
+        <dt id="All" class="callable">
+          <span class="name"><a href="darq/Enumerable/All.html">All</a></span><span class="signature">(<wbr>[<span class="parameter" id="All-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span></span> ])
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns <code>true</code> if all elements match a condition and <code>false</code> otherwise. <a href="darq/Enumerable/All.html">[...]</a>
+                  
+</dd>
+        <dt id="Any" class="callable">
+          <span class="name"><a href="darq/Enumerable/Any.html">Any</a></span><span class="signature">(<wbr>[<span class="parameter" id="Any-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span></span> ])
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns <code>true</code> if any one element matches a condition and <code>false</code> otherwise. <a href="darq/Enumerable/Any.html">[...]</a>
+                  
+</dd>
+        <dt id="Append" class="callable">
+          <span class="name"><a href="darq/Enumerable/Append.html">Append</a></span><span class="signature">(<wbr><span class="parameter" id="Append-param-newElement"><span class="type-annotation">T</span> <span class="parameter-name">newElement</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Inserts an element to the end of the enumerable. <a href="darq/Enumerable/Append.html">[...]</a>
+                  
+</dd>
+        <dt id="Average" class="callable">
+          <span class="name"><a href="darq/Enumerable/Average.html">Average</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Calculates the average of all numerical values in the enumerable. <a href="darq/Enumerable/Average.html">[...]</a>
+                  
+</dd>
+        <dt id="Cast" class="callable">
+          <span class="name"><a href="darq/Enumerable/Cast.html">Cast</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr>[<span class="parameter" id="Cast-param-transformer"><span class="type-annotation"><a href="darq/CastTransformer.html">CastTransformer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">transformer</span></span> ])
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Casts each element in the enumerable from one type to another. <a href="darq/Enumerable/Cast.html">[...]</a>
+                  
+</dd>
+        <dt id="Concat" class="callable">
+          <span class="name"><a href="darq/Enumerable/Concat.html">Concat</a></span><span class="signature">(<wbr><span class="parameter" id="Concat-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">other</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Concatenates this enumerable and another collection. <a href="darq/Enumerable/Concat.html">[...]</a>
+                  
+</dd>
+        <dt id="Contains" class="callable">
+          <span class="name"><a href="darq/Enumerable/Contains.html">Contains</a></span><span class="signature">(<wbr><span class="parameter" id="Contains-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span>, {</span> <span class="parameter" id="Contains-param-comparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">comparer</span></span> })
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns <code>true</code> if the specified element exists in the enumerable and <code>false</code> otherwise. <a href="darq/Enumerable/Contains.html">[...]</a>
+                  
+</dd>
+        <dt id="Count" class="callable">
+          <span class="name"><a href="darq/Enumerable/Count.html">Count</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; int</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the number of elements in the enumerable. <a href="darq/Enumerable/Count.html">[...]</a>
+                  
+</dd>
+        <dt id="CountIf" class="callable">
+          <span class="name"><a href="darq/Enumerable/CountIf.html">CountIf</a></span><span class="signature">(<wbr><span class="parameter" id="CountIf-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span></span>)
+            <span class="returntype parameter">&#8594; int</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the number of elements in the enumerable that match a condition. <a href="darq/Enumerable/CountIf.html">[...]</a>
+                  
+</dd>
+        <dt id="DefaultIfEmpty" class="callable">
+          <span class="name"><a href="darq/Enumerable/DefaultIfEmpty.html">DefaultIfEmpty</a></span><span class="signature">(<wbr><span class="parameter" id="DefaultIfEmpty-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Returns either this enumerable or a new enumerable containing <code>value</code> if
+this enumerable is empty. <a href="darq/Enumerable/DefaultIfEmpty.html">[...]</a>
+                  
+</dd>
+        <dt id="Distinct" class="callable">
+          <span class="name"><a href="darq/Enumerable/Distinct.html">Distinct</a></span><span class="signature">(<wbr>{<span class="parameter" id="Distinct-param-comparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">comparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Returns an enumerable representing the distinct values of this enumerable. <a href="darq/Enumerable/Distinct.html">[...]</a>
+                  
+</dd>
+        <dt id="ElementAt" class="callable">
+          <span class="name"><a href="darq/Enumerable/ElementAt.html">ElementAt</a></span><span class="signature">(<wbr><span class="parameter" id="ElementAt-param-index"><span class="type-annotation">int</span> <span class="parameter-name">index</span></span>)
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the element at the specified index. <a href="darq/Enumerable/ElementAt.html">[...]</a>
+                  
+</dd>
+        <dt id="ElementAtOrDefault" class="callable">
+          <span class="name"><a href="darq/Enumerable/ElementAtOrDefault.html">ElementAtOrDefault</a></span><span class="signature">(<wbr><span class="parameter" id="ElementAtOrDefault-param-index"><span class="type-annotation">int</span> <span class="parameter-name">index</span>, {</span> <span class="parameter" id="ElementAtOrDefault-param-defaultValue"><span class="type-annotation">T</span> <span class="parameter-name">defaultValue</span></span> })
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the element at the specified index or a default value of one is
+not found. <a href="darq/Enumerable/ElementAtOrDefault.html">[...]</a>
+                  
+</dd>
+        <dt id="Except" class="callable">
+          <span class="name"><a href="darq/Enumerable/Except.html">Except</a></span><span class="signature">(<wbr><span class="parameter" id="Except-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">other</span>, {</span> <span class="parameter" id="Except-param-comparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">comparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the set difference between the enumerable and the given
+collection. <a href="darq/Enumerable/Except.html">[...]</a>
+                  
+</dd>
+        <dt id="First" class="callable">
+          <span class="name"><a href="darq/Enumerable/First.html">First</a></span><span class="signature">(<wbr>{<span class="parameter" id="First-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span></span> })
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the first element in the enumerable, optionally matching a
+specified condition. <a href="darq/Enumerable/First.html">[...]</a>
+                  
+</dd>
+        <dt id="FirstOrDefault" class="callable">
+          <span class="name"><a href="darq/Enumerable/FirstOrDefault.html">FirstOrDefault</a></span><span class="signature">(<wbr>{<span class="parameter" id="FirstOrDefault-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span>, </span> <span class="parameter" id="FirstOrDefault-param-defaultValue"><span class="type-annotation">T</span> <span class="parameter-name">defaultValue</span></span> })
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the first element in the enumerable or a default value if there
+is none, optionally matching a specified condition. <a href="darq/Enumerable/FirstOrDefault.html">[...]</a>
+                  
+</dd>
+        <dt id="GroupBy" class="callable">
+          <span class="name"><a href="darq/Enumerable/GroupBy.html">GroupBy</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="GroupBy-param-keySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keySelector</span>, {</span> <span class="parameter" id="GroupBy-param-keyComparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keyComparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">IGrouping<span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>, <span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Groups the elements in the enumerable by a key. <a href="darq/Enumerable/GroupBy.html">[...]</a>
+                  
+</dd>
+        <dt id="GroupByValue" class="callable">
+          <span class="name"><a href="darq/Enumerable/GroupByValue.html">GroupByValue</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>, <span class="type-parameter">TValue</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="GroupByValue-param-keySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keySelector</span>, </span> <span class="parameter" id="GroupByValue-param-valueSelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TValue</span>&gt;</span></span> <span class="parameter-name">valueSelector</span>, {</span> <span class="parameter" id="GroupByValue-param-keyComparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keyComparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">IGrouping<span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>, <span class="type-parameter">TValue</span>&gt;</span></span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Groups the elements in the enumerable by a key and maps the elements to
+a new value. <a href="darq/Enumerable/GroupByValue.html">[...]</a>
+                  
+</dd>
+        <dt id="GroupJoin" class="callable">
+          <span class="name"><a href="darq/Enumerable/GroupJoin.html">GroupJoin</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TInner</span>, <span class="type-parameter">TKey</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="GroupJoin-param-inner"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">TInner</span>&gt;</span></span> <span class="parameter-name">inner</span>, </span> <span class="parameter" id="GroupJoin-param-outerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">outerKeySelector</span>, </span> <span class="parameter" id="GroupJoin-param-innerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">TInner</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">innerKeySelector</span>, </span> <span class="parameter" id="GroupJoin-param-resultSelector"><span class="type-annotation"><a href="darq/GroupSelector.html">GroupSelector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">TInner</span>&gt;</span></span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">resultSelector</span>, {</span> <span class="parameter" id="GroupJoin-param-keyComparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keyComparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Joins elements in the enumerable with a group of all elements in the
+<code>inner</code> collection that match the generated key. <a href="darq/Enumerable/GroupJoin.html">[...]</a>
+                  
+</dd>
+        <dt id="GroupSelect" class="callable">
+          <span class="name"><a href="darq/Enumerable/GroupSelect.html">GroupSelect</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="GroupSelect-param-keySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keySelector</span>, </span> <span class="parameter" id="GroupSelect-param-resultSelector"><span class="type-annotation"><a href="darq/GroupSelector.html">GroupSelector</a><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>, <span class="type-parameter">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">resultSelector</span>, {</span> <span class="parameter" id="GroupSelect-param-keyComparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keyComparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Groups the elements in the enumerable by a key and maps the groups to a new
+element. <a href="darq/Enumerable/GroupSelect.html">[...]</a>
+                  
+</dd>
+        <dt id="GroupSelectValue" class="callable">
+          <span class="name"><a href="darq/Enumerable/GroupSelectValue.html">GroupSelectValue</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>, <span class="type-parameter">TValue</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="GroupSelectValue-param-keySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keySelector</span>, </span> <span class="parameter" id="GroupSelectValue-param-valueSelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TValue</span>&gt;</span></span> <span class="parameter-name">valueSelector</span>, </span> <span class="parameter" id="GroupSelectValue-param-resultSelector"><span class="type-annotation"><a href="darq/GroupSelector.html">GroupSelector</a><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>, <span class="type-parameter">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">TValue</span>&gt;</span></span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">resultSelector</span>, {</span> <span class="parameter" id="GroupSelectValue-param-keyComparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keyComparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Groups the elements in the enumerable by a key, maps the elements to
+a new value, and maps the groups to a new element. <a href="darq/Enumerable/GroupSelectValue.html">[...]</a>
+                  
+</dd>
+        <dt id="Intersect" class="callable">
+          <span class="name"><a href="darq/Enumerable/Intersect.html">Intersect</a></span><span class="signature">(<wbr><span class="parameter" id="Intersect-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">other</span>, {</span> <span class="parameter" id="Intersect-param-comparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">comparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the set intersection between the enumerable and the given
+collection. <a href="darq/Enumerable/Intersect.html">[...]</a>
+                  
+</dd>
+        <dt id="Join" class="callable">
+          <span class="name"><a href="darq/Enumerable/Join.html">Join</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>, <span class="type-parameter">TKey</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="Join-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>&gt;</span></span> <span class="parameter-name">other</span>, </span> <span class="parameter" id="Join-param-outerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">outerKeySelector</span>, </span> <span class="parameter" id="Join-param-innerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">innerKeySelector</span>, </span> <span class="parameter" id="Join-param-selector"><span class="type-annotation"><a href="darq/ZipSelector.html">ZipSelector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TSecond</span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">selector</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Finds keys in this enumerable with matching keys in the <code>other</code> collection
+and returns a value that is the result of the corresponding elements being
+merged. <a href="darq/Enumerable/Join.html">[...]</a>
+                  
+</dd>
+        <dt id="Last" class="callable">
+          <span class="name"><a href="darq/Enumerable/Last.html">Last</a></span><span class="signature">(<wbr>{<span class="parameter" id="Last-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span></span> })
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the last element in the enumerable, optionally matching a
+specified condition. <a href="darq/Enumerable/Last.html">[...]</a>
+                  
+</dd>
+        <dt id="LastOrDefault" class="callable">
+          <span class="name"><a href="darq/Enumerable/LastOrDefault.html">LastOrDefault</a></span><span class="signature">(<wbr>{<span class="parameter" id="LastOrDefault-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span>, </span> <span class="parameter" id="LastOrDefault-param-defaultValue"><span class="type-annotation">T</span> <span class="parameter-name">defaultValue</span></span> })
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the last element in the enumerable, optionally matching a
+specified condition. <a href="darq/Enumerable/LastOrDefault.html">[...]</a>
+                  
+</dd>
+        <dt id="Max" class="callable">
+          <span class="name"><a href="darq/Enumerable/Max.html">Max</a></span><span class="signature">(<wbr>[<span class="parameter" id="Max-param-comparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">comparer</span></span> ])
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the maximum value in the enumerable. <a href="darq/Enumerable/Max.html">[...]</a>
+                  
+</dd>
+        <dt id="Min" class="callable">
+          <span class="name"><a href="darq/Enumerable/Min.html">Min</a></span><span class="signature">(<wbr>[<span class="parameter" id="Min-param-comparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">comparer</span></span> ])
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the minimum value in the enumerable. <a href="darq/Enumerable/Min.html">[...]</a>
+                  
+</dd>
+        <dt id="OfType" class="callable">
+          <span class="name"><a href="darq/Enumerable/OfType.html">OfType</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Returns all elements in the enumerable that are castable to the specified
+type. <a href="darq/Enumerable/OfType.html">[...]</a>
+                  
+</dd>
+        <dt id="OrderBy" class="callable">
+          <span class="name"><a href="darq/Enumerable/OrderBy.html">OrderBy</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="OrderBy-param-keySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keySelector</span>, {</span> <span class="parameter" id="OrderBy-param-keyComparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keyComparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Sorts the enumeration in ascending (least-to-greatest) order. <a href="darq/Enumerable/OrderBy.html">[...]</a>
+                  
+</dd>
+        <dt id="OrderByDescending" class="callable">
+          <span class="name"><a href="darq/Enumerable/OrderByDescending.html">OrderByDescending</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="OrderByDescending-param-keySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keySelector</span>, {</span> <span class="parameter" id="OrderByDescending-param-keyComparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keyComparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Sorts the enumeration in descending (greatest-to-least) order. <a href="darq/Enumerable/OrderByDescending.html">[...]</a>
+                  
+</dd>
+        <dt id="Prepend" class="callable">
+          <span class="name"><a href="darq/Enumerable/Prepend.html">Prepend</a></span><span class="signature">(<wbr><span class="parameter" id="Prepend-param-newElement"><span class="type-annotation">T</span> <span class="parameter-name">newElement</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Inserts an element at the beginning of the enumerable. <a href="darq/Enumerable/Prepend.html">[...]</a>
+                  
+</dd>
+        <dt id="Reverse" class="callable">
+          <span class="name"><a href="darq/Enumerable/Reverse.html">Reverse</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Reverses the order of the enumerable. <a href="darq/Enumerable/Reverse.html">[...]</a>
+                  
+</dd>
+        <dt id="Select" class="callable">
+          <span class="name"><a href="darq/Enumerable/Select.html">Select</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="Select-param-selector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">selector</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Applies a mapping function to the elements in the enumerable. <a href="darq/Enumerable/Select.html">[...]</a>
+                  
+</dd>
+        <dt id="SelectMany" class="callable">
+          <span class="name"><a href="darq/Enumerable/SelectMany.html">SelectMany</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="SelectMany-param-selector"><span class="type-annotation"><a href="darq/ManySelector.html">ManySelector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">selector</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Maps elements in an enumerable to collections and then flattens those
+collections into a single enumerable. <a href="darq/Enumerable/SelectMany.html">[...]</a>
+                  
+</dd>
+        <dt id="SequenceEqual" class="callable">
+          <span class="name"><a href="darq/Enumerable/SequenceEqual.html">SequenceEqual</a></span><span class="signature">(<wbr><span class="parameter" id="SequenceEqual-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">other</span>, {</span> <span class="parameter" id="SequenceEqual-param-comparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">comparer</span></span> })
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns <code>true</code> if this enumerable is equivalent to the given collection. <a href="darq/Enumerable/SequenceEqual.html">[...]</a>
+                  
+</dd>
+        <dt id="Single" class="callable">
+          <span class="name"><a href="darq/Enumerable/Single.html">Single</a></span><span class="signature">(<wbr>[<span class="parameter" id="Single-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span></span> ])
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the single element in the element, optionally matching a
+<code>condition</code>. <a href="darq/Enumerable/Single.html">[...]</a>
+                  
+</dd>
+        <dt id="SingleOrDefault" class="callable">
+          <span class="name"><a href="darq/Enumerable/SingleOrDefault.html">SingleOrDefault</a></span><span class="signature">(<wbr><span class="parameter" id="SingleOrDefault-param-defaultValue"><span class="type-annotation">T</span> <span class="parameter-name">defaultValue</span>, [</span> <span class="parameter" id="SingleOrDefault-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span></span> ])
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the single element in the element, optionally matching a
+<code>condition</code>, or a <code>defaultValue</code> if no such element exists. <a href="darq/Enumerable/SingleOrDefault.html">[...]</a>
+                  
+</dd>
+        <dt id="Skip" class="callable">
+          <span class="name"><a href="darq/Enumerable/Skip.html">Skip</a></span><span class="signature">(<wbr><span class="parameter" id="Skip-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Skips the first <code>count</code> elements in the enumerable. <a href="darq/Enumerable/Skip.html">[...]</a>
+                  
+</dd>
+        <dt id="SkipWhile" class="callable">
+          <span class="name"><a href="darq/Enumerable/SkipWhile.html">SkipWhile</a></span><span class="signature">(<wbr><span class="parameter" id="SkipWhile-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Skips all the elements at the beginning of the enumerable that match the
+<code>condition</code>. <a href="darq/Enumerable/SkipWhile.html">[...]</a>
+                  
+</dd>
+        <dt id="Sum" class="callable">
+          <span class="name"><a href="darq/Enumerable/Sum.html">Sum</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TResult extends num</span>&gt;</span><span class="signature">(<wbr>[<span class="parameter" id="Sum-param-selector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">selector</span></span> ])
+            <span class="returntype parameter">&#8594; TResult</span>
+          </span>
+                  </dt>
+        <dd>
+          Calculates the sum of the elements in an enumerable, optionally using
+<code>selector</code> to obtain the value to be summed. <a href="darq/Enumerable/Sum.html">[...]</a>
+                  
+</dd>
+        <dt id="Take" class="callable">
+          <span class="name"><a href="darq/Enumerable/Take.html">Take</a></span><span class="signature">(<wbr><span class="parameter" id="Take-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Takes the first <code>count</code> elements in the enumerable and discards the rest. <a href="darq/Enumerable/Take.html">[...]</a>
+                  
+</dd>
+        <dt id="TakeWhile" class="callable">
+          <span class="name"><a href="darq/Enumerable/TakeWhile.html">TakeWhile</a></span><span class="signature">(<wbr><span class="parameter" id="TakeWhile-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Takes all the elements at the beginning of the enumerable that match the
+<code>condition</code> and discards the rest. <a href="darq/Enumerable/TakeWhile.html">[...]</a>
+                  
+</dd>
+        <dt id="ThenBy" class="callable">
+          <span class="name"><a href="darq/Enumerable/ThenBy.html">ThenBy</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="ThenBy-param-keySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keySelector</span>, {</span> <span class="parameter" id="ThenBy-param-keyComparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keyComparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Adds a secondary sorting pass to enumeration in ascending
+(least-to-greatest) order. <a href="darq/Enumerable/ThenBy.html">[...]</a>
+                  
+</dd>
+        <dt id="ThenByDescending" class="callable">
+          <span class="name"><a href="darq/Enumerable/ThenByDescending.html">ThenByDescending</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="ThenByDescending-param-keySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keySelector</span>, {</span> <span class="parameter" id="ThenByDescending-param-keyComparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keyComparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Adds a secondary sorting pass to enumeration in descending
+(greatest-to-least) order. <a href="darq/Enumerable/ThenByDescending.html">[...]</a>
+                  
+</dd>
+        <dt id="ToList" class="callable">
+          <span class="name"><a href="darq/Enumerable/ToList.html">ToList</a></span><span class="signature">(<wbr>{<span class="parameter" id="ToList-param-growable"><span class="type-annotation">bool</span> <span class="parameter-name">growable</span>: <span class="default-value">false</span></span> })
+            <span class="returntype parameter">&#8594; List<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Converts the enumerable to a Dart <code>List</code>. <a href="darq/Enumerable/ToList.html">[...]</a>
+                  
+</dd>
+        <dt id="ToMap" class="callable">
+          <span class="name"><a href="darq/Enumerable/ToMap.html">ToMap</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>, <span class="type-parameter">TValue</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="ToMap-param-keySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">keySelector</span>, </span> <span class="parameter" id="ToMap-param-valueSelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TValue</span>&gt;</span></span> <span class="parameter-name">valueSelector</span></span>)
+            <span class="returntype parameter">&#8594; Map<span class="signature">&lt;<wbr><span class="type-parameter">TKey</span>, <span class="type-parameter">TValue</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Converts the enumerable to a Dart <code>Map</code>. <a href="darq/Enumerable/ToMap.html">[...]</a>
+                  
+</dd>
+        <dt id="ToSet" class="callable">
+          <span class="name"><a href="darq/Enumerable/ToSet.html">ToSet</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; Set<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Converts the enumerable to a Dart <code>Set</code>. <a href="darq/Enumerable/ToSet.html">[...]</a>
+                  
+</dd>
+        <dt id="Union" class="callable">
+          <span class="name"><a href="darq/Enumerable/Union.html">Union</a></span><span class="signature">(<wbr><span class="parameter" id="Union-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">other</span>, {</span> <span class="parameter" id="Union-param-comparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">comparer</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Returns the set union between the enumerable and the given
+collection. <a href="darq/Enumerable/Union.html">[...]</a>
+                  
+</dd>
+        <dt id="Where" class="callable">
+          <span class="name"><a href="darq/Enumerable/Where.html">Where</a></span><span class="signature">(<wbr><span class="parameter" id="Where-param-condition"><span class="type-annotation"><a href="darq/Condition.html">Condition</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">condition</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Filters the enumerable to elements that match the <code>condition</code>. <a href="darq/Enumerable/Where.html">[...]</a>
+                  
+</dd>
+        <dt id="Zip" class="callable">
+          <span class="name"><a href="darq/Enumerable/Zip.html">Zip</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="Zip-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>&gt;</span></span> <span class="parameter-name">other</span>, </span> <span class="parameter" id="Zip-param-selector"><span class="type-annotation"><a href="darq/ZipSelector.html">ZipSelector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TSecond</span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">selector</span></span>)
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Combines the values of the enumerable and another collection into an
+enumerable of new values. <a href="darq/Enumerable/Zip.html">[...]</a>
+                  
+</dd>
+        <dt id="any" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/any.html">any</a></span><span class="signature">(<wbr><span class="parameter" id="any-param-test"><span class="type-annotation">bool</span> <span class="parameter-name">test</span>(<span class="parameter" id="test-param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span>)</span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Checks whether any element of this iterable satisfies <code>test</code>. <a href="darq/Enumerable/any.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="cast" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/cast.html">cast</a></span><span class="signature">&lt;<wbr><span class="type-parameter">R</span>&gt;</span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; Iterable<span class="signature">&lt;<wbr><span class="type-parameter">R</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Provides a view of this iterable as an iterable of <code>R</code> instances. <a href="darq/Enumerable/cast.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="contains" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/contains.html">contains</a></span><span class="signature">(<wbr><span class="parameter" id="contains-param-element"><span class="type-annotation">Object</span> <span class="parameter-name">element</span></span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns true if the collection contains an element equal to <code>element</code>. <a href="darq/Enumerable/contains.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="elementAt" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/elementAt.html">elementAt</a></span><span class="signature">(<wbr><span class="parameter" id="elementAt-param-index"><span class="type-annotation">int</span> <span class="parameter-name">index</span></span>)
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns the <code>index</code>th element. <a href="darq/Enumerable/elementAt.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="every" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/every.html">every</a></span><span class="signature">(<wbr><span class="parameter" id="every-param-test"><span class="type-annotation">bool</span> <span class="parameter-name">test</span>(<span class="parameter" id="test-param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span>)</span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Checks whether every element of this iterable satisfies <code>test</code>. <a href="darq/Enumerable/every.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="expand" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/expand.html">expand</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="expand-param-f"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">f</span>(<span class="parameter" id="f-param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span>)</span>)
+            <span class="returntype parameter">&#8594; Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Expands each element of this <code>Iterable</code> into zero or more elements. <a href="darq/Enumerable/expand.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="firstWhere" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/firstWhere.html">firstWhere</a></span><span class="signature">(<wbr><span class="parameter" id="firstWhere-param-test"><span class="type-annotation">bool</span> <span class="parameter-name">test</span>(<span class="parameter" id="test-param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span>), {</span> <span class="parameter" id="firstWhere-param-orElse"><span class="type-annotation">T</span> <span class="parameter-name">orElse</span>()</span> })
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns the first element that satisfies the given predicate <code>test</code>. <a href="darq/Enumerable/firstWhere.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="fold" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/fold.html">fold</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="fold-param-initialValue"><span class="type-annotation">T</span> <span class="parameter-name">initialValue</span>, </span> <span class="parameter" id="fold-param-combine"><span class="type-annotation">T</span> <span class="parameter-name">combine</span>(<span class="parameter" id="combine-param-previousValue"><span class="type-annotation">T</span> <span class="parameter-name">previousValue</span>, </span> <span class="parameter" id="combine-param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span>)</span>)
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Reduces a collection to a single value by iteratively combining each
+element of the collection with an existing value <a href="darq/Enumerable/fold.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="followedBy" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/followedBy.html">followedBy</a></span><span class="signature">(<wbr><span class="parameter" id="followedBy-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">other</span></span>)
+            <span class="returntype parameter">&#8594; Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns the lazy concatentation of this iterable and <code>other</code>. <a href="darq/Enumerable/followedBy.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="forEach" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/forEach.html">forEach</a></span><span class="signature">(<wbr><span class="parameter" id="forEach-param-f"><span class="type-annotation">void</span> <span class="parameter-name">f</span>(<span class="parameter" id="f-param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span>)</span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Applies the function <code>f</code> to each element of this collection in iteration
+order.
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="join" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/join.html">join</a></span><span class="signature">(<wbr>[<span class="parameter" id="join-param-separator"><span class="type-annotation">String</span> <span class="parameter-name">separator</span> = <span class="default-value">""</span></span> ])
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Converts each element to a <code>String</code> and concatenates the strings. <a href="darq/Enumerable/join.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="lastWhere" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/lastWhere.html">lastWhere</a></span><span class="signature">(<wbr><span class="parameter" id="lastWhere-param-test"><span class="type-annotation">bool</span> <span class="parameter-name">test</span>(<span class="parameter" id="test-param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span>), {</span> <span class="parameter" id="lastWhere-param-orElse"><span class="type-annotation">T</span> <span class="parameter-name">orElse</span>()</span> })
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns the last element that satisfies the given predicate <code>test</code>. <a href="darq/Enumerable/lastWhere.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="map" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/map.html">map</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="map-param-f"><span class="type-annotation">T</span> <span class="parameter-name">f</span>(<span class="parameter" id="f-param-e"><span class="type-annotation">E</span> <span class="parameter-name">e</span></span>)</span>)
+            <span class="returntype parameter">&#8594; Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns a new lazy <code>Iterable</code> with elements that are created by
+calling <code>f</code> on each element of this <code>Iterable</code> in iteration order. <a href="darq/Enumerable/map.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="noSuchMethod" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Invoked when a non-existent method or property is accessed. <a href="darq/Enumerable/noSuchMethod.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="reduce" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/reduce.html">reduce</a></span><span class="signature">(<wbr><span class="parameter" id="reduce-param-combine"><span class="type-annotation">T</span> <span class="parameter-name">combine</span>(<span class="parameter" id="combine-param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span>, </span> <span class="parameter" id="combine-param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span>)</span>)
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Reduces a collection to a single value by iteratively combining elements
+of the collection using the provided function. <a href="darq/Enumerable/reduce.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="singleWhere" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/singleWhere.html">singleWhere</a></span><span class="signature">(<wbr><span class="parameter" id="singleWhere-param-test"><span class="type-annotation">bool</span> <span class="parameter-name">test</span>(<span class="parameter" id="test-param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span>), {</span> <span class="parameter" id="singleWhere-param-orElse"><span class="type-annotation">T</span> <span class="parameter-name">orElse</span>()</span> })
+            <span class="returntype parameter">&#8594; T</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns the single element that satisfies <code>test</code>. <a href="darq/Enumerable/singleWhere.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="skip" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/skip.html">skip</a></span><span class="signature">(<wbr><span class="parameter" id="skip-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span></span>)
+            <span class="returntype parameter">&#8594; Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns an <code>Iterable</code> that provides all but the first <code>count</code> elements. <a href="darq/Enumerable/skip.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="skipWhile" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/skipWhile.html">skipWhile</a></span><span class="signature">(<wbr><span class="parameter" id="skipWhile-param-test"><span class="type-annotation">bool</span> <span class="parameter-name">test</span>(<span class="parameter" id="test-param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span></span>)</span>)
+            <span class="returntype parameter">&#8594; Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns an <code>Iterable</code> that skips leading elements while <code>test</code> is satisfied. <a href="darq/Enumerable/skipWhile.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="take" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/take.html">take</a></span><span class="signature">(<wbr><span class="parameter" id="take-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span></span>)
+            <span class="returntype parameter">&#8594; Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns a lazy iterable of the <code>count</code> first elements of this iterable. <a href="darq/Enumerable/take.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="takeWhile" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/takeWhile.html">takeWhile</a></span><span class="signature">(<wbr><span class="parameter" id="takeWhile-param-test"><span class="type-annotation">bool</span> <span class="parameter-name">test</span>(<span class="parameter" id="test-param-value"><span class="type-annotation">E</span> <span class="parameter-name">value</span></span>)</span>)
+            <span class="returntype parameter">&#8594; Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns a lazy iterable of the leading elements satisfying <code>test</code>. <a href="darq/Enumerable/takeWhile.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="toList" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/toList.html">toList</a></span><span class="signature">(<wbr>{<span class="parameter" id="toList-param-growable"><span class="type-annotation">bool</span> <span class="parameter-name">growable</span>: <span class="default-value">true</span></span> })
+            <span class="returntype parameter">&#8594; List<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Creates a <code>List</code> containing the elements of this <code>Iterable</code>. <a href="darq/Enumerable/toList.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="toSet" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/toSet.html">toSet</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; Set<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Creates a <code>Set</code> containing the same elements as this iterable. <a href="darq/Enumerable/toSet.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="toString" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns a string representation of (some of) the elements of <code>this</code>. <a href="darq/Enumerable/toString.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="where" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/where.html">where</a></span><span class="signature">(<wbr><span class="parameter" id="where-param-test"><span class="type-annotation">bool</span> <span class="parameter-name">test</span>(<span class="parameter" id="test-param-element"><span class="type-annotation">E</span> <span class="parameter-name">element</span></span>)</span>)
+            <span class="returntype parameter">&#8594; Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns a new lazy <code>Iterable</code> with all elements that satisfy the
+predicate <code>test</code>. <a href="darq/Enumerable/where.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="whereType" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/whereType.html">whereType</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns a new lazy <code>Iterable</code> with all elements that have type <code>T</code>. <a href="darq/Enumerable/whereType.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+          <span class="name"><a href="darq/Enumerable/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          The equality operator. <a href="darq/Enumerable/operator_equals.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+
+    <section class="summary offset-anchor" id="static-methods">
+      <h2>Static Methods</h2>
+      <dl class="callables">
+        <dt id="range" class="callable">
+          <span class="name"><a href="darq/Enumerable/range.html">range</a></span><span class="signature">(<wbr><span class="parameter" id="range-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, </span> <span class="parameter" id="range-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span>, {</span> <span class="parameter" id="range-param-increment"><span class="type-annotation">int</span> <span class="parameter-name">increment</span>: <span class="default-value">1</span></span> })
+            <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Creates an enumerable containing values composed of the specified range. <a href="darq/Enumerable/range.html">[...]</a>
+                  
+</dd>
+      </dl>
+    </section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+    <ol>
+      <li class="section-title"><a href="darq/Enumerable-class.html#constructors">Constructors</a></li>
+      <li><a href="darq/Enumerable/Enumerable.html">Enumerable</a></li>
+      <li><a href="darq/Enumerable/Enumerable.empty.html">empty</a></li>
+      <li><a href="darq/Enumerable/Enumerable.from.html">from</a></li>
+      <li><a href="darq/Enumerable/Enumerable.repeat.html">repeat</a></li>
+    
+      <li class="section-title inherited">
+        <a href="darq/Enumerable-class.html#instance-properties">Properties</a>
+      </li>
+      <li class="inherited"><a href="darq/Enumerable/first.html">first</a></li>
+      <li class="inherited"><a href="darq/Enumerable/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="darq/Enumerable/isEmpty.html">isEmpty</a></li>
+      <li class="inherited"><a href="darq/Enumerable/isNotEmpty.html">isNotEmpty</a></li>
+      <li class="inherited"><a href="darq/Enumerable/iterator.html">iterator</a></li>
+      <li class="inherited"><a href="darq/Enumerable/last.html">last</a></li>
+      <li class="inherited"><a href="darq/Enumerable/length.html">length</a></li>
+      <li class="inherited"><a href="darq/Enumerable/runtimeType.html">runtimeType</a></li>
+      <li class="inherited"><a href="darq/Enumerable/single.html">single</a></li>
+    
+      <li class="section-title"><a href="darq/Enumerable-class.html#instance-methods">Methods</a></li>
+      <li><a href="darq/Enumerable/Aggregate.html">Aggregate</a></li>
+      <li><a href="darq/Enumerable/All.html">All</a></li>
+      <li><a href="darq/Enumerable/Any.html">Any</a></li>
+      <li><a href="darq/Enumerable/Append.html">Append</a></li>
+      <li><a href="darq/Enumerable/Average.html">Average</a></li>
+      <li><a href="darq/Enumerable/Cast.html">Cast</a></li>
+      <li><a href="darq/Enumerable/Concat.html">Concat</a></li>
+      <li><a href="darq/Enumerable/Contains.html">Contains</a></li>
+      <li><a href="darq/Enumerable/Count.html">Count</a></li>
+      <li><a href="darq/Enumerable/CountIf.html">CountIf</a></li>
+      <li><a href="darq/Enumerable/DefaultIfEmpty.html">DefaultIfEmpty</a></li>
+      <li><a href="darq/Enumerable/Distinct.html">Distinct</a></li>
+      <li><a href="darq/Enumerable/ElementAt.html">ElementAt</a></li>
+      <li><a href="darq/Enumerable/ElementAtOrDefault.html">ElementAtOrDefault</a></li>
+      <li><a href="darq/Enumerable/Except.html">Except</a></li>
+      <li><a href="darq/Enumerable/First.html">First</a></li>
+      <li><a href="darq/Enumerable/FirstOrDefault.html">FirstOrDefault</a></li>
+      <li><a href="darq/Enumerable/GroupBy.html">GroupBy</a></li>
+      <li><a href="darq/Enumerable/GroupByValue.html">GroupByValue</a></li>
+      <li><a href="darq/Enumerable/GroupJoin.html">GroupJoin</a></li>
+      <li><a href="darq/Enumerable/GroupSelect.html">GroupSelect</a></li>
+      <li><a href="darq/Enumerable/GroupSelectValue.html">GroupSelectValue</a></li>
+      <li><a href="darq/Enumerable/Intersect.html">Intersect</a></li>
+      <li><a href="darq/Enumerable/Join.html">Join</a></li>
+      <li><a href="darq/Enumerable/Last.html">Last</a></li>
+      <li><a href="darq/Enumerable/LastOrDefault.html">LastOrDefault</a></li>
+      <li><a href="darq/Enumerable/Max.html">Max</a></li>
+      <li><a href="darq/Enumerable/Min.html">Min</a></li>
+      <li><a href="darq/Enumerable/OfType.html">OfType</a></li>
+      <li><a href="darq/Enumerable/OrderBy.html">OrderBy</a></li>
+      <li><a href="darq/Enumerable/OrderByDescending.html">OrderByDescending</a></li>
+      <li><a href="darq/Enumerable/Prepend.html">Prepend</a></li>
+      <li><a href="darq/Enumerable/Reverse.html">Reverse</a></li>
+      <li><a href="darq/Enumerable/Select.html">Select</a></li>
+      <li><a href="darq/Enumerable/SelectMany.html">SelectMany</a></li>
+      <li><a href="darq/Enumerable/SequenceEqual.html">SequenceEqual</a></li>
+      <li><a href="darq/Enumerable/Single.html">Single</a></li>
+      <li><a href="darq/Enumerable/SingleOrDefault.html">SingleOrDefault</a></li>
+      <li><a href="darq/Enumerable/Skip.html">Skip</a></li>
+      <li><a href="darq/Enumerable/SkipWhile.html">SkipWhile</a></li>
+      <li><a href="darq/Enumerable/Sum.html">Sum</a></li>
+      <li><a href="darq/Enumerable/Take.html">Take</a></li>
+      <li><a href="darq/Enumerable/TakeWhile.html">TakeWhile</a></li>
+      <li><a href="darq/Enumerable/ThenBy.html">ThenBy</a></li>
+      <li><a href="darq/Enumerable/ThenByDescending.html">ThenByDescending</a></li>
+      <li><a href="darq/Enumerable/ToList.html">ToList</a></li>
+      <li><a href="darq/Enumerable/ToMap.html">ToMap</a></li>
+      <li><a href="darq/Enumerable/ToSet.html">ToSet</a></li>
+      <li><a href="darq/Enumerable/Union.html">Union</a></li>
+      <li><a href="darq/Enumerable/Where.html">Where</a></li>
+      <li><a href="darq/Enumerable/Zip.html">Zip</a></li>
+      <li class="inherited"><a href="darq/Enumerable/any.html">any</a></li>
+      <li class="inherited"><a href="darq/Enumerable/cast.html">cast</a></li>
+      <li class="inherited"><a href="darq/Enumerable/contains.html">contains</a></li>
+      <li class="inherited"><a href="darq/Enumerable/elementAt.html">elementAt</a></li>
+      <li class="inherited"><a href="darq/Enumerable/every.html">every</a></li>
+      <li class="inherited"><a href="darq/Enumerable/expand.html">expand</a></li>
+      <li class="inherited"><a href="darq/Enumerable/firstWhere.html">firstWhere</a></li>
+      <li class="inherited"><a href="darq/Enumerable/fold.html">fold</a></li>
+      <li class="inherited"><a href="darq/Enumerable/followedBy.html">followedBy</a></li>
+      <li class="inherited"><a href="darq/Enumerable/forEach.html">forEach</a></li>
+      <li class="inherited"><a href="darq/Enumerable/join.html">join</a></li>
+      <li class="inherited"><a href="darq/Enumerable/lastWhere.html">lastWhere</a></li>
+      <li class="inherited"><a href="darq/Enumerable/map.html">map</a></li>
+      <li class="inherited"><a href="darq/Enumerable/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="darq/Enumerable/reduce.html">reduce</a></li>
+      <li class="inherited"><a href="darq/Enumerable/singleWhere.html">singleWhere</a></li>
+      <li class="inherited"><a href="darq/Enumerable/skip.html">skip</a></li>
+      <li class="inherited"><a href="darq/Enumerable/skipWhile.html">skipWhile</a></li>
+      <li class="inherited"><a href="darq/Enumerable/take.html">take</a></li>
+      <li class="inherited"><a href="darq/Enumerable/takeWhile.html">takeWhile</a></li>
+      <li class="inherited"><a href="darq/Enumerable/toList.html">toList</a></li>
+      <li class="inherited"><a href="darq/Enumerable/toSet.html">toSet</a></li>
+      <li class="inherited"><a href="darq/Enumerable/toString.html">toString</a></li>
+      <li class="inherited"><a href="darq/Enumerable/where.html">where</a></li>
+      <li class="inherited"><a href="darq/Enumerable/whereType.html">whereType</a></li>
+    
+      <li class="section-title inherited"><a href="darq/Enumerable-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="darq/Enumerable/operator_equals.html">operator ==</a></li>
+    
+    
+      <li class="section-title"><a href="darq/Enumerable-class.html#static-methods">Static methods</a></li>
+      <li><a href="darq/Enumerable/range.html">range</a></li>
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    darq 0.0.1
+  </span>
+
+  
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

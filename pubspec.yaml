@@ -1,6 +1,6 @@
 name: darq
-description: A port of functional LINQ from the .NET library.
-version: 0.1.0
+description: The power of lazy-evaluated enumerables in your hands! (A port of functional LINQ from the .NET library.)
+version: 0.1.2
 author: andrew.ackerman <andrew.ackie@gmail.com>
 homepage: https://github.com/andrewackerman/darq
 repository: https://github.com/andrewackerman/darq

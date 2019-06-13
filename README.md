@@ -39,7 +39,7 @@ var rangeEnum = Enumerable.range(2, 5);
 var repeatEnum = Enumerable.repeat('a string', 6);
 ```
 
-Once you have an `Enumerable`, you can call any of over 50 different methods on it to modify or analyze it. For example, you can map to a new value with `Select`:
+Once you have an `Enumerable`, you can call any of 50 different methods on it to modify or analyze it. For example, you can map to a new value with `Select`:
 
 ```dart
 var myEnum = E([1, 2, 3);

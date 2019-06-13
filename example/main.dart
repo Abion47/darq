@@ -8,9 +8,9 @@ void main() {
     print(value);
   }
 
-  print(enumerable.Max());
-  print(enumerable.Min());
+  print(enumerable.eMax());
+  print(enumerable.eMin());
 
-  print(enumerable.Average());
-  print(enumerable.Sum());
+  print(enumerable.eAverage());
+  print(enumerable.eSum());
 }

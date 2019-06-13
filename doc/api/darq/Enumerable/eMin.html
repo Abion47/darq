@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the eMin method from the Enumerable class, for the Dart programming language.">
+  <title>eMin method - Enumerable class - darq library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+  
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">darq</a></li>
+    <li><a href="darq/darq-library.html">darq</a></li>
+    <li><a href="darq/Enumerable-class.html">Enumerable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">eMin method</li>
+  </ol>
+  <div class="self-name">eMin</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">darq</a></li>
+      <li><a href="darq/darq-library.html">darq</a></li>
+      <li><a href="darq/Enumerable-class.html">Enumerable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+      <li class="self-crumb">eMin method</li>
+    </ol>
+    
+    <h5>Enumerable class</h5>
+    <ol>
+      <li class="section-title"><a href="darq/Enumerable-class.html#constructors">Constructors</a></li>
+      <li><a href="darq/Enumerable/Enumerable.html">Enumerable</a></li>
+      <li><a href="darq/Enumerable/Enumerable.empty.html">empty</a></li>
+      <li><a href="darq/Enumerable/Enumerable.from.html">from</a></li>
+      <li><a href="darq/Enumerable/Enumerable.repeat.html">repeat</a></li>
+    
+      <li class="section-title inherited">
+        <a href="darq/Enumerable-class.html#instance-properties">Properties</a>
+      </li>
+      <li class="inherited"><a href="darq/Enumerable/first.html">first</a></li>
+      <li class="inherited"><a href="darq/Enumerable/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="darq/Enumerable/isEmpty.html">isEmpty</a></li>
+      <li class="inherited"><a href="darq/Enumerable/isNotEmpty.html">isNotEmpty</a></li>
+      <li class="inherited"><a href="darq/Enumerable/iterator.html">iterator</a></li>
+      <li class="inherited"><a href="darq/Enumerable/last.html">last</a></li>
+      <li class="inherited"><a href="darq/Enumerable/length.html">length</a></li>
+      <li class="inherited"><a href="darq/Enumerable/runtimeType.html">runtimeType</a></li>
+      <li class="inherited"><a href="darq/Enumerable/single.html">single</a></li>
+    
+      <li class="section-title"><a href="darq/Enumerable-class.html#instance-methods">Methods</a></li>
+      <li><a href="darq/Enumerable/eAggregate.html">eAggregate</a></li>
+      <li><a href="darq/Enumerable/eAll.html">eAll</a></li>
+      <li><a href="darq/Enumerable/eAny.html">eAny</a></li>
+      <li><a href="darq/Enumerable/eAppend.html">eAppend</a></li>
+      <li><a href="darq/Enumerable/eAverage.html">eAverage</a></li>
+      <li><a href="darq/Enumerable/eCast.html">eCast</a></li>
+      <li><a href="darq/Enumerable/eConcat.html">eConcat</a></li>
+      <li><a href="darq/Enumerable/eContains.html">eContains</a></li>
+      <li><a href="darq/Enumerable/eCount.html">eCount</a></li>
+      <li><a href="darq/Enumerable/eDefaultIfEmpty.html">eDefaultIfEmpty</a></li>
+      <li><a href="darq/Enumerable/eDistinct.html">eDistinct</a></li>
+      <li><a href="darq/Enumerable/eElementAt.html">eElementAt</a></li>
+      <li><a href="darq/Enumerable/eElementAtOrDefault.html">eElementAtOrDefault</a></li>
+      <li><a href="darq/Enumerable/eExcept.html">eExcept</a></li>
+      <li><a href="darq/Enumerable/eFirst.html">eFirst</a></li>
+      <li><a href="darq/Enumerable/eFirstOrDefault.html">eFirstOrDefault</a></li>
+      <li><a href="darq/Enumerable/eGroupBy.html">eGroupBy</a></li>
+      <li><a href="darq/Enumerable/eGroupByValue.html">eGroupByValue</a></li>
+      <li><a href="darq/Enumerable/eGroupJoin.html">eGroupJoin</a></li>
+      <li><a href="darq/Enumerable/eGroupSelect.html">eGroupSelect</a></li>
+      <li><a href="darq/Enumerable/eGroupSelectValue.html">eGroupSelectValue</a></li>
+      <li><a href="darq/Enumerable/eIntersect.html">eIntersect</a></li>
+      <li><a href="darq/Enumerable/eJoin.html">eJoin</a></li>
+      <li><a href="darq/Enumerable/eLast.html">eLast</a></li>
+      <li><a href="darq/Enumerable/eLastOrDefault.html">eLastOrDefault</a></li>
+      <li><a href="darq/Enumerable/eMax.html">eMax</a></li>
+      <li><a href="darq/Enumerable/eMin.html">eMin</a></li>
+      <li><a href="darq/Enumerable/eOfType.html">eOfType</a></li>
+      <li><a href="darq/Enumerable/eOrderBy.html">eOrderBy</a></li>
+      <li><a href="darq/Enumerable/eOrderByDescending.html">eOrderByDescending</a></li>
+      <li><a href="darq/Enumerable/ePrepend.html">ePrepend</a></li>
+      <li><a href="darq/Enumerable/eReverse.html">eReverse</a></li>
+      <li><a href="darq/Enumerable/eSelect.html">eSelect</a></li>
+      <li><a href="darq/Enumerable/eSelectMany.html">eSelectMany</a></li>
+      <li><a href="darq/Enumerable/eSequenceEqual.html">eSequenceEqual</a></li>
+      <li><a href="darq/Enumerable/eSingle.html">eSingle</a></li>
+      <li><a href="darq/Enumerable/eSingleOrDefault.html">eSingleOrDefault</a></li>
+      <li><a href="darq/Enumerable/eSkip.html">eSkip</a></li>
+      <li><a href="darq/Enumerable/eSkipWhile.html">eSkipWhile</a></li>
+      <li><a href="darq/Enumerable/eSum.html">eSum</a></li>
+      <li><a href="darq/Enumerable/eTake.html">eTake</a></li>
+      <li><a href="darq/Enumerable/eTakeWhile.html">eTakeWhile</a></li>
+      <li><a href="darq/Enumerable/eThenBy.html">eThenBy</a></li>
+      <li><a href="darq/Enumerable/eThenByDescending.html">eThenByDescending</a></li>
+      <li><a href="darq/Enumerable/eToList.html">eToList</a></li>
+      <li><a href="darq/Enumerable/eToMap.html">eToMap</a></li>
+      <li><a href="darq/Enumerable/eToSet.html">eToSet</a></li>
+      <li><a href="darq/Enumerable/eUnion.html">eUnion</a></li>
+      <li><a href="darq/Enumerable/eWhere.html">eWhere</a></li>
+      <li><a href="darq/Enumerable/eZip.html">eZip</a></li>
+      <li class="inherited"><a href="darq/Enumerable/any.html">any</a></li>
+      <li class="inherited"><a href="darq/Enumerable/cast.html">cast</a></li>
+      <li class="inherited"><a href="darq/Enumerable/contains.html">contains</a></li>
+      <li class="inherited"><a href="darq/Enumerable/elementAt.html">elementAt</a></li>
+      <li class="inherited"><a href="darq/Enumerable/every.html">every</a></li>
+      <li class="inherited"><a href="darq/Enumerable/expand.html">expand</a></li>
+      <li class="inherited"><a href="darq/Enumerable/firstWhere.html">firstWhere</a></li>
+      <li class="inherited"><a href="darq/Enumerable/fold.html">fold</a></li>
+      <li class="inherited"><a href="darq/Enumerable/followedBy.html">followedBy</a></li>
+      <li class="inherited"><a href="darq/Enumerable/forEach.html">forEach</a></li>
+      <li class="inherited"><a href="darq/Enumerable/join.html">join</a></li>
+      <li class="inherited"><a href="darq/Enumerable/lastWhere.html">lastWhere</a></li>
+      <li class="inherited"><a href="darq/Enumerable/map.html">map</a></li>
+      <li class="inherited"><a href="darq/Enumerable/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="darq/Enumerable/reduce.html">reduce</a></li>
+      <li class="inherited"><a href="darq/Enumerable/singleWhere.html">singleWhere</a></li>
+      <li class="inherited"><a href="darq/Enumerable/skip.html">skip</a></li>
+      <li class="inherited"><a href="darq/Enumerable/skipWhile.html">skipWhile</a></li>
+      <li class="inherited"><a href="darq/Enumerable/take.html">take</a></li>
+      <li class="inherited"><a href="darq/Enumerable/takeWhile.html">takeWhile</a></li>
+      <li class="inherited"><a href="darq/Enumerable/toList.html">toList</a></li>
+      <li class="inherited"><a href="darq/Enumerable/toSet.html">toSet</a></li>
+      <li class="inherited"><a href="darq/Enumerable/toString.html">toString</a></li>
+      <li class="inherited"><a href="darq/Enumerable/where.html">where</a></li>
+      <li class="inherited"><a href="darq/Enumerable/whereType.html">whereType</a></li>
+    
+      <li class="section-title inherited"><a href="darq/Enumerable-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="darq/Enumerable/operator_equals.html">operator ==</a></li>
+    
+    
+      <li class="section-title"><a href="darq/Enumerable-class.html#static-methods">Static methods</a></li>
+      <li><a href="darq/Enumerable/range.html">range</a></li>
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">eMin</span> method</h1></div>
+
+    <section class="multi-line-signature">
+      <span class="returntype">T</span>
+            <span class="name ">eMin</span>
+(<wbr>[<span class="parameter" id="eMin-param-comparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">comparer</span></span> ])
+      
+    </section>
+    <section class="desc markdown">
+      <p>Returns the minimum value in the enumerable.</p>
+<p>Iterates over the enumerable and applies the <code>sorter</code> property of the
+given <a href="darq/EqualityComparer-class.html">EqualityComparer</a> to each element in order to find the maximum
+value. Once iteration is complete, <a href="darq/Enumerable/eMin.html">eMin</a> will return the largest element
+found.</p>
+<p>When the type of the enumerable is one of the below types, the
+<a href="darq/EqualityComparer-class.html">EqualityComparer</a> can be omitted. In this case, the function defaults to
+predefined minimum functions depending on the type:</p><ul><li>Numeric types (<code>num</code>, <code>int</code>, <code>double</code>) return the minimum of all elements as defined by the <code>min</code> function in <code>dart:math</code>.</li><li><code>String</code> types return the alphabetic minimum of all elements.</li></ul>
+<p>If the enumerable type is not one of these types, the <a href="darq/EqualityComparer-class.html">EqualityComparer</a>
+must be provided. Otherwise, an <code>ArgumentError</code> will be thrown.</p>
+<p>If the enumerable is empty, an <a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a> will be thrown.</p>
+<p>The <a href="darq/Enumerable/eMin.html">eMin</a> function will iterate over every element in the enumerable.</p>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">T eMin([EqualityComparer&lt;T&gt; comparer]) {
+  if (comparer == null &amp;&amp;
+      T != num &amp;&amp;
+      T != int &amp;&amp;
+      T != double &amp;&amp;
+      T != String) {
+    throw ArgumentError(
+        &#39;`comparer` must not be null or the type of this enumerable must be one of the following: ${[
+      num,
+      int,
+      double,
+      String
+    ]}&#39;);
+  }
+
+  if (comparer == null) {
+    if (T == num) {
+      return EnumerableReducers.MinNum(this as Enumerable&lt;num&gt;) as T;
+    }
+    if (T == int) {
+      return EnumerableReducers.MinInt(this as Enumerable&lt;int&gt;) as T;
+    }
+    if (T == double) {
+      return EnumerableReducers.MinDouble(this as Enumerable&lt;double&gt;) as T;
+    }
+    if (T == String) {
+      return EnumerableReducers.MinString(this as Enumerable&lt;String&gt;) as T;
+    }
+    throw UnexpectedStateError();
+  }
+
+  final iterator = this.iterator;
+  if (!iterator.moveNext()) throw EmptyEnumerableError();
+
+  T min;
+  do {
+    if (min == null)
+      min = iterator.current;
+    else if (comparer.sort(min, iterator.current) &gt; 0) {
+      min = iterator.current;
+    }
+  } while (iterator.moveNext());
+
+  return min;
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    darq 0.2.0
+  </span>
+
+  
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

@@ -42,7 +42,7 @@ var repeatEnum = Enumerable.repeat('a string', 6);
 Once you have an `Enumerable`, you can call any of over 50 different methods on it to modify or analyze it. For example, you can map to a new value with `Select`:
 
 ```dart
-var myEnum = E([1, 2, 3);
+var myEnum = E([1, 2, 3]);
 var mappedEnum = myEnum.Select((i) => i * 2);
 // Values: [2, 4, 6]
 ```
@@ -50,7 +50,7 @@ var mappedEnum = myEnum.Select((i) => i * 2);
 ...filter the elements with `Where`:
 
 ```dart
-var myEnum = E([1, 2, 3);
+var myEnum = E([1, 2, 3]);
 var filteredEnum = myEnum.Where((i) => i.isOdd);
 // Values: [1, 3]
 ```
@@ -84,7 +84,7 @@ var resultEnum = myEnum.Select((i) => i * 2)
 To use the values, you can iterate over the `Enumerable` just like you would any other `Iterable` collection:
 
 ```dart
-var myEnum = E([1, 2, 3);
+var myEnum = E([1, 2, 3]);
 for (var value in myEnum) {
     print(value);
 }

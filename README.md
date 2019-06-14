@@ -90,7 +90,7 @@ var resultEnum = myEnum.selectE((i) => i * 2)
 To use the values, you can iterate over the `Enumerable` just like you would any other `Iterable` collection:
 
 ```dart
-var myEnum = E([1, 2, 3)];
+var myEnum = E([1, 2, 3]);
 for (var value in myEnum) {
     print(value);
 }

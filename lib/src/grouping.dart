@@ -1,9 +1,6 @@
-abstract class IGrouping<TKey, TValue> {
-  TKey get key;
-}
+import 'enumerable.dart';
 
-class Grouping<TKey, TValue> extends Iterable<TValue>
-    implements IGrouping<TKey, TValue> {
+class Grouping<TKey, TValue> extends Enumerable<TValue> {
   List<TValue> elements;
   Grouping hashNext;
   Grouping next;

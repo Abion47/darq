@@ -11,7 +11,7 @@ abstract class ILookup<TKey, TValue> {
   Iterable<TValue> operator [](TKey key);
 }
 
-class Lookup<TKey, TValue> extends Iterable<IGrouping<TKey, TValue>>
+class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     implements ILookup<TKey, TValue> {
   final EqualityComparer<TKey> comparer;
   List<Grouping<TKey, TValue>> groupings;
@@ -67,8 +67,8 @@ class Lookup<TKey, TValue> extends Iterable<IGrouping<TKey, TValue>>
   }
 
   @override
-  Iterator<IGrouping<TKey, TValue>> get iterator => iterate().iterator;
-  Iterable<IGrouping<TKey, TValue>> iterate() sync* {
+  Iterator<Grouping<TKey, TValue>> get iterator => iterate().iterator;
+  Iterable<Grouping<TKey, TValue>> iterate() sync* {
     var g = lastGrouping;
     if (g != null) {
       do {

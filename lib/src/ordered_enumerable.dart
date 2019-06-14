@@ -35,7 +35,7 @@ class InternalOrderedEnumerable<TValue, TKey>
   @override
   Iterator<TValue> get iterator => iterate().iterator;
   Iterable<TValue> iterate() sync* {
-    final buffer = source.eToList();
+    final buffer = source.toListE();
     if (buffer.isNotEmpty) {
       final sorter = getEnumerableSorter(null);
       final map = sorter.sort(buffer, buffer.length);

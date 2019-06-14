@@ -27,6 +27,10 @@ typedef int Sorter<T>(T left, T right);
 /// into the accumulate and returns the result.
 typedef T Aggregator<T>(T accumulate, T value);
 
+/// Takes an integer that represents an index and then returns a value of type `T` 
+/// based on that index.
+typedef T Generator<T>(int index);
+
 /// Takes an element of type `TSource` and casts it to type `TResult`, returning
 /// the result of the cast.
 typedef TResult CastTransformer<TSource, TResult>(TSource element);

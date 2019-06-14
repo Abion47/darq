@@ -1,9 +1,5 @@
-import 'package:darq/darq.dart';
-
+import 'errors.dart';
 import 'grouping.dart';
-import 'enumerables/value_enumerable.dart';
-import 'enumerables/repeat_enumerable.dart';
-import 'enumerables/range_enumerable.dart';
 import 'ordered_enumerable.dart';
 import 'typedefs.dart';
 import 'equality_comparer.dart';
@@ -15,6 +11,7 @@ import 'enumerables/concat_enumerable.dart';
 import 'enumerables/default_if_empty_enumerable.dart';
 import 'enumerables/distinct_enumerable.dart';
 import 'enumerables/except_enumerable.dart';
+import 'enumerables/generated_enumerable.dart';
 import 'enumerables/group_by_enumerable.dart';
 import 'enumerables/group_by_value_enumerable.dart';
 import 'enumerables/group_join_enumerable.dart';
@@ -24,14 +21,18 @@ import 'enumerables/intersect_enumerable.dart';
 import 'enumerables/join_enumerable.dart';
 import 'enumerables/of_type_enumerable.dart';
 import 'enumerables/prepend_enumerable.dart';
+import 'enumerables/range_enumerable.dart';
+import 'enumerables/repeat_enumerable.dart';
 import 'enumerables/reverse_enumerable.dart';
 import 'enumerables/select_enumerable.dart';
 import 'enumerables/select_many_enumerable.dart';
 import 'enumerables/skip_enumerable.dart';
 import 'enumerables/skip_while_enumerator.dart';
+import 'enumerables/string_enumerable.dart';
 import 'enumerables/take_enumerable.dart';
 import 'enumerables/take_while_enumerable.dart';
 import 'enumerables/union_enumerable.dart';
+import 'enumerables/value_enumerable.dart';
 import 'enumerables/where_enumerable.dart';
 import 'enumerables/zip_enumerable.dart';
 
@@ -48,7 +49,7 @@ Enumerable<T> E<T>(Iterable<T> iterable) => Enumerable<T>.from(iterable);
 /// value. These methods will iterate over the enumerable when the method is
 /// called, and may iterate over the entire enumerable (possibly more than once)
 /// or may short-circuit the iteration after certain conditions have been met.
-/// Examples of value methods include [eAggregate], [eMax], and [eCount].
+/// Examples of value methods include [aggregateE], [maxE], and [countE].
 ///
 /// Lazy-execution methods are methods that modify the enumeration using a
 /// particular tactic. These methods do not execute until the enumeration is
@@ -56,13 +57,13 @@ Enumerable<T> E<T>(Iterable<T> iterable) => Enumerable<T>.from(iterable);
 /// large collections of data. These methods will themselves return an instance
 /// of [Enumerable], so they can be chained together to perform multiple
 /// transformations at once, further improving performance. Examples of
-/// lazy-execution methods include [eSelect], [eGroupBy], and [eDistinct].
+/// lazy-execution methods include [selectE], [groupByE], and [distinctE].
 ///
 /// (Note: as part of their iteration, some deferred-execution methods must
 /// first iterate over the entire underlying collection before they can begin
 /// their own iteration. Take caution when applying these methods to large
 /// collections as they can block the thread while the initial computation
-/// takes place. Examples of this are [eReverse] and [eOrderBy].)
+/// takes place. Examples of this are [reverseE] and [orderByE].)
 ///
 /// To create an [Enumerable] out of a [List], [Set], or any other [Iterable],
 /// use the [Enumerable.from] factory method or use the [E] convenience global
@@ -96,7 +97,7 @@ Enumerable<T> E<T>(Iterable<T> iterable) => Enumerable<T>.from(iterable);
 /// ```
 ///
 /// [Enumerable] objects can be converted back into Dart collections by utilizing
-/// the [Enumerable.eToList], [Enumerable.eToMap], or [Enumerable.eToSet] methods.
+/// the [Enumerable.toListE], [Enumerable.toMapE], or [Enumerable.toSetE] methods.
 ///
 /// ```dart
 /// final list = [0, 1, 2, 3, 4];
@@ -109,8 +110,23 @@ Enumerable<T> E<T>(Iterable<T> iterable) => Enumerable<T>.from(iterable);
 abstract class Enumerable<T> extends Iterable<T> {
   Enumerable();
 
+  /// Creates an enumerable from an [Iterable].
+  /// 
+  /// Creates an enumerable that wraps around an [Iterable] with existing values.
+  /// This is usually unnecessary to call, as calling the global function [E] 
+  /// achieves the same thing more concisely.
   factory Enumerable.from(Iterable<T> iterable) {
     return ValueEnumerable<T>(iterable);
+  }
+
+  /// Creates an enumerable from a [String].
+  /// 
+  /// Converts a String into its character components and creates an enumerable 
+  /// out of the resulting collection. (As [String] doesn't extend [Iterable], 
+  /// this is a convenience method to iterate over every character in the [String] 
+  /// as well as make it compatable with other enumerable methods.)
+  static Enumerable<String> fromString(String s) {
+    return StringEnumerable(s);
   }
 
   /// Creates an empty enumerable.
@@ -133,6 +149,14 @@ abstract class Enumerable<T> extends Iterable<T> {
     }
     if (count == 0) return Enumerable<T>.empty();
     return RepeatEnumerable<T>(value, count);
+  }
+
+  factory Enumerable.generate(int count, Generator<T> generator) {
+    if (count < 0) {
+      throw ArgumentError('`count` must be a non-negative integer.');
+    }
+    if (count == 0) return Enumerable<T>.empty();
+    return GeneratedEnumerable(count, generator);
   }
 
   /// Creates an enumerable containing values composed of the specified range.
@@ -185,8 +209,8 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// If the enumerable type is not one of these types, the [aggregator] function
   /// must be provided. Otherwise, an [ArgumentError] will be thrown.
   ///
-  /// The [eAggregate] function will iterate over every element in the enumerable.
-  T eAggregate([Aggregator<T> aggregator, T initialValue]) {
+  /// The [aggregateE] function will iterate over every element in the enumerable.
+  T aggregateE([Aggregator<T> aggregator, T initialValue]) {
     if (aggregator == null &&
         T != num &&
         T != int &&
@@ -247,14 +271,14 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// not.
   ///
   /// If the [condition] function returns `true` for all elements in the
-  /// enumerable, the [eAll] method returns `true` as well. Otherwise, if the
+  /// enumerable, the [allE] method returns `true` as well. Otherwise, if the
   /// [condition] function returns `false` even once during the iteration, the
-  /// [eAll] method will return `false` as well.
+  /// [allE] method will return `false` as well.
   ///
-  /// The [eAll] method will short-circuit after receiving a `false` from calling
+  /// The [allE] method will short-circuit after receiving a `false` from calling
   /// [condition] and will not iterate further over the enumerable. In the worst
   /// case, it will iterate over the entire enumerable.
-  bool eAll([Condition<T> condition]) {
+  bool allE([Condition<T> condition]) {
     assert(condition != null || T == bool);
 
     if (condition == null) {
@@ -280,14 +304,14 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// not.
   ///
   /// If the [condition] function returns `true` for any element in the
-  /// enumerable, the [eAny] method returns `true` as well. Otherwise, if the
-  /// [condition] function returns `false` for every element, the [eAny] method
+  /// enumerable, the [anyE] method returns `true` as well. Otherwise, if the
+  /// [condition] function returns `false` for every element, the [anyE] method
   /// will return `false` as well.
   ///
-  /// The [eAny] method will short-circuit after receiving a `true` from calling
+  /// The [anyE] method will short-circuit after receiving a `true` from calling
   /// [condition] and will not iterate further over the enumerable. In the worst
   /// case, it will iterate over the entire enumerable.
-  bool eAny([Condition<T> condition]) {
+  bool anyE([Condition<T> condition]) {
     assert(condition != null || T == bool);
 
     if (condition == null) {
@@ -308,7 +332,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Inserts an element to the end of the enumerable.
   ///
   /// Takes the specified element and inserts it at the end of the enumerable.
-  Enumerable<T> eAppend(T newElement) {
+  Enumerable<T> appendE(T newElement) {
     return AppendEnumerable<T>(this, newElement);
   }
 
@@ -322,8 +346,8 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// an integer division between the sum and the number of elements). For `num`
   /// and `double` enumerables, the result will be a `double`.
   ///
-  /// The [eAverage] function will iterate over every element in the enumerable.
-  T eAverage() {
+  /// The [averageE] function will iterate over every element in the enumerable.
+  T averageE() {
     if (T != num && T != int && T != double) {
       throw IncompatibleTypeError([num, int, double]);
     }
@@ -353,7 +377,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// If [T] and [TResult] are unrelated, the [transformer] function must be
   /// provided to facilitate the transformation. Otherwise, a [ConversionError]
   /// will be thrown.
-  Enumerable<TResult> eCast<TResult>([CastTransformer<T, TResult> transformer]) {
+  Enumerable<TResult> castE<TResult>([CastTransformer<T, TResult> transformer]) {
     return CastEnumerable<T, TResult>(this, transformer);
   }
 
@@ -361,7 +385,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// Appends the values of a given [Iterable] to the end of this enumerable,
   /// resulting in an enumerable that is the concatenation of both.
-  Enumerable<T> eConcat(Iterable<T> other) {
+  Enumerable<T> concatE(Iterable<T> other) {
     assert(other != null);
     return ConcatEnumerable<T>(this, other);
   }
@@ -369,22 +393,22 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Returns `true` if the specified element exists in the enumerable and `false` otherwise.
   ///
   /// Iterates over the entire enumerable and compares each element to the
-  /// specified value. If the two are deemed to be equivalent, [eContains] returns
+  /// specified value. If the two are deemed to be equivalent, [containsE] returns
   /// `true`. If the iteration reaches the end of the enumerable without finding a
-  /// match, [eContains] returns `false`.
+  /// match, [containsE] returns `false`.
   ///
   /// Optionally, an [EqualityComparer] can be supplied to handle comparisons. If
-  /// one is provided, the [eContains] method will use the [comparer] property in
-  /// order to determine equivalency. If omitted, [eContains] will resort to strict
+  /// one is provided, the [containsE] method will use the [comparer] property in
+  /// order to determine equivalency. If omitted, [containsE] will resort to strict
   /// equivalency (i.e. checking `if (value == element)`).
   ///
-  /// (For the [eContains] method, only the [comparer] property of the
+  /// (For the [containsE] method, only the [comparer] property of the
   /// [EqualityComparer] need be supplied.)
   ///
-  /// The [eContains] method will short-circuit after receiving a `true` from any
+  /// The [containsE] method will short-circuit after receiving a `true` from any
   /// comparison and will not iterate further over the enumerable. In the worst
   /// case, it will iterate over the entire enumerable.
-  bool eContains(T value, {EqualityComparer<T> comparer}) {
+  bool containsE(T value, {EqualityComparer<T> comparer}) {
     if (comparer == null) comparer = EqualityComparer.forType<T>();
 
     final iterator = this.iterator;
@@ -403,8 +427,8 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// will be the number of elements for which the [condition] function 
   /// returned `true`.
   ///
-  /// The [eCount] function will iterate over every element in the enumerable.
-  int eCount([Condition<T> condition]) {
+  /// The [countE] function will iterate over every element in the enumerable.
+  int countE([Condition<T> condition]) {
     final iterator = this.iterator;
     int count = 0;
     if (condition == null) {
@@ -424,27 +448,27 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Returns either this enumerable or a new enumerable containing [value] if
   /// this enumerable is empty.
   ///
-  /// If the number of elements in this enumerable is zero, [eDefaultIfEmpty] will
+  /// If the number of elements in this enumerable is zero, [defaultIfEmptyE] will
   /// return a new enumerable that consists of a single element specified by
   /// the given [value].
   ///
   /// If this enumerable has one or more elements, the enumerable is returned
   /// without modification.
-  Enumerable<T> eDefaultIfEmpty(T value) {
+  Enumerable<T> defaultIfEmptyE(T value) {
     return DefaultIfEmptyEnumerable<T>(this, value);
   }
 
   /// Returns an enumerable representing the distinct values of this enumerable.
   ///
-  /// After applying the [eDistinct] method to an enumerable, the resulting
+  /// After applying the [distinctE] method to an enumerable, the resulting
   /// enumerable will consist of distinct values in the source enumerable.
   ///
   /// Optionally, an [EqualityComparer] can be supplied to handle comparisons. If
-  /// one is provided, the [eDistinct] method will use the [comparer] property in
-  /// order to determine equivalency. If omitted, [eDistinct] will resort to strict
+  /// one is provided, the [distinctE] method will use the [comparer] property in
+  /// order to determine equivalency. If omitted, [distinctE] will resort to strict
   /// equivalency (i.e. checking `if (value == element)`).
   ///
-  /// (For the [eDistinct] method, only the [comparer] property of the
+  /// (For the [distinctE] method, only the [comparer] property of the
   /// [EqualityComparer] need be supplied.)
   ///
   /// Each element will be the first element found in the source enumerable,
@@ -453,23 +477,23 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If none of the elements in the enumerable match any other element in the
   /// enumerable, the enumerable will be unchanged.
-  Enumerable<T> eDistinct({EqualityComparer<T> comparer}) {
+  Enumerable<T> distinctE({EqualityComparer<T> comparer}) {
     return DistinctEnumerable<T>(this, comparer);
   }
 
   /// Returns the element at the specified index.
   ///
   /// Iterates over the entire enumerable until it reaches the element on the
-  /// iteration matching the given [index]. [eElementAt] will then return that
+  /// iteration matching the given [index]. [elementAtE] will then return that
   /// value. If the iteration reaches the end of the enumerable before arriving
   /// at [index], an [ElementNotFoundError] will be thrown.
   /// 
   /// The value of [index] must be a non-negative integer.
   ///
-  /// The [eElementAt] method will short-circuit after reaching the element at
+  /// The [elementAtE] method will short-circuit after reaching the element at
   /// [index] and will not iterate further over the enumerable. In the worst
   /// case, it will iterate over the entire enumerable.
-  T eElementAt(int index) {
+  T elementAtE(int index) {
     assert(index >= 0);
 
     final iterator = this.iterator;
@@ -486,15 +510,15 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// not found.
   ///
   /// Iterates over the entire enumerable until it reaches the element on the
-  /// iteration matching the given [index]. [eElementAt] will then return that
+  /// iteration matching the given [index]. [elementAtE] will then return that
   /// value. If the iteration reaches the end of the enumerable before arriving
   /// at [index], the value of [defaultValue] will be returned instead. If
   /// [defaultValue] is not supplied, the returned value will be `null`.
   ///
-  /// The [eElementAtOrDefault] method will short-circuit after reaching the
+  /// The [elementAtOrDefaultE] method will short-circuit after reaching the
   /// element at [index] and will not iterate further over the enumerable. In
   /// the worst case, it will iterate over the entire enumerable.
-  T eElementAtOrDefault(int index, {T defaultValue}) {
+  T elementAtOrDefaultE(int index, {T defaultValue}) {
     assert(index >= 0);
 
     final iterator = this.iterator;
@@ -510,22 +534,22 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Returns the set difference between the enumerable and the given
   /// collection.
   ///
-  /// After applying the [eExcept] method to an enumerable, the resulting
+  /// After applying the [exceptE] method to an enumerable, the resulting
   /// enumerable will consist of all the elements in the source enumerable that
   /// are not present in the given [other] collection. This is equivalent to
   /// taking the set difference of the two sequences.
   ///
   /// Optionally, an [EqualityComparer] can be supplied to handle comparisons. If
-  /// one is provided, the [eExcept] method will use the [comparer] and [hasher] properties in
-  /// order to determine equivalency. If omitted, [eExcept] will resort to strict
+  /// one is provided, the [exceptE] method will use the [comparer] and [hasher] properties in
+  /// order to determine equivalency. If omitted, [exceptE] will resort to strict
   /// equivalency (i.e. checking `if (value == element)`).
   ///
-  /// (For the [eExcept] method, only the [comparer] and [hasher] properties of the
+  /// (For the [exceptE] method, only the [comparer] and [hasher] properties of the
   /// [EqualityComparer] need be supplied.)
   ///
   /// If none of the elements in the source enumerable match any element in the
   /// given [other] collection, the enumerable will be unchanged.
-  Enumerable<T> eExcept(Iterable<T> other, {EqualityComparer<T> comparer}) {
+  Enumerable<T> exceptE(Iterable<T> other, {EqualityComparer<T> comparer}) {
     assert(other != null);
     return ExceptEnumerable<T>(this, other, comparer);
   }
@@ -535,20 +559,20 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// Begins iteration of the enumerable, but then returns the first element
   /// found that matches the specified [condition]. If [condition] is omitted,
-  /// [eFirst] will return the first element of the enumerable.
+  /// [firstE] will return the first element of the enumerable.
   ///
   /// If the enumerable is empty, an [EmptyEnumerableError] will be thrown. If
   /// [condition] is provided but iteration reaches the end of the enumerable
   /// before an element is found, an [ElementNotFoundError] will be thrown.
   ///
-  /// If [condition] is provided, the [eFirst] method short-circuits the first
+  /// If [condition] is provided, the [firstE] method short-circuits the first
   /// time [condition] returns `true` and will not iterate further over the
   /// enumerable. In the worst case, it will iterate over the entire enumerable.
   ///
-  /// If [condition] is omitted, the [eFirst] method will always only visit the
+  /// If [condition] is omitted, the [firstE] method will always only visit the
   /// first element in the enumerable, making it run in constant time
   /// regardless of iteration length.
-  T eFirst({Condition<T> condition}) {
+  T firstE({Condition<T> condition}) {
     final iterator = this.iterator;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
     if (condition == null) return iterator.current;
@@ -565,23 +589,23 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// Begins iteration of the enumerable, but then returns the first element
   /// found that matches the specified [condition]. If [condition] is omitted,
-  /// [eFirstOrDefault] will return the first element of the enumerable.
+  /// [firstOrDefaultE] will return the first element of the enumerable.
   ///
   /// If the enumerable is empty, or if [condition] is provided but iteration
   /// reaches the end of the enumerable before an element is found, the value
   /// specified by [defaultValue] will be returned instead. If [defaultValue] is
   /// omitted, the returned value will be `null`.
   ///
-  /// If [condition] is provided, the [eFirstOrDefault] method short-circuits the
+  /// If [condition] is provided, the [firstOrDefaultE] method short-circuits the
   /// first time [condition] returns `true` and will not iterate further over the
   /// enumerable. In the worst case, it will iterate over the entire enumerable.
   ///
-  /// If [condition] is omitted, the [eFirstOrDefault] method will always only
+  /// If [condition] is omitted, the [firstOrDefaultE] method will always only
   /// visit the first element in the enumerable, making it run in constant time
   /// regardless of iteration length.
   /// Returns the first element in the enumerable or a default value if there
   /// is none.
-  T eFirstOrDefault({Condition<T> condition, T defaultValue}) {
+  T firstOrDefaultE({Condition<T> condition, T defaultValue}) {
     final iterator = this.iterator;
     if (!iterator.moveNext()) return defaultValue;
     if (condition == null) return iterator.current;
@@ -595,17 +619,17 @@ abstract class Enumerable<T> extends Iterable<T> {
 
   /// Groups the elements in the enumerable by a key.
   ///
-  /// After applying the [eGroupBy] method to an enumerable, the resulting
+  /// After applying the [groupByE] method to an enumerable, the resulting
   /// enumerable will be a series of groups of elements. Each group will consist
   /// of all elements in the source enumerable that share a common key as defined
   /// by passing the element to the [keySelector] function.
   ///
   /// Optionally, an [EqualityComparer] can be supplied to handle key comparisons.
-  /// If one is provided, the [eGroupBy] method will use the [comparer] and
+  /// If one is provided, the [groupByE] method will use the [comparer] and
   /// [hasher] properties in order to determine equivalency. If omitted,
-  /// [eGroupBy] will resort to strict equivalency (i.e. checking `if (value == element)`).
+  /// [groupByE] will resort to strict equivalency (i.e. checking `if (value == element)`).
   ///
-  /// (For the [eGroupBy] method, only the [comparer] and [hasher] properties of
+  /// (For the [groupByE] method, only the [comparer] and [hasher] properties of
   /// the [EqualityComparer] need be supplied.)
   ///
   /// The resulting enumerable will consist of a series of [IGrouping] constructs
@@ -613,7 +637,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// common key, the resulting enumerable will consist of [IGrouping] objects
   /// (each containing a single element) of the same length as the source
   /// enumerable.
-  Enumerable<IGrouping<TKey, T>> eGroupBy<TKey>(Selector<T, TKey> keySelector,
+  Enumerable<Grouping<TKey, T>> groupByE<TKey>(Selector<T, TKey> keySelector,
       {EqualityComparer<TKey> keyComparer}) {
     assert(keySelector != null);
     return GroupByEnumerable<T, TKey>(this, keySelector, keyComparer);
@@ -622,18 +646,18 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Groups the elements in the enumerable by a key and maps the elements to
   /// a new value.
   ///
-  /// After applying the [eGroupByValue] method to an enumerable, the resulting
+  /// After applying the [groupByValueE] method to an enumerable, the resulting
   /// enumerable will be a series of groups of elements. Each group will consist
   /// of all elements in the source enumerable that share a common key as defined
   /// by passing the element to the [keySelector] function with those elements
   /// passed to the [valueSelector] to retrieve the value stored under the key.
   ///
   /// Optionally, an [EqualityComparer] can be supplied to handle key comparisons.
-  /// If one is provided, the [eGroupByValue] method will use the [comparer] and
+  /// If one is provided, the [groupByValueE] method will use the [comparer] and
   /// [hasher] properties in order to determine equivalency. If omitted,
-  /// [eGroupByValue] will resort to strict equivalency (i.e. checking `if (value == element)`).
+  /// [groupByValueE] will resort to strict equivalency (i.e. checking `if (value == element)`).
   ///
-  /// (For the [eGroupByValue] method, only the [comparer] and [hasher] properties of
+  /// (For the [groupByValueE] method, only the [comparer] and [hasher] properties of
   /// the [EqualityComparer] need be supplied.)
   ///
   /// The resulting enumerable will consist of a series of [IGrouping] constructs
@@ -641,7 +665,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// common key, the resulting enumerable will consist of [IGrouping] objects
   /// (each containing a single element) of the same length as the source
   /// enumerable.
-  Enumerable<IGrouping<TKey, TValue>> eGroupByValue<TKey, TValue>(
+  Enumerable<Grouping<TKey, TValue>> groupByValueE<TKey, TValue>(
       Selector<T, TKey> keySelector, Selector<T, TValue> valueSelector,
       {EqualityComparer<TKey> keyComparer}) {
     assert(keySelector != null && valueSelector != null);
@@ -652,9 +676,9 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Joins elements in the enumerable with a group of all elements in the
   /// [inner] collection that match the generated key.
   ///
-  /// First, [eGroupJoin] will iterate over the [other] collection and make a
+  /// First, [groupJoinE] will iterate over the [other] collection and make a
   /// lookup table of its elements, referenceable by a key generated by
-  /// [innerKeySelector]. Then [eGroupJoin] will iterate over the source
+  /// [innerKeySelector]. Then [groupJoinE] will iterate over the source
   /// enumeration, generating keys via the [outerKeySelector]. If a generated
   /// outer key matches an inner key in the collection lookup, the enumerable
   /// element is passed to the [selector] with all elements from the [other]
@@ -666,12 +690,12 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// collection as the second parameter. Elements in [other] that don't share
   /// a key with a source enumerable element are discarded.
   ///
-  /// [eGroupJoin] is different from [eJoin] in that, where [eJoin] will produce a
+  /// [groupJoinE] is different from [joinE] in that, where [joinE] will produce a
   /// new resulting element for each key match between the source enumerable and
-  /// the [inner] collection, [eGroupJoin] will produce a new element from an
+  /// the [inner] collection, [groupJoinE] will produce a new element from an
   /// element in the source enumerable and all elements in the [inner]
   /// collection that match on the key.
-  Enumerable<TResult> eGroupJoin<TInner, TKey, TResult>(
+  Enumerable<TResult> groupJoinE<TInner, TKey, TResult>(
       Iterable<TInner> inner,
       Selector<T, TKey> outerKeySelector,
       Selector<TInner, TKey> innerKeySelector,
@@ -686,7 +710,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Groups the elements in the enumerable by a key and maps the groups to a new
   /// element.
   ///
-  /// After applying the [eGroupSelect] method to an enumerable, the resulting
+  /// After applying the [groupSelectE] method to an enumerable, the resulting
   /// enumerable will be a series of groups of elements. Each group will consist
   /// of all elements in the source enumerable that share a common key as defined
   /// by passing the element to the [keySelector] function. Finally, each group
@@ -695,14 +719,14 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// an element of the resulting enumerable.
   ///
   /// Optionally, an [EqualityComparer] can be supplied to handle key comparisons.
-  /// If one is provided, the [eGroupSelect] method will use the [comparer] and
+  /// If one is provided, the [groupSelectE] method will use the [comparer] and
   /// [hasher] properties in order to determine equivalency. If omitted,
-  /// [eGroupSelect] will resort to strict equivalency (i.e. checking `if
+  /// [groupSelectE] will resort to strict equivalency (i.e. checking `if
   /// (value == element)`).
   ///
-  /// (For the [eGroupSelect] method, only the [comparer] and [hasher] properties of
+  /// (For the [groupSelectE] method, only the [comparer] and [hasher] properties of
   /// the [EqualityComparer] need be supplied.)
-  Enumerable<TResult> eGroupSelect<TKey, TResult>(Selector<T, TKey> keySelector,
+  Enumerable<TResult> groupSelectE<TKey, TResult>(Selector<T, TKey> keySelector,
       GroupSelector<TKey, Iterable<T>, TResult> resultSelector,
       {EqualityComparer<TKey> keyComparer}) {
     assert(keySelector != null && resultSelector != null);
@@ -713,7 +737,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Groups the elements in the enumerable by a key, maps the elements to
   /// a new value, and maps the groups to a new element.
   ///
-  /// After applying the [eGroupSelectValue] method to an enumerable, the resulting
+  /// After applying the [groupSelectValueE] method to an enumerable, the resulting
   /// enumerable will be a series of groups of elements. Each group will consist
   /// of all elements in the source enumerable that share a common key as defined
   /// by passing the element to the [keySelector] function stored as a value
@@ -723,14 +747,14 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// as an element of the resulting enumerable.
   ///
   /// Optionally, an [EqualityComparer] can be supplied to handle key comparisons.
-  /// If one is provided, the [eGroupSelectValue] method will use the [comparer] and
+  /// If one is provided, the [groupSelectValueE] method will use the [comparer] and
   /// [hasher] properties in order to determine equivalency. If omitted,
-  /// [eGroupSelectValue] will resort to strict equivalency (i.e. checking `if
+  /// [groupSelectValueE] will resort to strict equivalency (i.e. checking `if
   /// (value == element)`).
   ///
-  /// (For the [eGroupSelectValue] method, only the [comparer] and [hasher]
+  /// (For the [groupSelectValueE] method, only the [comparer] and [hasher]
   /// properties of the [EqualityComparer] need be supplied.)
-  Enumerable<TResult> eGroupSelectValue<TKey, TValue, TResult>(
+  Enumerable<TResult> groupSelectValueE<TKey, TValue, TResult>(
       Selector<T, TKey> keySelector,
       Selector<T, TValue> valueSelector,
       GroupSelector<TKey, Iterable<TValue>, TResult> resultSelector,
@@ -744,22 +768,22 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Returns the set intersection between the enumerable and the given
   /// collection.
   ///
-  /// After applying the [eIntersect] method to an enumerable, the resulting
+  /// After applying the [intersectE] method to an enumerable, the resulting
   /// enumerable will consist of all the elements in the source enumerable that
   /// are also present in the given [other] collection. This is equivalent to
   /// taking the set intersection of the two sequences.
   ///
   /// Optionally, an [EqualityComparer] can be supplied to handle comparisons. If
-  /// one is provided, the [eIntersect] method will use the [comparer] and [hasher] properties in
-  /// order to determine equivalency. If omitted, [eIntersect] will resort to strict
+  /// one is provided, the [intersectE] method will use the [comparer] and [hasher] properties in
+  /// order to determine equivalency. If omitted, [intersectE] will resort to strict
   /// equivalency (i.e. checking `if (value == element)`).
   ///
-  /// (For the [eIntersect] method, only the [comparer] and [hasher] properties of the
+  /// (For the [intersectE] method, only the [comparer] and [hasher] properties of the
   /// [EqualityComparer] need be supplied.)
   ///
   /// If all of the elements in the source enumerable match an element in the
   /// given [other] collection, the enumerable will be unchanged.
-  Enumerable<T> eIntersect(Iterable<T> other, {EqualityComparer<T> comparer}) {
+  Enumerable<T> intersectE(Iterable<T> other, {EqualityComparer<T> comparer}) {
     assert(other != null);
     return IntersectEnumerable<T>(this, other, comparer);
   }
@@ -768,9 +792,9 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// and returns a value that is the result of the corresponding elements being
   /// merged.
   ///
-  /// First, [eJoin] will iterate over the [other] collection and make a lookup
+  /// First, [joinE] will iterate over the [other] collection and make a lookup
   /// table of its elements, referenceable by a key generated by
-  /// [innerKeySelector]. Then [eJoin] will iterate over the source enumeration,
+  /// [innerKeySelector]. Then [joinE] will iterate over the source enumeration,
   /// generating keys via the [outerKeySelector]. If a generated key matches a
   /// key in the collection lookup, the collection element and the enumerable
   /// element are passed through the [selector]. The returned value of
@@ -779,7 +803,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Elements in the source enumerable that doesn't share a key in the
   /// lookup table as well as elements in [other] that don't share a key with a
   /// source enumerable element are discarded.
-  Enumerable<TResult> eJoin<TSecond, TKey, TResult>(
+  Enumerable<TResult> joinE<TSecond, TKey, TResult>(
     Iterable<TSecond> other,
     Selector<T, TKey> outerKeySelector,
     Selector<TSecond, TKey> innerKeySelector,
@@ -797,15 +821,15 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// specified condition.
   ///
   /// Iterates through the enumerable a returns the last element found that
-  /// matches the specified [condition]. If [condition] is omitted, [eLast] will
+  /// matches the specified [condition]. If [condition] is omitted, [lastE] will
   /// return the last element of the enumerable.
   ///
   /// If the enumerable is empty, an [EmptyEnumerableError] will be thrown. If
   /// [condition] is provided but iteration reaches the end of the enumerable
   /// before an element is found, an [ElementNotFoundError] will be thrown.
   ///
-  /// The [eLast] method will always iterate through the entire enumerable.
-  T eLast({Condition<T> condition}) {
+  /// The [lastE] method will always iterate through the entire enumerable.
+  T lastE({Condition<T> condition}) {
     final iterator = this.iterator;
     if (!iterator.moveNext()) throw EmptyEnumerableError();
 
@@ -828,16 +852,16 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// Iterates through the enumerable a returns the last element found that
   /// matches the specified [condition]. If [condition] is omitted,
-  /// [eLastOrDefault] will return the last element of the enumerable.
+  /// [lastOrDefaultE] will return the last element of the enumerable.
   ///
   /// If the enumerable is empty, or if [condition] is provided but iteration
   /// reaches the end of the enumerable before an element is found, the value
   /// specified by [defaultValue] will be returned instead. If [defaultValue] is
   /// omitted, the returned value will be `null`.
   ///
-  /// The [eLastOrDefault] method will always iterate through the entire
+  /// The [lastOrDefaultE] method will always iterate through the entire
   /// enumerable.
-  T eLastOrDefault({Condition<T> condition, T defaultValue}) {
+  T lastOrDefaultE({Condition<T> condition, T defaultValue}) {
     final iterator = this.iterator;
     if (!iterator.moveNext()) return defaultValue;
 
@@ -859,7 +883,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// Iterates over the enumerable and applies the [sorter] property of the
   /// given [EqualityComparer] to each element in order to find the maximum
-  /// value. Once iteration is complete, [eMax] will return the largest element
+  /// value. Once iteration is complete, [maxE] will return the largest element
   /// found.
   ///
   /// When the type of the enumerable is one of the below types, the
@@ -874,8 +898,8 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If the enumerable is empty, an [EmptyEnumerableError] will be thrown.
   ///
-  /// The [eMax] function will iterate over every element in the enumerable.
-  T eMax([EqualityComparer<T> comparer]) {
+  /// The [maxE] function will iterate over every element in the enumerable.
+  T maxE([EqualityComparer<T> comparer]) {
     if (comparer == null &&
         T != num &&
         T != int &&
@@ -925,7 +949,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// Iterates over the enumerable and applies the [sorter] property of the
   /// given [EqualityComparer] to each element in order to find the maximum
-  /// value. Once iteration is complete, [eMin] will return the largest element
+  /// value. Once iteration is complete, [minE] will return the largest element
   /// found.
   ///
   /// When the type of the enumerable is one of the below types, the
@@ -940,8 +964,8 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If the enumerable is empty, an [EmptyEnumerableError] will be thrown.
   ///
-  /// The [eMin] function will iterate over every element in the enumerable.
-  T eMin([EqualityComparer<T> comparer]) {
+  /// The [minE] function will iterate over every element in the enumerable.
+  T minE([EqualityComparer<T> comparer]) {
     if (comparer == null &&
         T != num &&
         T != int &&
@@ -990,19 +1014,19 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Returns all elements in the enumerable that are castable to the specified
   /// type.
   ///
-  /// After applying [eOfType] to an enumerable, the resulting enumerable will
+  /// After applying [ofTypeE] to an enumerable, the resulting enumerable will
   /// consist of all elements in the source enumerable that can be safely cast
   /// to `TResult`.
   ///
   /// If all elements in the source enumerable can be safely cast to `TResult`,
   /// the resulting enumerable will be unchanged.
-  Enumerable<TResult> eOfType<TResult>() {
+  Enumerable<TResult> ofTypeE<TResult>() {
     return OfTypeEnumerable<T, TResult>(this);
   }
 
   /// Sorts the enumeration in ascending (least-to-greatest) order.
   ///
-  /// First, [eOrderBy] iterates over the entire enumerable, creating a list of
+  /// First, [orderByE] iterates over the entire enumerable, creating a list of
   /// keys generated by [keySelector] associated to their corresponding
   /// elements. Then a QuickSort algorithm is applied to the keys, using the
   /// [sorter] property in [keyComparer] to determine sort order. Afterwards,
@@ -1021,7 +1045,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If the enumerable is already sorted in ascending order, the resulting
   /// enumerable will be unchanged.
-  Enumerable<T> eOrderBy<TKey>(Selector<T, TKey> keySelector,
+  Enumerable<T> orderByE<TKey>(Selector<T, TKey> keySelector,
       {EqualityComparer<TKey> keyComparer}) {
     assert(keySelector != null);
     return InternalOrderedEnumerable(this, keySelector, keyComparer, false);
@@ -1029,7 +1053,7 @@ abstract class Enumerable<T> extends Iterable<T> {
 
   /// Sorts the enumeration in descending (greatest-to-least) order.
   ///
-  /// First, [eOrderByDescending] iterates over the entire enumerable, creating a
+  /// First, [orderByDescendingE] iterates over the entire enumerable, creating a
   /// list of keys generated by [keySelector] associated to their corresponding
   /// elements. Then a QuickSort algorithm is applied to the keys, using the
   /// [sorter] property in [keyComparer] to determine sort order. Afterwards,
@@ -1048,7 +1072,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If the enumerable is already sorted in descending order, the resulting
   /// enumerable will be unchanged.
-  Enumerable<T> eOrderByDescending<TKey>(Selector<T, TKey> keySelector,
+  Enumerable<T> orderByDescendingE<TKey>(Selector<T, TKey> keySelector,
       {EqualityComparer<TKey> keyComparer}) {
     assert(keySelector != null);
     return InternalOrderedEnumerable(this, keySelector, keyComparer, true);
@@ -1058,7 +1082,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// Takes the specified element and inserts it at the beginning of the
   /// enumerable.
-  Enumerable<T> ePrepend(T newElement) {
+  Enumerable<T> prependE(T newElement) {
     return PrependEnumerable<T>(this, newElement);
   }
 
@@ -1067,7 +1091,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// The enumerable is iterated over and stored in a list. The resulting
   /// enumerable is the product of then iterating over that list in reverse
   /// order.
-  Enumerable<T> eReverse() {
+  Enumerable<T> reverseE() {
     return ReverseEnumerable<T>(this);
   }
 
@@ -1076,7 +1100,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// During iteration, the [selector] function is applied to each element. The
   /// returned value of that function is then provided as the next element of the
   /// resulting enumerable.
-  Enumerable<TResult> eSelect<TResult>(Selector<T, TResult> selector) {
+  Enumerable<TResult> selectE<TResult>(Selector<T, TResult> selector) {
     assert(selector != null);
 
     return SelectEnumerable<T, TResult>(this, selector);
@@ -1090,7 +1114,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// value in that iteration is provided as the next element of the
   /// resulting enumerable. The result is all the collections flattened so that
   /// their values become elements in a single enumerable.
-  Enumerable<TResult> eSelectMany<TResult>(ManySelector<T, TResult> selector) {
+  Enumerable<TResult> selectManyE<TResult>(ManySelector<T, TResult> selector) {
     assert(selector != null);
 
     return SelectManyEnumerable<T, TResult>(this, selector);
@@ -1101,19 +1125,19 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Iterates over both this enumerable and the given [other] collection. The
   /// [comparer] property of the [EqualityComparer] is applied to elements in
   /// the same position of both collections. If the comparison returns false for
-  /// any element pair, [eSequenceEqual] will return `false`.
+  /// any element pair, [sequenceEqualE] will return `false`.
   ///
   /// Furthermore, if either collections iteration ends before the other's does,
-  /// the lengths of the collections is deemed unequal, and [eSequenceEqual] will
+  /// the lengths of the collections is deemed unequal, and [sequenceEqualE] will
   /// return `false`.
   ///
   /// If the enumerable and the [other] collection are the same length and each
   /// element in the corresponsing positions of both are deemed equal by the
-  /// [EqualityComparer], [eSequenceEqual] will return `true`.
+  /// [EqualityComparer], [sequenceEqualE] will return `true`.
   ///
   /// If the [EqualityComparer] is omitted, comparison will default to strict
   /// equivalency checking (i.e. `if (a == b)`).
-  bool eSequenceEqual(Iterable<T> other, {EqualityComparer<T> comparer}) {
+  bool sequenceEqualE(Iterable<T> other, {EqualityComparer<T> comparer}) {
     assert(other != null);
 
     final _thisIterator = this.iterator;
@@ -1138,25 +1162,25 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Returns the single element in the element, optionally matching a
   /// [condition].
   ///
-  /// If [condition] is omitted, [eSingle] will return the single value in this
+  /// If [condition] is omitted, [singleE] will return the single value in this
   /// enumerable. If the enumerable is empty, a [EmptyEnumerableError] is thrown.
   /// If the enumerable contains more than one element, an [OperationError] is
   /// thrown.
   ///
-  /// In this scenario, the [eSingle] function will short-circuit after iterating
+  /// In this scenario, the [singleE] function will short-circuit after iterating
   /// a maximum of two elements into the enumerable.
   ///
-  /// If [condition] is supplied, [eSingle] will iterate over the entire
+  /// If [condition] is supplied, [singleE] will iterate over the entire
   /// enumerable, applying the [condition] function to each element. At the end
   /// of the iteration, if a single element matches the [condition], that element
   /// is returned. If no elements match the [condition], an [ElementNotFoundError]
   /// is thrown. If more than one element matches the [condition], an
   /// [OperationError] is thrown.
   ///
-  /// In this scenario, the [eSingle] function will short-circuit after finding a
+  /// In this scenario, the [singleE] function will short-circuit after finding a
   /// second element that matches the [condition]. In the worst-case scenario,
-  /// [eSingle] will iterate over the entire enumerable.
-  T eSingle([Condition<T> condition]) {
+  /// [singleE] will iterate over the entire enumerable.
+  T singleE([Condition<T> condition]) {
     final _iterator = this.iterator;
 
     if (!_iterator.moveNext()) {
@@ -1201,25 +1225,25 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Returns the single element in the element, optionally matching a
   /// [condition], or a [defaultValue] if no such element exists.
   ///
-  /// If [condition] is omitted, [eSingleOrDefault] will return the single value
+  /// If [condition] is omitted, [singleOrDefaultE] will return the single value
   /// in this enumerable. If the enumerable is empty, the value specified by
   /// [defaultValue] is returned instead. If the enumerable contains more than
   /// one element, an [OperationError] is thrown.
   ///
-  /// In this scenario, the [eSingleOrDefault] function will short-circuit after
+  /// In this scenario, the [singleOrDefaultE] function will short-circuit after
   /// iterating a maximum of two elements into the enumerable.
   ///
-  /// If [condition] is supplied, [eSingleOrDefault] will iterate over the entire
+  /// If [condition] is supplied, [singleOrDefaultE] will iterate over the entire
   /// enumerable, applying the [condition] function to each element. At the end
   /// of the iteration, if a single element matches the [condition], that element
   /// is returned. If no elements match the [condition], the value specified by
   /// [defaultValue] is returned instead. If more than one element matches the
   /// [condition], an [OperationError] is thrown.
   ///
-  /// In this scenario, the [eSingleOrDefault] function will short-circuit after
+  /// In this scenario, the [singleOrDefaultE] function will short-circuit after
   /// finding a second element that matches the [condition]. In the worst-case
-  /// scenario, [eSingleOrDefault] will iterate over the entire enumerable.
-  T eSingleOrDefault(T defaultValue, [Condition<T> condition]) {
+  /// scenario, [singleOrDefaultE] will iterate over the entire enumerable.
+  T singleOrDefaultE(T defaultValue, [Condition<T> condition]) {
     final _iterator = this.iterator;
 
     if (!_iterator.moveNext()) return defaultValue;
@@ -1266,7 +1290,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If [count] is greater than the number of elements in the enumerable, the
   /// result is an empty enumerable.
-  Enumerable<T> eSkip(int count) {
+  Enumerable<T> skipE(int count) {
     assert(count >= 0);
 
     if (count == 0) return this;
@@ -1285,7 +1309,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If all elements in the enumerable match the given [condition], the result
   /// is an empty enumerable.
-  Enumerable<T> eSkipWhile(Condition<T> condition) {
+  Enumerable<T> skipWhileE(Condition<T> condition) {
     assert(condition != null);
 
     return SkipWhileEnumerable<T>(this, condition);
@@ -1299,10 +1323,10 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// iteration is complete, the total is returned.
   ///
   /// The type of the returned total is dependent on the value returned by the
-  /// [selector] function. If all values are `int`, the return value of [eSum]
-  /// will be `int`. If all values are `double`, the return value of [eSum] will
+  /// [selector] function. If all values are `int`, the return value of [sumE]
+  /// will be `int`. If all values are `double`, the return value of [sumE] will
   /// be `double`. If all values are `num` or there is a combination of `int`
-  /// and `double`, the return value of [eSum] will be `num`.
+  /// and `double`, the return value of [sumE] will be `num`.
   ///
   /// When the type of the enumerable is a numeric primitive (e.g. `int`,
   /// `double`, or `num`), the [selector] function can be omitted. If so,
@@ -1310,7 +1334,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If the type of the enumerable is not a numeric primitive, the [selector]
   /// function must be provided. Otherwise, an [ArgumentError] is thrown.
-  TResult eSum<TResult extends num>([Selector<T, TResult> selector]) {
+  TResult sumE<TResult extends num>([Selector<T, TResult> selector]) {
     if (selector == null && T != num && T != int && T != double) {
       throw ArgumentError(
           '`selector` must not be null or the type of this enumerable must be one of the following: ${[
@@ -1360,7 +1384,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If [count] is greater than the number of elements in the enumerable, the
   /// resulting enumerable is unchanged.
-  Enumerable<T> eTake(int count) {
+  Enumerable<T> takeE(int count) {
     assert(count >= 0);
 
     if (count == 0) return Enumerable<T>.empty();
@@ -1377,7 +1401,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If all elements in the enumerable match the given [condition], the
   /// resulting enumerable is unchanged.
-  Enumerable<T> eTakeWhile(Condition<T> condition) {
+  Enumerable<T> takeWhileE(Condition<T> condition) {
     assert(condition != null);
 
     return TakeWhileEnumerable<T>(this, condition);
@@ -1386,11 +1410,11 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Adds a secondary sorting pass to enumeration in ascending
   /// (least-to-greatest) order.
   ///
-  /// [eThenBy] applies to an enumerable that has been sorted by [eOrderBy] or
-  /// [eOrderByDescending] (or another [eThenBy] or [eThenByDescending]). Once the
+  /// [thenByE] applies to an enumerable that has been sorted by [orderByE] or
+  /// [orderByDescendingE] (or another [thenByE] or [thenByDescendingE]). Once the
   /// previous sorting mechanism is processed, the keys are then sorted again
   /// using the [EqualityComparer] given to this method. (The process of sorting
-  /// is identical to [eGroupBy].)
+  /// is identical to [groupByE].)
   ///
   /// When the type of the enumerable is one of the below types, the
   /// [EqualityComparer] can be omitted. In this case, the function defaults to
@@ -1404,7 +1428,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If the enumerable is already sorted in ascending order, the resulting
   /// enumerable will be unchanged.
-  Enumerable<T> eThenBy<TKey>(Selector<T, TKey> keySelector,
+  Enumerable<T> thenByE<TKey>(Selector<T, TKey> keySelector,
       {EqualityComparer<TKey> keyComparer}) {
     assert(keySelector != null);
     if (!(this is InternalOrderedEnumerable)) {
@@ -1418,11 +1442,11 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Adds a secondary sorting pass to enumeration in descending
   /// (greatest-to-least) order.
   ///
-  /// [eThenByDescending] applies to an enumerable that has been sorted by
-  /// [eOrderBy] or [eOrderByDescending] (or another [eThenBy] or
-  /// [eThenByDescending]). Once the previous sorting mechanism is processed, the
+  /// [thenByDescendingE] applies to an enumerable that has been sorted by
+  /// [orderByE] or [orderByDescendingE] (or another [thenByE] or
+  /// [thenByDescendingE]). Once the previous sorting mechanism is processed, the
   /// keys are then sorted again using the [EqualityComparer] given to this
-  /// method. (The process of sorting is identical to [eGroupBy].)
+  /// method. (The process of sorting is identical to [groupByE].)
   ///
   /// When the type of the enumerable is one of the below types, the
   /// [EqualityComparer] can be omitted. In this case, the function defaults to
@@ -1436,7 +1460,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If the enumerable is already sorted in descending order, the resulting
   /// enumerable will be unchanged.
-  Enumerable<T> eThenByDescending<TKey>(Selector<T, TKey> keySelector,
+  Enumerable<T> thenByDescendingE<TKey>(Selector<T, TKey> keySelector,
       {EqualityComparer<TKey> keyComparer}) {
     assert(keySelector != null);
     if (!(this is InternalOrderedEnumerable)) {
@@ -1457,7 +1481,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// The length of the resulting [List] is guaranteed to the the same length as
   /// the enumerable.
-  List<T> eToList({bool growable = false}) {
+  List<T> toListE({bool growable = false}) {
     final list = <T>[];
     final iterator = this.iterator;
     while (iterator.moveNext()) {
@@ -1476,7 +1500,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// If a duplicate key is produced, the value generated by a prior element is
   /// overwritten. As such, the length of the resulting [Map] is not guaranteed
   /// to be the same length as the enumerable.
-  Map<TKey, TValue> eToMap<TKey, TValue>(
+  Map<TKey, TValue> toMapE<TKey, TValue>(
       Selector<T, TKey> keySelector, Selector<T, TValue> valueSelector) {
     assert(keySelector != null && valueSelector != null);
     final map = <TKey, TValue>{};
@@ -1501,7 +1525,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Duplicate elements are determined by the default Dart [Set] behavior (i.e.
   /// by the [hashCode] property of `T`. In the event of a duplicate element,
   /// the previous element is preserved and the duplicate is discarded.
-  Set<T> eToSet() {
+  Set<T> toSetE() {
     final hSet = Set<T>();
     final iterator = this.iterator;
     while (iterator.moveNext()) {
@@ -1514,25 +1538,25 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// Returns the set union between the enumerable and the given
   /// collection.
   ///
-  /// After applying the [eUnion] method to an enumerable, the resulting
+  /// After applying the [unionE] method to an enumerable, the resulting
   /// enumerable will consist of all the distinct elements in the source
   /// enumerable as well as the distinct elements in the given [other]
   /// collection. This is equivalent to taking the set union of the two
   /// sequences.
   ///
   /// Optionally, an [EqualityComparer] can be supplied to handle comparisons. If
-  /// one is provided, the [eUnion] method will use the [comparer] and [hasher] properties in
-  /// order to determine equivalency. If omitted, [eUnion] will resort to strict
+  /// one is provided, the [unionE] method will use the [comparer] and [hasher] properties in
+  /// order to determine equivalency. If omitted, [unionE] will resort to strict
   /// equivalency (i.e. checking `if (value == element)`).
   ///
-  /// (For the [eUnion] method, only the [comparer] and [hasher] properties of the
+  /// (For the [unionE] method, only the [comparer] and [hasher] properties of the
   /// [EqualityComparer] need be supplied.)
   ///
   /// Due to the nature of set unions, the resulting enumerable will be as though
-  /// [eDistinct] was applied to it, so duplicate elements after the first found
+  /// [distinctE] was applied to it, so duplicate elements after the first found
   /// will be discarded. If the intention is to combine elements of two
-  /// enumerables/collections, use [eConcat] instead.
-  Enumerable<T> eUnion(Iterable<T> other, {EqualityComparer<T> comparer}) {
+  /// enumerables/collections, use [concatE] instead.
+  Enumerable<T> unionE(Iterable<T> other, {EqualityComparer<T> comparer}) {
     assert(other != null);
     return UnionEnumerable<T>(this, other, comparer);
   }
@@ -1544,7 +1568,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// If all elements in the enumerable match the [condition], the resulting
   /// enumerable will be unchanged.
-  Enumerable<T> eWhere(Condition<T> condition) {
+  Enumerable<T> whereE(Condition<T> condition) {
     assert(condition != null);
     return WhereEnumerable<T>(this, condition);
   }
@@ -1560,7 +1584,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// The length of the resulting enumerable will be equal to the lesser of the
   /// lengths of the source enumerable or the given [other] collection.
-  Enumerable<TResult> eZip<TSecond, TResult>(
+  Enumerable<TResult> zipE<TSecond, TResult>(
       Iterable<TSecond> other, ZipSelector<T, TSecond, TResult> selector) {
     assert(other != null && selector != null);
     return ZipEnumerable<T, TSecond, TResult>(this, other, selector);

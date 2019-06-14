@@ -6,7 +6,7 @@ import '../enumerable_with_source.dart';
 import '../grouping.dart';
 
 class GroupByEnumerable<TSource, TKey>
-    extends Enumerable<IGrouping<TKey, TSource>>
+    extends Enumerable<Grouping<TKey, TSource>>
     with EnumerableWithSource<TSource> {
   final Selector<TSource, TKey> keySelector;
   final EqualityComparer<TKey> keyComparer;
@@ -18,7 +18,7 @@ class GroupByEnumerable<TSource, TKey>
   }
 
   @override
-  Iterator<IGrouping<TKey, TSource>> get iterator {
+  Iterator<Grouping<TKey, TSource>> get iterator {
     return Lookup.create<TSource, TKey, TSource>(
             source, keySelector, (a) => a, keyComparer)
         .iterator;

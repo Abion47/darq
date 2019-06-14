@@ -37,37 +37,43 @@ var rangeEnum = Enumerable.range(2, 5);
 
 // Creates an Enumerable that contains 6 copies of the value 'a string'
 var repeatEnum = Enumerable.repeat('a string', 6);
+
+// Creates an Enumerable from a string, iterating over its characters
+var stringEnum = Enumerable.fromString('abcdef');
+
+// Creates an Enumerable using a generator function
+var generatedEnum = Enumerable.generate(5, (index) => (index * 2).toString());
 ```
 
-Once you have an `Enumerable`, you can call any of 50 different methods on it to modify or analyze it. For example, you can map to a new value with `Select`:
+Once you have an `Enumerable`, you can call any of 50 different methods on it to modify or analyze it. For example, you can map to a new value with `selectE`:
 
 ```dart
-var myEnum = E([1, 2, 3);
-var mappedEnum = myEnum.Select((i) => i * 2);
+var myEnum = E([1, 2, 3]);
+var mappedEnum = myEnum.selectE((i) => i * 2);
 // Values: [2, 4, 6]
 ```
 
-...filter the elements with `Where`:
+...filter the elements with `whereE`:
 
 ```dart
-var myEnum = E([1, 2, 3);
-var filteredEnum = myEnum.Where((i) => i.isOdd);
+var myEnum = E([1, 2, 3]);
+var filteredEnum = myEnum.whereE((i) => i.isOdd);
 // Values: [1, 3]
 ```
 
-...get only unique values with `Distinct`:
+...get only unique values with `distinctE`:
 
 ```dart
 var myEnum = E([1, 1, 1, 2, 2, 3, 4, 5, 5, 5, 5, 5]);
-var uniqueEnum = myEnum.Distinct();
+var uniqueEnum = myEnum.distinctE();
 // Values: [1, 2, 3, 4, 5]
 ```
 
-...or even group elements together using `GroupBy`:
+...or even group elements together using `groupByE`:
 
 ```dart
 var myEnum = E([1, 2, 3, 4, 5, 6]);
-var groupedEnum = myEnum.GroupBy((i) => i % 2);
+var groupedEnum = myEnum.groupByE((i) => i % 2);
 // Values: [[1, 3, 5], [2, 4, 6]]
 ```
 
@@ -75,16 +81,16 @@ What's more, you can chain methods together, enabling virtually endless possibil
 
 ```dart
 var myEnum = E([1, 2, 3, 4, 5, 6]);
-var resultEnum = myEnum.Select((i) => i * 2)
-                       .Where((i) => i > 4)
-                       .Select((i) => i.toRadixString(16));
+var resultEnum = myEnum.selectE((i) => i * 2)
+                       .whereE((i) => i > 4)
+                       .selectE((i) => i.toRadixString(16));
 /// Values: ['6', '8', 'A', 'C']
 ```
 
 To use the values, you can iterate over the `Enumerable` just like you would any other `Iterable` collection:
 
 ```dart
-var myEnum = E([1, 2, 3);
+var myEnum = E([1, 2, 3)];
 for (var value in myEnum) {
     print(value);
 }
@@ -95,7 +101,7 @@ for (var value in myEnum) {
 // 3
 ```
 
-You can also easily convert the `Enumerable` back into a Dart collection type using `ToList`, `ToMap`, or `ToSet`:
+You can also easily convert the `Enumerable` back into a Dart collection type using `toListE`, `toMapE`, or `toSetE`:
 
 ```dart
 var myEnum = E([1, 2, 3]);

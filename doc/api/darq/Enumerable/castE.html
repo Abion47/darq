@@ -185,7 +185,8 @@ will be thrown.</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">Enumerable&lt;TResult&gt; castE&lt;TResult&gt;([CastTransformer&lt;T, TResult&gt; transformer]) {
+      <pre class="language-dart"><code class="language-dart">Enumerable&lt;TResult&gt; castE&lt;TResult&gt;(
+    [CastTransformer&lt;T, TResult&gt; transformer]) {
   return CastEnumerable&lt;T, TResult&gt;(this, transformer);
 }</code></pre>
     </section>

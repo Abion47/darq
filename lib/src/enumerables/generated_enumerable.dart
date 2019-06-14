@@ -2,7 +2,8 @@ import '../enumerable.dart';
 import '../enumerable_with_source.dart';
 import '../typedefs.dart';
 
-class GeneratedEnumerable<T> extends Enumerable<T> with EnumerableWithSource<T> {
+class GeneratedEnumerable<T> extends Enumerable<T>
+    with EnumerableWithSource<T> {
   final int count;
   final Generator<T> generator;
 

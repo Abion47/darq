@@ -1,7 +1,8 @@
 import '../enumerable.dart';
 import '../enumerable_with_source.dart';
 
-class StringEnumerable extends Enumerable<String> with EnumerableWithSource<String> {
+class StringEnumerable extends Enumerable<String>
+    with EnumerableWithSource<String> {
   final String sourceString;
 
   List<String> _buffer;

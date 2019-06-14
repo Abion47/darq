@@ -200,8 +200,10 @@ collection that match on the key.</p>
     Selector&lt;TInner, TKey&gt; innerKeySelector,
     GroupSelector&lt;T, Iterable&lt;TInner&gt;, TResult&gt; resultSelector,
     {EqualityComparer&lt;TKey&gt; keyComparer}) {
-  assert(
-      inner != null &amp;&amp; outerKeySelector != null &amp;&amp; innerKeySelector != null &amp;&amp; resultSelector != null);
+  assert(inner != null &amp;&amp;
+      outerKeySelector != null &amp;&amp;
+      innerKeySelector != null &amp;&amp;
+      resultSelector != null);
   return GroupJoinEnumerable&lt;T, TInner, TKey, TResult&gt;(this, inner,
       outerKeySelector, innerKeySelector, resultSelector, keyComparer);
 }</code></pre>

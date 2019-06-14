@@ -111,19 +111,19 @@ abstract class Enumerable<T> extends Iterable<T> {
   Enumerable();
 
   /// Creates an enumerable from an [Iterable].
-  /// 
+  ///
   /// Creates an enumerable that wraps around an [Iterable] with existing values.
-  /// This is usually unnecessary to call, as calling the global function [E] 
+  /// This is usually unnecessary to call, as calling the global function [E]
   /// achieves the same thing more concisely.
   factory Enumerable.from(Iterable<T> iterable) {
     return ValueEnumerable<T>(iterable);
   }
 
   /// Creates an enumerable from a [String].
-  /// 
-  /// Converts a String into its character components and creates an enumerable 
-  /// out of the resulting collection. (As [String] doesn't extend [Iterable], 
-  /// this is a convenience method to iterate over every character in the [String] 
+  ///
+  /// Converts a String into its character components and creates an enumerable
+  /// out of the resulting collection. (As [String] doesn't extend [Iterable],
+  /// this is a convenience method to iterate over every character in the [String]
   /// as well as make it compatable with other enumerable methods.)
   static Enumerable<String> fromString(String s) {
     return StringEnumerable(s);
@@ -377,7 +377,8 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// If [T] and [TResult] are unrelated, the [transformer] function must be
   /// provided to facilitate the transformation. Otherwise, a [ConversionError]
   /// will be thrown.
-  Enumerable<TResult> castE<TResult>([CastTransformer<T, TResult> transformer]) {
+  Enumerable<TResult> castE<TResult>(
+      [CastTransformer<T, TResult> transformer]) {
     return CastEnumerable<T, TResult>(this, transformer);
   }
 
@@ -422,9 +423,9 @@ abstract class Enumerable<T> extends Iterable<T> {
   ///
   /// Iterates over the entire enumerable and returns the number of elements
   /// that were iterated over.
-  /// 
+  ///
   /// Optionally, a [condition] can be specified. If so, the total count
-  /// will be the number of elements for which the [condition] function 
+  /// will be the number of elements for which the [condition] function
   /// returned `true`.
   ///
   /// The [countE] function will iterate over every element in the enumerable.
@@ -442,8 +443,6 @@ abstract class Enumerable<T> extends Iterable<T> {
     }
     return count;
   }
-
-
 
   /// Returns either this enumerable or a new enumerable containing [value] if
   /// this enumerable is empty.
@@ -487,7 +486,7 @@ abstract class Enumerable<T> extends Iterable<T> {
   /// iteration matching the given [index]. [elementAtE] will then return that
   /// value. If the iteration reaches the end of the enumerable before arriving
   /// at [index], an [ElementNotFoundError] will be thrown.
-  /// 
+  ///
   /// The value of [index] must be a non-negative integer.
   ///
   /// The [elementAtE] method will short-circuit after reaching the element at
@@ -701,8 +700,10 @@ abstract class Enumerable<T> extends Iterable<T> {
       Selector<TInner, TKey> innerKeySelector,
       GroupSelector<T, Iterable<TInner>, TResult> resultSelector,
       {EqualityComparer<TKey> keyComparer}) {
-    assert(
-        inner != null && outerKeySelector != null && innerKeySelector != null && resultSelector != null);
+    assert(inner != null &&
+        outerKeySelector != null &&
+        innerKeySelector != null &&
+        resultSelector != null);
     return GroupJoinEnumerable<T, TInner, TKey, TResult>(this, inner,
         outerKeySelector, innerKeySelector, resultSelector, keyComparer);
   }

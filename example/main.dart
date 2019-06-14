@@ -1,41 +1,60 @@
 import 'package:darq/darq.dart';
 
 void main() {
-  final iterations = 100;
-  final benchmarks = List<double>(iterations);
-  for (int i = 0; i < iterations; i++) {
-    benchmarks[i] = benchmark();
-  }
-
-  final sum = E(benchmarks).averageE();
-  print('Average execution time in seconds: $sum');
+  benchmark();
 }
 
-double benchmark() {
+void benchmark() {
   final source = List.generate(1000000, (i) => i);
+  final iterations = 100;
+  final benchmarks = List<double>(iterations);
 
-  final start = DateTime.now();
+  // LINQ style
+  for (int i = 0; i < iterations; i++) {
+    final start = DateTime.now();
 
-  final result = E(source).groupByE((i) => i % 3).selectE((g) => g.averageE());
-  for (var avg in result) {
-    // Do something with `avg`
+    // ======================BENCHMARK START=============================
+    final result =
+        E(source).groupByE((i) => i % 3).selectE((g) => g.averageE());
+    for (var _ in result) {
+      // Do something with the value
+    }
+    // ======================BENCHMARK END===============================
+
+    final end = DateTime.now();
+
+    benchmarks[i] =
+        (end.microsecondsSinceEpoch - start.microsecondsSinceEpoch) / 1000000;
   }
 
-  // source.map((i) => i % 3);
-  // final result = <List<int>>[[], [], []];
-  // for (var i in source) {
-  //   result[i % 3].add(i);
-  // }
-  // for (var g in result) {
-  //   var total = 0;
-  //   for (var i in g) {
-  //     total += i;
-  //   }
-  //   final avg = total / g.length;
-  //   // Go something with `avg`
-  // }
+  print(
+      'Average execution time in seconds (LINQ): ${E(benchmarks).averageE()}');
 
-  final end = DateTime.now();
+  // Vanilla Style
+  for (int i = 0; i < iterations; i++) {
+    final start = DateTime.now();
 
-  return (end.microsecondsSinceEpoch - start.microsecondsSinceEpoch) / 1000000;
+    // ======================BENCHMARK START=============================
+    final result = <List<int>>[[], [], []];
+    for (var i in source) {
+      result[i % 3].add(i);
+    }
+    for (var g in result) {
+      var total = 0;
+      for (var i in g) {
+        total += i;
+      }
+      final _ = total / g.length;
+      // Go something with the value
+    }
+    // ======================BENCHMARK END===============================
+
+    final end = DateTime.now();
+
+    benchmarks[i] =
+        (end.microsecondsSinceEpoch - start.microsecondsSinceEpoch) / 1000000;
+  }
+
+  print(
+      'Average execution time in seconds (Vanilla): ${E(benchmarks).averageE()}');
 }

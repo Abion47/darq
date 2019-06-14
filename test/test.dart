@@ -165,7 +165,7 @@ void main() {
     var list2 = [0, 1, 2, 3, 4, 5];
     var result2 = E(list2).countE();
     expect(result2, equals(6));
-    
+
     var list3 = [0, 1, 2, 3, 4, 5];
     var result3 = E(list3).countE((i) => i.isEven);
     expect(result3, equals(3));
@@ -941,7 +941,8 @@ void main() {
           barley,
         ]));
 
-    final errorTest = () => E([0, 1, 2]).selectE((i) => i + 1).thenByE((i) => i);
+    final errorTest =
+        () => E([0, 1, 2]).selectE((i) => i + 1).thenByE((i) => i);
     expect(errorTest, throwsA(isA<OperationError>()));
   });
 

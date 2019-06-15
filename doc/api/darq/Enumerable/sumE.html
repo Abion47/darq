@@ -191,25 +191,11 @@ function must be provided. Otherwise, an <code>ArgumentError</code> is thrown.</
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">TResult sumE&lt;TResult extends num&gt;([Selector&lt;T, TResult&gt; selector]) {
-  if (selector == null &amp;&amp; T != num &amp;&amp; T != int &amp;&amp; T != double) {
-    throw ArgumentError(
-        &#39;`selector` must not be null or the type of this enumerable must be one of the following: ${[
-      num,
-      int,
-      double
-    ]}&#39;);
-  }
+  IncompatibleTypeError.checkValidTypeOrParam(
+      T, SumReducers.director.keys, selector);
 
   if (selector == null) {
-    if (T == num) return EnumerableReducers.SumNum(this as Enumerable&lt;num&gt;);
-    if (T == int) {
-      return EnumerableReducers.SumInt(this as Enumerable&lt;int&gt;) as TResult;
-    }
-    if (T == double) {
-      return EnumerableReducers.SumDouble(this as Enumerable&lt;double&gt;)
-          as TResult;
-    }
-    throw UnexpectedStateError();
+    return SumReducers.director[T](this);
   }
 
   num sum;
@@ -223,7 +209,7 @@ function must be provided. Otherwise, an <code>ArgumentError</code> is thrown.</
   final _iterator = this.iterator;
 
   if (!_iterator.moveNext()) {
-    throw EmptyEnumerableError();
+    throw EnumerableError.isEmpty();
   }
 
   do {

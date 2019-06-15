@@ -13,12 +13,13 @@ abstract class ILookup<TKey, TValue> {
 
 class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     implements ILookup<TKey, TValue> {
-  final EqualityComparer<TKey> comparer;
+  EqualityComparer<TKey> comparer;
   List<Grouping<TKey, TValue>> groupings;
   Grouping<TKey, TValue> lastGrouping;
   int _count;
 
   Lookup._internal(this.comparer) {
+    if (comparer == null) comparer = EqualityComparer.forType<TKey>();
     groupings = List<Grouping<TKey, TValue>>(7);
     _count = 0;
   }
@@ -29,7 +30,9 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     Selector<TSource, TValue> valueSelector,
     EqualityComparer<TKey> comparer,
   ) {
-    assert(source != null && keySelector != null && valueSelector != null);
+    ArgumentError.checkNotNull(source);
+    ArgumentError.checkNotNull(keySelector);
+    ArgumentError.checkNotNull(valueSelector);
     final lookup = Lookup<TKey, TValue>._internal(comparer);
     for (final item in source) {
       lookup.getGrouping(keySelector(item), true).add(valueSelector(item));
@@ -37,12 +40,26 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     return lookup;
   }
 
+  static Lookup<TKey, TValue> createFromMap<TKey, TValue>(
+    Map<TKey, TValue> map,
+    EqualityComparer<TKey> comparer,
+  ) {
+    ArgumentError.checkNotNull(map);
+    return Lookup.create(
+      map.entries,
+      (entry) => entry.key,
+      (entry) => entry.value,
+      comparer,
+    );
+  }
+
   static Lookup<TKey, TValue> createForJoin<TKey, TValue>(
     Iterable<TValue> source,
     Selector<TValue, TKey> keySelector,
     EqualityComparer<TKey> comparer,
   ) {
-    assert(source != null && keySelector != null);
+    ArgumentError.checkNotNull(source);
+    ArgumentError.checkNotNull(keySelector);
     final lookup = Lookup<TKey, TValue>._internal(comparer);
     for (final item in source) {
       final key = keySelector(item);
@@ -59,6 +76,10 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     final grouping = getGrouping(key, false);
     if (grouping != null) return grouping;
     return Iterable<TValue>.empty();
+  }
+
+  operator []=(TKey key, TValue value) {
+    getGrouping(key, true).add(value);
   }
 
   @override

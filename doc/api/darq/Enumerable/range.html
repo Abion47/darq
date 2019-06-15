@@ -182,12 +182,8 @@ starting from <code>start</code> and incrementing <code>count</code> times, offs
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">static Enumerable&lt;int&gt; range(int start, int count, {int increment = 1}) {
-  if (count &lt; 0) {
-    throw ArgumentError(&#39;`count` must be a non-negative integer.&#39;);
-  }
-  if (increment == 0) {
-    throw ArgumentError(&#39;`increment` must be a non-zero integer.&#39;);
-  }
+  RangeError.checkNotNegative(count);
+  RangeError.value(count, &#39;increment parameter must not be zero&#39;);
   if (count == 0) return Enumerable&lt;int&gt;.empty();
   return RangeEnumerable(start, count, increment);
 }</code></pre>

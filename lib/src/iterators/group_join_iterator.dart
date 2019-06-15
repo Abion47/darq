@@ -17,7 +17,7 @@ class GroupJoinIterator<TSource, TInner, TKey, TResult>
 
     if (sourceIterator == null) {
       sourceIterator = enumerable.source.iterator;
-      _lookup = Lookup.createForJoin(
+      _lookup = Lookup.createForJoin<TKey, TInner>(
           castEnum.inner, castEnum.innerKeySelector, castEnum.keyComparer);
     }
 

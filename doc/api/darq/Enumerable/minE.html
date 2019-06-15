@@ -181,45 +181,22 @@ found.</p>
 predefined minimum functions depending on the type:</p><ul><li>Numeric types (<code>num</code>, <code>int</code>, <code>double</code>) return the minimum of all elements as defined by the <code>min</code> function in <code>dart:math</code>.</li><li><code>String</code> types return the alphabetic minimum of all elements.</li></ul>
 <p>If the enumerable type is not one of these types, the <a href="darq/EqualityComparer-class.html">EqualityComparer</a>
 must be provided. Otherwise, an <code>ArgumentError</code> will be thrown.</p>
-<p>If the enumerable is empty, an <a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a> will be thrown.</p>
+<p>If the enumerable is empty, an <code>EmptyEnumerableError</code> will be thrown.</p>
 <p>The <a href="darq/Enumerable/minE.html">minE</a> function will iterate over every element in the enumerable.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">T minE([EqualityComparer&lt;T&gt; comparer]) {
-  if (comparer == null &amp;&amp;
-      T != num &amp;&amp;
-      T != int &amp;&amp;
-      T != double &amp;&amp;
-      T != String) {
-    throw ArgumentError(
-        &#39;`comparer` must not be null or the type of this enumerable must be one of the following: ${[
-      num,
-      int,
-      double,
-      String
-    ]}&#39;);
-  }
+  IncompatibleTypeError.checkValidTypeOrParam(
+      T, MinReducers.director.keys, comparer);
 
   if (comparer == null) {
-    if (T == num) {
-      return EnumerableReducers.MinNum(this as Enumerable&lt;num&gt;) as T;
-    }
-    if (T == int) {
-      return EnumerableReducers.MinInt(this as Enumerable&lt;int&gt;) as T;
-    }
-    if (T == double) {
-      return EnumerableReducers.MinDouble(this as Enumerable&lt;double&gt;) as T;
-    }
-    if (T == String) {
-      return EnumerableReducers.MinString(this as Enumerable&lt;String&gt;) as T;
-    }
-    throw UnexpectedStateError();
+    return MinReducers.director[T](this);
   }
 
   final iterator = this.iterator;
-  if (!iterator.moveNext()) throw EmptyEnumerableError();
+  if (!iterator.moveNext()) throw EnumerableError.isEmpty();
 
   T min;
   do {

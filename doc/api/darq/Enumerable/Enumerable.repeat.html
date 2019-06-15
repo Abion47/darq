@@ -170,18 +170,25 @@
     </section>
 
     <section class="desc markdown">
-      <p>Creates an enumerable</p>
+      <p>Creates an enumerable from a value repeated <code>count</code> times.</p>
 <p>A convenience factory to create an enumerable by repeating <code>value</code> <code>count</code>
-number of times.</p>
+number of times. The value in <code>value</code> is not copied, so every element will
+point to the same object:</p>
+<pre class="language-dart"><code class="language-dart">final mapValue = { 'a': 1 };
+final enumerable = Enumerable.repeat(3, mapValue);
+mapValue['a'] = 2;
+print(enumerable);
+
+// Output:
+// [{ 'a': 2 }, { 'a': 2 }, { 'a': 2 }]
+</code></pre>
 <p><code>count</code> must be a non-negative number.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">factory Enumerable.repeat(T value, int count) {
-  if (count &lt; 0) {
-    throw ArgumentError(&#39;`count` must be a non-negative integer.&#39;);
-  }
+  RangeError.checkNotNegative(count);
   if (count == 0) return Enumerable&lt;T&gt;.empty();
   return RepeatEnumerable&lt;T&gt;(value, count);
 }</code></pre>

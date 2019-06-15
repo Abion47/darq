@@ -184,7 +184,8 @@ to be the same length as the enumerable.</p>
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Map&lt;TKey, TValue&gt; toMapE&lt;TKey, TValue&gt;(
     Selector&lt;T, TKey&gt; keySelector, Selector&lt;T, TValue&gt; valueSelector) {
-  assert(keySelector != null &amp;&amp; valueSelector != null);
+  ArgumentError.checkNotNull(keySelector);
+  ArgumentError.checkNotNull(valueSelector);
   final map = &lt;TKey, TValue&gt;{};
   final iterator = this.iterator;
   TKey key;

@@ -4,12 +4,11 @@ import '../typedefs.dart';
 import '../iterators/cast_iterator.dart';
 
 class CastEnumerable<TSource, TResult> extends Enumerable<TResult>
-    with EnumerableWithSource<TSource> {
+    implements EnumerableWithSource<TSource> {
+  final Enumerable<TSource> source;
   final CastTransformer<TSource, TResult> transformer;
 
-  CastEnumerable(Enumerable<TSource> source, this.transformer) {
-    this.src = source;
-  }
+  const CastEnumerable(this.source, this.transformer);
 
   @override
   Iterator<TResult> get iterator => CastIterator(this);

@@ -1,14 +1,30 @@
 import '../enumerable.dart';
 import '../enumerable_with_source.dart';
 
-class ValueEnumerable<T> extends Enumerable<T> with EnumerableWithSource<T> {
-  final Iterable<T> sourceIterable;
+abstract class ValueEnumerable<T> extends Enumerable<T>
+    implements EnumerableWithSource<T> {
+  const ValueEnumerable();
+
+  static ValueEnumerable<T> create<T>(Iterable<T> source) {
+    if (source is List) return ListEnumerable<T>(source);
+    return DefaultValueEnumerable<T>(source);
+  }
 
   @override
-  Iterable<T> get source => sourceIterable;
+  Iterator<T> get iterator => source.iterator;
+}
 
-  ValueEnumerable(Iterable<T> source) : this.sourceIterable = source;
+class DefaultValueEnumerable<T> extends ValueEnumerable<T> {
+  final Iterable<T> source;
+  const DefaultValueEnumerable(this.source);
+}
+
+class ListEnumerable<T> extends ValueEnumerable<T> {
+  final List<T> source;
+  const ListEnumerable(this.source);
+
+  T operator [](int index) => source[index];
 
   @override
-  Iterator<T> get iterator => sourceIterable.iterator;
+  int get length => source.length;
 }

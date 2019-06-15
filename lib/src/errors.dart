@@ -1,36 +1,31 @@
-class UnexpectedStateError extends Error {
-  UnexpectedStateError();
-
-  @override
-  String toString() =>
-      'Code execution has entered a state that should not have been possible.';
+class UnexpectedStateError extends StateError {
+  UnexpectedStateError()
+      : super(
+            'Code execution has entered a state that should not have been possible. Please post an issue on the darq github describing what caused this error to be thrown.');
 }
 
-class NullEnumerableError extends Error {
-  NullEnumerableError();
+class EnumerableError extends StateError {
+  EnumerableError(String message) : super(message);
 
-  @override
-  String toString() =>
-      'Cannot perform operation on an enumeration with a backing data of null.';
+  EnumerableError.isNull() : this('The underlying data is null.');
+
+  EnumerableError.isEmpty() : this('The enumerable is empty.');
+
+  EnumerableError.elementNotFound() : this('The element could not be found');
+
+  EnumerableError.ambiguousMatch()
+      : this('More than one element matches the request.');
+
+  EnumerableError.tooMany()
+      : this(
+            'There are more elements in the enumerable than are allowed by the operation');
 }
 
-class EmptyEnumerableError extends Error {
-  EmptyEnumerableError();
-
-  @override
-  String toString() => 'Cannot perform operation on an empty enumeration.';
+class KeyExistsError<T> extends StateError {
+  KeyExistsError(T key) : super('A duplicate key $key was created.');
 }
 
-class KeyExistsError extends Error {
-  final dynamic key;
-
-  KeyExistsError(this.key);
-
-  @override
-  String toString() => 'Generating the map produced a duplicate key: $key';
-}
-
-class ConversionError<TSource, TResult> extends Error {
+class ConversionError<TSource, TResult> extends CastError {
   final TSource object;
 
   ConversionError(this.object);
@@ -40,34 +35,29 @@ class ConversionError<TSource, TResult> extends Error {
       'Unable to convert $object from type $TSource to type $TResult.';
 }
 
-class ElementNotFoundError extends Error {
-  ElementNotFoundError();
-
-  @override
-  String toString() =>
-      'An element was requested, but the enumeration ended before it oculd be found.';
+class IntegerOverflowError extends StateError {
+  IntegerOverflowError() : super('An operation caused an integer to overflow.');
 }
 
-class OperationError extends Error {
-  final String message;
-
-  OperationError(this.message);
-
-  String toString() => 'Operational error: $message';
-}
-
-class IntegerOverflowError extends Error {
-  IntegerOverflowError();
-
-  @override
-  String toString() => 'An operation caused an integer to overflow.';
-}
-
-class IncompatibleTypeError extends Error {
+class IncompatibleTypeError extends TypeError {
+  final Type t;
   final List<Type> allowedTypes;
 
-  IncompatibleTypeError(this.allowedTypes);
+  IncompatibleTypeError(this.t, this.allowedTypes);
 
+  @override
   String toString() =>
-      'Type parameter must be one of these types: $allowedTypes';
+      'Type $t is unsupported. The type parameter must be one of these types: $allowedTypes';
+
+  static void checkValidType(Type t, Iterable<Type> validTypes) {
+    if (validTypes.contains(t)) return;
+    throw IncompatibleTypeError(t, validTypes);
+  }
+
+  static void checkValidTypeOrParam(
+      Type t, Iterable<Type> validTypes, dynamic param) {
+    if (param != null) return;
+    if (validTypes.contains(t)) return;
+    throw IncompatibleTypeError(t, validTypes);
+  }
 }

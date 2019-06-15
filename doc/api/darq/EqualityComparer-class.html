@@ -78,13 +78,10 @@
     
       <li class="section-title"><a href="darq/darq-library.html#exceptions">Exceptions</a></li>
       <li><a href="darq/ConversionError-class.html">ConversionError</a></li>
-      <li><a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a></li>
-      <li><a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a></li>
+      <li><a href="darq/EnumerableError-class.html">EnumerableError</a></li>
       <li><a href="darq/IncompatibleTypeError-class.html">IncompatibleTypeError</a></li>
       <li><a href="darq/IntegerOverflowError-class.html">IntegerOverflowError</a></li>
       <li><a href="darq/KeyExistsError-class.html">KeyExistsError</a></li>
-      <li><a href="darq/NullEnumerableError-class.html">NullEnumerableError</a></li>
-      <li><a href="darq/OperationError-class.html">OperationError</a></li>
       <li><a href="darq/UnexpectedStateError-class.html">UnexpectedStateError</a></li>
     </ol>
   </div>
@@ -119,7 +116,7 @@ greater than the right value, the returned integer is positive. If the two
 values are equal, 0 is returned. (This behavior is identical to various
 <code>compareTo</code> methods on Dart types.)</p>
 <p>If the <a href="darq/EqualityComparer/sort.html">EqualityComparer.sort</a> field is omitted, the function's default
-behavior depends on the type argument passed to <a href="darq/EqualityComparer-class.html">EqualityComparer</a>:</p><ul><li><code>int</code> will default to using <code>int.compareTo</code></li><li><code>num</code> will default to using <code>num.compareTo</code></li><li><code>double</code> will default to using <code>double.compareTo</code></li><li><code>String</code> will default to using <code>String.compareTo</code></li><li>All other types will default to a non-sorting function:</li></ul>
+behavior depends on the type argument passed to <a href="darq/EqualityComparer-class.html">EqualityComparer</a>:</p><ul><li><code>int</code> will default to using <code>int.compareTo</code></li><li><code>num</code> will default to using <code>num.compareTo</code></li><li><code>double</code> will default to using <code>double.compareTo</code></li><li><code>String</code> will default to using <code>String.compareTo</code></li><li><code>Duration</code> will default to using <code>Duration.compareTo</code></li><li><code>BigInt</code> will default to using <code>BigInt.compareTo</code></li><li>All other types will default to a non-sorting function:</li></ul>
 <pre class="language-dart"><code class="language-dart">(left, right) { return 0; }
 </code></pre>
     </section>
@@ -234,7 +231,28 @@ behavior depends on the type argument passed to <a href="darq/EqualityComparer-c
           </span>
                   </dt>
         <dd>
-          
+          Returns the default <a href="darq/EqualityComparer-class.html">EqualityComparer</a> that has been registered for type
+<code>T</code>. <a href="darq/EqualityComparer/forType.html">[...]</a>
+                  
+</dd>
+        <dt id="registerEqualityComparer" class="callable">
+          <span class="name"><a href="darq/EqualityComparer/registerEqualityComparer.html">registerEqualityComparer</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="registerEqualityComparer-param-comparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">comparer</span>, {</span> <span class="parameter" id="registerEqualityComparer-param-overwrite"><span class="type-annotation">bool</span> <span class="parameter-name">overwrite</span>: <span class="default-value">false</span></span> })
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+                  </dt>
+        <dd>
+          Registers an <a href="darq/EqualityComparer-class.html">EqualityComparer</a> object as the default comparer for type <code>T</code>,
+returning a <code>bool</code> stating if a comparer already exists. <a href="darq/EqualityComparer/registerEqualityComparer.html">[...]</a>
+                  
+</dd>
+        <dt id="unregisterEqualityComparer" class="callable">
+          <span class="name"><a href="darq/EqualityComparer/unregisterEqualityComparer.html">unregisterEqualityComparer</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; <a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+          </span>
+                  </dt>
+        <dd>
+          Unregisters an <a href="darq/EqualityComparer-class.html">EqualityComparer</a> object as the default comparer for type <code>T</code>,
+returning the comparer object that was removed. <a href="darq/EqualityComparer/unregisterEqualityComparer.html">[...]</a>
                   
 </dd>
       </dl>
@@ -267,6 +285,8 @@ behavior depends on the type argument passed to <a href="darq/EqualityComparer-c
     
       <li class="section-title"><a href="darq/EqualityComparer-class.html#static-methods">Static methods</a></li>
       <li><a href="darq/EqualityComparer/forType.html">forType</a></li>
+      <li><a href="darq/EqualityComparer/registerEqualityComparer.html">registerEqualityComparer</a></li>
+      <li><a href="darq/EqualityComparer/unregisterEqualityComparer.html">unregisterEqualityComparer</a></li>
     
     </ol>
   </div><!--/.sidebar-offcanvas-->

@@ -60,7 +60,9 @@
         <a href="darq/IncompatibleTypeError-class.html#instance-properties">Properties</a>
       </li>
       <li><a href="darq/IncompatibleTypeError/allowedTypes.html">allowedTypes</a></li>
+      <li><a href="darq/IncompatibleTypeError/t.html">t</a></li>
       <li class="inherited"><a href="darq/IncompatibleTypeError/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="darq/IncompatibleTypeError/message.html">message</a></li>
       <li class="inherited"><a href="darq/IncompatibleTypeError/runtimeType.html">runtimeType</a></li>
       <li class="inherited"><a href="darq/IncompatibleTypeError/stackTrace.html">stackTrace</a></li>
     
@@ -72,6 +74,9 @@
       <li class="inherited"><a href="darq/IncompatibleTypeError/operator_equals.html">operator ==</a></li>
     
     
+      <li class="section-title"><a href="darq/IncompatibleTypeError-class.html#static-methods">Static methods</a></li>
+      <li><a href="darq/IncompatibleTypeError/checkValidType.html">checkValidType</a></li>
+      <li><a href="darq/IncompatibleTypeError/checkValidTypeOrParam.html">checkValidTypeOrParam</a></li>
     
     </ol>
   </div><!--/.sidebar-offcanvas-->
@@ -80,6 +85,11 @@
       <div><h1><span class="kind-method">toString</span> method</h1></div>
 
     <section class="multi-line-signature">
+      <div>
+        <ol class="annotation-list">
+          <li>@override</li>
+        </ol>
+      </div>
       <span class="returntype">String</span>
             <span class="name ">toString</span>
 (<wbr>)
@@ -91,8 +101,9 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">String toString() =&gt;
-    &#39;Type parameter must be one of these types: $allowedTypes&#39;;</code></pre>
+      <pre class="language-dart"><code class="language-dart">@override
+String toString() =&gt;
+    &#39;Type $t is unsupported. The type parameter must be one of these types: $allowedTypes&#39;;</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

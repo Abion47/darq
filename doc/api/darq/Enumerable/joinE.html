@@ -167,7 +167,7 @@
     <section class="multi-line-signature">
       <span class="returntype"><a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
             <span class="name ">joinE</span>
-&lt;<wbr><span class="type-parameter">TSecond</span>, <span class="type-parameter">TKey</span>, <span class="type-parameter">TResult</span>&gt;(<wbr><span class="parameter" id="joinE-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>&gt;</span></span> <span class="parameter-name">other</span>, </span> <span class="parameter" id="joinE-param-outerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">outerKeySelector</span>, </span> <span class="parameter" id="joinE-param-innerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">innerKeySelector</span>, </span> <span class="parameter" id="joinE-param-selector"><span class="type-annotation"><a href="darq/ZipSelector.html">ZipSelector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TSecond</span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">selector</span></span>)
+&lt;<wbr><span class="type-parameter">TSecond</span>, <span class="type-parameter">TKey</span>, <span class="type-parameter">TResult</span>&gt;(<wbr><span class="parameter" id="joinE-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>&gt;</span></span> <span class="parameter-name">other</span>, </span> <span class="parameter" id="joinE-param-outerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">outerKeySelector</span>, </span> <span class="parameter" id="joinE-param-innerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">innerKeySelector</span>, </span> <span class="parameter" id="joinE-param-selector"><span class="type-annotation"><a href="darq/ZipSelector.html">ZipSelector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TSecond</span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">selector</span>, {</span> <span class="parameter" id="joinE-param-keyComparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">keyComparer</span></span> })
       
     </section>
     <section class="desc markdown">
@@ -189,17 +189,17 @@ source enumerable element are discarded.</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Enumerable&lt;TResult&gt; joinE&lt;TSecond, TKey, TResult&gt;(
-  Iterable&lt;TSecond&gt; other,
-  Selector&lt;T, TKey&gt; outerKeySelector,
-  Selector&lt;TSecond, TKey&gt; innerKeySelector,
-  ZipSelector&lt;T, TSecond, TResult&gt; selector,
-) {
-  assert(other != null &amp;&amp;
-      outerKeySelector != null &amp;&amp;
-      innerKeySelector != null &amp;&amp;
-      selector != null);
+    Iterable&lt;TSecond&gt; other,
+    Selector&lt;T, TKey&gt; outerKeySelector,
+    Selector&lt;TSecond, TKey&gt; innerKeySelector,
+    ZipSelector&lt;T, TSecond, TResult&gt; selector,
+    {EqualityComparer&lt;T&gt; keyComparer}) {
+  ArgumentError.checkNotNull(other);
+  ArgumentError.checkNotNull(outerKeySelector);
+  ArgumentError.checkNotNull(innerKeySelector);
+  ArgumentError.checkNotNull(selector);
   return JoinEnumerable(
-      this, other, outerKeySelector, innerKeySelector, selector);
+      this, other, outerKeySelector, innerKeySelector, selector, keyComparer);
 }</code></pre>
     </section>
 

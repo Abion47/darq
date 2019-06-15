@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the operator == method from the EqualityComparer class, for the Dart programming language.">
-  <title>operator == method - EqualityComparer class - darq library - Dart API</title>
+  <meta name="description" content="API docs for the registerEqualityComparer method from the EqualityComparer class, for the Dart programming language.">
+  <title>registerEqualityComparer method - EqualityComparer class - darq library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -27,9 +27,9 @@
     <li><a href="index.html">darq</a></li>
     <li><a href="darq/darq-library.html">darq</a></li>
     <li><a href="darq/EqualityComparer-class.html">EqualityComparer<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">operator == method</li>
+    <li class="self-crumb">registerEqualityComparer&lt;<wbr><span class="type-parameter">T</span>&gt; method</li>
   </ol>
-  <div class="self-name">operator ==</div>
+  <div class="self-name">registerEqualityComparer</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -48,7 +48,7 @@
       <li><a href="index.html">darq</a></li>
       <li><a href="darq/darq-library.html">darq</a></li>
       <li><a href="darq/EqualityComparer-class.html">EqualityComparer<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-      <li class="self-crumb">operator == method</li>
+      <li class="self-crumb">registerEqualityComparer&lt;<wbr><span class="type-parameter">T</span>&gt; method</li>
     </ol>
     
     <h5>EqualityComparer class</h5>
@@ -82,39 +82,33 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div>  <div id="external-links" class="btn-group"><a title="View source code" class="source-link" href="https://github.com/dart-lang/sdk/blob/3f2d646132b55b152cff4ba7090cbeebdd48d477/sdk/lib/core/object.dart#L60"><i class="material-icons">description</i></a></div>
-<h1><span class="kind-method">operator ==</span> method</h1></div>
+      <div><h1><span class="kind-method">registerEqualityComparer&lt;<wbr><span class="type-parameter">T</span>&gt;</span> method</h1></div>
 
     <section class="multi-line-signature">
       <span class="returntype">bool</span>
-            <span class="name ">operator ==</span>
-(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
-      <div class="features">inherited</div>
+            <span class="name ">registerEqualityComparer</span>
+&lt;<wbr><span class="type-parameter">T</span>&gt;(<wbr><span class="parameter" id="registerEqualityComparer-param-comparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">comparer</span>, {</span> <span class="parameter" id="registerEqualityComparer-param-overwrite"><span class="type-annotation">bool</span> <span class="parameter-name">overwrite</span>: <span class="default-value">false</span></span> })
+      
     </section>
     <section class="desc markdown">
-      <p>The equality operator.</p>
-<p>The default behavior for all <code>Object</code>s is to return true if and
-only if <code>this</code> and <code>other</code> are the same object.</p>
-<p>Override this method to specify a different equality relation on
-a class. The overriding method must still be an equivalence relation.
-That is, it must be:</p><ul><li>
-<p>Total: It must return a boolean for all arguments. It should never throw
-or return <code>null</code>.</p></li><li>
-<p>Reflexive: For all objects <code>o</code>, <code>o == o</code> must be true.</p></li><li>
-<p>Symmetric: For all objects <code>o1</code> and <code>o2</code>, <code>o1 == o2</code> and <code>o2 == o1</code> must
-either both be true, or both be false.</p></li><li>
-<p>Transitive: For all objects <code>o1</code>, <code>o2</code>, and <code>o3</code>, if <code>o1 == o2</code> and
-<code>o2 == o3</code> are true, then <code>o1 == o3</code> must be true.</p></li></ul>
-<p>The method should also be consistent over time,
-so whether two objects are equal should only change
-if at least one of the objects was modified.</p>
-<p>If a subclass overrides the equality operator it should override
-the <a href="darq/EqualityComparer/hashCode.html">hashCode</a> method as well to maintain consistency.</p>
+      <p>Registers an <a href="darq/EqualityComparer-class.html">EqualityComparer</a> object as the default comparer for type <code>T</code>,
+returning a <code>bool</code> stating if a comparer already exists.</p>
+<p>If <code>overwrite</code> is <code>true</code>, the comparer will replace any existing comparer
+registered under <code>T</code> with the given one. If <code>overwrite</code> is <code>false</code> and a
+comparer for <code>T</code> is already registered, the new comparer is ignored. (<code>overwrite</code>
+defaults to <code>false</code>.)</p>
+<p>In either case, this method returns <code>true</code> if a comparer is already registered
+under type <code>T</code>, and <code>false</code> otherwise.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">external bool operator ==(other);</code></pre>
+      <pre class="language-dart"><code class="language-dart">static bool registerEqualityComparer&lt;T&gt;(EqualityComparer&lt;T&gt; comparer,
+    {bool overwrite = false}) {
+  bool typeExists = _registeredEqualityComparers.containsKey(T);
+  if (!typeExists || overwrite) _registeredEqualityComparers[T] = comparer;
+  return typeExists;
+}</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

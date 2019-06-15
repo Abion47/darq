@@ -78,13 +78,10 @@
     
       <li class="section-title"><a href="darq/darq-library.html#exceptions">Exceptions</a></li>
       <li><a href="darq/ConversionError-class.html">ConversionError</a></li>
-      <li><a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a></li>
-      <li><a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a></li>
+      <li><a href="darq/EnumerableError-class.html">EnumerableError</a></li>
       <li><a href="darq/IncompatibleTypeError-class.html">IncompatibleTypeError</a></li>
       <li><a href="darq/IntegerOverflowError-class.html">IntegerOverflowError</a></li>
       <li><a href="darq/KeyExistsError-class.html">KeyExistsError</a></li>
-      <li><a href="darq/NullEnumerableError-class.html">NullEnumerableError</a></li>
-      <li><a href="darq/OperationError-class.html">OperationError</a></li>
       <li><a href="darq/UnexpectedStateError-class.html">UnexpectedStateError</a></li>
     </ol>
   </div>
@@ -174,6 +171,7 @@ print(result);
         </dt>
         <dd>
           
+          <div class="constructor-modifier features">const</div>
         </dd>
         <dt id="Enumerable.empty" class="callable">
           <span class="name"><a href="darq/Enumerable/Enumerable.empty.html">Enumerable.empty</a></span><span class="signature">()</span>
@@ -190,17 +188,18 @@ print(result);
           <div class="constructor-modifier features">factory</div>
         </dd>
         <dt id="Enumerable.generate" class="callable">
-          <span class="name"><a href="darq/Enumerable/Enumerable.generate.html">Enumerable.generate</a></span><span class="signature">(<span class="parameter" id="generate-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span>, </span> <span class="parameter" id="generate-param-generator"><span class="type-annotation"><a href="darq/Generator.html">Generator</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">generator</span></span>)</span>
+          <span class="name"><a href="darq/Enumerable/Enumerable.generate.html">Enumerable.generate</a></span><span class="signature">(<span class="parameter" id="generate-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span>, </span> <span class="parameter" id="generate-param-generator"><span class="type-annotation"><a href="darq/Generator.html">Generator</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">generator</span>, {</span> <span class="parameter" id="generate-param-useCache"><span class="type-annotation">bool</span> <span class="parameter-name">useCache</span>: <span class="default-value">false</span></span> })</span>
         </dt>
         <dd>
-          
+          Creates an enumerable of <code>count</code> length, where each element is generated
+from a given <a href="darq/Generator.html">Generator</a> function. <a href="darq/Enumerable/Enumerable.generate.html">[...]</a>
           <div class="constructor-modifier features">factory</div>
         </dd>
         <dt id="Enumerable.repeat" class="callable">
           <span class="name"><a href="darq/Enumerable/Enumerable.repeat.html">Enumerable.repeat</a></span><span class="signature">(<span class="parameter" id="repeat-param-value"><span class="type-annotation">T</span> <span class="parameter-name">value</span>, </span> <span class="parameter" id="repeat-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span></span>)</span>
         </dt>
         <dd>
-          Creates an enumerable <a href="darq/Enumerable/Enumerable.repeat.html">[...]</a>
+          Creates an enumerable from a value repeated <code>count</code> times. <a href="darq/Enumerable/Enumerable.repeat.html">[...]</a>
           <div class="constructor-modifier features">factory</div>
         </dd>
       </dl>
@@ -498,7 +497,7 @@ collection. <a href="darq/Enumerable/intersectE.html">[...]</a>
                   
 </dd>
         <dt id="joinE" class="callable">
-          <span class="name"><a href="darq/Enumerable/joinE.html">joinE</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>, <span class="type-parameter">TKey</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="joinE-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>&gt;</span></span> <span class="parameter-name">other</span>, </span> <span class="parameter" id="joinE-param-outerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">outerKeySelector</span>, </span> <span class="parameter" id="joinE-param-innerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">innerKeySelector</span>, </span> <span class="parameter" id="joinE-param-selector"><span class="type-annotation"><a href="darq/ZipSelector.html">ZipSelector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TSecond</span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">selector</span></span>)
+          <span class="name"><a href="darq/Enumerable/joinE.html">joinE</a></span><span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>, <span class="type-parameter">TKey</span>, <span class="type-parameter">TResult</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="joinE-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>&gt;</span></span> <span class="parameter-name">other</span>, </span> <span class="parameter" id="joinE-param-outerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">outerKeySelector</span>, </span> <span class="parameter" id="joinE-param-innerKeySelector"><span class="type-annotation"><a href="darq/Selector.html">Selector</a><span class="signature">&lt;<wbr><span class="type-parameter">TSecond</span>, <span class="type-parameter">TKey</span>&gt;</span></span> <span class="parameter-name">innerKeySelector</span>, </span> <span class="parameter" id="joinE-param-selector"><span class="type-annotation"><a href="darq/ZipSelector.html">ZipSelector</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>, <span class="type-parameter">TSecond</span>, <span class="type-parameter">TResult</span>&gt;</span></span> <span class="parameter-name">selector</span>, {</span> <span class="parameter" id="joinE-param-keyComparer"><span class="type-annotation"><a href="darq/EqualityComparer-class.html">EqualityComparer</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">keyComparer</span></span> })
             <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">TResult</span>&gt;</span></span>
           </span>
                   </dt>
@@ -1017,7 +1016,7 @@ predicate <code>test</code>. <a href="darq/Enumerable/where.html">[...]</a>
       <h2>Static Methods</h2>
       <dl class="callables">
         <dt id="fromString" class="callable">
-          <span class="name"><a href="darq/Enumerable/fromString.html">fromString</a></span><span class="signature">(<wbr><span class="parameter" id="fromString-param-s"><span class="type-annotation">String</span> <span class="parameter-name">s</span></span>)
+          <span class="name"><a href="darq/Enumerable/fromString.html">fromString</a></span><span class="signature">(<wbr><span class="parameter" id="fromString-param-s"><span class="type-annotation">String</span> <span class="parameter-name">s</span>, {</span> <span class="parameter" id="fromString-param-useCache"><span class="type-annotation">bool</span> <span class="parameter-name">useCache</span>: <span class="default-value">false</span></span> })
             <span class="returntype parameter">&#8594; <a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
           </span>
                   </dt>

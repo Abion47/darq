@@ -191,9 +191,9 @@ enumerable will be unchanged.</p>
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Enumerable&lt;T&gt; thenByDescendingE&lt;TKey&gt;(Selector&lt;T, TKey&gt; keySelector,
     {EqualityComparer&lt;TKey&gt; keyComparer}) {
-  assert(keySelector != null);
-  if (!(this is InternalOrderedEnumerable)) {
-    throw OperationError(
+  ArgumentError.checkNotNull(keySelector);
+  if (this is! InternalOrderedEnumerable) {
+    throw UnsupportedError(
         &#39;ThenByDescending must be called immediately following a call to OrderBy, OrderByDescending, ThenBy, or ThenByDescending.&#39;);
   }
   return (this as dynamic)

@@ -179,7 +179,8 @@ achieves the same thing more concisely.</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">factory Enumerable.from(Iterable&lt;T&gt; iterable) {
-  return ValueEnumerable&lt;T&gt;(iterable);
+  ArgumentError.checkNotNull(iterable);
+  return ValueEnumerable.create&lt;T&gt;(iterable);
 }</code></pre>
     </section>
 

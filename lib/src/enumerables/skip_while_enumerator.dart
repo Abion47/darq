@@ -4,12 +4,11 @@ import '../typedefs.dart';
 import '../iterators/skip_while_iterator.dart';
 
 class SkipWhileEnumerable<T> extends Enumerable<T>
-    with EnumerableWithSource<T> {
+    implements EnumerableWithSource<T> {
+  final Enumerable<T> source;
   final Condition<T> condition;
 
-  SkipWhileEnumerable(Enumerable<T> source, this.condition) {
-    this.src = source;
-  }
+  const SkipWhileEnumerable(this.source, this.condition);
 
   @override
   Iterator<T> get iterator => SkipWhileIterator(this);

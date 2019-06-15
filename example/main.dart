@@ -1,7 +1,49 @@
 import 'package:darq/darq.dart';
 
-void main() {
-  benchmark();
+//void main() {
+//  benchmark();
+//}
+
+typedef T2 Foo2<T1, T2>(T1 a);
+typedef T3 Foo3<T1, T2, T3>(T1 a, T2 b);
+
+class Bar<A> {
+  final List<A> outer;
+  Bar(this.outer);
+
+  void run<B, C, D>(
+    List<B> inner,
+    Foo2<A, C> outerSelector,
+    Foo2<B, C> innerSelector,
+    Foo3<A, B, D> resultSelector,
+  ) {
+    print([A, B, C, D]);
+    print([
+      outer.runtimeType,
+      inner.runtimeType,
+      outerSelector.runtimeType,
+      innerSelector.runtimeType,
+      resultSelector.runtimeType
+    ]);
+  }
+}
+
+class Person {
+  final String name;
+  Person(this.name);
+}
+
+class Pet {
+  final String name;
+  final String owner;
+  Pet(this.name, this.owner);
+}
+
+main() {
+  final map = {'a': 1, 'b': 2};
+  print(map.runtimeType);
+  print(map.keys.runtimeType);
+  print(map.values.runtimeType);
 }
 
 void benchmark() {

@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:darq/darq.dart';
 import 'package:darq/src/errors.dart';
 import 'package:darq/src/enumerable.dart';
@@ -9,8 +11,14 @@ void main() {
     var list = [0, 1, 2, 3, 4];
     var e = E(list);
 
-    expect(e, isA<Enumerable<int>>());
+    expect(e, isA<ListEnumerable<int>>());
     expect(e, orderedEquals([0, 1, 2, 3, 4]));
+
+    var queue = Queue<int>.from([5, 4, 3, 2, 1]);
+    var e2 = E(queue);
+
+    expect(e2, isA<DefaultValueEnumerable<int>>());
+    expect(e2, orderedEquals([5, 4, 3, 2, 1]));
   });
 
   test('Creating an empty enumerable', () {
@@ -205,7 +213,7 @@ void main() {
     expect(result, equals(3));
 
     var result2 = () => E(list).elementAtE(6);
-    expect(result2, throwsA(isA<ElementNotFoundError>()));
+    expect(result2, throwsA(isA<EnumerableError>()));
   });
 
   test('ElementAtOrDefault', () {
@@ -268,7 +276,11 @@ void main() {
 
     var test2 = [];
     var result2 = () => E(test2).firstE();
-    expect(result2, throwsA(isA<EmptyEnumerableError>()));
+    expect(result2, throwsA(isA<EnumerableError>()));
+
+    var test3 = [0, 1, 2, 3];
+    var result3 = E(test3).firstE(condition: (i) => i.isOdd);
+    expect(result3, 1);
   });
 
   test('FirstOrDefault', () {
@@ -282,6 +294,10 @@ void main() {
 
     var result3 = E(test2).firstOrDefaultE(defaultValue: 4);
     expect(result3, 4);
+
+    var test4 = [0, 1, 2, 3];
+    var result4 = E(test4).firstOrDefaultE(condition: (i) => i.isOdd);
+    expect(result4, 1);
   });
 
   test('GroupBy', () {
@@ -683,7 +699,11 @@ void main() {
 
     var test2 = [];
     var result2 = () => E(test2).lastE();
-    expect(result2, throwsA(isA<EmptyEnumerableError>()));
+    expect(result2, throwsA(isA<EnumerableError>()));
+
+    var test3 = [0, 1, 2, 3];
+    var result3 = E(test3).lastE(condition: (i) => i.isOdd);
+    expect(result3, 3);
   });
 
   test('LastOrDefault', () {
@@ -697,6 +717,10 @@ void main() {
 
     var result3 = E(test2).lastOrDefaultE(defaultValue: 4);
     expect(result3, 4);
+
+    var test4 = [0, 1, 2, 3];
+    var result4 = E(test4).firstOrDefaultE(condition: (i) => i.isOdd);
+    expect(result4, 1);
   });
 
   test('Max', () {
@@ -706,7 +730,7 @@ void main() {
 
     var test2 = <int>[];
     var result2 = () => E(test2).maxE();
-    expect(result2, throwsA(isA<EmptyEnumerableError>()));
+    expect(result2, throwsA(isA<EnumerableError>()));
 
     var test3 = ['0', '1', '2', '3'];
     var comparer = EqualityComparer<String>(
@@ -722,7 +746,7 @@ void main() {
 
     var test2 = <int>[];
     var result2 = () => E(test2).minE();
-    expect(result2, throwsA(isA<EmptyEnumerableError>()));
+    expect(result2, throwsA(isA<EnumerableError>()));
 
     var test3 = ['0', '1', '2', '3'];
     var comparer = EqualityComparer<String>(
@@ -815,7 +839,7 @@ void main() {
 
     final input2 = [0, 1];
     final output2 = () => E(input2).singleE();
-    expect(output2, throwsA(isA<OperationError>()));
+    expect(output2, throwsA(isA<EnumerableError>()));
 
     final input3 = [0, 1, 2, 3, 4];
     final output3 = E(input3).singleE((x) => x == 2);
@@ -823,15 +847,15 @@ void main() {
 
     final input4 = [0, 1, 2, 3, 4, 2];
     final output4 = () => E(input4).singleE((x) => x == 2);
-    expect(output4, throwsA(isA<OperationError>()));
+    expect(output4, throwsA(isA<EnumerableError>()));
 
     final input5 = [];
     final output5 = () => E(input5).singleE();
-    expect(output5, throwsA(isA<OperationError>()));
+    expect(output5, throwsA(isA<EnumerableError>()));
 
     final input6 = [];
     final output6 = () => E(input6).singleE((x) => x == 2);
-    expect(output6, throwsA(isA<OperationError>()));
+    expect(output6, throwsA(isA<EnumerableError>()));
   });
 
   test('SingleOrDefault', () {
@@ -841,7 +865,7 @@ void main() {
 
     final input2 = [0, 1];
     final output2 = () => E(input2).singleOrDefaultE(5);
-    expect(output2, throwsA(isA<OperationError>()));
+    expect(output2, throwsA(isA<EnumerableError>()));
 
     final input3 = [0, 1, 2, 3, 4];
     final output3 = E(input3).singleOrDefaultE(5, (x) => x == 2);
@@ -849,7 +873,7 @@ void main() {
 
     final input4 = [0, 1, 2, 3, 4, 2];
     final output4 = () => E(input4).singleOrDefaultE(5, (x) => x == 2);
-    expect(output4, throwsA(isA<OperationError>()));
+    expect(output4, throwsA(isA<EnumerableError>()));
 
     final input5 = [];
     final output5 = E(input5).singleOrDefaultE(5);
@@ -943,7 +967,7 @@ void main() {
 
     final errorTest =
         () => E([0, 1, 2]).selectE((i) => i + 1).thenByE((i) => i);
-    expect(errorTest, throwsA(isA<OperationError>()));
+    expect(errorTest, throwsA(isA<UnsupportedError>()));
   });
 
   test('ThenByDescending', () {
@@ -995,7 +1019,7 @@ void main() {
 
     final errorTest =
         () => E([0, 1, 2]).selectE((i) => i + 1).thenByDescendingE((i) => i);
-    expect(errorTest, throwsA(isA<OperationError>()));
+    expect(errorTest, throwsA(isA<UnsupportedError>()));
   });
 
   test('ToList', () {
@@ -1077,6 +1101,320 @@ void main() {
 
     final output = E(a).zipE(b, (x, y) => '$x-$y');
     expect(output, orderedEquals(['1-5.0', '2-6.0', '3-7.0']));
+  });
+
+  // ===========================================================================
+
+  test('Iterable - first', () {
+    final a = [2, 3, 4, 5, 6];
+    final result = E(a).reverseE().first;
+    expect(result, 6);
+  });
+
+  test('Iterable - isEmpty', () {
+    final a = [];
+    final result = E(a).isEmpty;
+    expect(result, isTrue);
+
+    final b = [1];
+    final result2 = E(b).isEmpty;
+    expect(result2, isFalse);
+
+    final c = [1, 3, 5, 7];
+    final result3 = E(c).whereE((i) => i.isEven).isEmpty;
+    expect(result3, isTrue);
+  });
+
+  test('Iterable - isNotEmpty', () {
+    final a = [];
+    final result = E(a).isNotEmpty;
+    expect(result, isFalse);
+
+    final b = [1];
+    final result2 = E(b).isNotEmpty;
+    expect(result2, isTrue);
+
+    final c = [1, 3, 5, 7];
+    final result3 = E(c).whereE((i) => i.isEven).isNotEmpty;
+    expect(result3, isFalse);
+  });
+
+  test('Iterable - iterator', () {
+    final a = [1, 2, 3, 4, 5];
+    var idx = 0;
+    for (var i in E(a)) {
+      expect(i, a[idx++]);
+    }
+    expect(idx, 5);
+
+    final b = ['a', 'b', 'c', 'd', 'e'];
+    idx = 0;
+    final iterator = E(b).selectE((c) => c.toUpperCase()).iterator;
+    expect(iterator, isA<Iterator<String>>());
+    while (iterator.moveNext()) {
+      final current = iterator.current;
+      expect(current, equals(b[idx++].toUpperCase()));
+    }
+    expect(idx, 5);
+  });
+
+  test('Iterable - last', () {
+    final a = [1, 2, 3, 4, 5];
+    final result = E(a).whereE((i) => i.isEven).last;
+    expect(result, 4);
+  });
+
+  test('Iterable - length', () {
+    final a = [1, 2, 3, 4, 5];
+    final result = E(a).whereE((i) => i.isEven).length;
+    expect(result, 2);
+  });
+
+  test('Iterable - single', () {
+    final input = [0];
+    final output = E(input).single;
+    expect(output, equals(0));
+
+    final input2 = [0, 1];
+    final output2 = () => E(input2).single;
+    expect(output2, throwsA(isA<StateError>()));
+
+    final input3 = [];
+    final output3 = () => E(input3).single();
+    expect(output3, throwsA(isA<StateError>()));
+  });
+
+  test('Iterable - any', () {
+    var list3 = [2, 4, 6, 8];
+    var result3 = E(list3).any((x) => x.isOdd);
+    expect(result3, isFalse);
+
+    var list4 = [2, 4, 6, 7];
+    var result4 = E(list4).any((x) => x.isOdd);
+    expect(result4, isTrue);
+  });
+
+  test('Iterable - cast', () {
+    var list = <num>[0, 1, 2, 3, 4];
+
+    var e = list;
+    expect(e, isA<Iterable<num>>());
+
+    var result = E(list).cast<int>();
+    expect(result, orderedEquals([0, 1, 2, 3, 4]));
+    expect(result, isA<Iterable<int>>());
+
+    var list2 = <int>[0, 1, 2, 3, 4];
+    var result2 = () => E(list2).cast<String>();
+    expect(result2, throwsA(isA<CastError>()));
+  });
+
+  test('Iterable - contains', () {
+    var list = [0, 1, 2, 3, 4];
+    var result = E(list).contains(2);
+    expect(result, isTrue);
+
+    var result2 = E(list).contains(5);
+    expect(result2, isFalse);
+  });
+
+  test('Iterable - elementAt', () {
+    var list = <int>[0, 1, 2, 3, 4];
+    var result = E(list).elementAt(3);
+    expect(result, equals(3));
+
+    var result2 = () => E(list).elementAt(6);
+    expect(result2, throwsA(isA<RangeError>()));
+  });
+
+  test('Iterable - every', () {
+    var list = [2, 4, 6, 8];
+    var result = E(list).every((x) => x.isEven);
+    expect(result, isTrue);
+
+    var list2 = [2, 4, 6, 7];
+    var result2 = E(list2).every((x) => x.isEven);
+    expect(result2, isFalse);
+  });
+
+  test('Iterable - expand', () {
+    final list = [1, 2, 3, 4, 5];
+    final result =
+        E(list).selectE((i) => [i * 2, i * 2 + 1]).expand((pair) => pair);
+    expect(result, orderedEquals([2, 3, 4, 5, 6, 7, 8, 9, 10, 11]));
+  });
+
+  test('Iterable - firstWhere', () {
+    var test = [0, 1, 2, 3];
+    var result = E(test).firstWhere((i) => i.isOdd);
+    expect(result, 1);
+  });
+
+  test('Iterable - fold', () {
+    var list = [0, 1, 2, 3, 4];
+    var result = E(list).fold(0, (a, b) => a + b);
+    expect(result, equals(10));
+
+    var list2 = ['a', 'b', 'c', 'd', 'e'];
+    var result2 = E(list2).fold('xyz', (a, b) => a + b);
+    expect(result2, equals('xyzabcde'));
+  });
+
+  test('Iterable - followedBy', () {
+    var list = [1, 2, 3];
+    var result = E(list).followedBy([4, 5, 6]);
+    expect(result, orderedEquals([1, 2, 3, 4, 5, 6]));
+  });
+
+  test('Iterable - forEach', () {
+    var list = [1, 2, 3, 4, 5];
+    var idx = 0;
+    E(list).forEach((i) {
+      expect(i, list[idx++]);
+    });
+    expect(idx, 5);
+  });
+
+  test('Iterable - join', () {
+    var list = [1, 2, 3, 4, 5];
+    var result = E(list).join('-');
+    expect(result, '1-2-3-4-5');
+  });
+
+  test('Iterable - lastWhere', () {
+    var test = [0, 1, 2, 3];
+    var result = E(test).lastWhere((i) => i.isOdd);
+    expect(result, 3);
+  });
+
+  test('Iterable - map', () {
+    final input = ['a', 'b', 'c', 'd', 'e'];
+    final output = E(input).map((c) => c.codeUnits[0]);
+    expect(output, orderedEquals([97, 98, 99, 100, 101]));
+  });
+
+  test('Iterable - reduce', () {
+    var list = [0, 1, 2, 3, 4];
+    var result = E(list).reduce((a, b) => a + b);
+    expect(result, equals(10));
+
+    var list2 = ['a', 'b', 'c', 'd', 'e'];
+    var result2 = E(list2).reduce((a, b) => a + b);
+    expect(result2, equals('abcde'));
+  });
+
+  test('Iterable - singleWhere', () {
+    final input = [0, 1, 2, 3, 4];
+    final output = E(input).singleWhere((x) => x == 2);
+    expect(output, equals(2));
+
+    final input2 = [0, 1, 2, 3, 4, 2];
+    final output2 = () => E(input2).singleWhere((x) => x == 2);
+    expect(output2, throwsA(isA<StateError>()));
+
+    final input3 = [];
+    final output3 = () => E(input3).singleWhere((x) => x == 2);
+    expect(output3, throwsA(isA<StateError>()));
+  });
+
+  test('Iterable - skip', () {
+    final input = [0, 1, 2, 3, 4, 5];
+    final output = E(input).skip(3);
+    expect(output, orderedEquals([3, 4, 5]));
+  });
+
+  test('Iterable - skipWhile', () {
+    final input = [0, 1, 2, 3, 4, 5];
+    final output = E(input).skipWhile((x) => x < 3);
+    expect(output, orderedEquals([3, 4, 5]));
+  });
+
+  test('Iterable - take', () {
+    final input = [0, 1, 2, 3, 4, 5];
+    final output = E(input).take(3);
+    expect(output, orderedEquals([0, 1, 2]));
+  });
+
+  test('Iterable - takeWhile', () {
+    final input = [0, 1, 2, 3, 4, 5];
+    final output = E(input).takeWhile((x) => x < 3);
+    expect(output, orderedEquals([0, 1, 2]));
+  });
+
+  test('Iterable - toList', () {
+    final input = [1, 2, 3, 4, 5];
+    expect(input, isA<List<int>>());
+
+    final e = E(input);
+    expect(e, isA<ValueEnumerable<int>>());
+
+    final result = e.toList();
+    expect(result, isA<List<int>>());
+    expect(result, orderedEquals([1, 2, 3, 4, 5]));
+  });
+
+  test('Iterable - toSet', () {
+    final input = [1, 2, 3, 2, 3];
+    expect(input, isA<List<int>>());
+
+    final result = E(input).toSet();
+    expect(result, isA<Set<int>>());
+    expect(result, equals(Set.of([1, 2, 3])));
+  });
+
+  test('Iterable - toString', () {
+    final input = [1, 2, 3, 4, 5];
+    final result = E(input).toString();
+    expect(result, '(1, 2, 3, 4, 5)');
+  });
+
+  test('Iterable - where', () {
+    final input = [0, 1, 2, 3, 4, 5];
+    final output = E(input).where((x) => x.isEven);
+    expect(output, orderedEquals([0, 2, 4]));
+  });
+
+  test('Iterable - whereType', () {
+    var test = [0, 1.0, 2, 3.0];
+    var e = E(test);
+    expect(e, isA<ValueEnumerable<num>>());
+
+    var result = e.whereType<int>();
+    expect(result, orderedEquals([0, 2]));
+  });
+
+  // ===========================================================================
+
+  test('EqualityComparer', () {
+    final barley = Pet()
+      ..name = 'Barley'
+      ..age = 8;
+    final boots = Pet()
+      ..name = 'Boots'
+      ..age = 4;
+    final whiskers = Pet()
+      ..name = 'Whiskers'
+      ..age = 1;
+    final daisy = Pet()
+      ..name = 'Daisy'
+      ..age = 4;
+
+    final pets = [whiskers, barley, daisy, boots];
+
+    final results = E(pets).orderByE((p) => p);
+    expect(results, orderedEquals([whiskers, barley, daisy, boots]));
+
+    EqualityComparer.registerEqualityComparer(EqualityComparer<Pet>(
+      comparer: (left, right) => left.name == right.name,
+      hasher: (value) => value.name.hashCode,
+      sorter: (left, right) => left.name.compareTo(right.name),
+    ));
+
+    expect(results, orderedEquals([barley, boots, daisy, whiskers]));
+
+    EqualityComparer.unregisterEqualityComparer<Pet>();
+
+    expect(results, orderedEquals([whiskers, barley, daisy, boots]));
   });
 }
 

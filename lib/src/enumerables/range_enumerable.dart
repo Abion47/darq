@@ -5,7 +5,7 @@ class RangeEnumerable extends Enumerable<int> {
   final int count;
   final int increment;
 
-  RangeEnumerable(this.start, this.count, this.increment);
+  const RangeEnumerable(this.start, this.count, this.increment);
 
   @override
   Iterator<int> get iterator => iterate().iterator;

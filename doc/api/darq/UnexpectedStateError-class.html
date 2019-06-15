@@ -78,13 +78,10 @@
     
       <li class="section-title"><a href="darq/darq-library.html#exceptions">Exceptions</a></li>
       <li><a href="darq/ConversionError-class.html">ConversionError</a></li>
-      <li><a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a></li>
-      <li><a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a></li>
+      <li><a href="darq/EnumerableError-class.html">EnumerableError</a></li>
       <li><a href="darq/IncompatibleTypeError-class.html">IncompatibleTypeError</a></li>
       <li><a href="darq/IntegerOverflowError-class.html">IntegerOverflowError</a></li>
       <li><a href="darq/KeyExistsError-class.html">KeyExistsError</a></li>
-      <li><a href="darq/NullEnumerableError-class.html">NullEnumerableError</a></li>
-      <li><a href="darq/OperationError-class.html">OperationError</a></li>
       <li><a href="darq/UnexpectedStateError-class.html">UnexpectedStateError</a></li>
     </ol>
   </div>
@@ -99,6 +96,7 @@
         <dd><ul class="gt-separated dark clazz-relationships">
           <li>Object</li>
           <li>Error</li>
+          <li>StateError</li>
           <li>UnexpectedStateError</li>
         </ul></dd>
 
@@ -133,6 +131,14 @@
           The hash code for this object. <a href="darq/UnexpectedStateError/hashCode.html">[...]</a>
                   <div class="features">read-only, inherited</div>
 </dd>
+        <dt id="message" class="property inherited">
+          <span class="name"><a href="darq/UnexpectedStateError/message.html">message</a></span>
+          <span class="signature">&#8594; String</span>         
+        </dt>
+        <dd class="inherited">
+          
+                  <div class="features">final, inherited</div>
+</dd>
         <dt id="runtimeType" class="property inherited">
           <span class="name"><a href="darq/UnexpectedStateError/runtimeType.html">runtimeType</a></span>
           <span class="signature">&#8594; Type</span>         
@@ -152,18 +158,9 @@
       </dl>
     </section>
 
-    <section class="summary offset-anchor" id="instance-methods">
+    <section class="summary offset-anchor inherited" id="instance-methods">
       <h2>Methods</h2>
       <dl class="callables">
-        <dt id="toString" class="callable">
-          <span class="name"><a href="darq/UnexpectedStateError/toString.html">toString</a></span><span class="signature">(<wbr>)
-            <span class="returntype parameter">&#8594; String</span>
-          </span>
-                  </dt>
-        <dd>
-          Returns a string representation of this object.
-                  <div class="features">override</div>
-</dd>
         <dt id="noSuchMethod" class="callable inherited">
           <span class="name"><a href="darq/UnexpectedStateError/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
             <span class="returntype parameter">&#8594; dynamic</span>
@@ -171,6 +168,15 @@
                   </dt>
         <dd class="inherited">
           Invoked when a non-existent method or property is accessed. <a href="darq/UnexpectedStateError/noSuchMethod.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="toString" class="callable inherited">
+          <span class="name"><a href="darq/UnexpectedStateError/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns a string representation of this object.
                   <div class="features">inherited</div>
 </dd>
       </dl>
@@ -205,12 +211,13 @@
         <a href="darq/UnexpectedStateError-class.html#instance-properties">Properties</a>
       </li>
       <li class="inherited"><a href="darq/UnexpectedStateError/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="darq/UnexpectedStateError/message.html">message</a></li>
       <li class="inherited"><a href="darq/UnexpectedStateError/runtimeType.html">runtimeType</a></li>
       <li class="inherited"><a href="darq/UnexpectedStateError/stackTrace.html">stackTrace</a></li>
     
-      <li class="section-title"><a href="darq/UnexpectedStateError-class.html#instance-methods">Methods</a></li>
-      <li><a href="darq/UnexpectedStateError/toString.html">toString</a></li>
+      <li class="section-title inherited"><a href="darq/UnexpectedStateError-class.html#instance-methods">Methods</a></li>
       <li class="inherited"><a href="darq/UnexpectedStateError/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="darq/UnexpectedStateError/toString.html">toString</a></li>
     
       <li class="section-title inherited"><a href="darq/UnexpectedStateError-class.html#operators">Operators</a></li>
       <li class="inherited"><a href="darq/UnexpectedStateError/operator_equals.html">operator ==</a></li>

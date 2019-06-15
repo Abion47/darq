@@ -193,7 +193,7 @@ enumerable.</p>
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Enumerable&lt;Grouping&lt;TKey, T&gt;&gt; groupByE&lt;TKey&gt;(Selector&lt;T, TKey&gt; keySelector,
     {EqualityComparer&lt;TKey&gt; keyComparer}) {
-  assert(keySelector != null);
+  ArgumentError.checkNotNull(keySelector);
   return GroupByEnumerable&lt;T, TKey&gt;(this, keySelector, keyComparer);
 }</code></pre>
     </section>

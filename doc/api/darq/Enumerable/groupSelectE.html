@@ -194,7 +194,8 @@ the <a href="darq/EqualityComparer-class.html">EqualityComparer</a> need be supp
       <pre class="language-dart"><code class="language-dart">Enumerable&lt;TResult&gt; groupSelectE&lt;TKey, TResult&gt;(Selector&lt;T, TKey&gt; keySelector,
     GroupSelector&lt;TKey, Iterable&lt;T&gt;, TResult&gt; resultSelector,
     {EqualityComparer&lt;TKey&gt; keyComparer}) {
-  assert(keySelector != null &amp;&amp; resultSelector != null);
+  ArgumentError.checkNotNull(keySelector);
+  ArgumentError.checkNotNull(resultSelector);
   return GroupSelectEnumerable&lt;T, TKey, TResult&gt;(
       this, keySelector, resultSelector, keyComparer);
 }</code></pre>

@@ -9,6 +9,7 @@ class ComparableSet<TValue> {
   EqualityComparer<TValue> comparer;
 
   ComparableSet([this.comparer]) {
+    if (comparer == null) comparer = EqualityComparer.forType<TValue>();
     buckets = List<int>.filled(7, 0, growable: false);
     slots = List<_Slot>.generate(7, (_) => _Slot(), growable: false);
     count = 0;

@@ -3,21 +3,20 @@ import '../enumerable_with_source.dart';
 import '../typedefs.dart';
 
 class GeneratedEnumerable<T> extends Enumerable<T>
-    with EnumerableWithSource<T> {
+    implements EnumerableWithSource<T> {
   final int count;
   final Generator<T> generator;
+  final List<T> _cache;
 
-  GeneratedEnumerable(this.count, this.generator);
+  const GeneratedEnumerable(this.count, this.generator, [this._cache]);
 
-  Iterable<T> _buffer;
+  factory GeneratedEnumerable.withCache(int count, Generator<T> generator) {
+    final buffer = List<T>.generate(count, generator);
+    return GeneratedEnumerable(count, generator, buffer);
+  }
 
   @override
-  Iterable<T> get source {
-    if (_buffer == null) {
-      _buffer = List<T>.generate(count, generator);
-    }
-    return _buffer;
-  }
+  Iterable<T> get source => _cache ?? Iterable<T>.generate(count, generator);
 
   @override
   Iterator<T> get iterator => source.iterator;

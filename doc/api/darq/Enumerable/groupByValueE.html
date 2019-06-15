@@ -196,7 +196,8 @@ enumerable.</p>
       <pre class="language-dart"><code class="language-dart">Enumerable&lt;Grouping&lt;TKey, TValue&gt;&gt; groupByValueE&lt;TKey, TValue&gt;(
     Selector&lt;T, TKey&gt; keySelector, Selector&lt;T, TValue&gt; valueSelector,
     {EqualityComparer&lt;TKey&gt; keyComparer}) {
-  assert(keySelector != null &amp;&amp; valueSelector != null);
+  ArgumentError.checkNotNull(keySelector);
+  ArgumentError.checkNotNull(valueSelector);
   return GroupByValueEnumerable&lt;T, TKey, TValue&gt;(
       this, keySelector, valueSelector, keyComparer);
 }</code></pre>

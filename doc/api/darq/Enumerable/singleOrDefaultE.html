@@ -176,7 +176,7 @@
 <p>If <code>condition</code> is omitted, <a href="darq/Enumerable/singleOrDefaultE.html">singleOrDefaultE</a> will return the single value
 in this enumerable. If the enumerable is empty, the value specified by
 <code>defaultValue</code> is returned instead. If the enumerable contains more than
-one element, an <a href="darq/OperationError-class.html">OperationError</a> is thrown.</p>
+one element, an <code>OperationError</code> is thrown.</p>
 <p>In this scenario, the <a href="darq/Enumerable/singleOrDefaultE.html">singleOrDefaultE</a> function will short-circuit after
 iterating a maximum of two elements into the enumerable.</p>
 <p>If <code>condition</code> is supplied, <a href="darq/Enumerable/singleOrDefaultE.html">singleOrDefaultE</a> will iterate over the entire
@@ -184,7 +184,7 @@ enumerable, applying the <code>condition</code> function to each element. At the
 of the iteration, if a single element matches the <code>condition</code>, that element
 is returned. If no elements match the <code>condition</code>, the value specified by
 <code>defaultValue</code> is returned instead. If more than one element matches the
-<code>condition</code>, an <a href="darq/OperationError-class.html">OperationError</a> is thrown.</p>
+<code>condition</code>, an <code>OperationError</code> is thrown.</p>
 <p>In this scenario, the <a href="darq/Enumerable/singleOrDefaultE.html">singleOrDefaultE</a> function will short-circuit after
 finding a second element that matches the <code>condition</code>. In the worst-case
 scenario, <a href="darq/Enumerable/singleOrDefaultE.html">singleOrDefaultE</a> will iterate over the entire enumerable.</p>
@@ -204,8 +204,7 @@ scenario, <a href="darq/Enumerable/singleOrDefaultE.html">singleOrDefaultE</a> w
     do {
       if (condition(_iterator.current)) {
         if (valueSet) {
-          throw OperationError(
-              &#39;More than one element matches the condition.&#39;);
+          throw EnumerableError.ambiguousMatch();
         }
 
         value = _iterator.current;
@@ -220,7 +219,7 @@ scenario, <a href="darq/Enumerable/singleOrDefaultE.html">singleOrDefaultE</a> w
 
   do {
     if (valueSet) {
-      throw OperationError(&#39;More than one element exists in the enumerable.&#39;);
+      throw EnumerableError.tooMany();
     }
 
     value = _iterator.current;

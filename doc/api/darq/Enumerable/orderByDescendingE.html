@@ -191,7 +191,7 @@ enumerable will be unchanged.</p>
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Enumerable&lt;T&gt; orderByDescendingE&lt;TKey&gt;(Selector&lt;T, TKey&gt; keySelector,
     {EqualityComparer&lt;TKey&gt; keyComparer}) {
-  assert(keySelector != null);
+  ArgumentError.checkNotNull(keySelector);
   return InternalOrderedEnumerable(this, keySelector, keyComparer, true);
 }</code></pre>
     </section>

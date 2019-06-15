@@ -60,12 +60,13 @@
         <a href="darq/UnexpectedStateError-class.html#instance-properties">Properties</a>
       </li>
       <li class="inherited"><a href="darq/UnexpectedStateError/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="darq/UnexpectedStateError/message.html">message</a></li>
       <li class="inherited"><a href="darq/UnexpectedStateError/runtimeType.html">runtimeType</a></li>
       <li class="inherited"><a href="darq/UnexpectedStateError/stackTrace.html">stackTrace</a></li>
     
-      <li class="section-title"><a href="darq/UnexpectedStateError-class.html#instance-methods">Methods</a></li>
-      <li><a href="darq/UnexpectedStateError/toString.html">toString</a></li>
+      <li class="section-title inherited"><a href="darq/UnexpectedStateError-class.html#instance-methods">Methods</a></li>
       <li class="inherited"><a href="darq/UnexpectedStateError/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="darq/UnexpectedStateError/toString.html">toString</a></li>
     
       <li class="section-title inherited"><a href="darq/UnexpectedStateError-class.html#operators">Operators</a></li>
       <li class="inherited"><a href="darq/UnexpectedStateError/operator_equals.html">operator ==</a></li>
@@ -76,18 +77,14 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-method">toString</span> method</h1></div>
+      <div>  <div id="external-links" class="btn-group"><a title="View source code" class="source-link" href="https://github.com/dart-lang/sdk/blob/3f2d646132b55b152cff4ba7090cbeebdd48d477/sdk/lib/core/errors.dart#L533"><i class="material-icons">description</i></a></div>
+<h1><span class="kind-method">toString</span> method</h1></div>
 
     <section class="multi-line-signature">
-      <div>
-        <ol class="annotation-list">
-          <li>@override</li>
-        </ol>
-      </div>
       <span class="returntype">String</span>
             <span class="name ">toString</span>
 (<wbr>)
-      <div class="features">override</div>
+      <div class="features">inherited</div>
     </section>
     <section class="desc markdown">
       <p>Returns a string representation of this object.</p>
@@ -95,9 +92,7 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">@override
-String toString() =&gt;
-    &#39;Code execution has entered a state that should not have been possible.&#39;;</code></pre>
+      <pre class="language-dart"><code class="language-dart">String toString() =&gt; &quot;Bad state: $message&quot;;</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

@@ -75,6 +75,8 @@
     
       <li class="section-title"><a href="darq/EqualityComparer-class.html#static-methods">Static methods</a></li>
       <li><a href="darq/EqualityComparer/forType.html">forType</a></li>
+      <li><a href="darq/EqualityComparer/registerEqualityComparer.html">registerEqualityComparer</a></li>
+      <li><a href="darq/EqualityComparer/unregisterEqualityComparer.html">unregisterEqualityComparer</a></li>
     
     </ol>
   </div><!--/.sidebar-offcanvas-->
@@ -88,14 +90,26 @@
 &lt;<wbr><span class="type-parameter">T</span>&gt;(<wbr>)
       
     </section>
+    <section class="desc markdown">
+      <p>Returns the default <a href="darq/EqualityComparer-class.html">EqualityComparer</a> that has been registered for type
+<code>T</code>.</p>
+<p>The returned <a href="darq/EqualityComparer-class.html">EqualityComparer</a> will be the type registered to <code>T</code> for use
+as the comparer when the <code>comparer</code> parameter in various LINQ methods is
+omitted. The <a href="darq/EqualityComparer-class.html">EqualityComparer</a> will be one of the built-in default comparers
+(for <code>dynamic</code>, <code>num</code>, <code>int</code>, <code>double</code>, <code>String</code>, <code>Duration</code>, or <code>BigInt</code>)
+or will be a comparer that has been registered via a call to
+<code>EqualityComparer.addDefaultEqualityComparer</code>.</p>
+<p>If no registered comparer can be found, this method will return a new instance
+of <a href="darq/EqualityComparer-class.html">EqualityComparer</a> as if <code>EqualityComparer&lt;T&gt;()</code> was called instead.</p>
+    </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">static EqualityComparer&lt;T&gt; forType&lt;T&gt;() =&gt; EqualityComparer&lt;T&gt;(
-      comparer: null,
-      hasher: null,
-      sorter: null,
-    );</code></pre>
+      <pre class="language-dart"><code class="language-dart">static EqualityComparer&lt;T&gt; forType&lt;T&gt;() {
+  final equalityComparer = _registeredEqualityComparers[T];
+  if (equalityComparer == null) return EqualityComparer&lt;T&gt;();
+  return equalityComparer;
+}</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

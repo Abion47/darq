@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the stackTrace property from the IncompatibleTypeError class, for the Dart programming language.">
-  <title>stackTrace property - IncompatibleTypeError class - darq library - Dart API</title>
+  <meta name="description" content="API docs for the checkValidTypeOrParam method from the IncompatibleTypeError class, for the Dart programming language.">
+  <title>checkValidTypeOrParam method - IncompatibleTypeError class - darq library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="../..">
 
@@ -27,9 +27,9 @@
     <li><a href="index.html">darq</a></li>
     <li><a href="darq/darq-library.html">darq</a></li>
     <li><a href="darq/IncompatibleTypeError-class.html">IncompatibleTypeError</a></li>
-    <li class="self-crumb">stackTrace property</li>
+    <li class="self-crumb">checkValidTypeOrParam method</li>
   </ol>
-  <div class="self-name">stackTrace</div>
+  <div class="self-name">checkValidTypeOrParam</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -48,7 +48,7 @@
       <li><a href="index.html">darq</a></li>
       <li><a href="darq/darq-library.html">darq</a></li>
       <li><a href="darq/IncompatibleTypeError-class.html">IncompatibleTypeError</a></li>
-      <li class="self-crumb">stackTrace property</li>
+      <li class="self-crumb">checkValidTypeOrParam method</li>
     </ol>
     
     <h5>IncompatibleTypeError class</h5>
@@ -82,24 +82,25 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div>  <div id="external-links" class="btn-group"><a title="View source code" class="source-link" href="https://github.com/dart-lang/sdk/blob/3f2d646132b55b152cff4ba7090cbeebdd48d477/sdk/lib/core/errors.dart#L1"><i class="material-icons">description</i></a></div>
-<h1><span class="kind-property">stackTrace</span> property</h1></div>
+      <div><h1><span class="kind-method">checkValidTypeOrParam</span> method</h1></div>
 
+    <section class="multi-line-signature">
+      <span class="returntype">void</span>
+            <span class="name ">checkValidTypeOrParam</span>
+(<wbr><span class="parameter" id="checkValidTypeOrParam-param-t"><span class="type-annotation">Type</span> <span class="parameter-name">t</span>, </span> <span class="parameter" id="checkValidTypeOrParam-param-validTypes"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">Type</span>&gt;</span></span> <span class="parameter-name">validTypes</span>, </span> <span class="parameter" id="checkValidTypeOrParam-param-param"><span class="type-annotation">dynamic</span> <span class="parameter-name">param</span></span>)
+      
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">static void checkValidTypeOrParam(
+    Type t, Iterable&lt;Type&gt; validTypes, dynamic param) {
+  if (param != null) return;
+  if (validTypes.contains(t)) return;
+  throw IncompatibleTypeError(t, validTypes);
+}</code></pre>
+    </section>
 
-        <section id="getter">
-        
-        <section class="multi-line-signature">
-          <span class="returntype">StackTrace</span>
-                  <span class="name ">stackTrace</span>
-          <div class="features">inherited</div>
-</section>
-        
-                        <section class="summary source-code" id="source">
-          <h2><span>Implementation</span></h2>
-          <pre class="language-dart"><code class="language-dart">external StackTrace get stackTrace;</code></pre>
-        </section>
-</section>
-        
   </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">

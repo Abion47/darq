@@ -7,16 +7,14 @@ import '../enumerable_with_source.dart';
 
 class GroupByValueEnumerable<TSource, TKey, TValue>
     extends Enumerable<Grouping<TKey, TValue>>
-    with EnumerableWithSource<TSource> {
+    implements EnumerableWithSource<TSource> {
+  final Enumerable<TSource> source;
   final Selector<TSource, TKey> keySelector;
   final Selector<TSource, TValue> valueSelector;
   final EqualityComparer<TKey> keyComparer;
 
-  GroupByValueEnumerable(Enumerable<TSource> source, this.keySelector,
-      this.valueSelector, EqualityComparer<TKey> keyComparer)
-      : this.keyComparer = keyComparer ?? EqualityComparer.forType<TKey>() {
-    this.src = source;
-  }
+  const GroupByValueEnumerable(
+      this.source, this.keySelector, this.valueSelector, this.keyComparer);
 
   @override
   Iterator<Grouping<TKey, TValue>> get iterator {

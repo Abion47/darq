@@ -78,13 +78,10 @@
     
       <li class="section-title"><a href="darq/darq-library.html#exceptions">Exceptions</a></li>
       <li><a href="darq/ConversionError-class.html">ConversionError</a></li>
-      <li><a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a></li>
-      <li><a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a></li>
+      <li><a href="darq/EnumerableError-class.html">EnumerableError</a></li>
       <li><a href="darq/IncompatibleTypeError-class.html">IncompatibleTypeError</a></li>
       <li><a href="darq/IntegerOverflowError-class.html">IntegerOverflowError</a></li>
       <li><a href="darq/KeyExistsError-class.html">KeyExistsError</a></li>
-      <li><a href="darq/NullEnumerableError-class.html">NullEnumerableError</a></li>
-      <li><a href="darq/OperationError-class.html">OperationError</a></li>
       <li><a href="darq/UnexpectedStateError-class.html">UnexpectedStateError</a></li>
     </ol>
   </div>
@@ -99,6 +96,8 @@
         <dd><ul class="gt-separated dark clazz-relationships">
           <li>Object</li>
           <li>Error</li>
+          <li>AssertionError</li>
+          <li>TypeError</li>
           <li>IncompatibleTypeError</li>
         </ul></dd>
 
@@ -113,7 +112,7 @@
 
       <dl class="constructor-summary-list">
         <dt id="IncompatibleTypeError" class="callable">
-          <span class="name"><a href="darq/IncompatibleTypeError/IncompatibleTypeError.html">IncompatibleTypeError</a></span><span class="signature">(<span class="parameter" id="-param-allowedTypes"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">Type</span>&gt;</span></span> <span class="parameter-name">allowedTypes</span></span>)</span>
+          <span class="name"><a href="darq/IncompatibleTypeError/IncompatibleTypeError.html">IncompatibleTypeError</a></span><span class="signature">(<span class="parameter" id="-param-t"><span class="type-annotation">Type</span> <span class="parameter-name">t</span>, </span> <span class="parameter" id="-param-allowedTypes"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">Type</span>&gt;</span></span> <span class="parameter-name">allowedTypes</span></span>)</span>
         </dt>
         <dd>
           
@@ -133,6 +132,14 @@
           
                   <div class="features">final</div>
 </dd>
+        <dt id="t" class="property">
+          <span class="name"><a href="darq/IncompatibleTypeError/t.html">t</a></span>
+          <span class="signature">&#8594; Type</span>         
+        </dt>
+        <dd>
+          
+                  <div class="features">final</div>
+</dd>
         <dt id="hashCode" class="property inherited">
           <span class="name"><a href="darq/IncompatibleTypeError/hashCode.html">hashCode</a></span>
           <span class="signature">&#8594; int</span>         
@@ -140,6 +147,14 @@
         <dd class="inherited">
           The hash code for this object. <a href="darq/IncompatibleTypeError/hashCode.html">[...]</a>
                   <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="message" class="property inherited">
+          <span class="name"><a href="darq/IncompatibleTypeError/message.html">message</a></span>
+          <span class="signature">&#8594; Object</span>         
+        </dt>
+        <dd class="inherited">
+          Message describing the assertion error.
+                  <div class="features">final, inherited</div>
 </dd>
         <dt id="runtimeType" class="property inherited">
           <span class="name"><a href="darq/IncompatibleTypeError/runtimeType.html">runtimeType</a></span>
@@ -200,6 +215,29 @@
     </section>
 
 
+    <section class="summary offset-anchor" id="static-methods">
+      <h2>Static Methods</h2>
+      <dl class="callables">
+        <dt id="checkValidType" class="callable">
+          <span class="name"><a href="darq/IncompatibleTypeError/checkValidType.html">checkValidType</a></span><span class="signature">(<wbr><span class="parameter" id="checkValidType-param-t"><span class="type-annotation">Type</span> <span class="parameter-name">t</span>, </span> <span class="parameter" id="checkValidType-param-validTypes"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">Type</span>&gt;</span></span> <span class="parameter-name">validTypes</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          
+                  
+</dd>
+        <dt id="checkValidTypeOrParam" class="callable">
+          <span class="name"><a href="darq/IncompatibleTypeError/checkValidTypeOrParam.html">checkValidTypeOrParam</a></span><span class="signature">(<wbr><span class="parameter" id="checkValidTypeOrParam-param-t"><span class="type-annotation">Type</span> <span class="parameter-name">t</span>, </span> <span class="parameter" id="checkValidTypeOrParam-param-validTypes"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">Type</span>&gt;</span></span> <span class="parameter-name">validTypes</span>, </span> <span class="parameter" id="checkValidTypeOrParam-param-param"><span class="type-annotation">dynamic</span> <span class="parameter-name">param</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+                  </dt>
+        <dd>
+          
+                  
+</dd>
+      </dl>
+    </section>
 
 
   </div> <!-- /.main-content -->
@@ -213,7 +251,9 @@
         <a href="darq/IncompatibleTypeError-class.html#instance-properties">Properties</a>
       </li>
       <li><a href="darq/IncompatibleTypeError/allowedTypes.html">allowedTypes</a></li>
+      <li><a href="darq/IncompatibleTypeError/t.html">t</a></li>
       <li class="inherited"><a href="darq/IncompatibleTypeError/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="darq/IncompatibleTypeError/message.html">message</a></li>
       <li class="inherited"><a href="darq/IncompatibleTypeError/runtimeType.html">runtimeType</a></li>
       <li class="inherited"><a href="darq/IncompatibleTypeError/stackTrace.html">stackTrace</a></li>
     
@@ -225,6 +265,9 @@
       <li class="inherited"><a href="darq/IncompatibleTypeError/operator_equals.html">operator ==</a></li>
     
     
+      <li class="section-title"><a href="darq/IncompatibleTypeError-class.html#static-methods">Static methods</a></li>
+      <li><a href="darq/IncompatibleTypeError/checkValidType.html">checkValidType</a></li>
+      <li><a href="darq/IncompatibleTypeError/checkValidTypeOrParam.html">checkValidTypeOrParam</a></li>
     
     </ol>
   </div><!--/.sidebar-offcanvas-->

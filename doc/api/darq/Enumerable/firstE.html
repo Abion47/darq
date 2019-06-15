@@ -176,9 +176,9 @@ specified condition.</p>
 <p>Begins iteration of the enumerable, but then returns the first element
 found that matches the specified <code>condition</code>. If <code>condition</code> is omitted,
 <a href="darq/Enumerable/firstE.html">firstE</a> will return the first element of the enumerable.</p>
-<p>If the enumerable is empty, an <a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a> will be thrown. If
+<p>If the enumerable is empty, an <code>EmptyEnumerableError</code> will be thrown. If
 <code>condition</code> is provided but iteration reaches the end of the enumerable
-before an element is found, an <a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a> will be thrown.</p>
+before an element is found, an <code>ElementNotFoundError</code> will be thrown.</p>
 <p>If <code>condition</code> is provided, the <a href="darq/Enumerable/firstE.html">firstE</a> method short-circuits the first
 time <code>condition</code> returns <code>true</code> and will not iterate further over the
 enumerable. In the worst case, it will iterate over the entire enumerable.</p>
@@ -191,14 +191,14 @@ regardless of iteration length.</p>
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">T firstE({Condition&lt;T&gt; condition}) {
   final iterator = this.iterator;
-  if (!iterator.moveNext()) throw EmptyEnumerableError();
+  if (!iterator.moveNext()) throw EnumerableError.isEmpty();
   if (condition == null) return iterator.current;
 
   do {
     if (condition(iterator.current)) return iterator.current;
   } while (iterator.moveNext());
 
-  throw ElementNotFoundError();
+  throw EnumerableError.elementNotFound();
 }</code></pre>
     </section>
 

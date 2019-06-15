@@ -176,9 +176,9 @@ specified condition.</p>
 <p>Iterates through the enumerable a returns the last element found that
 matches the specified <code>condition</code>. If <code>condition</code> is omitted, <a href="darq/Enumerable/lastE.html">lastE</a> will
 return the last element of the enumerable.</p>
-<p>If the enumerable is empty, an <a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a> will be thrown. If
+<p>If the enumerable is empty, an <code>EmptyEnumerableError</code> will be thrown. If
 <code>condition</code> is provided but iteration reaches the end of the enumerable
-before an element is found, an <a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a> will be thrown.</p>
+before an element is found, an <code>ElementNotFoundError</code> will be thrown.</p>
 <p>The <a href="darq/Enumerable/lastE.html">lastE</a> method will always iterate through the entire enumerable.</p>
     </section>
     
@@ -186,7 +186,7 @@ before an element is found, an <a href="darq/ElementNotFoundError-class.html">El
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">T lastE({Condition&lt;T&gt; condition}) {
   final iterator = this.iterator;
-  if (!iterator.moveNext()) throw EmptyEnumerableError();
+  if (!iterator.moveNext()) throw EnumerableError.isEmpty();
 
   T value;
   bool valueFound = false;
@@ -199,7 +199,7 @@ before an element is found, an <a href="darq/ElementNotFoundError-class.html">El
 
   if (valueFound) return value;
 
-  throw ElementNotFoundError();
+  throw EnumerableError.elementNotFound();
 }</code></pre>
     </section>
 

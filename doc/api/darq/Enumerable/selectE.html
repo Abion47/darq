@@ -180,8 +180,7 @@ resulting enumerable.</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Enumerable&lt;TResult&gt; selectE&lt;TResult&gt;(Selector&lt;T, TResult&gt; selector) {
-  assert(selector != null);
-
+  ArgumentError.checkNotNull(selector);
   return SelectEnumerable&lt;T, TResult&gt;(this, selector);
 }</code></pre>
     </section>

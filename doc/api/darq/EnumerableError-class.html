@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the NullEnumerableError class from the darq library, for the Dart programming language.">
-  <title>NullEnumerableError class - darq library - Dart API</title>
+  <meta name="description" content="API docs for the EnumerableError class from the darq library, for the Dart programming language.">
+  <title>EnumerableError class - darq library - Dart API</title>
   <!-- required because all the links are pseudo-absolute -->
   <base href="..">
 
@@ -26,9 +26,9 @@
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="index.html">darq</a></li>
     <li><a href="darq/darq-library.html">darq</a></li>
-    <li class="self-crumb">NullEnumerableError class</li>
+    <li class="self-crumb">EnumerableError class</li>
   </ol>
-  <div class="self-name">NullEnumerableError</div>
+  <div class="self-name">EnumerableError</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -46,7 +46,7 @@
     <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
       <li><a href="index.html">darq</a></li>
       <li><a href="darq/darq-library.html">darq</a></li>
-      <li class="self-crumb">NullEnumerableError class</li>
+      <li class="self-crumb">EnumerableError class</li>
     </ol>
     
     <h5>darq library</h5>
@@ -78,19 +78,16 @@
     
       <li class="section-title"><a href="darq/darq-library.html#exceptions">Exceptions</a></li>
       <li><a href="darq/ConversionError-class.html">ConversionError</a></li>
-      <li><a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a></li>
-      <li><a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a></li>
+      <li><a href="darq/EnumerableError-class.html">EnumerableError</a></li>
       <li><a href="darq/IncompatibleTypeError-class.html">IncompatibleTypeError</a></li>
       <li><a href="darq/IntegerOverflowError-class.html">IntegerOverflowError</a></li>
       <li><a href="darq/KeyExistsError-class.html">KeyExistsError</a></li>
-      <li><a href="darq/NullEnumerableError-class.html">NullEnumerableError</a></li>
-      <li><a href="darq/OperationError-class.html">OperationError</a></li>
       <li><a href="darq/UnexpectedStateError-class.html">UnexpectedStateError</a></li>
     </ol>
   </div>
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-class">NullEnumerableError</span> class </h1></div>
+      <div><h1><span class="kind-class">EnumerableError</span> class </h1></div>
 
     
     <section>
@@ -99,7 +96,8 @@
         <dd><ul class="gt-separated dark clazz-relationships">
           <li>Object</li>
           <li>Error</li>
-          <li>NullEnumerableError</li>
+          <li>StateError</li>
+          <li>EnumerableError</li>
         </ul></dd>
 
 
@@ -112,8 +110,38 @@
       <h2>Constructors</h2>
 
       <dl class="constructor-summary-list">
-        <dt id="NullEnumerableError" class="callable">
-          <span class="name"><a href="darq/NullEnumerableError/NullEnumerableError.html">NullEnumerableError</a></span><span class="signature">()</span>
+        <dt id="EnumerableError" class="callable">
+          <span class="name"><a href="darq/EnumerableError/EnumerableError.html">EnumerableError</a></span><span class="signature">(<span class="parameter" id="-param-message"><span class="type-annotation">String</span> <span class="parameter-name">message</span></span>)</span>
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="EnumerableError.ambiguousMatch" class="callable">
+          <span class="name"><a href="darq/EnumerableError/EnumerableError.ambiguousMatch.html">EnumerableError.ambiguousMatch</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="EnumerableError.elementNotFound" class="callable">
+          <span class="name"><a href="darq/EnumerableError/EnumerableError.elementNotFound.html">EnumerableError.elementNotFound</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="EnumerableError.isEmpty" class="callable">
+          <span class="name"><a href="darq/EnumerableError/EnumerableError.isEmpty.html">EnumerableError.isEmpty</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="EnumerableError.isNull" class="callable">
+          <span class="name"><a href="darq/EnumerableError/EnumerableError.isNull.html">EnumerableError.isNull</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+        </dd>
+        <dt id="EnumerableError.tooMany" class="callable">
+          <span class="name"><a href="darq/EnumerableError/EnumerableError.tooMany.html">EnumerableError.tooMany</a></span><span class="signature">()</span>
         </dt>
         <dd>
           
@@ -126,15 +154,23 @@
 
       <dl class="properties">
         <dt id="hashCode" class="property inherited">
-          <span class="name"><a href="darq/NullEnumerableError/hashCode.html">hashCode</a></span>
+          <span class="name"><a href="darq/EnumerableError/hashCode.html">hashCode</a></span>
           <span class="signature">&#8594; int</span>         
         </dt>
         <dd class="inherited">
-          The hash code for this object. <a href="darq/NullEnumerableError/hashCode.html">[...]</a>
+          The hash code for this object. <a href="darq/EnumerableError/hashCode.html">[...]</a>
                   <div class="features">read-only, inherited</div>
 </dd>
+        <dt id="message" class="property inherited">
+          <span class="name"><a href="darq/EnumerableError/message.html">message</a></span>
+          <span class="signature">&#8594; String</span>         
+        </dt>
+        <dd class="inherited">
+          
+                  <div class="features">final, inherited</div>
+</dd>
         <dt id="runtimeType" class="property inherited">
-          <span class="name"><a href="darq/NullEnumerableError/runtimeType.html">runtimeType</a></span>
+          <span class="name"><a href="darq/EnumerableError/runtimeType.html">runtimeType</a></span>
           <span class="signature">&#8594; Type</span>         
         </dt>
         <dd class="inherited">
@@ -142,7 +178,7 @@
                   <div class="features">read-only, inherited</div>
 </dd>
         <dt id="stackTrace" class="property inherited">
-          <span class="name"><a href="darq/NullEnumerableError/stackTrace.html">stackTrace</a></span>
+          <span class="name"><a href="darq/EnumerableError/stackTrace.html">stackTrace</a></span>
           <span class="signature">&#8594; StackTrace</span>         
         </dt>
         <dd class="inherited">
@@ -152,25 +188,25 @@
       </dl>
     </section>
 
-    <section class="summary offset-anchor" id="instance-methods">
+    <section class="summary offset-anchor inherited" id="instance-methods">
       <h2>Methods</h2>
       <dl class="callables">
-        <dt id="toString" class="callable">
-          <span class="name"><a href="darq/NullEnumerableError/toString.html">toString</a></span><span class="signature">(<wbr>)
-            <span class="returntype parameter">&#8594; String</span>
-          </span>
-                  </dt>
-        <dd>
-          Returns a string representation of this object.
-                  <div class="features">override</div>
-</dd>
         <dt id="noSuchMethod" class="callable inherited">
-          <span class="name"><a href="darq/NullEnumerableError/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
+          <span class="name"><a href="darq/EnumerableError/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
             <span class="returntype parameter">&#8594; dynamic</span>
           </span>
                   </dt>
         <dd class="inherited">
-          Invoked when a non-existent method or property is accessed. <a href="darq/NullEnumerableError/noSuchMethod.html">[...]</a>
+          Invoked when a non-existent method or property is accessed. <a href="darq/EnumerableError/noSuchMethod.html">[...]</a>
+                  <div class="features">inherited</div>
+</dd>
+        <dt id="toString" class="callable inherited">
+          <span class="name"><a href="darq/EnumerableError/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+                  </dt>
+        <dd class="inherited">
+          Returns a string representation of this object.
                   <div class="features">inherited</div>
 </dd>
       </dl>
@@ -180,12 +216,12 @@
       <h2>Operators</h2>
       <dl class="callables">
         <dt id="operator ==" class="callable inherited">
-          <span class="name"><a href="darq/NullEnumerableError/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
+          <span class="name"><a href="darq/EnumerableError/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
             <span class="returntype parameter">&#8594; bool</span>
           </span>
                   </dt>
         <dd class="inherited">
-          The equality operator. <a href="darq/NullEnumerableError/operator_equals.html">[...]</a>
+          The equality operator. <a href="darq/EnumerableError/operator_equals.html">[...]</a>
                   <div class="features">inherited</div>
 </dd>
       </dl>
@@ -198,22 +234,28 @@
 
   <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
     <ol>
-      <li class="section-title"><a href="darq/NullEnumerableError-class.html#constructors">Constructors</a></li>
-      <li><a href="darq/NullEnumerableError/NullEnumerableError.html">NullEnumerableError</a></li>
+      <li class="section-title"><a href="darq/EnumerableError-class.html#constructors">Constructors</a></li>
+      <li><a href="darq/EnumerableError/EnumerableError.html">EnumerableError</a></li>
+      <li><a href="darq/EnumerableError/EnumerableError.ambiguousMatch.html">ambiguousMatch</a></li>
+      <li><a href="darq/EnumerableError/EnumerableError.elementNotFound.html">elementNotFound</a></li>
+      <li><a href="darq/EnumerableError/EnumerableError.isEmpty.html">isEmpty</a></li>
+      <li><a href="darq/EnumerableError/EnumerableError.isNull.html">isNull</a></li>
+      <li><a href="darq/EnumerableError/EnumerableError.tooMany.html">tooMany</a></li>
     
       <li class="section-title inherited">
-        <a href="darq/NullEnumerableError-class.html#instance-properties">Properties</a>
+        <a href="darq/EnumerableError-class.html#instance-properties">Properties</a>
       </li>
-      <li class="inherited"><a href="darq/NullEnumerableError/hashCode.html">hashCode</a></li>
-      <li class="inherited"><a href="darq/NullEnumerableError/runtimeType.html">runtimeType</a></li>
-      <li class="inherited"><a href="darq/NullEnumerableError/stackTrace.html">stackTrace</a></li>
+      <li class="inherited"><a href="darq/EnumerableError/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="darq/EnumerableError/message.html">message</a></li>
+      <li class="inherited"><a href="darq/EnumerableError/runtimeType.html">runtimeType</a></li>
+      <li class="inherited"><a href="darq/EnumerableError/stackTrace.html">stackTrace</a></li>
     
-      <li class="section-title"><a href="darq/NullEnumerableError-class.html#instance-methods">Methods</a></li>
-      <li><a href="darq/NullEnumerableError/toString.html">toString</a></li>
-      <li class="inherited"><a href="darq/NullEnumerableError/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="section-title inherited"><a href="darq/EnumerableError-class.html#instance-methods">Methods</a></li>
+      <li class="inherited"><a href="darq/EnumerableError/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="darq/EnumerableError/toString.html">toString</a></li>
     
-      <li class="section-title inherited"><a href="darq/NullEnumerableError-class.html#operators">Operators</a></li>
-      <li class="inherited"><a href="darq/NullEnumerableError/operator_equals.html">operator ==</a></li>
+      <li class="section-title inherited"><a href="darq/EnumerableError-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="darq/EnumerableError/operator_equals.html">operator ==</a></li>
     
     
     

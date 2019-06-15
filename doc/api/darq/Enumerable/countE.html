@@ -172,28 +172,25 @@
     </section>
     <section class="desc markdown">
       <p>Returns the number of elements in the enumerable.</p>
-<p>Iterates over the entire enumerable and returns the number of elements
-that were iterated over.</p>
 <p>Optionally, a <code>condition</code> can be specified. If so, the total count
 will be the number of elements for which the <code>condition</code> function
 returned <code>true</code>.</p>
-<p>The <a href="darq/Enumerable/countE.html">countE</a> function will iterate over every element in the enumerable.</p>
+<p>If the <code>condition</code> parameter is omitted and the underlying collection extends
+or implements <code>EfficientLengthIterable</code>, the <a href="darq/Enumerable/countE.html">countE</a> method will call the
+<code>length</code> property of the iterable as an O(1) operation. Otherwise, the
+<a href="darq/Enumerable/countE.html">countE</a> function will iterate over every element in the enumerable.</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">int countE([Condition&lt;T&gt; condition]) {
+  if (condition == null) return this.length;
   final iterator = this.iterator;
+  if (!iterator.moveNext()) return 0;
   int count = 0;
-  if (condition == null) {
-    while (iterator.moveNext()) {
-      count++;
-    }
-  } else {
-    while (iterator.moveNext()) {
-      if (condition(iterator.current)) count++;
-    }
-  }
+  do {
+    if (condition(iterator.current)) count++;
+  } while (iterator.moveNext());
   return count;
 }</code></pre>
     </section>

@@ -178,6 +178,10 @@ iteration matching the given <code>index</code>. <a href="darq/Enumerable/elemen
 value. If the iteration reaches the end of the enumerable before arriving
 at <code>index</code>, the value of <code>defaultValue</code> will be returned instead. If
 <code>defaultValue</code> is not supplied, the returned value will be <code>null</code>.</p>
+<p>If the underlying collection is a <code>ListEnumerable</code>, this method will instead
+short-circuit into an indexer call to the <code>List</code> as an O(1) operation. If
+<code>index</code> is greater than or equal to the length of the list, <code>defaultValue</code>
+will be returned instead.</p>
 <p>The <a href="darq/Enumerable/elementAtOrDefaultE.html">elementAtOrDefaultE</a> method will short-circuit after reaching the
 element at <code>index</code> and will not iterate further over the enumerable. In
 the worst case, it will iterate over the entire enumerable.</p>
@@ -186,8 +190,11 @@ the worst case, it will iterate over the entire enumerable.</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">T elementAtOrDefaultE(int index, {T defaultValue}) {
-  assert(index &gt;= 0);
-
+  RangeError.checkNotNegative(index);
+  if (this is ListEnumerable) {
+    if (index &gt;= this.length) return defaultValue;
+    return (this as ListEnumerable)[index];
+  }
   final iterator = this.iterator;
   int currentIndex = 0;
   while (iterator.moveNext()) {

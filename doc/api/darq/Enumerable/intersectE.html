@@ -190,7 +190,7 @@ given <code>other</code> collection, the enumerable will be unchanged.</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Enumerable&lt;T&gt; intersectE(Iterable&lt;T&gt; other, {EqualityComparer&lt;T&gt; comparer}) {
-  assert(other != null);
+  ArgumentError.checkNotNull(other);
   return IntersectEnumerable&lt;T&gt;(this, other, comparer);
 }</code></pre>
     </section>

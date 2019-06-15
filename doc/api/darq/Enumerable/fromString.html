@@ -167,7 +167,7 @@
     <section class="multi-line-signature">
       <span class="returntype"><a href="darq/Enumerable-class.html">Enumerable</a><span class="signature">&lt;<wbr><span class="type-parameter">String</span>&gt;</span></span>
             <span class="name ">fromString</span>
-(<wbr><span class="parameter" id="fromString-param-s"><span class="type-annotation">String</span> <span class="parameter-name">s</span></span>)
+(<wbr><span class="parameter" id="fromString-param-s"><span class="type-annotation">String</span> <span class="parameter-name">s</span>, {</span> <span class="parameter" id="fromString-param-useCache"><span class="type-annotation">bool</span> <span class="parameter-name">useCache</span>: <span class="default-value">false</span></span> })
       
     </section>
     <section class="desc markdown">
@@ -176,11 +176,17 @@
 out of the resulting collection. (As <code>String</code> doesn't extend <code>Iterable</code>,
 this is a convenience method to iterate over every character in the <code>String</code>
 as well as make it compatable with other enumerable methods.)</p>
+<p>Optionally takes a boolean <code>useCache</code> value. If <code>true</code>, the returned
+enumerable will contain a buffer with the calculated string values.
+Otherwise, the enumerable will calculate the string values every time it is
+iterated. (<code>useCache</code> defaults to <code>false</code>.)</p>
     </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">static Enumerable&lt;String&gt; fromString(String s) {
+      <pre class="language-dart"><code class="language-dart">static Enumerable&lt;String&gt; fromString(String s, {bool useCache = false}) {
+  ArgumentError.checkNotNull(s);
+  if (useCache) return StringEnumerable.withCache(s);
   return StringEnumerable(s);
 }</code></pre>
     </section>

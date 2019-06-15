@@ -197,8 +197,9 @@ properties of the <a href="darq/EqualityComparer-class.html">EqualityComparer</a
     Selector&lt;T, TValue&gt; valueSelector,
     GroupSelector&lt;TKey, Iterable&lt;TValue&gt;, TResult&gt; resultSelector,
     {EqualityComparer&lt;TKey&gt; keyComparer}) {
-  assert(
-      keySelector != null &amp;&amp; valueSelector != null &amp;&amp; resultSelector != null);
+  ArgumentError.checkNotNull(keySelector);
+  ArgumentError.checkNotNull(valueSelector);
+  ArgumentError.checkNotNull(resultSelector);
   return GroupSelectValueEnumerable&lt;T, TKey, TValue, TResult&gt;(
       this, keySelector, valueSelector, resultSelector, keyComparer);
 }</code></pre>

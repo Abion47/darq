@@ -181,10 +181,8 @@ result is an empty enumerable.</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Enumerable&lt;T&gt; skipE(int count) {
-  assert(count &gt;= 0);
-
+  RangeError.checkNotNegative(count);
   if (count == 0) return this;
-
   return SkipEnumerable&lt;T&gt;(this, count);
 }</code></pre>
     </section>

@@ -174,17 +174,15 @@
       <p>Returns the single element in the element, optionally matching a
 <code>condition</code>.</p>
 <p>If <code>condition</code> is omitted, <a href="darq/Enumerable/singleE.html">singleE</a> will return the single value in this
-enumerable. If the enumerable is empty, a <a href="darq/EmptyEnumerableError-class.html">EmptyEnumerableError</a> is thrown.
-If the enumerable contains more than one element, an <a href="darq/OperationError-class.html">OperationError</a> is
-thrown.</p>
+enumerable. If the enumerable is empty, or if the enumerable contains more
+than one element, an <a href="darq/EnumerableError-class.html">EnumerableError</a> is thrown.</p>
 <p>In this scenario, the <a href="darq/Enumerable/singleE.html">singleE</a> function will short-circuit after iterating
 a maximum of two elements into the enumerable.</p>
 <p>If <code>condition</code> is supplied, <a href="darq/Enumerable/singleE.html">singleE</a> will iterate over the entire
 enumerable, applying the <code>condition</code> function to each element. At the end
 of the iteration, if a single element matches the <code>condition</code>, that element
-is returned. If no elements match the <code>condition</code>, an <a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a>
-is thrown. If more than one element matches the <code>condition</code>, an
-<a href="darq/OperationError-class.html">OperationError</a> is thrown.</p>
+is returned. If no elements match the <code>condition</code>, or if more than one
+element matches the <code>condition</code>, an <a href="darq/EnumerableError-class.html">EnumerableError</a> is thrown.</p>
 <p>In this scenario, the <a href="darq/Enumerable/singleE.html">singleE</a> function will short-circuit after finding a
 second element that matches the <code>condition</code>. In the worst-case scenario,
 <a href="darq/Enumerable/singleE.html">singleE</a> will iterate over the entire enumerable.</p>
@@ -196,7 +194,7 @@ second element that matches the <code>condition</code>. In the worst-case scenar
   final _iterator = this.iterator;
 
   if (!_iterator.moveNext()) {
-    throw OperationError(&#39;The enumerable is empty.&#39;);
+    throw EnumerableError.isEmpty();
   }
 
   bool valueSet = false;
@@ -206,8 +204,7 @@ second element that matches the <code>condition</code>. In the worst-case scenar
     do {
       if (condition(_iterator.current)) {
         if (valueSet) {
-          throw OperationError(
-              &#39;More than one element matches the condition.&#39;);
+          throw EnumerableError.ambiguousMatch();
         }
 
         value = _iterator.current;
@@ -215,14 +212,14 @@ second element that matches the <code>condition</code>. In the worst-case scenar
       }
     } while (_iterator.moveNext());
 
-    if (!valueSet) throw ElementNotFoundError();
+    if (!valueSet) throw EnumerableError.elementNotFound();
 
     return value;
   }
 
   do {
     if (valueSet) {
-      throw OperationError(&#39;More than one element exists in the enumerable.&#39;);
+      throw EnumerableError.tooMany();
     }
 
     value = _iterator.current;

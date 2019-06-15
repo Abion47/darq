@@ -3,12 +3,12 @@ import '../enumerable_with_source.dart';
 import '../typedefs.dart';
 import '../iterators/where_iterator.dart';
 
-class WhereEnumerable<T> extends Enumerable<T> with EnumerableWithSource<T> {
+class WhereEnumerable<T> extends Enumerable<T>
+    implements EnumerableWithSource<T> {
+  final Enumerable<T> source;
   final Condition<T> condition;
 
-  WhereEnumerable(Enumerable<T> source, this.condition) {
-    this.src = source;
-  }
+  const WhereEnumerable(this.source, this.condition);
 
   @override
   Iterator<T> get iterator => WhereIterator(this);

@@ -189,7 +189,7 @@ equivalency checking (i.e. <code>if (a == b)</code>).</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">bool sequenceEqualE(Iterable&lt;T&gt; other, {EqualityComparer&lt;T&gt; comparer}) {
-  assert(other != null);
+  ArgumentError.checkNotNull(other);
 
   final _thisIterator = this.iterator;
   final _otherIterator = other.iterator;

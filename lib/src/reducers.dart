@@ -1,11 +1,20 @@
 import 'enumerable.dart';
 import 'errors.dart';
 
-class EnumerableReducers {
+class SumReducers {
+  static final director = <Type, dynamic>{
+    num: SumNum,
+    int: SumInt,
+    double: SumDouble,
+    String: SumString,
+    Duration: SumDuration,
+    BigInt: SumBigInt,
+  };
+
   static num SumNum(Enumerable<num> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     num sum = 0.0;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       sum += iterator.current;
     } while (iterator.moveNext());
@@ -14,8 +23,8 @@ class EnumerableReducers {
 
   static int SumInt(Enumerable<int> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     int sum = 0;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       sum += iterator.current;
     } while (iterator.moveNext());
@@ -24,8 +33,8 @@ class EnumerableReducers {
 
   static double SumDouble(Enumerable<double> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     double sum = 0.0;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       sum += iterator.current;
     } while (iterator.moveNext());
@@ -34,14 +43,36 @@ class EnumerableReducers {
 
   static String SumString(Enumerable<String> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     String sum = '';
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       sum += iterator.current;
     } while (iterator.moveNext());
     return sum;
   }
 
+  static Duration SumDuration(Enumerable<Duration> enumerable) {
+    final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
+    Duration sum = Duration.zero;
+    do {
+      sum += iterator.current;
+    } while (iterator.moveNext());
+    return sum;
+  }
+
+  static BigInt SumBigInt(Enumerable<BigInt> enumerable) {
+    final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
+    BigInt sum = BigInt.zero;
+    do {
+      sum += iterator.current;
+    } while (iterator.moveNext());
+    return sum;
+  }
+}
+
+class AllReducers {
   static bool AllBool(Enumerable<bool> enumerable) {
     final iterator = enumerable.iterator;
     while (iterator.moveNext()) {
@@ -49,7 +80,9 @@ class EnumerableReducers {
     }
     return true;
   }
+}
 
+class AnyReducers {
   static bool AnyBool(Enumerable<bool> enumerable) {
     final iterator = enumerable.iterator;
     while (iterator.moveNext()) {
@@ -57,12 +90,22 @@ class EnumerableReducers {
     }
     return false;
   }
+}
+
+class AverageReducers {
+  static final director = <Type, dynamic>{
+    num: AverageNum,
+    int: AverageInt,
+    double: AverageDouble,
+    Duration: AverageDuration,
+    BigInt: AverageBigInt,
+  };
 
   static double AverageNum(Enumerable<num> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     num sum = 0.0;
     int count = 0;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       sum += iterator.current;
       count++;
@@ -72,9 +115,9 @@ class EnumerableReducers {
 
   static int AverageInt(Enumerable<int> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     int sum = 0;
     int count = 0;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       sum += iterator.current;
       count++;
@@ -84,9 +127,9 @@ class EnumerableReducers {
 
   static double AverageDouble(Enumerable<double> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     double sum = 0.0;
     int count = 0;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       sum += iterator.current;
       count++;
@@ -94,6 +137,32 @@ class EnumerableReducers {
     return sum / count;
   }
 
+  static Duration AverageDuration(Enumerable<Duration> enumerable) {
+    final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
+    Duration sum = Duration.zero;
+    int count = 0;
+    do {
+      sum += iterator.current;
+      count++;
+    } while (iterator.moveNext());
+    return sum ~/ count;
+  }
+
+  static BigInt AverageBigInt(Enumerable<BigInt> enumerable) {
+    final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
+    BigInt sum = BigInt.zero;
+    int count = 0;
+    do {
+      sum += iterator.current;
+      count++;
+    } while (iterator.moveNext());
+    return sum ~/ BigInt.from(count);
+  }
+}
+
+class ContainsReducers {
   static bool ContainsEquals<T>(Enumerable<T> enumerable, T value) {
     final iterator = enumerable.iterator;
     while (iterator.moveNext()) {
@@ -101,11 +170,22 @@ class EnumerableReducers {
     }
     return false;
   }
+}
+
+class MinReducers {
+  static final director = <Type, dynamic>{
+    num: MinNum,
+    int: MinInt,
+    double: MinDouble,
+    String: MinString,
+    Duration: MinDuration,
+    BigInt: MinBigInt,
+  };
 
   static num MinNum(Enumerable<num> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     num min;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       if (min == null) {
         min = iterator.current;
@@ -118,8 +198,8 @@ class EnumerableReducers {
 
   static int MinInt(Enumerable<int> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     int min;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       if (min == null) {
         min = iterator.current;
@@ -132,8 +212,8 @@ class EnumerableReducers {
 
   static double MinDouble(Enumerable<double> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     double min;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       if (min == null) {
         min = iterator.current;
@@ -146,8 +226,8 @@ class EnumerableReducers {
 
   static String MinString(Enumerable<String> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     String min;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       if (min == null) {
         min = iterator.current;
@@ -158,10 +238,49 @@ class EnumerableReducers {
     return min;
   }
 
+  static Duration MinDuration(Enumerable<Duration> enumerable) {
+    final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
+    Duration min;
+    do {
+      if (min == null) {
+        min = iterator.current;
+      } else {
+        min = min.compareTo(iterator.current) < 0 ? min : iterator.current;
+      }
+    } while (iterator.moveNext());
+    return min;
+  }
+
+  static BigInt MinBigInt(Enumerable<BigInt> enumerable) {
+    final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
+    BigInt min;
+    do {
+      if (min == null) {
+        min = iterator.current;
+      } else {
+        min = min.compareTo(iterator.current) < 0 ? min : iterator.current;
+      }
+    } while (iterator.moveNext());
+    return min;
+  }
+}
+
+class MaxReducers {
+  static final director = <Type, dynamic>{
+    num: MaxNum,
+    int: MaxInt,
+    double: MaxDouble,
+    String: MaxString,
+    Duration: MaxDuration,
+    BigInt: MaxBigInt,
+  };
+
   static num MaxNum(Enumerable<num> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     num max;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       if (max == null) {
         max = iterator.current;
@@ -174,8 +293,8 @@ class EnumerableReducers {
 
   static int MaxInt(Enumerable<int> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     int max;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       if (max == null) {
         max = iterator.current;
@@ -188,8 +307,8 @@ class EnumerableReducers {
 
   static double MaxDouble(Enumerable<double> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     double max;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
     do {
       if (max == null) {
         max = iterator.current;
@@ -202,8 +321,36 @@ class EnumerableReducers {
 
   static String MaxString(Enumerable<String> enumerable) {
     final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
     String max;
-    if (!iterator.moveNext()) throw EmptyEnumerableError();
+    do {
+      if (max == null) {
+        max = iterator.current;
+      } else {
+        max = max.compareTo(iterator.current) > 0 ? max : iterator.current;
+      }
+    } while (iterator.moveNext());
+    return max;
+  }
+
+  static Duration MaxDuration(Enumerable<Duration> enumerable) {
+    final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
+    Duration max;
+    do {
+      if (max == null) {
+        max = iterator.current;
+      } else {
+        max = max.compareTo(iterator.current) > 0 ? max : iterator.current;
+      }
+    } while (iterator.moveNext());
+    return max;
+  }
+
+  static BigInt MaxBigInt(Enumerable<BigInt> enumerable) {
+    final iterator = enumerable.iterator;
+    if (!iterator.moveNext()) throw EnumerableError.isEmpty();
+    BigInt max;
     do {
       if (max == null) {
         max = iterator.current;

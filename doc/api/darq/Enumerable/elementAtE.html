@@ -175,7 +175,11 @@
 <p>Iterates over the entire enumerable until it reaches the element on the
 iteration matching the given <code>index</code>. <a href="darq/Enumerable/elementAtE.html">elementAtE</a> will then return that
 value. If the iteration reaches the end of the enumerable before arriving
-at <code>index</code>, an <a href="darq/ElementNotFoundError-class.html">ElementNotFoundError</a> will be thrown.</p>
+at <code>index</code>, an <code>ElementNotFoundError</code> will be thrown.</p>
+<p>If the underlying collection is a <code>ListEnumerable</code>, this method will instead
+short-circuit into an indexer call to the <code>List</code> as an O(1) operation. If
+<code>index</code> is greater than or equal to the length of the list, an
+<code>ElementNotFoundError</code> will be thrown.</p>
 <p>The value of <code>index</code> must be a non-negative integer.</p>
 <p>The <a href="darq/Enumerable/elementAtE.html">elementAtE</a> method will short-circuit after reaching the element at
 <code>index</code> and will not iterate further over the enumerable. In the worst
@@ -185,8 +189,11 @@ case, it will iterate over the entire enumerable.</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">T elementAtE(int index) {
-  assert(index &gt;= 0);
-
+  RangeError.checkNotNegative(index);
+  if (this is ListEnumerable) {
+    if (index &gt;= this.length) throw EnumerableError.elementNotFound();
+    return (this as ListEnumerable)[index];
+  }
   final iterator = this.iterator;
   int currentIndex = 0;
   while (iterator.moveNext()) {
@@ -194,7 +201,7 @@ case, it will iterate over the entire enumerable.</p>
     currentIndex++;
   }
 
-  throw ElementNotFoundError();
+  throw EnumerableError.elementNotFound();
 }</code></pre>
     </section>
 

@@ -5,21 +5,15 @@ import '../enumerable.dart';
 import '../enumerable_with_source.dart';
 
 class GroupSelectValueEnumerable<TSource, TKey, TValue, TResult>
-    extends Enumerable<TResult> with EnumerableWithSource<TSource> {
+    extends Enumerable<TResult> implements EnumerableWithSource<TSource> {
+  final Enumerable<TSource> source;
   final Selector<TSource, TKey> keySelector;
   final Selector<TSource, TValue> valueSelector;
   final GroupSelector<TKey, Iterable<TValue>, TResult> resultSelector;
   final EqualityComparer<TKey> keyComparer;
 
-  GroupSelectValueEnumerable(
-      Enumerable<TSource> source,
-      this.keySelector,
-      this.valueSelector,
-      this.resultSelector,
-      EqualityComparer<TKey> keyComparer)
-      : this.keyComparer = keyComparer ?? EqualityComparer.forType<TKey>() {
-    this.src = source;
-  }
+  const GroupSelectValueEnumerable(this.source, this.keySelector,
+      this.valueSelector, this.resultSelector, this.keyComparer);
 
   @override
   Iterator<TResult> get iterator {

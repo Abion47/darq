@@ -166,17 +166,28 @@
 
     <section class="multi-line-signature">
       
-      <span class="name ">Enumerable&lt;<wbr><span class="type-parameter">T</span>&gt;.generate</span>(<wbr><span class="parameter" id="generate-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span>, </span> <span class="parameter" id="generate-param-generator"><span class="type-annotation"><a href="darq/Generator.html">Generator</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">generator</span></span>)
+      <span class="name ">Enumerable&lt;<wbr><span class="type-parameter">T</span>&gt;.generate</span>(<wbr><span class="parameter" id="generate-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span>, </span> <span class="parameter" id="generate-param-generator"><span class="type-annotation"><a href="darq/Generator.html">Generator</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">generator</span>, {</span> <span class="parameter" id="generate-param-useCache"><span class="type-annotation">bool</span> <span class="parameter-name">useCache</span>: <span class="default-value">false</span></span> })
     </section>
 
+    <section class="desc markdown">
+      <p>Creates an enumerable of <code>count</code> length, where each element is generated
+from a given <a href="darq/Generator.html">Generator</a> function.</p>
+<p>A convenience factory to create an enumerable of a given <code>count</code> length.
+On generation, every element is created by calling <code>generator</code>, passing in
+the index of that element.</p>
+<p>Optionally takes a boolean <code>useCache</code> value. If <code>true</code>, the returned
+enumerable will contain a buffer with the calculated values.
+Otherwise, the enumerable will calculate the values every time it is
+iterated. (<code>useCache</code> defaults to <code>false</code>.)</p>
+    </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">factory Enumerable.generate(int count, Generator&lt;T&gt; generator) {
-  if (count &lt; 0) {
-    throw ArgumentError(&#39;`count` must be a non-negative integer.&#39;);
-  }
+      <pre class="language-dart"><code class="language-dart">factory Enumerable.generate(int count, Generator&lt;T&gt; generator,
+    {bool useCache = false}) {
+  RangeError.checkNotNegative(count);
   if (count == 0) return Enumerable&lt;T&gt;.empty();
+  if (useCache) return GeneratedEnumerable.withCache(count, generator);
   return GeneratedEnumerable(count, generator);
 }</code></pre>
     </section>

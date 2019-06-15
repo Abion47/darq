@@ -60,7 +60,9 @@
         <a href="darq/IncompatibleTypeError-class.html#instance-properties">Properties</a>
       </li>
       <li><a href="darq/IncompatibleTypeError/allowedTypes.html">allowedTypes</a></li>
+      <li><a href="darq/IncompatibleTypeError/t.html">t</a></li>
       <li class="inherited"><a href="darq/IncompatibleTypeError/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="darq/IncompatibleTypeError/message.html">message</a></li>
       <li class="inherited"><a href="darq/IncompatibleTypeError/runtimeType.html">runtimeType</a></li>
       <li class="inherited"><a href="darq/IncompatibleTypeError/stackTrace.html">stackTrace</a></li>
     
@@ -72,6 +74,9 @@
       <li class="inherited"><a href="darq/IncompatibleTypeError/operator_equals.html">operator ==</a></li>
     
     
+      <li class="section-title"><a href="darq/IncompatibleTypeError-class.html#static-methods">Static methods</a></li>
+      <li><a href="darq/IncompatibleTypeError/checkValidType.html">checkValidType</a></li>
+      <li><a href="darq/IncompatibleTypeError/checkValidTypeOrParam.html">checkValidTypeOrParam</a></li>
     
     </ol>
   </div><!--/.sidebar-offcanvas-left-->
@@ -81,13 +86,13 @@
 
     <section class="multi-line-signature">
       
-      <span class="name ">IncompatibleTypeError</span>(<wbr><span class="parameter" id="-param-allowedTypes"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">Type</span>&gt;</span></span> <span class="parameter-name">allowedTypes</span></span>)
+      <span class="name ">IncompatibleTypeError</span>(<wbr><span class="parameter" id="-param-t"><span class="type-annotation">Type</span> <span class="parameter-name">t</span>, </span> <span class="parameter" id="-param-allowedTypes"><span class="type-annotation">List<span class="signature">&lt;<wbr><span class="type-parameter">Type</span>&gt;</span></span> <span class="parameter-name">allowedTypes</span></span>)
     </section>
 
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">IncompatibleTypeError(this.allowedTypes);</code></pre>
+      <pre class="language-dart"><code class="language-dart">IncompatibleTypeError(this.t, this.allowedTypes);</code></pre>
     </section>
 
   </div> <!-- /.main-content -->

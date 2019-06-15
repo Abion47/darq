@@ -188,11 +188,11 @@ case, it will iterate over the entire enumerable.</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">bool anyE([Condition&lt;T&gt; condition]) {
-  assert(condition != null || T == bool);
+  IncompatibleTypeError.checkValidTypeOrParam(T, [bool], condition);
 
   if (condition == null) {
     if (T == bool) {
-      return EnumerableReducers.AnyBool(this as Enumerable&lt;bool&gt;);
+      return AnyReducers.AnyBool(this as Enumerable&lt;bool&gt;);
     }
     throw UnexpectedStateError();
   }

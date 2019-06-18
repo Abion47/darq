@@ -21,34 +21,35 @@ typedef int Hasher<T>(T value);
 /// - If [left] is less than [right], a negative number is returned.
 /// - If [left] is greater than [right], a positive number is returned.
 /// - If [left] and [right] are equal, 0 is returned.
-typedef int Sorter<T>(T left, T right);
+typedef Sorter<T> = int Function(T left, T right);
 
 /// Takes an accumulate and a value of type `T`, then aggregates the value
 /// into the accumulate and returns the result.
-typedef T Aggregator<T>(T accumulate, T value);
+typedef Aggregator<T> = T Function(T accumulate, T value);
 
 /// Takes an integer that represents an index and then returns a value of type `T`
 /// based on that index.
-typedef T Generator<T>(int index);
+typedef Generator<T> = T Function(int index);
 
 /// Takes an element of type `TSource` and casts it to type `TResult`, returning
 /// the result of the cast.
-typedef TResult CastTransformer<TSource, TResult>(TSource element);
+typedef CastTransformer<TSource, TResult> = TResult Function(TSource element);
 
 /// Takes an element of type `TSource` and transforms it into an [Iterable] of
 /// type <TResult>, returning the result of the transformation.
-typedef Iterable<TResult> ManySelector<TSource, TResult>(TSource element);
+typedef ManySelector<TSource, TResult> = Iterable<TResult> Function(TSource element);
 
 /// Takes a key of type `TKey` and a group of type `TSource` and maps them to a
 /// value of type `TResult`, returning the result of the mapping. (The group will
 /// typically be an instance of `IGrouping`.)
-typedef TResult GroupSelector<TKey, TSource, TResult>(TKey key, TSource group);
+typedef GroupSelector<TKey, TSource, TResult> = TResult Function(TKey key, TSource group);
 
 /// Takes an element of type `TFirst` and an element of type `TSecond` and maps
 /// them into a value of type `TResult`, returning the value.
-typedef TResult ZipSelector<TFirst, TSecond, TResult>(
+typedef ZipSelector<TFirst, TSecond, TResult> = TResult Function(
     TFirst first, TSecond second);
 
 /// Takes an key of type `TKey` and a value of type `TValue` and maps
 /// them into a value of type `TResult`, returning the value.
-typedef TResult LookupSelector<TKey, TValue, TResult>(TKey key, TValue value);
+typedef LookupSelector<TKey, TValue, TResult> = TResult Function(
+    TKey key, TValue value);

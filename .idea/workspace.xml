@@ -2,197 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5419590-18ab-45db-a839-6b69d11e2235" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/EnumerableError.ambiguousMatch.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/EnumerableError.tooMany.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/registerEqualityComparer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/unregisterEqualityComparer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/checkValidType.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/checkValidTypeOrParam.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/darq.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/darq.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Aggregator.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Aggregator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/CastTransformer.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/CastTransformer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Comparer.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Comparer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Condition.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Condition.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/ConversionError-class.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/ConversionError-class.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/E.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/E.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/ElementNotFoundError-class.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/ElementNotFoundError/ElementNotFoundError.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/EnumerableError.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/ElementNotFoundError/hashCode.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/ElementNotFoundError/noSuchMethod.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/ElementNotFoundError/operator_equals.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/ElementNotFoundError/runtimeType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/message.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/ElementNotFoundError/stackTrace.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/stackTrace.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/ElementNotFoundError/toString.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EmptyEnumerableError-class.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EmptyEnumerableError/EmptyEnumerableError.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/EnumerableError.isNull.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EmptyEnumerableError/hashCode.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/hashCode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EmptyEnumerableError/noSuchMethod.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/noSuchMethod.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EmptyEnumerableError/operator_equals.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/operator_equals.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EmptyEnumerableError/runtimeType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/runtimeType.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EmptyEnumerableError/stackTrace.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/message.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EmptyEnumerableError/toString.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/EnumerableError.elementNotFound.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable-class.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable-class.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/Enumerable.empty.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/Enumerable.empty.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/Enumerable.from.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/Enumerable.from.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/Enumerable.generate.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/Enumerable.generate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/Enumerable.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/Enumerable.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/Enumerable.repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/Enumerable.repeat.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/aggregateE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/aggregateE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/allE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/allE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/anyE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/anyE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/averageE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/averageE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/concatE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/concatE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/countE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/countE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/elementAtE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/elementAtE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/elementAtOrDefaultE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/elementAtOrDefaultE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/exceptE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/exceptE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/firstE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/firstE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/fromString.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/fromString.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/groupByE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/groupByE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/groupByValueE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/groupByValueE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/groupJoinE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/groupJoinE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/groupSelectE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/groupSelectE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/groupSelectValueE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/groupSelectValueE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/intersectE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/intersectE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/joinE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/joinE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/lastE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/lastE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/maxE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/maxE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/minE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/minE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/orderByDescendingE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/orderByDescendingE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/orderByE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/orderByE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/range.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/range.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/selectE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/selectE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/selectManyE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/selectManyE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/sequenceEqualE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/sequenceEqualE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/singleE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/singleE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/singleOrDefaultE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/singleOrDefaultE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/skipE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/skipE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/skipWhileE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/skipWhileE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/sumE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/sumE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/takeE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/takeE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/takeWhileE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/takeWhileE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/thenByDescendingE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/thenByDescendingE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/thenByE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/thenByE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/toMapE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/toMapE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/unionE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/unionE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/whereE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/whereE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Enumerable/zipE.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Enumerable/zipE.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EqualityComparer-class.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer-class.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/EqualityComparer.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/EqualityComparer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/compare.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/compare.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/forType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/forType.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/hash.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/hash.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/hashCode.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/hashCode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/noSuchMethod.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/noSuchMethod.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/operator_equals.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/operator_equals.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/runtimeType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/runtimeType.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/sort.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/sort.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/toString.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EqualityComparer/toString.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Generator.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Generator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/GroupSelector.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/GroupSelector.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Hasher.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Hasher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError-class.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError-class.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/IncompatibleTypeError.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/IncompatibleTypeError.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/allowedTypes.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/allowedTypes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/hashCode.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/hashCode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/noSuchMethod.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/noSuchMethod.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/operator_equals.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/operator_equals.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/runtimeType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/runtimeType.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/stackTrace.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/stackTrace.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/toString.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/toString.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError-class.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError-class.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/IntegerOverflowError.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/IntegerOverflowError.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/hashCode.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/hashCode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/noSuchMethod.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/noSuchMethod.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/operator_equals.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/operator_equals.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/runtimeType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/runtimeType.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/stackTrace.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/stackTrace.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/toString.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IntegerOverflowError/toString.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/KeyExistsError-class.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/KeyExistsError-class.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/KeyExistsError.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/KeyExistsError.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/hashCode.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/hashCode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/key.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/message.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/noSuchMethod.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/noSuchMethod.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/operator_equals.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/operator_equals.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/runtimeType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/runtimeType.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/stackTrace.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/stackTrace.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/toString.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/KeyExistsError/toString.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/LookupSelector.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/LookupSelector.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/ManySelector.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/ManySelector.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/NullEnumerableError-class.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError-class.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/NullEnumerableError/NullEnumerableError.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/EnumerableError.isEmpty.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/NullEnumerableError/hashCode.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/NullEnumerableError/noSuchMethod.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/NullEnumerableError/operator_equals.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/NullEnumerableError/runtimeType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/message.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/NullEnumerableError/stackTrace.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/NullEnumerableError/toString.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/OperationError-class.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/OperationError/OperationError.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/OperationError/hashCode.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/OperationError/message.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/message.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/OperationError/noSuchMethod.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/OperationError/operator_equals.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/OperationError/runtimeType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/IncompatibleTypeError/t.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/OperationError/stackTrace.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/OperationError/toString.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/EnumerableError/toString.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Selector.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Selector.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/Sorter.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/Sorter.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError-class.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError-class.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/UnexpectedStateError.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/UnexpectedStateError.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/hashCode.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/hashCode.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/noSuchMethod.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/noSuchMethod.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/operator_equals.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/operator_equals.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/runtimeType.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/runtimeType.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/stackTrace.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/stackTrace.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/toString.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/UnexpectedStateError/toString.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/ZipSelector.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/ZipSelector.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/darq/darq-library.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/darq/darq-library.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/api/index.json" beforeDir="false" afterPath="$PROJECT_DIR$/doc/api/index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerable_with_source.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerable_with_source.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/append_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/append_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/cast_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/cast_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/concat_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/concat_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/default_if_empty_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/default_if_empty_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/distinct_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/distinct_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/except_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/except_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/generated_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/generated_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/group_by_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/group_by_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/group_by_value_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/group_by_value_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/group_join_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/group_join_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/group_select_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/group_select_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/group_select_value_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/group_select_value_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/intersect_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/intersect_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/join_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/join_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/null_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/null_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/of_type_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/of_type_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/prepend_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/prepend_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/range_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/range_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/repeat_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/repeat_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/reverse_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/reverse_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/select_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/select_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/select_many_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/select_many_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/skip_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/skip_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/skip_while_enumerator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/skip_while_enumerator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/string_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/string_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/take_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/take_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/take_while_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/take_while_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/union_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/union_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/value_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/value_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/where_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/where_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/enumerables/zip_enumerable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/enumerables/zip_enumerable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/equality_comparer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/equality_comparer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/errors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/errors.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/iterators/group_join_iterator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/iterators/group_join_iterator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/lookup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/lookup.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/reducers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/reducers.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/set.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/set.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/typedefs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/typedefs.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -208,7 +21,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/test.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="805">
+            <state relative-caret-position="23970">
               <caret line="1416" column="69" selection-start-line="1416" selection-start-column="69" selection-end-line="1416" selection-end-column="69" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
@@ -221,8 +34,8 @@
         <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="289">
-                <caret line="10" column="315" selection-start-line="10" selection-start-column="315" selection-end-line="10" selection-end-column="315" />
+              <first_editor relative-caret-position="34">
+                <caret line="2" column="120" selection-start-line="2" selection-start-column="120" selection-end-line="2" selection-end-column="120" />
               </first_editor>
               <second_editor />
             </state>
@@ -241,11 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/src/enumerable.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
+            <state relative-caret-position="7531">
               <caret line="479" column="58" selection-start-line="479" selection-start-column="58" selection-end-line="479" selection-end-column="58" />
-              <folding>
-                <element signature="e#2#23#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -254,7 +64,16 @@
         <entry file="file://$PROJECT_DIR$/pubspec.yaml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+              <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/src/typedefs.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="918">
+              <caret line="54" column="4" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -298,7 +117,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/src/typedefs.dart" />
         <option value="$PROJECT_DIR$/LICENSE" />
         <option value="$PROJECT_DIR$/CHANGELOG" />
         <option value="$PROJECT_DIR$/README.md" />
@@ -342,12 +160,13 @@
         <option value="$PROJECT_DIR$/lib/src/lookup.dart" />
         <option value="$PROJECT_DIR$/lib/src/efficient_length_enumerable.dart" />
         <option value="$PROJECT_DIR$/test/test.dart" />
-        <option value="$PROJECT_DIR$/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/lib/src/enumerables/value_enumerable.dart" />
         <option value="$PROJECT_DIR$/lib/src/enumerable.dart" />
         <option value="$PROJECT_DIR$/lib/src/equality_comparer.dart" />
         <option value="$PROJECT_DIR$/example/main.dart" />
         <option value="$PROJECT_DIR$/lib/src/iterators/distinct_iterator.dart" />
+        <option value="$PROJECT_DIR$/lib/src/typedefs.dart" />
+        <option value="$PROJECT_DIR$/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
       </list>
     </option>
@@ -366,7 +185,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -375,10 +193,22 @@
               <item name="darq" type="b2602c69:ProjectViewProjectNode" />
               <item name="darq" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="darq" type="b2602c69:ProjectViewProjectNode" />
+              <item name="darq" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="darq" type="b2602c69:ProjectViewProjectNode" />
+              <item name="darq" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -476,7 +306,7 @@
     <frame x="-8" y="-8" width="2576" height="1456" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13473769" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13553259" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -505,17 +335,10 @@
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="8" />
-      <window_info anchor="right" id="Flutter Outline" order="9" visible="true" weight="0.24165341" />
+      <window_info anchor="right" id="Flutter Outline" order="9" visible="true" weight="0.122019075" />
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/src/typedefs.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="48" column="54" selection-start-line="48" selection-start-column="54" selection-end-line="48" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/iterators/cast_iterator.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -879,38 +702,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/efficient_length_enumerable.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="805">
-          <caret line="1416" column="69" selection-start-line="1416" selection-start-column="69" selection-end-line="1416" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="289">
-            <caret line="10" column="315" selection-start-line="10" selection-start-column="315" selection-end-line="10" selection-end-column="315" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="88" lean-forward="true" selection-start-line="2" selection-start-column="88" selection-end-line="2" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/efficient_length_enumerable.dart" />
     <entry file="file://$PROJECT_DIR$/lib/src/enumerables/value_enumerable.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
@@ -918,13 +710,6 @@
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/main.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -945,6 +730,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/test.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23970">
+          <caret line="1416" column="69" selection-start-line="1416" selection-start-column="69" selection-end-line="1416" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/src/enumerable.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7531">
+          <caret line="479" column="58" selection-start-line="479" selection-start-column="58" selection-end-line="479" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/src/iterators/distinct_iterator.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -954,20 +763,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/src/enumerable.dart">
+    <entry file="file://$PROJECT_DIR$/lib/src/typedefs.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="479" column="58" selection-start-line="479" selection-start-column="58" selection-end-line="479" selection-end-column="58" />
-          <folding>
-            <element signature="e#2#23#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="918">
+          <caret line="54" column="4" selection-start-line="54" selection-start-column="4" selection-end-line="54" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="88" lean-forward="true" selection-start-line="2" selection-start-column="88" selection-end-line="2" selection-end-column="88" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="34">
+            <caret line="2" column="120" selection-start-line="2" selection-start-column="120" selection-end-line="2" selection-end-column="120" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
         </state>
       </provider>
     </entry>

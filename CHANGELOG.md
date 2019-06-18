@@ -1,3 +1,7 @@
+## [0.3.1]
+
+* Typedefs have been converted from a shorthand form to the full form. This should help with some type inference issues.  
+
 ## [0.3.0]
 
 * Unit tests have been added to ensure `Iterable` built-in functions behave as expected.

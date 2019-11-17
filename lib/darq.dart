@@ -1,6 +1,6 @@
 library darq;
 
-export 'src/enumerable.dart';
-export 'src/typedefs.dart';
-export 'src/errors.dart';
+export 'src/string_extension.dart';
+export 'src/iterable_extension.dart';
+export 'src/iterable_factories.dart';
 export 'src/equality_comparer.dart';

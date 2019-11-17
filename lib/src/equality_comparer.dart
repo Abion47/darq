@@ -1,4 +1,20 @@
-import 'typedefs.dart';
+/// Takes two elements of type `T` and checks them for equality, returning `true`
+/// if the elements are equal and `false` otherwise.
+typedef bool Comparer<T>(T left, T right);
+
+/// Takes an element of type `T` and computes its hash code, returning the code's
+/// integer value.
+typedef int Hasher<T>(T value);
+
+/// Takes two values of type `T` and computes their sort order, represented by
+/// a returned integer value.
+///
+/// The rules of the comparison are as follows:
+///
+/// - If [left] is less than [right], a negative number is returned.
+/// - If [left] is greater than [right], a positive number is returned.
+/// - If [left] and [right] are equal, 0 is returned.
+typedef Sorter<T> = int Function(T left, T right);
 
 /// Used in various enumeration methods for allowing user-defined comparisons
 /// between complex elements.

@@ -1,6 +1,4 @@
 import 'equality_comparer.dart';
-import 'errors.dart';
-import 'typedefs.dart';
 import 'grouping.dart';
 
 abstract class ILookup<TKey, TValue> {
@@ -26,8 +24,8 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
 
   static Lookup<TKey, TValue> create<TSource, TKey, TValue>(
     Iterable<TSource> source,
-    Selector<TSource, TKey> keySelector,
-    Selector<TSource, TValue> valueSelector,
+    TKey Function(TSource) keySelector,
+    TValue Function(TSource) valueSelector,
     EqualityComparer<TKey> comparer,
   ) {
     ArgumentError.checkNotNull(source);
@@ -55,7 +53,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
 
   static Lookup<TKey, TValue> createForJoin<TKey, TValue>(
     Iterable<TValue> source,
-    Selector<TValue, TKey> keySelector,
+    TKey Function(TValue) keySelector,
     EqualityComparer<TKey> comparer,
   ) {
     ArgumentError.checkNotNull(source);
@@ -104,7 +102,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
   }
 
   Iterable<TResult> applyResultSelector<TResult>(
-      GroupSelector<TKey, Iterable<TValue>, TResult> resultSelector) sync* {
+      TResult Function(TKey key, Iterable<TValue> group) resultSelector) sync* {
     var g = lastGrouping;
     if (g != null) {
       do {
@@ -148,7 +146,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
 
   void resizeBuffer() {
     int newSize = count * 2 + 1;
-    if (newSize < count) throw IntegerOverflowError();
+    if (newSize < count) throw Exception('Integer overflow');
 
     final newGroupings = List<Grouping>(newSize);
     var g = lastGrouping;

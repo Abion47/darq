@@ -1,163 +1,122 @@
 [![pub package](https://img.shields.io/pub/v/darq.svg)](https://pub.dartlang.org/packages/darq)
 
-A port of .NET's LINQ IEnumerable functions to Dart. This library adds a powerful `Enumerable` collection type to Dart that greatly increases convenience when modifying a collection as well as performance when dealing with large collections and complex modifications.
+A port of .NET's LINQ IEnumerable functions to Dart. This library extends the native `Iterable` type with all of the LINQ methods that do not exist in native Dart.
 
 ## API Reference
 
  - [Dart Docs](https://pub.dev/documentation/darq/latest/darq/darq-library.html)
 
-## Lazy Execution
-
-The power of `Enumerable` is that it supports modification to an underlying collection using lazy execution. This means that the enumerable only stores the data necessary to perform the modification and does not actually perform the modification until the enumerable is iterated over. No data is cached either, so unless you actually iterate over the enumerable, creating one is virtually free from both a memory and performance standpoint.
-
-What's more, when multiple enumerable modifications are chained together, the iteration is done through them all simultaneously. This greatly eases the overhead of performing complex modifications on large collection sets.
-
 ## Usage
 
-An `Enumerable` can be created out of any Dart collection type that extends `Iterable`. There are two ways to do so:
+Because this library uses Dart 2.6's new extension methods, any `Iterable` has access to these methods as though they were native methods. This includes classes that extend from `Iterable`, such as `List` and `Set`.
+
+In addition, this library adds several new types of `Iterable` classes to make some utility functions easier:
 
 ```dart
-var sourceList = [0, 1, 2, 3, 4];
+// Creates an iterable containing 5 integers starting with the number 2: [2, 3, 4, 5, 6]
+var rangeI = RangeIterable(2, 5);
 
-// Factory method
-var factoryEnum = Enumerable.from(sourceList);
+// Creates an iterable that contains 3 copies of the value 'abc': ['abc', 'abc', 'abc']
+var repeatI = RepeatIterable('abc', 6);
 
-// Convenience method
-var convenientEnum = E(sourceList);
+// Creates an iterable from a string, iterating over its characters
+var stringI = 'abcdef'.iterable;
 ```
 
-You can also generate an `Enumerable` without needing a pre-existing collection using one of several factory methods:
+You can call any of 39 new methods on it to modify or analyze it. For example, the native method `map` is expanded upon with `select`, which combines the element with the index the element is found within the iterable:
 
 ```dart
-// Creates an Enumerable with no values
-var emptyEnum = Enumerable.empty();
-
-// Creates an Enumerable containing 5 integers starting with the number 2
-var rangeEnum = Enumerable.range(2, 5);
-
-// Creates an Enumerable that contains 6 copies of the value 'a string'
-var repeatEnum = Enumerable.repeat('a string', 6);
-
-// Creates an Enumerable from a string, iterating over its characters
-var stringEnum = Enumerable.fromString('abcdef');
-
-// Creates an Enumerable using a generator function
-var generatedEnum = Enumerable.generate(5, (index) => (index * 2).toString());
+var list = [10, 20, 30];
+var mappedList = list.select((i, index) => '$index-$i'); // ['1-10', '2-20', '3-30']
 ```
 
-Once you have an `Enumerable`, you can call any of 50 different methods on it to modify or analyze it. For example, you can map to a new value with `selectE`:
+There are "orDefault" variants on several common `iterator` value getter methods, such as `firstOrDefault`, `singleOrDefault`, and `defaultIfEmpty`:
 
 ```dart
-var myEnum = E([1, 2, 3]);
-var mappedEnum = myEnum.selectE((i) => i * 2);
-// Values: [2, 4, 6]
+var list = <String>[];
+
+var native = list.first; // Throws a StateError
+var orDefault = list.firstOrDefault('abc'); // Returns 'abc'
+
+var list2 = [1, 2, 3];
+var importantValue = list2.where((i) => i >= 4)
+                          .defaultIfEmpty(-1); // Returns [-1]
 ```
 
-...filter the elements with `whereE`:
+You can filter an iterable down to unique instances of elements with the `distinct` method:
 
 ```dart
-var myEnum = E([1, 2, 3]);
-var filteredEnum = myEnum.whereE((i) => i.isOdd);
-// Values: [1, 3]
+var list = [1, 1, 1, 2, 2, 3, 4, 5, 5, 5, 5, 5];
+var uniqueList = myEnum.distinct(); // [1, 2, 3, 4, 5]
 ```
 
-...get only unique values with `distinctE`:
+There are also set operations with the `except`, `intersect`, and `union` methods:
 
 ```dart
-var myEnum = E([1, 1, 1, 2, 2, 3, 4, 5, 5, 5, 5, 5]);
-var uniqueEnum = myEnum.distinctE();
-// Values: [1, 2, 3, 4, 5]
+var listA = [1, 2, 3, 4];
+var listB = [3, 4, 5, 6];
+
+var exclusion = listA.except(listB);       // [1, 2]
+var intersection = listA.intersect(listB); // [3, 4]
+var union = listA.union(listB);            // [1, 2, 3, 4, 5, 6]
 ```
 
-...or even group elements together using `groupByE`:
+And you can group elements together using `groupBy`:
 
 ```dart
-var myEnum = E([1, 2, 3, 4, 5, 6]);
-var groupedEnum = myEnum.groupByE((i) => i % 2);
-// Values: [[1, 3, 5], [2, 4, 6]]
+var list = [1, 2, 3, 4, 5, 6];
+var groupedList = list.groupBy((i) => i % 2); // [[1, 3, 5], [2, 4, 6]]
 ```
 
-What's more, you can chain methods together, enabling virtually endless possibilities in a concise chain of method calls:
+Just like in native dart, every method returns a new `Iterable`, so you can chain methods together to make complex mapping, grouping, and filtering behavior:
 
 ```dart
-var myEnum = E([1, 2, 3, 4, 5, 6]);
-var resultEnum = myEnum.selectE((i) => i * 2)
-                       .whereE((i) => i > 4)
-                       .selectE((i) => i.toRadixString(16));
-/// Values: ['6', '8', 'A', 'C']
-```
-
-To use the values, you can iterate over the `Enumerable` just like you would any other `Iterable` collection:
-
-```dart
-var myEnum = E([1, 2, 3]);
-for (var value in myEnum) {
-    print(value);
-}
-
-// Output:
-// 1
-// 2
-// 3
-```
-
-You can also easily convert the `Enumerable` back into a Dart collection type using `toListE`, `toMapE`, or `toSetE`:
-
-```dart
-var myEnum = E([1, 2, 3]);
-var myList = myEnum.ToList();
-// myList is a List<int> with the values of myEnum
+var list = [3, 1, 6, 2, 3, 2, 4, 1];
+var result = list.select((i, idx) => i * 2 + idx)     // [6, 3, 14, 8, 10, 10, 14, 9]
+                 .distinct()                          // [6, 3, 14, 8, 10, 9]
+                 .where((i) => i > 4)                 // [6, 14, 8, 10, 9]
+                 .orderBy((i) => i)                   // [6, 8, 9, 10, 14]
+                 .map((i) => i.toRadixString(16));    // [6, 8, 9, A, E]
 ```
 
 ## Full Function List
 
- - [eAggregate](https://pub.dev/documentation/darq/latest/darq/Enumerable/eAggregate.html)
- - [eAll](https://pub.dev/documentation/darq/latest/darq/Enumerable/eAll.html)
- - [eAny](https://pub.dev/documentation/darq/latest/darq/Enumerable/eAny.html)
- - [eAppend](https://pub.dev/documentation/darq/latest/darq/Enumerable/eAppend.html)
- - [eAverage](https://pub.dev/documentation/darq/latest/darq/Enumerable/eAverage.html)
- - [eCast](https://pub.dev/documentation/darq/latest/darq/Enumerable/eCast.html)
- - [eConcat](https://pub.dev/documentation/darq/latest/darq/Enumerable/eConcat.html)
- - [eContains](https://pub.dev/documentation/darq/latest/darq/Enumerable/eContains.html)
- - [eCount](https://pub.dev/documentation/darq/latest/darq/Enumerable/eCount.html)
- - [eDefaultIfEmpty](https://pub.dev/documentation/darq/latest/darq/Enumerable/eDefaultIfEmpty.html)
- - [eDistinct](https://pub.dev/documentation/darq/latest/darq/Enumerable/eDistinct.html)
- - [eElementAt](https://pub.dev/documentation/darq/latest/darq/Enumerable/eElementAt.html)
- - [eElementAtOrDefault](https://pub.dev/documentation/darq/latest/darq/Enumerable/eElementAtOrDefault.html)
- - [eExcept](https://pub.dev/documentation/darq/latest/darq/Enumerable/eExcept.html)
- - [eFirst](https://pub.dev/documentation/darq/latest/darq/Enumerable/eFirst.html)
- - [eFirstOrDefault](https://pub.dev/documentation/darq/latest/darq/Enumerable/eFirstOrDefault.html)
- - [eGroupBy](https://pub.dev/documentation/darq/latest/darq/Enumerable/eGroupBy.html)
- - [eGroupByValue](https://pub.dev/documentation/darq/latest/darq/Enumerable/eGroupByValue.html)
- - [eGroupJoin](https://pub.dev/documentation/darq/latest/darq/Enumerable/eGroupJoin.html)
- - [eGroupSelect](https://pub.dev/documentation/darq/latest/darq/Enumerable/eGroupSelect.html)
- - [eGroupSelectValue](https://pub.dev/documentation/darq/latest/darq/Enumerable/eGroupSelectValue.html)
- - [eIntersect](https://pub.dev/documentation/darq/latest/darq/Enumerable/eIntersect.html)
- - [eJoin](https://pub.dev/documentation/darq/latest/darq/Enumerable/eJoin.html)
- - [eLast](https://pub.dev/documentation/darq/latest/darq/Enumerable/eLast.html)
- - [eLastOrDefault](https://pub.dev/documentation/darq/latest/darq/Enumerable/eLastOrDefault.html)
- - [eMax](https://pub.dev/documentation/darq/latest/darq/Enumerable/eMax.html)
- - [eMin](https://pub.dev/documentation/darq/latest/darq/Enumerable/eMin.html)
- - [eOfType](https://pub.dev/documentation/darq/latest/darq/Enumerable/eOfType.html)
- - [eOrderBy](https://pub.dev/documentation/darq/latest/darq/Enumerable/eOrderBy.html)
- - [eOrderByDescending](https://pub.dev/documentation/darq/latest/darq/Enumerable/eOrderByDescending.html)
- - [ePrepend](https://pub.dev/documentation/darq/latest/darq/Enumerable/ePrepend.html)
- - [eReverse](https://pub.dev/documentation/darq/latest/darq/Enumerable/eReverse.html)
- - [eSelect](https://pub.dev/documentation/darq/latest/darq/Enumerable/eSelect.html)
- - [eSelectMany](https://pub.dev/documentation/darq/latest/darq/Enumerable/eSelectMany.html)
- - [eSequenceEqual](https://pub.dev/documentation/darq/latest/darq/Enumerable/eSequenceEqual.html)
- - [eSingle](https://pub.dev/documentation/darq/latest/darq/Enumerable/eSingle.html)
- - [eSingleOrDefault](https://pub.dev/documentation/darq/latest/darq/Enumerable/eSingleOrDefault.html)
- - [eSkip](https://pub.dev/documentation/darq/latest/darq/Enumerable/eSkip.html)
- - [eSkipWhile](https://pub.dev/documentation/darq/latest/darq/Enumerable/eSkipWhile.html)
- - [eSum](https://pub.dev/documentation/darq/latest/darq/Enumerable/eSum.html)
- - [eTake](https://pub.dev/documentation/darq/latest/darq/Enumerable/eTake.html)
- - [eTakeWhile](https://pub.dev/documentation/darq/latest/darq/Enumerable/eTakeWhile.html)
- - [eThenBy](https://pub.dev/documentation/darq/latest/darq/Enumerable/eThenBy.html)
- - [eThenByDescending](https://pub.dev/documentation/darq/latest/darq/Enumerable/eThenByDescending.html)
- - [eToList](https://pub.dev/documentation/darq/latest/darq/Enumerable/eToList.html)
- - [eToMap](https://pub.dev/documentation/darq/latest/darq/Enumerable/eToMap.html)
- - [eToSet](https://pub.dev/documentation/darq/latest/darq/Enumerable/eToSet.html)
- - [eUnion](https://pub.dev/documentation/darq/latest/darq/Enumerable/eUnion.html)
- - [eWhere](https://pub.dev/documentation/darq/latest/darq/Enumerable/eWhere.html)
- - [eZip](https://pub.dev/documentation/darq/latest/darq/Enumerable/eZip.html)
+ - [aggregate](https://pub.dev/documentation/darq/latest/darq/IterableExtension/aggregate.html)
+ - [all](https://pub.dev/documentation/darq/latest/darq/IterableExtension/all.html)
+ - [append](https://pub.dev/documentation/darq/latest/darq/IterableExtension/append.html)
+ - [average](https://pub.dev/documentation/darq/latest/darq/IterableExtension/average.html)
+ - [concat](https://pub.dev/documentation/darq/latest/darq/IterableExtension/concat.html)
+ - [count](https://pub.dev/documentation/darq/latest/darq/IterableExtension/count.html)
+ - [defaultIfEmpty](https://pub.dev/documentation/darq/latest/darq/IterableExtension/defaultIfEmpty.html)
+ - [distinct](https://pub.dev/documentation/darq/latest/darq/IterableExtension/distinct.html)
+ - [elementAtOrDefault](https://pub.dev/documentation/darq/latest/darq/IterableExtension/elementAtOrDefault.html)
+ - [except](https://pub.dev/documentation/darq/latest/darq/IterableExtension/except.html)
+ - [firstWhereOrDefault](https://pub.dev/documentation/darq/latest/darq/IterableExtension/firstWhereOrDefault.html)
+ - [firstOrDefault](https://pub.dev/documentation/darq/latest/darq/IterableExtension/firstOrDefault.html)
+ - [groupBy](https://pub.dev/documentation/darq/latest/darq/IterableExtension/groupBy.html)
+ - [groupByValue](https://pub.dev/documentation/darq/latest/darq/IterableExtension/groupByValue.html)
+ - [groupJoin](https://pub.dev/documentation/darq/latest/darq/IterableExtension/groupJoin.html)
+ - [groupSelect](https://pub.dev/documentation/darq/latest/darq/IterableExtension/groupSelect.html)
+ - [groupSelectValue](https://pub.dev/documentation/darq/latest/darq/IterableExtension/groupSelectValue.html)
+ - [intersect](https://pub.dev/documentation/darq/latest/darq/IterableExtension/intersect.html)
+ - [joinMap](https://pub.dev/documentation/darq/latest/darq/IterableExtension/joinMap.html)
+ - [lastOrDefault](https://pub.dev/documentation/darq/latest/darq/IterableExtension/lastOrDefault.html)
+ - [lastWhereOrDefault](https://pub.dev/documentation/darq/latest/darq/IterableExtension/lastWhereOrDefault.html)
+ - [max](https://pub.dev/documentation/darq/latest/darq/IterableExtension/max.html)
+ - [min](https://pub.dev/documentation/darq/latest/darq/IterableExtension/min.html)
+ - [ofType](https://pub.dev/documentation/darq/latest/darq/IterableExtension/ofType.html)
+ - [orderBy](https://pub.dev/documentation/darq/latest/darq/IterableExtension/orderBy.html)
+ - [orderByDescending](https://pub.dev/documentation/darq/latest/darq/IterableExtension/orderByDescending.html)
+ - [prepend](https://pub.dev/documentation/darq/latest/darq/IterableExtension/prepend.html)
+ - [reverse](https://pub.dev/documentation/darq/latest/darq/IterableExtension/reverse.html)
+ - [select](https://pub.dev/documentation/darq/latest/darq/IterableExtension/select.html)
+ - [selectMany](https://pub.dev/documentation/darq/latest/darq/IterableExtension/selectMany.html)
+ - [sequenceEqual](https://pub.dev/documentation/darq/latest/darq/IterableExtension/sequenceEqual.html)
+ - [singleOrDefault](https://pub.dev/documentation/darq/latest/darq/IterableExtension/singleOrDefault.html)
+ - [singleWhereOrDefault](https://pub.dev/documentation/darq/latest/darq/IterableExtension/singleWhereOrDefault.html)
+ - [sum](https://pub.dev/documentation/darq/latest/darq/IterableExtension/sum.html)
+ - [thenBy](https://pub.dev/documentation/darq/latest/darq/IterableExtension/thenBy.html)
+ - [thenByDescending](https://pub.dev/documentation/darq/latest/darq/IterableExtension/thenByDescending.html)
+ - [toMap](https://pub.dev/documentation/darq/latest/darq/IterableExtension/toMap.html)
+ - [union](https://pub.dev/documentation/darq/latest/darq/IterableExtension/union.html)
+ - [zip](https://pub.dev/documentation/darq/latest/darq/IterableExtension/zip.html)

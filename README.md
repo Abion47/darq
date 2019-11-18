@@ -20,6 +20,8 @@ var rangeI = RangeIterable(2, 5);
 var repeatI = RepeatIterable('abc', 6);
 
 // Creates an iterable from a string, iterating over its characters
+// This is an extension getter property on String that returns an 
+// iterable via `String.split('')`.
 var stringI = 'abcdef'.iterable;
 ```
 
@@ -107,6 +109,7 @@ var result = list.select((i, idx) => i * 2 + idx)     // [6, 3, 14, 8, 10, 10, 1
  - [ofType](https://pub.dev/documentation/darq/latest/darq/IterableExtension/ofType.html)
  - [orderBy](https://pub.dev/documentation/darq/latest/darq/IterableExtension/orderBy.html)
  - [orderByDescending](https://pub.dev/documentation/darq/latest/darq/IterableExtension/orderByDescending.html)
+ - [package](https://pub.dev/documentation/darq/latest/darq/IterableExtension/package.html)
  - [prepend](https://pub.dev/documentation/darq/latest/darq/IterableExtension/prepend.html)
  - [reverse](https://pub.dev/documentation/darq/latest/darq/IterableExtension/reverse.html)
  - [select](https://pub.dev/documentation/darq/latest/darq/IterableExtension/select.html)

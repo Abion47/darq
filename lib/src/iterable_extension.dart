@@ -47,7 +47,11 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If the iterable type is not one of these types, the [aggregator] function
   /// must be provided. Otherwise, an [ArgumentError] will be thrown.
   ///
-  /// The [aggregate] function will iterate over every element in the iterable.
+  /// <strong>The [aggregate] method is an iterable-consuming method. All lazy iterables
+  /// will be iterated fully in the process of calculating the result.</strong>
+  ///
+  /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
+  /// Internally it functions identically to [fold].)
   TResult aggregate<TResult>(
           TResult initialValue, TResult Function(TResult, T) aggregator) =>
       this.fold(initialValue, aggregator);
@@ -64,9 +68,17 @@ extension IterableExtensions<T> on Iterable<T> {
   /// [condition] function returns `false` even once during the iteration, the
   /// [all] method will return `false` as well.
   ///
+  /// If the type of the iterable is `bool`, the condition argument is optional.
+  ///
   /// The [all] method will short-circuit after receiving a `false` from calling
   /// [condition] and will not iterate further over the iterable. In the worst
   /// case, it will iterate over the entire iterable.
+  ///
+  /// <strong>The [all] method is an iterable-consuming method. All lazy iterables
+  /// will be iterated fully in the process of calculating the result.</strong>
+  ///
+  /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
+  /// Internally it functions identically to [every].)
   bool all([bool Function(T) condition]) {
     if (condition == null) {
       if (T == bool) {
@@ -136,6 +148,9 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// Appends the values of a given [Iterable] to the end of this iterable,
   /// resulting in an iterable that is the concatenation of both.
+  ///
+  /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
+  /// Internally it functions identically to [followedBy].)
   Iterable<T> concat(Iterable<T> other) => this.followedBy(other);
 
   /// Returns the number of elements in the iterable.
@@ -762,6 +777,9 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// If all elements in the source iterable can be safely cast to `TResult`,
   /// the resulting iterable will be unchanged.
+  ///
+  /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
+  /// Internally it functions identically to [whereType].)
   Iterable<TOther> ofType<TOther>() => this.whereType<TOther>();
 
   /// Sorts the iteration in ascending (least-to-greatest) order.
@@ -873,7 +891,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// <strong>The [reverse] method is an iterable-consuming method. All lazy
   /// iterables will be iterated fully in the process of calculating the result.</strong>
   Iterable<T> reverse() sync* {
-    final list = List<T>.from(this);
+    final list = this.toList();
     yield* list.reversed;
   }
 

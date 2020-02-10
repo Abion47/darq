@@ -4,11 +4,13 @@ abstract class OrderedIterable<T> extends Iterable<T> {
   Iterable<T> source;
 
   OrderedIterable(this.source);
-  EnumerableSorter<T> getEnumerableSorter(EnumerableSorter<T> next);
+  IterableSorter<T> getIterableSorter(IterableSorter<T> next);
 
-  OrderedIterable<T> createOrderedEnumerable<TKey>(TKey Function(T) keySelector,
-      EqualityComparer<TKey> keyComparer, bool descending) {
-    final result = InternalOrderedIterable<T, TKey>(
+  OrderedIterable<T> createOrderedIterable<TNewKey>(
+      TNewKey Function(T) keySelector,
+      EqualityComparer<TNewKey> keyComparer,
+      bool descending) {
+    final result = InternalOrderedIterable<T, TNewKey>(
         source, keySelector, keyComparer, descending);
     result.parent = this;
     return result;
@@ -32,21 +34,22 @@ class InternalOrderedIterable<TValue, TKey> extends OrderedIterable<TValue> {
   Iterable<TValue> iterate() sync* {
     final buffer = source.toList();
     if (buffer.isNotEmpty) {
-      final sorter = getEnumerableSorter(null);
+      final sorter = getIterableSorter(null);
       final map = sorter.sort(buffer, buffer.length);
       yield* OrderedBuffer(buffer, map);
     }
   }
 
-  EnumerableSorter<TValue> getEnumerableSorter(EnumerableSorter<TValue> next) {
-    EnumerableSorter<TValue> sorter = InternalEnumerableSorter<TValue, TKey>(
+  @override
+  IterableSorter<TValue> getIterableSorter(IterableSorter<TValue> next) {
+    IterableSorter<TValue> sorter = InternalIterableSorter<TValue, TKey>(
         keySelector, keyComparer, descending, next);
-    if (parent != null) sorter = parent.getEnumerableSorter(sorter);
+    if (parent != null) sorter = parent.getIterableSorter(sorter);
     return sorter;
   }
 }
 
-abstract class EnumerableSorter<T> {
+abstract class IterableSorter<T> {
   void computeKeys(List<T> elements, int count);
   int compareKeys(int idx1, int idx2);
 
@@ -59,9 +62,9 @@ abstract class EnumerableSorter<T> {
 
   void quickSort(List<int> map, int left, int right) {
     do {
-      int i = left;
-      int j = right;
-      int x = map[i + ((j - i) >> 1)];
+      var i = left;
+      var j = right;
+      final x = map[i + ((j - i) >> 1)];
       do {
         while (i < map.length && compareKeys(x, map[i]) > 0) {
           i++;
@@ -71,7 +74,7 @@ abstract class EnumerableSorter<T> {
         }
         if (i > j) break;
         if (i < j) {
-          int temp = map[i];
+          final temp = map[i];
           map[i] = map[j];
           map[j] = temp;
         }
@@ -89,25 +92,26 @@ abstract class EnumerableSorter<T> {
   }
 }
 
-class InternalEnumerableSorter<TValue, TKey> extends EnumerableSorter<TValue> {
+class InternalIterableSorter<TValue, TKey> extends IterableSorter<TValue> {
   TKey Function(TValue) keySelector;
   EqualityComparer<TKey> comparer;
   bool descending;
-  EnumerableSorter<TValue> next;
+  IterableSorter<TValue> next;
   List<TKey> keys;
 
-  InternalEnumerableSorter(
-      this.keySelector, this.comparer, this.descending, this.next) {
-    this.keySelector = keySelector;
-    this.comparer = comparer ?? EqualityComparer.forType<TKey>();
-    this.descending = descending;
-    this.next = next;
+  InternalIterableSorter(
+    this.keySelector,
+    this.comparer,
+    this.descending,
+    this.next,
+  ) {
+    comparer ??= EqualityComparer.forType<TKey>();
   }
 
   @override
   void computeKeys(List<TValue> elements, int count) {
     keys = List<TKey>(count);
-    for (int i = 0; i < count; i++) {
+    for (var i = 0; i < count; i++) {
       keys[i] = keySelector(elements[i]);
     }
     if (next != null) next.computeKeys(elements, count);
@@ -115,7 +119,7 @@ class InternalEnumerableSorter<TValue, TKey> extends EnumerableSorter<TValue> {
 
   @override
   int compareKeys(int index1, int index2) {
-    int c = comparer.sort(keys[index1], keys[index2]);
+    final c = comparer.sort(keys[index1], keys[index2]);
     if (c == 0) {
       if (next == null) return index1 - index2;
       return next.compareKeys(index1, index2);

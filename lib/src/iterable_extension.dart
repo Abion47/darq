@@ -10,7 +10,7 @@ import 'lookup.dart';
 
 extension IterableStaticExtensions on Iterable {
   static Iterable<int> range(int start, int length) sync* {
-    for (int i = 0; i < length; i++) {
+    for (var i = 0; i < length; i++) {
       yield start + i;
     }
   }
@@ -54,7 +54,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// Internally it functions identically to [fold].)
   TResult aggregate<TResult>(
           TResult initialValue, TResult Function(TResult, T) aggregator) =>
-      this.fold(initialValue, aggregator);
+      fold(initialValue, aggregator);
 
   /// Returns `true` if all elements match a condition and `false` otherwise.
   ///
@@ -90,7 +90,7 @@ extension IterableExtensions<T> on Iterable<T> {
       throw ArgumentError('If T isn\t bool, condition must not be null.');
     }
 
-    return this.every(condition);
+    return every(condition);
   }
 
   /// Inserts an element to the end of the iterable.
@@ -124,7 +124,7 @@ extension IterableExtensions<T> on Iterable<T> {
       }
     }
 
-    if (this.isEmpty) {
+    if (isEmpty) {
       throw StateError('Iterator must not be empty.');
     }
 
@@ -133,8 +133,8 @@ extension IterableExtensions<T> on Iterable<T> {
           'If T isn\'t a subtype of num, selector must not be null.');
     }
 
-    double total = 0.0;
-    int count = 0;
+    var total = 0.0;
+    var count = 0;
 
     for (var n in this) {
       total += selector(n);
@@ -151,7 +151,7 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
   /// Internally it functions identically to [followedBy].)
-  Iterable<T> concat(Iterable<T> other) => this.followedBy(other);
+  Iterable<T> concat(Iterable<T> other) => followedBy(other);
 
   /// Returns the number of elements in the iterable.
   ///
@@ -164,9 +164,9 @@ extension IterableExtensions<T> on Iterable<T> {
   /// `length` property of the iterable as an O(1) operation. Otherwise, the
   /// [count] function will iterate over every element in the iterable.
   int count([bool Function(T) condition]) {
-    if (condition == null) return this.length;
+    if (condition == null) return length;
 
-    int count = 0;
+    var count = 0;
     for (var v in this) {
       if (condition(v)) {
         count++;
@@ -186,7 +186,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If this iterable has one or more elements, the iterable is returned
   /// without modification.
   Iterable<T> defaultIfEmpty(T defaultVal) sync* {
-    bool hasValues = false;
+    var hasValues = false;
     for (var v in this) {
       yield v;
       hasValues = true;
@@ -214,10 +214,8 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If none of the elements in the iterable match any other element in the
   /// iterable, the iterable will be unchanged.
   Iterable<T> distinct<TKey>([TKey Function(T) keySelector]) sync* {
-    if (keySelector == null) {
-      keySelector = (T v) => v as TKey;
-    }
-    final set = Set<TKey>();
+    keySelector ??= (T v) => v as TKey;
+    final set = <TKey>{};
 
     for (var t in this) {
       if (set.add(keySelector(t))) yield t;
@@ -252,7 +250,7 @@ extension IterableExtensions<T> on Iterable<T> {
       return asList[index];
     }
 
-    int i = 0;
+    var i = 0;
     for (var v in this) {
       if (index == i) return v;
       i++;
@@ -278,9 +276,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// given [other] collection, the iterable will be unchanged.
   Iterable<T> except<TKey>(Iterable<T> other,
       [TKey Function(T) selector]) sync* {
-    if (selector == null) {
-      selector = (T v) => v as TKey;
-    }
+    selector ??= (T v) => v as TKey;
 
     final set = Set<TKey>.from(other.map(selector));
     for (var v in this) {
@@ -294,8 +290,8 @@ extension IterableExtensions<T> on Iterable<T> {
   /// returned instead. If [defaultValue] is omitted, the returned value will be
   /// `null`.
   T firstOrDefault([T defaultVal]) {
-    if (this.isEmpty) return defaultVal;
-    return this.first;
+    if (isEmpty) return defaultVal;
+    return first;
   }
 
   /// Returns the first element in the iterable matching a specified condition,
@@ -313,7 +309,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// the first time [condition] returns `true` and will not iterate further. In
   /// the worst case, it will iterate over the entire iterable.
   T firstWhereOrDefault(bool Function(T) condition, [T defaultVal]) {
-    if (this.isEmpty) return defaultVal;
+    if (isEmpty) return defaultVal;
 
     for (var v in this) {
       if (condition(v)) {
@@ -348,13 +344,8 @@ extension IterableExtensions<T> on Iterable<T> {
     TKey Function(T) keySelector, {
     EqualityComparer<TKey> keyComparer,
   }) {
-    if (keySelector == null) {
-      keySelector = (T v) => v as TKey;
-    }
-
-    if (keyComparer == null) {
-      keyComparer = EqualityComparer.forType<TKey>();
-    }
+    keySelector ??= (T v) => v as TKey;
+    keyComparer ??= EqualityComparer.forType<TKey>();
 
     return GroupByIterable<T, TKey>(this, keySelector, keyComparer);
   }
@@ -386,17 +377,9 @@ extension IterableExtensions<T> on Iterable<T> {
     TValue Function(T) valueSelector,
     EqualityComparer<TKey> keyComparer,
   }) {
-    if (keySelector == null) {
-      keySelector = (T v) => v as TKey;
-    }
-
-    if (valueSelector == null) {
-      valueSelector = (T v) => v as TValue;
-    }
-
-    if (keyComparer == null) {
-      keyComparer = EqualityComparer.forType<TKey>();
-    }
+    keySelector ??= (T v) => v as TKey;
+    valueSelector ??= (T v) => v as TValue;
+    keyComparer ??= EqualityComparer.forType<TKey>();
 
     return GroupByValueIterable<T, TKey, TValue>(
         this, keySelector, valueSelector, keyComparer);
@@ -439,17 +422,9 @@ extension IterableExtensions<T> on Iterable<T> {
     assert(other != null);
     assert(resultSelector != null);
 
-    if (outerKeySelector == null) {
-      outerKeySelector = (T v) => v as TKey;
-    }
-
-    if (innerKeySelector == null) {
-      innerKeySelector = (TInner v) => v as TKey;
-    }
-
-    if (keyComparer == null) {
-      keyComparer = EqualityComparer.forType<TKey>();
-    }
+    outerKeySelector ??= (T v) => v as TKey;
+    innerKeySelector ??= (TInner v) => v as TKey;
+    keyComparer ??= EqualityComparer.forType<TKey>();
 
     return GroupJoinIterable<T, TInner, TKey, TResult>(this, other,
         outerKeySelector, innerKeySelector, resultSelector, keyComparer);
@@ -479,13 +454,8 @@ extension IterableExtensions<T> on Iterable<T> {
     TKey Function(T) keySelector,
     EqualityComparer<TKey> keyComparer,
   }) {
-    if (keySelector == null) {
-      keySelector = (T v) => v as TKey;
-    }
-
-    if (keyComparer == null) {
-      keyComparer = EqualityComparer.forType<TKey>();
-    }
+    keySelector ??= (T v) => v as TKey;
+    keyComparer ??= EqualityComparer.forType<TKey>();
 
     return GroupSelectIterable<T, TKey, TResult>(
         this, keySelector, resultSelector, keyComparer);
@@ -518,17 +488,9 @@ extension IterableExtensions<T> on Iterable<T> {
     TValue Function(T) valueSelector,
     EqualityComparer<TKey> keyComparer,
   }) {
-    if (keySelector == null) {
-      keySelector = (T v) => v as TKey;
-    }
-
-    if (valueSelector == null) {
-      valueSelector = (T v) => v as TValue;
-    }
-
-    if (keyComparer == null) {
-      keyComparer = EqualityComparer.forType<TKey>();
-    }
+    keySelector ??= (T v) => v as TKey;
+    valueSelector ??= (T v) => v as TValue;
+    keyComparer ??= EqualityComparer.forType<TKey>();
 
     return GroupSelectValueIterable(
         this, keySelector, valueSelector, resultSelector, keyComparer);
@@ -551,9 +513,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// given [other] collection, the iterable will be unchanged.
   Iterable<T> intersect<TKey>(Iterable<T> other,
       [TKey Function(T) selector]) sync* {
-    if (selector == null) {
-      selector = (T v) => v as TKey;
-    }
+    selector ??= (T v) => v as TKey;
 
     final set = Set<TKey>.from(other.map(selector));
     for (var v in this) {
@@ -583,13 +543,11 @@ extension IterableExtensions<T> on Iterable<T> {
     TResult Function(T, TInner) resultSelector, {
     EqualityComparer<TKey> keyComparer,
   }) sync* {
-    if (keyComparer == null) {
-      keyComparer = EqualityComparer.forType<TKey>();
-    }
+    keyComparer ??= EqualityComparer.forType<TKey>();
 
     final lookup = Lookup.createForJoin(other, innerKeySelector, keyComparer);
 
-    final outerIterator = this.iterator;
+    final outerIterator = iterator;
 
     Iterator<TInner> groupIterator;
 
@@ -622,8 +580,8 @@ extension IterableExtensions<T> on Iterable<T> {
   /// <strong>The [lastOrDefault] method is an iterable-consuming method. All lazy iterables
   /// will be iterated fully in the process of calculating the result.</strong>
   T lastOrDefault([T defaultVal]) {
-    if (this.isEmpty) return defaultVal;
-    return this.last;
+    if (isEmpty) return defaultVal;
+    return last;
   }
 
   /// Returns the last element in the iterable matching a specified condition,
@@ -639,9 +597,9 @@ extension IterableExtensions<T> on Iterable<T> {
   /// <strong>The [lastWhereOrDefault] method is an iterable-consuming method. All lazy
   /// iterables will be iterated fully in the process of calculating the result.</strong>
   T lastWhereOrDefault(bool Function(T) condition, [T defaultVal]) {
-    if (this.isEmpty) return defaultVal;
+    if (isEmpty) return defaultVal;
 
-    bool found = false;
+    var found = false;
     T val;
 
     for (var v in this) {
@@ -693,7 +651,7 @@ extension IterableExtensions<T> on Iterable<T> {
       }
     }
 
-    if (this.isEmpty) {
+    if (isEmpty) {
       throw StateError('Iterable must not be empty.');
     }
 
@@ -748,7 +706,7 @@ extension IterableExtensions<T> on Iterable<T> {
       }
     }
 
-    if (this.isEmpty) {
+    if (isEmpty) {
       throw StateError('Iterable must not be empty.');
     }
 
@@ -780,7 +738,7 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
   /// Internally it functions identically to [whereType].)
-  Iterable<TOther> ofType<TOther>() => this.whereType<TOther>();
+  Iterable<TOther> ofType<TOther>() => whereType<TOther>();
 
   /// Sorts the iteration in ascending (least-to-greatest) order.
   ///
@@ -857,7 +815,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// a final list of some length less than [size]. (False by default.)
   Iterable<Iterable<T>> package(int size, {bool includeTail = false}) sync* {
     var package = List<T>(size);
-    int index = 0;
+    var index = 0;
 
     for (var v in this) {
       package[index++] = v;
@@ -891,7 +849,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// <strong>The [reverse] method is an iterable-consuming method. All lazy
   /// iterables will be iterated fully in the process of calculating the result.</strong>
   Iterable<T> reverse() sync* {
-    final list = this.toList();
+    final list = toList();
     yield* list.reversed;
   }
 
@@ -901,7 +859,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// along with the index of the value in the iteration. The returned value of that
   /// function is then provided as the next element of the resulting iterable.
   Iterable<TResult> select<TResult>(TResult Function(T, int) selector) sync* {
-    int index = 0;
+    var index = 0;
     for (var v in this) {
       yield selector(v, index++);
     }
@@ -918,7 +876,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// their values become elements in a single iterable.
   Iterable<TResult> selectMany<TResult>(
       Iterable<TResult> Function(T, int) selector) sync* {
-    int index = 0;
+    var index = 0;
     for (var v in this) {
       yield* selector(v, index++);
     }
@@ -952,19 +910,14 @@ extension IterableExtensions<T> on Iterable<T> {
       return false;
     }
 
-    final iterA = this.iterator;
+    final iterA = iterator;
     final iterB = other.iterator;
 
     bool aHasNext;
     bool bHasNext;
 
-    if (outerSelector == null) {
-      outerSelector = (T v) => v as TKey;
-    }
-
-    if (innerSelector == null) {
-      innerSelector = (T v) => v as TKey;
-    }
+    outerSelector ??= (T v) => v as TKey;
+    innerSelector ??= (T v) => v as TKey;
 
     do {
       aHasNext = iterA.moveNext();
@@ -994,10 +947,10 @@ extension IterableExtensions<T> on Iterable<T> {
   /// element of the iteration, if one exists. In the worst-case scenario,
   /// [singleOrDefault] will iterate over two elements of the iterable.
   T singleOrDefault([T defaultVal]) {
-    final iter = this.iterator;
+    final iter = iterator;
     if (!iter.moveNext()) return defaultVal;
 
-    T val = iter.current;
+    var val = iter.current;
     if (iter.moveNext()) {
       throw StateError('The iterable has more than one element.');
     }
@@ -1018,11 +971,11 @@ extension IterableExtensions<T> on Iterable<T> {
   /// that matches the [condition]. In the worst-case scenario, [singleOrDefault]
   /// will iterate over the entire iterable.
   T singleWhereOrDefault(bool Function(T) condition, [T defaultVal]) {
-    final iter = this.iterator;
+    final iter = iterator;
     if (!iter.moveNext()) return defaultVal;
 
     T val;
-    bool found = false;
+    var found = false;
     do {
       if (condition(iter.current)) {
         if (!found) {
@@ -1072,7 +1025,7 @@ extension IterableExtensions<T> on Iterable<T> {
       }
     }
 
-    if (this.isEmpty) {
+    if (isEmpty) {
       throw StateError('Iterator must not be empty.');
     }
 
@@ -1081,7 +1034,7 @@ extension IterableExtensions<T> on Iterable<T> {
           'If T isn\'t a subtype of num, selector must not be null.');
     }
 
-    num total = T == int ? 0 : 0.0;
+    var total = T == int ? 0 : 0.0;
 
     for (var n in this) {
       total += selector(n);
@@ -1124,7 +1077,7 @@ extension IterableExtensions<T> on Iterable<T> {
           'thenBy must be called immediately following a call to orderBy, orderByDescending, thenBy, or thenByDescending.');
     }
     return (this as dynamic)
-        .createOrderediterable<TKey>(keySelector, keyComparer, false);
+        .createOrderedIterable<TKey>(keySelector, keyComparer, false);
   }
 
   /// Adds a secondary sorting pass to iteration in ascending
@@ -1161,7 +1114,7 @@ extension IterableExtensions<T> on Iterable<T> {
           'thenByDescending must be called immediately following a call to orderBy, orderByDescending, thenBy, or thenByDescending.');
     }
     return (this as dynamic)
-        .createOrderediterable<TKey>(keySelector, keyComparer, true);
+        .createOrderedIterable<TKey>(keySelector, keyComparer, true);
   }
 
   /// Converts the iterable to a [Map].
@@ -1209,11 +1162,9 @@ extension IterableExtensions<T> on Iterable<T> {
   /// iterables/collections, use [concat] instead.
   Iterable<T> union<TKey>(Iterable<T> other,
       [TKey Function(T) selector]) sync* {
-    if (selector == null) {
-      selector = (T v) => v as TKey;
-    }
+    selector ??= (T v) => v as TKey;
 
-    final set = Set<TKey>();
+    final set = <TKey>{};
 
     for (var v in this) {
       if (set.add(selector(v))) {
@@ -1241,7 +1192,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// lengths of the source iterable or the given [other] collection.
   Iterable<TResult> zip<TOther, TResult>(
       Iterable<TOther> other, TResult Function(T, TOther) selector) sync* {
-    final sourceIterator = this.iterator;
+    final sourceIterator = iterator;
     final otherIterator = other.iterator;
 
     while (sourceIterator.moveNext() && otherIterator.moveNext()) {

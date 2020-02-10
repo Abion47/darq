@@ -1,21 +1,21 @@
 class RangeIterable extends Iterable<int> {
   final int start;
-  final int length;
+  final int count;
 
-  RangeIterable(this.start, this.length)
+  RangeIterable(this.start, this.count)
       : assert(start != null),
-        assert(length != null),
-        assert(length > 0);
+        assert(count != null),
+        assert(count > 0);
 
   @override
-  Iterator<int> get iterator => _RangeIterator(start, length);
+  Iterator<int> get iterator => _RangeIterator(start, count);
 }
 
 class _RangeIterator extends Iterator<int> {
   final int start;
-  final int length;
+  final int count;
 
-  _RangeIterator(this.start, this.length);
+  _RangeIterator(this.start, this.count);
 
   int _currentValue;
 
@@ -30,7 +30,7 @@ class _RangeIterator extends Iterator<int> {
       _currentValue++;
     }
 
-    if (_currentValue >= start + length) {
+    if (_currentValue >= start + count) {
       return false;
     }
 

@@ -1,10 +1,10 @@
 /// Takes two elements of type `T` and checks them for equality, returning `true`
 /// if the elements are equal and `false` otherwise.
-typedef bool Comparer<T>(T left, T right);
+typedef Comparer<T> = bool Function(T left, T right);
 
 /// Takes an element of type `T` and computes its hash code, returning the code's
 /// integer value.
-typedef int Hasher<T>(T value);
+typedef Hasher<T> = int Function(T value);
 
 /// Takes two values of type `T` and computes their sort order, represented by
 /// a returned integer value.
@@ -73,9 +73,9 @@ class EqualityComparer<T> {
     Comparer<T> comparer,
     Hasher<T> hasher,
     Sorter<T> sorter,
-  })  : this.compare = comparer ?? _getDefaultComparer<T>(),
-        this.hash = hasher ?? _getDefaultHasher<T>(),
-        this.sort = sorter ?? _getDefaultSorter<T>();
+  })  : compare = comparer ?? _getDefaultComparer<T>(),
+        hash = hasher ?? _getDefaultHasher<T>(),
+        sort = sorter ?? _getDefaultSorter<T>();
 
   static Comparer<T> _getDefaultComparer<T>() =>
       (T left, T right) => left == right;
@@ -100,7 +100,7 @@ class EqualityComparer<T> {
     return equalityComparer;
   }
 
-  static Map<Type, EqualityComparer> _registeredEqualityComparers = {
+  static final Map<Type, EqualityComparer> _registeredEqualityComparers = {
     dynamic: EqualityComparer<dynamic>(
       comparer: (left, right) => left == right,
       hasher: (value) => value.hashCode,
@@ -150,7 +150,7 @@ class EqualityComparer<T> {
   /// under type `T`, and `false` otherwise.
   static bool registerEqualityComparer<T>(EqualityComparer<T> comparer,
       {bool overwrite = false}) {
-    bool typeExists = _registeredEqualityComparers.containsKey(T);
+    var typeExists = _registeredEqualityComparers.containsKey(T);
     if (!typeExists || overwrite) _registeredEqualityComparers[T] = comparer;
     return typeExists;
   }

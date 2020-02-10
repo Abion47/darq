@@ -19,13 +19,14 @@ class GroupJoinIterable<TSource, TInner, TKey, TResult>
 
 class GroupJoinIterator<TSource, TInner, TKey, TResult>
     extends Iterator<TResult> {
-  final GroupJoinIterable<TSource, TInner, TKey, TResult> enumerable;
+  final GroupJoinIterable<TSource, TInner, TKey, TResult> iterable;
 
-  GroupJoinIterator(this.enumerable);
+  GroupJoinIterator(this.iterable);
 
   Lookup<TKey, TInner> _lookup;
 
   TResult _current;
+  @override
   TResult get current => _current;
 
   Iterator<TSource> _sourceIterator;
@@ -33,15 +34,15 @@ class GroupJoinIterator<TSource, TInner, TKey, TResult>
   @override
   bool moveNext() {
     if (_sourceIterator == null) {
-      _sourceIterator = enumerable.source.iterator;
-      _lookup = Lookup.createForJoin<TKey, TInner>(enumerable.inner,
-          enumerable.innerKeySelector, enumerable.keyComparer);
+      _sourceIterator = iterable.source.iterator;
+      _lookup = Lookup.createForJoin<TKey, TInner>(
+          iterable.inner, iterable.innerKeySelector, iterable.keyComparer);
     }
 
     if (_sourceIterator.moveNext()) {
       final item = _sourceIterator.current;
-      _current = enumerable.resultSelector(
-          item, _lookup[enumerable.outerKeySelector(item)]);
+      _current = iterable.resultSelector(
+          item, _lookup[iterable.outerKeySelector(item)]);
       return true;
     }
 

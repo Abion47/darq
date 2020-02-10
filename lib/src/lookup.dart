@@ -17,7 +17,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
   int _count;
 
   Lookup._internal(this.comparer) {
-    if (comparer == null) comparer = EqualityComparer.forType<TKey>();
+    comparer ??= EqualityComparer.forType<TKey>();
     groupings = List<Grouping<TKey, TValue>>(7);
     _count = 0;
   }
@@ -145,14 +145,14 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
   }
 
   void resizeBuffer() {
-    int newSize = count * 2 + 1;
+    var newSize = count * 2 + 1;
     if (newSize < count) throw Exception('Integer overflow');
 
     final newGroupings = List<Grouping>(newSize);
     var g = lastGrouping;
     do {
       g = g.next;
-      int index = g.hashCode % newSize;
+      final index = g.hashCode % newSize;
       g.hashNext = newGroupings[index];
       newGroupings[index] = g;
     } while (g != lastGrouping);

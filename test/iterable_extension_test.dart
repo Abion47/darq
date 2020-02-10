@@ -45,10 +45,68 @@ void main() {
 
   group('Factories', () {
     test('Creating a range iterable', () {
-      var e = RangeIterable(2, 5);
+      Iterable<int> e;
+
+      // Default behavior
+      e = RangeIterable(2, 5);
 
       expect(e, isA<Iterable<int>>());
-      expect(e, equals([2, 3, 4, 5, 6]));
+      expect(e, orderedEquals([2, 3, 4]));
+
+      // Default inclusive behavior
+      e = RangeIterable(2, 5, inclusive: true);
+
+      expect(e, isA<Iterable<int>>());
+      expect(e, orderedEquals([2, 3, 4, 5]));
+
+      // Default interval behavior
+      e = RangeIterable(2, 5, interval: 2);
+
+      expect(e, isA<Iterable<int>>());
+      expect(e, orderedEquals([2, 4]));
+
+      // Negative interval behavior
+      e = RangeIterable(2, 5, interval: -1);
+
+      expect(e, isA<Iterable<int>>());
+      expect(e, orderedEquals([4, 3, 2]));
+
+      // Negative inclusive interval behavior
+      e = RangeIterable(2, 5, interval: -1, inclusive: true);
+
+      expect(e, isA<Iterable<int>>());
+      expect(e, orderedEquals([5, 4, 3, 2]));
+
+      // Default count behavior
+      e = RangeIterable.count(2, 5);
+
+      expect(e, isA<Iterable<int>>());
+      expect(e, orderedEquals([2, 3, 4, 5, 6]));
+
+      // Zero count behavior
+      e = RangeIterable.count(2, 0);
+
+      expect(e, isA<Iterable<int>>());
+      expect(e, orderedEquals([]));
+
+      // Default count interval behavior
+      e = RangeIterable.count(2, 5, interval: 2);
+
+      expect(e, isA<Iterable<int>>());
+      expect(e, orderedEquals([2, 4, 6, 8, 10]));
+
+      // Negative count interval behavior
+      e = RangeIterable.count(2, 5, interval: -1);
+
+      expect(e, isA<Iterable<int>>());
+      expect(e, orderedEquals([2, 1, 0, -1, -2]));
+
+      // End < Start error
+      expect(() => RangeIterable(5, 2), throwsA(isA<AssertionError>()));
+
+      // Zero interval error
+      expect(() => RangeIterable(2, 5, interval: 0),
+          throwsA(isA<AssertionError>()));
     });
 
     test('Creating a repeat iterable', () {
@@ -678,22 +736,6 @@ void main() {
       expect(result, orderedEquals([5, 4, 3, 2, 1]));
     });
 
-    test('package', () {
-      final input = [0, 1, 2, 3, 4, 5, 6];
-
-      final result = input.package(2);
-      expect(result.length, 3);
-      expect(result.elementAt(0), orderedEquals([0, 1]));
-      expect(result.elementAt(1), orderedEquals([2, 3]));
-      expect(result.elementAt(2), orderedEquals([4, 5]));
-
-      final result2 = input.package(3, includeTail: true);
-      expect(result2.length, 3);
-      expect(result2.elementAt(0), orderedEquals([0, 1, 2]));
-      expect(result2.elementAt(1), orderedEquals([3, 4, 5]));
-      expect(result2.elementAt(2), orderedEquals([6]));
-    });
-
     test('prepend', () {
       var list = [0, 1, 2, 3];
       var result = list.prepend(4);
@@ -704,6 +746,22 @@ void main() {
       var test = [0, 1, 2, 3];
       var result = test.reverse();
       expect(result, orderedEquals([3, 2, 1, 0]));
+    });
+
+    test('segment', () {
+      final input = [0, 1, 2, 3, 4, 5, 6];
+
+      final result = input.segment(2);
+      expect(result.length, 3);
+      expect(result.elementAt(0), orderedEquals([0, 1]));
+      expect(result.elementAt(1), orderedEquals([2, 3]));
+      expect(result.elementAt(2), orderedEquals([4, 5]));
+
+      final result2 = input.segment(3, includeTail: true);
+      expect(result2.length, 3);
+      expect(result2.elementAt(0), orderedEquals([0, 1, 2]));
+      expect(result2.elementAt(1), orderedEquals([3, 4, 5]));
+      expect(result2.elementAt(2), orderedEquals([6]));
     });
 
     test('select', () {

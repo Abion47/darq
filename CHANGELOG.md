@@ -1,3 +1,35 @@
+## [0.4.0]
+
+* `Enumerable` and all related subclasses have been removed. The package has changed over to using static extension methods on `Iterable`.
+  * Related, the trailing "E" in method names as well as the utility factory `E` have been removed.
+* `Enumerable` factory constructors have been converted into standalone factory classes.
+  * `Enumerable.repeat` -> `RepeatIterator`
+* A new factory class has been created: `RangeIterator`
+  * Generates an iterable whose elements represent a range of integral values.
+* Some methods have been renamed so as to not conflict with existing `Iterable` methods of the same name.
+  * `join` -> `joinMap`
+* Some methods have had functionality tweaked so as to maintain a separate identity from existing `Iterable` methods.
+  * `select`: Selector argument now requires `(T element, int index)` as the parameters.
+  * `selectMany`: Selector argument now requires `(T element, int index)` as the parameters.
+* Some methods have been removed as existing methods in `Iterable` make them fully redundant.
+  * `cast`
+  * `elementAt`
+  * `first`
+  * `last`
+  * `single`
+  * `take`
+  * `takeWhile`
+  * `skip`
+  * `skipWhile`
+  * `toList`
+  * `toSet`
+  * `where`
+* A new method has been added: `segment`
+  * Groups the iterable into segments of an indicated size. Can optionally include any partial chunks at the end of the iterable.
+* Extension getters have also been added to `String` to facilitate easy conversion to `Iterable<String>`.
+  * `iterable`: Returns an iterable of the characters in the string.
+  * `iterableRunes`: Returns an iterable of the characters in the string while respecting rune boundaries.
+
 ## [0.3.1]
 
 * Typedefs have been converted from a shorthand form to the full form. This should help with some type inference issues.  

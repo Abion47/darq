@@ -2,7 +2,10 @@
 
 * `Enumerable` and all related subclasses have been removed. The package has changed over to using static extension methods on `Iterable`.
   * Related, the trailing "E" in method names as well as the utility factory `E` have been removed.
-* `Enumerable` factory constructors have been converted into standalone factory classes.
+* `Enumerable` factory constructors have been converted into standalone factory classes (if not made redundant by existing `Iterable` constructors).
+  * `Enumerable.empty` -> `Iterable.empty`
+  * `Enumerable.from` -> _redundant_
+  * `Enumerable.generate` -> `Iterable.generate`
   * `Enumerable.repeat` -> `RepeatIterator`
 * A new factory class has been created: `RangeIterator`
   * Generates an iterable whose elements represent a range of integral values.

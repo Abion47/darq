@@ -8,14 +8,7 @@ import 'iterables/group_select_value_iterable.dart';
 import 'iterables/ordered_iterable.dart';
 import 'lookup.dart';
 
-extension IterableStaticExtensions on Iterable {
-  static Iterable<int> range(int start, int length) sync* {
-    for (var i = 0; i < length; i++) {
-      yield start + i;
-    }
-  }
-}
-
+/// Provides the extension methods on `Iterable`.
 extension IterableExtensions<T> on Iterable<T> {
   /// Aggregates the iterable into a single value.
   ///
@@ -340,6 +333,29 @@ extension IterableExtensions<T> on Iterable<T> {
   /// common key, the resulting iterable will consist of [Grouping] objects
   /// (each containing a single element) of the same length as the source
   /// iterable.
+  ///
+  /// Example:
+  ///
+  ///    class Pet {
+  ///      Pet(this.name, this.age);
+  ///
+  ///      String name;
+  ///      double age;
+  ///    }
+  ///
+  ///    void main() {
+  ///      final pets = [Pet('Barley', 8), Pet('Boots', 4), Pet('Whiskers', 1), Pet('Daisy', 4)];
+  ///
+  ///      final results = pets.groupBy((pet) => pet.age);
+  ///
+  ///      // Resulting Iterable:
+  ///      // [
+  ///      //   [ Pet('Barley', 8) ],
+  ///      //   [ Pet('Boots', 4), Pet('Daisy', 4) ],
+  ///      //   [ Pet('Whiskers', 1) ],
+  ///      // ]
+  ///    }
+
   GroupByIterable<T, TKey> groupBy<TKey>(
     TKey Function(T) keySelector, {
     EqualityComparer<TKey> keyComparer,
@@ -372,6 +388,31 @@ extension IterableExtensions<T> on Iterable<T> {
   /// common key, the resulting iterable will consist of [Grouping] objects
   /// (each containing a single element) of the same length as the source
   /// iterable.
+  ///
+  /// Example:
+  ///
+  ///    class Pet {
+  ///      Pet(this.name, this.age);
+  ///
+  ///      String name;
+  ///      double age;
+  ///    }
+  ///
+  ///    void main() {
+  ///      final pets = [Pet('Barley', 8), Pet('Boots', 4), Pet('Whiskers', 1), Pet('Daisy', 4)];
+  ///
+  ///      final results = pets.groupByValue(
+  ///        keySelector: (pet) => pet.age),
+  ///        valueSelector: (pet) => pet.name),
+  ///      );
+  ///
+  ///      // Resulting Iterable:
+  ///      // [
+  ///      //   [ 'Barley' ],
+  ///      //   [ Boots', 'Daisy' ],
+  ///      //   [ 'Whiskers' ],
+  ///      // ]
+  ///    }
   GroupByValueIterable<T, TKey, TValue> groupByValue<TKey, TValue>({
     TKey Function(T) keySelector,
     TValue Function(T) valueSelector,
@@ -412,6 +453,55 @@ extension IterableExtensions<T> on Iterable<T> {
   /// the [inner] collection, [groupJoin] will produce a new element from an
   /// element in the source iterable and all elements in the [inner]
   /// collection that match on the key.
+  ///
+  /// Example:
+  ///
+  ///    class Person {
+  ///      Person(this.name);
+  ///
+  ///      String name;
+  ///    }
+  ///
+  ///    class Pet {
+  ///      Pet(this.name, this.age, this.owner);
+  ///
+  ///      String name;
+  ///      double age;
+  ///      Person owner;
+  ///    }
+  ///
+  ///    void main() {
+  ///      final people = [
+  ///        Person('Travis'),
+  ///        Person('Terry'),
+  ///        Person('Charlotte'),
+  ///        Person('Benny'),
+  ///      ];
+  ///      final pets = [
+  ///        Pet('Barley', 8, people[1]),   // owner: terry
+  ///        Pet('Boots', 4, people[1]),    // owner: terry
+  ///        Pet('Whiskers', 1, people[2]), // owner: charlotte
+  ///        Pet('Daisy', 4, people[0]),    // owner: travis
+  ///      ];
+  ///
+  ///      final result = people.groupJoin(
+  ///        pets,
+  ///        (person, pets) => <String, dynamic>{
+  ///          'ownerName': person.name,
+  ///          'pets': pets.select((pet, i) => pet.name)
+  ///        },
+  ///        outerKeySelector: (person) => person.name,
+  ///        innerKeySelector: (pet) => pet.owner.name,
+  ///      );
+  ///
+  ///      // Resulting Iterable:
+  ///      // [
+  ///      //   { 'ownerName': 'Travis', 'pets': ['Daisy'] },
+  ///      //   { 'ownerName': 'Terry', 'pets': ['Barley', 'Boots'] },
+  ///      //   { 'ownerName': 'Charlotte', 'pets': ['Whiskers'] },
+  ///      //   { 'ownerName': 'Benny', 'pets': [] },
+  ///      // ]
+  ///    }
   GroupJoinIterable<T, TInner, TKey, TResult> groupJoin<TInner, TKey, TResult>(
     Iterable<TInner> other,
     TResult Function(T, Iterable<TInner>) resultSelector, {
@@ -449,6 +539,43 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// (For the [groupSelect] method, only the [comparer] and [hasher] properties of
   /// the [EqualityComparer] need be supplied.)
+  ///
+  /// Example:
+  ///
+  ///    class Pet {
+  ///      Pet(this.name, this.age);
+  ///
+  ///      String name;
+  ///      double age;
+  ///    }
+  ///
+  ///    void main() {
+  ///      final pets = [
+  ///        Pet('Barley', 8.3),
+  ///        Pet('Boots', 4.9),
+  ///        Pet('Whiskers', 1.5),
+  ///        Pet('Daisy', 4.3),
+  ///      ];
+  ///
+  ///      final ageComparer = (Pet p1, Pet p2) => p1.age.compareTo(p2.age);
+  ///
+  ///      final result = pets.groupSelect(
+  ///        (age, pets) => {
+  ///          'key': age,
+  ///          'count': pets.length,
+  ///          'min': pets.min(ageComparer),
+  ///          'max': pets.max(ageComparer),
+  ///        },
+  ///        keySelector: (pet) => pet.age.floor(),
+  ///      );
+  ///
+  ///      // Resulting Iterable:
+  ///      // [
+  ///      //   { 'key': 8, count: 1, min: Pet('Barley', 8.3), max: Pet('Barley', 8.3) },
+  ///      //   { 'key': 4, count: 2, min: Pet('Daisy', 4.3), max: Pet('Boots', 4.9) },
+  ///      //   { 'key': 1, count: 1, min: Pet('Whiskers', 1.5), max: Pet('Whiskers', 1.5) },
+  ///      // ]
+  ///    }
   GroupSelectIterable<T, TKey, TResult> groupSelect<TKey, TResult>(
     TResult Function(TKey, Iterable<T>) resultSelector, {
     TKey Function(T) keySelector,
@@ -481,6 +608,43 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// (For the [groupSelectValue] method, only the [comparer] and [hasher]
   /// properties of the [EqualityComparer] need be supplied.)
+  ///
+  /// Example:
+  ///
+  ///    class Pet {
+  ///      Pet(this.name, this.age);
+  ///
+  ///      String name;
+  ///      double age;
+  ///    }
+  ///
+  ///    void main() {
+  ///      final pets = [
+  ///        Pet('Barley', 8.3),
+  ///        Pet('Boots', 4.9),
+  ///        Pet('Whiskers', 1.5),
+  ///        Pet('Daisy', 4.3),
+  ///      ];
+  ///
+  ///      final ageComparer = (Pet p1, Pet p2) => p1.age.compareTo(p2.age);
+  ///
+  ///      final result = pets.groupSelectValue(
+  ///        (age, pets) => {
+  ///          'key': age,
+  ///          'count': pets.length,
+  ///          'names': pets,
+  ///        },
+  ///        keySelector: (pet) => pet.age.floor(),
+  ///        valueSelector: (pet) => pet.name,
+  ///      );
+  ///
+  ///      // Resulting Iterable:
+  ///      // [
+  ///      //   { 'key': 8, count: 1, names: ['Barley'] },
+  ///      //   { 'key': 4, count: 2, names: ['Boots', 'Daisy'] },
+  ///      //   { 'key': 1, count: 1, names: ['Whiskers'] },
+  ///      // ]
+  ///    }
   GroupSelectValueIterable<T, TKey, TValue, TResult>
       groupSelectValue<TKey, TValue, TResult>(
     TResult Function(TKey, Iterable<TValue>) resultSelector, {

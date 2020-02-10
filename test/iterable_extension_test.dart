@@ -384,7 +384,7 @@ void main() {
 
       final result = people.groupJoin(
         pets,
-        (person, pets) => {
+        (person, pets) => <String, dynamic>{
           'ownerName': person.name,
           'pets': pets.select((pet, i) => pet.name)
         },
@@ -405,7 +405,10 @@ void main() {
           'ownerName': 'Charlotte',
           'pets': ['Whiskers']
         },
-        {'ownerName': 'Benny', 'pets': []},
+        {
+          'ownerName': 'Benny',
+          'pets': [],
+        },
       ]);
 
       final result2 = people.groupJoin(

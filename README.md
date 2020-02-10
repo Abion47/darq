@@ -13,26 +13,31 @@ Because this library uses Dart 2.6's new extension methods, any `Iterable` has a
 In addition, this library adds several new types of `Iterable` classes to make some utility functions easier:
 
 ```dart
-// Creates an iterable containing 5 integers starting with the number 2: [2, 3, 4, 5, 6]
-var rangeI = RangeIterable(2, 5);
+// Creates an iterable containing the numbers from 2 to 6: [2, 3, 4, 5, 6]
+var rangeI = RangeIterable(2, 6, inclusive: true);
 
 // Creates an iterable that contains 3 copies of the value 'abc': ['abc', 'abc', 'abc']
-var repeatI = RepeatIterable('abc', 6);
+var repeatI = RepeatIterable('abc', 3);
 
 // Creates an iterable from a string, iterating over its characters
 // This is an extension getter property on String that returns an 
-// iterable via `String.split('')`.
+// iterable via `String.codeUnits.map((u) => String.fromCodeUnit(u))`.
+// Results in ['a', 'b', 'c', 'd', 'e', 'f']
 var stringI = 'abcdef'.iterable;
+
+// Same as above but using `runes` instead of `codeUnits` to respect 
+// rune boundaries and maintain surrogate pairs.
+var stringIR = 'abcdef'.iterableRunes;
 ```
 
-You can call any of 39 new methods on it to modify or analyze it. For example, the native method `map` is expanded upon with `select`, which combines the element with the index the element is found within the iterable:
+You can call any of 40 new methods on it to modify or analyze it. For example, the native method `map` is expanded upon with `select`, which combines the element with the index at which the element is found within the iterable:
 
 ```dart
 var list = [10, 20, 30];
 var mappedList = list.select((i, index) => '$index-$i'); // ['1-10', '2-20', '3-30']
 ```
 
-There are "orDefault" variants on several common `iterator` value getter methods, such as `firstOrDefault`, `singleOrDefault`, and `defaultIfEmpty`:
+There are "OrDefault" variants on several common `iterator` value getter methods, such as `firstOrDefault`, `singleOrDefault`, and `defaultIfEmpty`. Instead of throwing an error, these methods will return a default value (or null if left unspecified) if the element(s) cannot be found:
 
 ```dart
 var list = <String>[];
@@ -63,11 +68,28 @@ var intersection = listA.intersect(listB); // [3, 4]
 var union = listA.union(listB);            // [1, 2, 3, 4, 5, 6]
 ```
 
-And you can group elements together using `groupBy`:
+And you can group elements together by common features using `groupBy`:
 
 ```dart
 var list = [1, 2, 3, 4, 5, 6];
-var groupedList = list.groupBy((i) => i % 2); // [[1, 3, 5], [2, 4, 6]]
+var groupedList = list.groupBy((i) => i / 3 == 0); // [[1, 2, 4, 5], [3, 6]]
+```
+
+Or bundle them into groups of a fixed length using `segment`:
+
+```dart
+var list = [1, 2, 3, 4, 5, 6];
+var segmented = list.segment(2); // [[1, 2], [3, 4], [5, 6]]
+```
+
+You can even perform complex ordering functions using `orderBy` and `thenBy`:
+
+```dart
+var list = ['ab', 'a', 'c', 'aa', ''];
+// Sort by string length followed by alphabetical order
+var ordered = list.orderBy((c) => c.length)
+                  .thenBy((c) => c);
+// Result: ['', 'a', 'c', 'aa', 'ab']
 ```
 
 Just like in native dart, every method returns a new `Iterable`, so you can chain methods together to make complex mapping, grouping, and filtering behavior:
@@ -109,9 +131,9 @@ var result = list.select((i, idx) => i * 2 + idx)     // [6, 3, 14, 8, 10, 10, 1
  - [ofType](https://pub.dev/documentation/darq/latest/darq/IterableExtension/ofType.html)
  - [orderBy](https://pub.dev/documentation/darq/latest/darq/IterableExtension/orderBy.html)
  - [orderByDescending](https://pub.dev/documentation/darq/latest/darq/IterableExtension/orderByDescending.html)
- - [package](https://pub.dev/documentation/darq/latest/darq/IterableExtension/package.html)
  - [prepend](https://pub.dev/documentation/darq/latest/darq/IterableExtension/prepend.html)
  - [reverse](https://pub.dev/documentation/darq/latest/darq/IterableExtension/reverse.html)
+ - [segment](https://pub.dev/documentation/darq/latest/darq/IterableExtension/package.html)
  - [select](https://pub.dev/documentation/darq/latest/darq/IterableExtension/select.html)
  - [selectMany](https://pub.dev/documentation/darq/latest/darq/IterableExtension/selectMany.html)
  - [sequenceEqual](https://pub.dev/documentation/darq/latest/darq/IterableExtension/sequenceEqual.html)

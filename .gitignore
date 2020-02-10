@@ -1,0 +1,6 @@
+.dart_tool
+.idea
+doc
+
+.packages
+linq-to-dart-iterable.txt

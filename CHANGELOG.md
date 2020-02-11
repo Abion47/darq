@@ -1,3 +1,7 @@
+## [0.4.0+1]
+
+* Fixing a bug in the documentation
+
 ## [0.4.0]
 
 * `Enumerable` and all related subclasses have been removed. The package has changed over to using static extension methods on `Iterable`.

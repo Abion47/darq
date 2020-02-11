@@ -1,3 +1,4 @@
+/// Provides the extension methods on `String`.
 extension StringExtensions on String {
   /// Returns an iterable that returns every character in this
   /// string, split along UTF-16 code units.

@@ -8,6 +8,11 @@ import 'iterables/group_select_value_iterable.dart';
 import 'iterables/ordered_iterable.dart';
 import 'lookup.dart';
 
+///{@template consuming}
+///<strong>This method is an iterable-consuming method. All lazy iterables
+/// will be iterated fully in the process of calculating the result.</strong>
+///{@endtemplate}
+
 /// Provides the extension methods on `Iterable`.
 extension IterableExtensions<T> on Iterable<T> {
   /// Aggregates the iterable into a single value.
@@ -40,8 +45,16 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If the iterable type is not one of these types, the [aggregator] function
   /// must be provided. Otherwise, an [ArgumentError] will be thrown.
   ///
-  /// <strong>The [aggregate] method is an iterable-consuming method. All lazy iterables
-  /// will be iterated fully in the process of calculating the result.</strong>
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [0, 1, 2, 3, 4];
+  ///       final result = list.aggregate(0, (a, b) => a + b);
+  ///
+  ///       // Result: 10
+  ///     }
+  ///
+  /// {@macro consuming}
   ///
   /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
   /// Internally it functions identically to [fold].)
@@ -67,8 +80,16 @@ extension IterableExtensions<T> on Iterable<T> {
   /// [condition] and will not iterate further over the iterable. In the worst
   /// case, it will iterate over the entire iterable.
   ///
-  /// <strong>The [all] method is an iterable-consuming method. All lazy iterables
-  /// will be iterated fully in the process of calculating the result.</strong>
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [2, 4, 6, 8];
+  ///       final result = list.all((x) => x.isEven);
+  ///
+  ///       // Result: true
+  ///     }
+  ///
+  /// {@macro consuming}
   ///
   /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
   /// Internally it functions identically to [every].)
@@ -89,6 +110,15 @@ extension IterableExtensions<T> on Iterable<T> {
   /// Inserts an element to the end of the iterable.
   ///
   /// Takes the specified element and inserts it at the end of the iterable.
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [0, 1, 2, 3];
+  ///       final result = list.append(4);
+  ///
+  ///       // Result: [0, 1, 2, 3, 4]
+  ///     }
   Iterable<T> append(T value) sync* {
     yield* this;
     yield value;
@@ -104,8 +134,16 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If the type of the iterator is a numerical type and the [selector] function
   /// isn't supplied, an [ArgumentError] will be thrown.
   ///
-  /// <strong>The [average] method is an iterable-consuming method. All lazy iterables
-  /// will be iterated fully in the process of calculating the result.</strong>
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [1, 3, 5, 7, 9];
+  ///       final result = list.average();
+  ///
+  ///       // Result: 5.0
+  ///     }
+  ///
+  /// {@macro consuming}
   double average([num Function(T) selector]) {
     if (selector == null) {
       if (T == num) {
@@ -142,6 +180,15 @@ extension IterableExtensions<T> on Iterable<T> {
   /// Appends the values of a given [Iterable] to the end of this iterable,
   /// resulting in an iterable that is the concatenation of both.
   ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [0, 1, 2];
+  ///       final result = list.concat([3, 4, 5]);
+  ///
+  ///       // Result: [0, 1, 2, 3, 4, 5]
+  ///     }
+  ///
   /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
   /// Internally it functions identically to [followedBy].)
   Iterable<T> concat(Iterable<T> other) => followedBy(other);
@@ -156,6 +203,20 @@ extension IterableExtensions<T> on Iterable<T> {
   /// or implements [EfficientLengthIterable], the [count] method will call the
   /// `length` property of the iterable as an O(1) operation. Otherwise, the
   /// [count] function will iterate over every element in the iterable.
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [0, 1, 2, 3];
+  ///       final resultA = list.count();
+  ///       final resultB = list.count((x) => x.isEven);
+  ///
+  ///       // ResultA: 4
+  ///       // ResultB: 2
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   int count([bool Function(T) condition]) {
     if (condition == null) return length;
 
@@ -178,6 +239,15 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// If this iterable has one or more elements, the iterable is returned
   /// without modification.
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = <int>[];
+  ///       final result = list.defaultIfEmpty(-1);
+  ///
+  ///       // Result: [-1]
+  ///     }
   Iterable<T> defaultIfEmpty(T defaultVal) sync* {
     var hasValues = false;
     for (var v in this) {
@@ -192,7 +262,7 @@ extension IterableExtensions<T> on Iterable<T> {
 
   /// Returns an iterable representing the distinct values of this iterable.
   ///
-  /// After applying the [distinctE] method to an iterable, the resulting
+  /// After applying the [distinct] method to an iterable, the resulting
   /// iterable will consist of distinct values in the source iterable.
   ///
   /// Optionally, a [keySelector] can be supplied to handle comparisons. If
@@ -205,7 +275,16 @@ extension IterableExtensions<T> on Iterable<T> {
   /// [keySelector] will be dropped.
   ///
   /// If none of the elements in the iterable match any other element in the
-  /// iterable, the iterable will be unchanged.
+  /// iterable, the iterable will be unchanged.\
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [0, 0, 0, 1, 1, 2, 3, 3, 3];
+  ///       final result = list.distinct();
+  ///
+  ///       // Result: [0, 1, 2, 3]
+  ///     }
   Iterable<T> distinct<TKey>([TKey Function(T) keySelector]) sync* {
     keySelector ??= (T v) => v as TKey;
     final set = <TKey>{};
@@ -232,14 +311,26 @@ extension IterableExtensions<T> on Iterable<T> {
   /// utilize an indexer call to the [List] as an O(1) operation. If
   /// [index] is greater than or equal to the length of the list, `defaultValue`
   /// will be returned instead.
-  T elementAtOrDefault(int index, [T defaultVal]) {
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [1, 2, 3, 4];
+  ///       final result = list.elementAtOrDefault(4, defaultValue: -1);
+  ///
+  ///       // Result: -1
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
+  T elementAtOrDefault(int index, {T defaultValue}) {
     if (index < 0) {
       throw RangeError.index(index, this, 'The index must not be negative.');
     }
 
     if (this is List) {
       final asList = this as List;
-      if (index >= asList.length) return defaultVal;
+      if (index >= asList.length) return defaultValue;
       return asList[index];
     }
 
@@ -249,7 +340,7 @@ extension IterableExtensions<T> on Iterable<T> {
       i++;
     }
 
-    return defaultVal;
+    return defaultValue;
   }
 
   /// Returns the set difference between the iterable and the given
@@ -267,6 +358,16 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// If none of the elements in the source iterable match any element in the
   /// given [other] collection, the iterable will be unchanged.
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final listA = [1, 2, 3, 4];
+  ///       final listB = [3, 4, 5, 6];
+  ///       final result = listA.except(listB);
+  ///
+  ///       // Result: [1, 2]
+  ///     }
   Iterable<T> except<TKey>(Iterable<T> other,
       [TKey Function(T) selector]) sync* {
     selector ??= (T v) => v as TKey;
@@ -282,8 +383,20 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If the iterable is empty, the value specified by [defaultValue] will be
   /// returned instead. If [defaultValue] is omitted, the returned value will be
   /// `null`.
-  T firstOrDefault([T defaultVal]) {
-    if (isEmpty) return defaultVal;
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = <int>[];
+  ///       final result = list.firstOrDefault(defaultValue: -1);
+  ///
+  ///       // Result: -1
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
+  T firstOrDefault({T defaultValue}) {
+    if (isEmpty) return defaultValue;
     return first;
   }
 
@@ -301,8 +414,20 @@ extension IterableExtensions<T> on Iterable<T> {
   /// The [firstWhereOrDefault] method begins iteration, but short-circuits
   /// the first time [condition] returns `true` and will not iterate further. In
   /// the worst case, it will iterate over the entire iterable.
-  T firstWhereOrDefault(bool Function(T) condition, [T defaultVal]) {
-    if (isEmpty) return defaultVal;
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [1, 3, 5];
+  ///       final result = list.firstWhereOrDefault((x) => x.isEven, defaultValue: -1);
+  ///
+  ///       // Result: -1
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
+  T firstWhereOrDefault(bool Function(T) condition, {T defaultValue}) {
+    if (isEmpty) return defaultValue;
 
     for (var v in this) {
       if (condition(v)) {
@@ -310,7 +435,7 @@ extension IterableExtensions<T> on Iterable<T> {
       }
     }
 
-    return defaultVal;
+    return defaultValue;
   }
 
   /// Groups the elements in the iterable by a key.
@@ -336,26 +461,33 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// Example:
   ///
-  ///    class Pet {
-  ///      Pet(this.name, this.age);
+  ///     class Pet {
+  ///       Pet(this.name, this.age);
   ///
-  ///      String name;
-  ///      double age;
-  ///    }
+  ///       String name;
+  ///       double age;
+  ///     }
   ///
-  ///    void main() {
-  ///      final pets = [Pet('Barley', 8), Pet('Boots', 4), Pet('Whiskers', 1), Pet('Daisy', 4)];
+  ///     void main() {
+  ///       final pets = [
+  ///         Pet('Barley', 8),
+  ///         Pet('Boots', 4),
+  ///         Pet('Whiskers', 1),
+  ///         Pet('Daisy', 4),
+  ///       ];
   ///
-  ///      final results = pets.groupBy((pet) => pet.age);
+  ///       final results = pets.groupBy((pet) => pet.age);
   ///
-  ///      // Resulting Iterable:
-  ///      // [
-  ///      //   [ Pet('Barley', 8) ],
-  ///      //   [ Pet('Boots', 4), Pet('Daisy', 4) ],
-  ///      //   [ Pet('Whiskers', 1) ],
-  ///      // ]
-  ///    }
-
+  ///       // Resulting Iterable:
+  ///       // [
+  ///       //   [ Pet('Barley', 8) ],
+  ///       //   [ Pet('Boots', 4), Pet('Daisy', 4) ],
+  ///       //   [ Pet('Whiskers', 1) ],
+  ///       // ]
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   GroupByIterable<T, TKey> groupBy<TKey>(
     TKey Function(T) keySelector, {
     EqualityComparer<TKey> keyComparer,
@@ -391,28 +523,36 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// Example:
   ///
-  ///    class Pet {
-  ///      Pet(this.name, this.age);
+  ///     class Pet {
+  ///       Pet(this.name, this.age);
   ///
-  ///      String name;
-  ///      double age;
-  ///    }
+  ///       String name;
+  ///       double age;
+  ///     }
   ///
-  ///    void main() {
-  ///      final pets = [Pet('Barley', 8), Pet('Boots', 4), Pet('Whiskers', 1), Pet('Daisy', 4)];
+  ///     void main() {
+  ///       final pets = [
+  ///         Pet('Barley', 8),
+  ///         Pet('Boots', 4),
+  ///         Pet('Whiskers', 1),
+  ///         Pet('Daisy', 4),
+  ///       ];
   ///
-  ///      final results = pets.groupByValue(
-  ///        keySelector: (pet) => pet.age),
-  ///        valueSelector: (pet) => pet.name),
-  ///      );
+  ///       final results = pets.groupByValue(
+  ///         keySelector: (pet) => pet.age),
+  ///         valueSelector: (pet) => pet.name),
+  ///       );
   ///
-  ///      // Resulting Iterable:
-  ///      // [
-  ///      //   [ 'Barley' ],
-  ///      //   [ Boots', 'Daisy' ],
-  ///      //   [ 'Whiskers' ],
-  ///      // ]
-  ///    }
+  ///       // Resulting Iterable:
+  ///       // [
+  ///       //   [ 'Barley' ],
+  ///       //   [ 'Boots', 'Daisy' ],
+  ///       //   [ 'Whiskers' ],
+  ///       // ]
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   GroupByValueIterable<T, TKey, TValue> groupByValue<TKey, TValue>({
     TKey Function(T) keySelector,
     TValue Function(T) valueSelector,
@@ -456,52 +596,55 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// Example:
   ///
-  ///    class Person {
-  ///      Person(this.name);
+  ///     class Person {
+  ///       Person(this.name);
   ///
-  ///      String name;
-  ///    }
+  ///       String name;
+  ///     }
   ///
-  ///    class Pet {
-  ///      Pet(this.name, this.age, this.owner);
+  ///     class Pet {
+  ///       Pet(this.name, this.age, this.owner);
   ///
-  ///      String name;
-  ///      double age;
-  ///      Person owner;
-  ///    }
+  ///       String name;
+  ///       double age;
+  ///       Person owner;
+  ///     }
   ///
-  ///    void main() {
-  ///      final people = [
-  ///        Person('Travis'),
-  ///        Person('Terry'),
-  ///        Person('Charlotte'),
-  ///        Person('Benny'),
-  ///      ];
-  ///      final pets = [
-  ///        Pet('Barley', 8, people[1]),   // owner: terry
-  ///        Pet('Boots', 4, people[1]),    // owner: terry
-  ///        Pet('Whiskers', 1, people[2]), // owner: charlotte
-  ///        Pet('Daisy', 4, people[0]),    // owner: travis
-  ///      ];
+  ///     void main() {
+  ///       final people = [
+  ///         Person('Travis'),
+  ///         Person('Terry'),
+  ///         Person('Charlotte'),
+  ///         Person('Benny'),
+  ///       ];
+  ///       final pets = [
+  ///         Pet('Barley', 8, people[1]),   // owner: terry
+  ///         Pet('Boots', 4, people[1]),    // owner: terry
+  ///         Pet('Whiskers', 1, people[2]), // owner: charlotte
+  ///         Pet('Daisy', 4, people[0]),    // owner: travis
+  ///       ];
   ///
-  ///      final result = people.groupJoin(
-  ///        pets,
-  ///        (person, pets) => <String, dynamic>{
-  ///          'ownerName': person.name,
-  ///          'pets': pets.select((pet, i) => pet.name)
-  ///        },
-  ///        outerKeySelector: (person) => person.name,
-  ///        innerKeySelector: (pet) => pet.owner.name,
-  ///      );
+  ///       final result = people.groupJoin(
+  ///         pets,
+  ///         (person, pets) => <String, dynamic>{
+  ///           'ownerName': person.name,
+  ///           'pets': pets.select((pet, i) => pet.name)
+  ///         },
+  ///         outerKeySelector: (person) => person.name,
+  ///         innerKeySelector: (pet) => pet.owner.name,
+  ///       );
   ///
-  ///      // Resulting Iterable:
-  ///      // [
-  ///      //   { 'ownerName': 'Travis', 'pets': ['Daisy'] },
-  ///      //   { 'ownerName': 'Terry', 'pets': ['Barley', 'Boots'] },
-  ///      //   { 'ownerName': 'Charlotte', 'pets': ['Whiskers'] },
-  ///      //   { 'ownerName': 'Benny', 'pets': [] },
-  ///      // ]
-  ///    }
+  ///       // Resulting Iterable:
+  ///       // [
+  ///       //   { 'ownerName': 'Travis', 'pets': ['Daisy'] },
+  ///       //   { 'ownerName': 'Terry', 'pets': ['Barley', 'Boots'] },
+  ///       //   { 'ownerName': 'Charlotte', 'pets': ['Whiskers'] },
+  ///       //   { 'ownerName': 'Benny', 'pets': [] },
+  ///       // ]
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   GroupJoinIterable<T, TInner, TKey, TResult> groupJoin<TInner, TKey, TResult>(
     Iterable<TInner> other,
     TResult Function(T, Iterable<TInner>) resultSelector, {
@@ -542,40 +685,43 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// Example:
   ///
-  ///    class Pet {
-  ///      Pet(this.name, this.age);
+  ///     class Pet {
+  ///       Pet(this.name, this.age);
   ///
-  ///      String name;
-  ///      double age;
-  ///    }
+  ///       String name;
+  ///       double age;
+  ///     }
   ///
-  ///    void main() {
-  ///      final pets = [
-  ///        Pet('Barley', 8.3),
-  ///        Pet('Boots', 4.9),
-  ///        Pet('Whiskers', 1.5),
-  ///        Pet('Daisy', 4.3),
-  ///      ];
+  ///     void main() {
+  ///       final pets = [
+  ///         Pet('Barley', 8.3),
+  ///         Pet('Boots', 4.9),
+  ///         Pet('Whiskers', 1.5),
+  ///         Pet('Daisy', 4.3),
+  ///       ];
   ///
-  ///      final ageComparer = (Pet p1, Pet p2) => p1.age.compareTo(p2.age);
+  ///       final ageComparer = (Pet p1, Pet p2) => p1.age.compareTo(p2.age);
   ///
-  ///      final result = pets.groupSelect(
-  ///        (age, pets) => {
-  ///          'key': age,
-  ///          'count': pets.length,
-  ///          'min': pets.min(ageComparer),
-  ///          'max': pets.max(ageComparer),
-  ///        },
-  ///        keySelector: (pet) => pet.age.floor(),
-  ///      );
+  ///       final result = pets.groupSelect(
+  ///         (age, pets) => {
+  ///           'key': age,
+  ///           'count': pets.length,
+  ///           'min': pets.min(ageComparer),
+  ///           'max': pets.max(ageComparer),
+  ///         },
+  ///         keySelector: (pet) => pet.age.floor(),
+  ///       );
   ///
-  ///      // Resulting Iterable:
-  ///      // [
-  ///      //   { 'key': 8, count: 1, min: Pet('Barley', 8.3), max: Pet('Barley', 8.3) },
-  ///      //   { 'key': 4, count: 2, min: Pet('Daisy', 4.3), max: Pet('Boots', 4.9) },
-  ///      //   { 'key': 1, count: 1, min: Pet('Whiskers', 1.5), max: Pet('Whiskers', 1.5) },
-  ///      // ]
-  ///    }
+  ///       // Resulting Iterable:
+  ///       // [
+  ///       //   { 'key': 8, 'count': 1, 'min': Pet('Barley', 8.3), 'max': Pet('Barley', 8.3) },
+  ///       //   { 'key': 4, 'count': 2, 'min': Pet('Daisy', 4.3), 'max': Pet('Boots', 4.9) },
+  ///       //   { 'key': 1, 'count': 1, 'min': Pet('Whiskers', 1.5), 'max': Pet('Whiskers', 1.5) },
+  ///       // ]
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   GroupSelectIterable<T, TKey, TResult> groupSelect<TKey, TResult>(
     TResult Function(TKey, Iterable<T>) resultSelector, {
     TKey Function(T) keySelector,
@@ -611,40 +757,43 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// Example:
   ///
-  ///    class Pet {
-  ///      Pet(this.name, this.age);
+  ///     class Pet {
+  ///       Pet(this.name, this.age);
   ///
-  ///      String name;
-  ///      double age;
-  ///    }
+  ///       String name;
+  ///       double age;
+  ///     }
   ///
-  ///    void main() {
-  ///      final pets = [
-  ///        Pet('Barley', 8.3),
-  ///        Pet('Boots', 4.9),
-  ///        Pet('Whiskers', 1.5),
-  ///        Pet('Daisy', 4.3),
-  ///      ];
+  ///     void main() {
+  ///       final pets = [
+  ///         Pet('Barley', 8.3),
+  ///         Pet('Boots', 4.9),
+  ///         Pet('Whiskers', 1.5),
+  ///         Pet('Daisy', 4.3),
+  ///       ];
   ///
-  ///      final ageComparer = (Pet p1, Pet p2) => p1.age.compareTo(p2.age);
+  ///       final ageComparer = (Pet p1, Pet p2) => p1.age.compareTo(p2.age);
   ///
-  ///      final result = pets.groupSelectValue(
-  ///        (age, pets) => {
-  ///          'key': age,
-  ///          'count': pets.length,
-  ///          'names': pets,
-  ///        },
-  ///        keySelector: (pet) => pet.age.floor(),
-  ///        valueSelector: (pet) => pet.name,
-  ///      );
+  ///       final result = pets.groupSelectValue(
+  ///         (age, pets) => {
+  ///           'key': age,
+  ///           'count': pets.length,
+  ///           'names': pets,
+  ///         },
+  ///         keySelector: (pet) => pet.age.floor(),
+  ///         valueSelector: (pet) => pet.name,
+  ///       );
   ///
-  ///      // Resulting Iterable:
-  ///      // [
-  ///      //   { 'key': 8, count: 1, names: ['Barley'] },
-  ///      //   { 'key': 4, count: 2, names: ['Boots', 'Daisy'] },
-  ///      //   { 'key': 1, count: 1, names: ['Whiskers'] },
-  ///      // ]
-  ///    }
+  ///       // Resulting Iterable:
+  ///       // [
+  ///       //   { 'key': 8, 'count': 1, 'names': ['Barley'] },
+  ///       //   { 'key': 4, 'count': 2, 'names': ['Boots', 'Daisy'] },
+  ///       //   { 'key': 1, 'count': 1, 'names': ['Whiskers'] },
+  ///       // ]
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   GroupSelectValueIterable<T, TKey, TValue, TResult>
       groupSelectValue<TKey, TValue, TResult>(
     TResult Function(TKey, Iterable<TValue>) resultSelector, {
@@ -675,6 +824,16 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// If all of the elements in the source iterable match an element in the
   /// given [other] collection, the iterable will be unchanged.
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final listA = [1, 2, 3, 4];
+  ///       final listB = [3, 4, 5, 6];
+  ///       final result = listA.intersect(listB);
+  ///
+  ///       // Result: [3, 4]
+  ///     }
   Iterable<T> intersect<TKey>(Iterable<T> other,
       [TKey Function(T) selector]) sync* {
     selector ??= (T v) => v as TKey;
@@ -700,13 +859,31 @@ extension IterableExtensions<T> on Iterable<T> {
   /// Elements in the source iterable that doesn't share a key in the
   /// lookup table as well as elements in [other] that don't share a key with a
   /// source iterable element are discarded.
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final a = {'1': 1, '2': 2, '3': 3, '4': 4};
+  ///       final b = {'1': 1.0, '2': 2.0, '3': 3.0, '5': 5.0};
+  ///
+  ///       final result = a.entries.joinMap(
+  ///         b.entries,
+  ///         (x, y) => '${x.value}: ${y.value}',
+  ///         outerKeySelector: (x) => x.key,
+  ///         innerKeySelector: (y) => y.key,
+  ///       );
+  ///
+  ///       // Result: ['1: 1.0', '2: 2.0', '3: 3.0']
+  ///     }
   Iterable<TResult> joinMap<TInner, TKey, TResult>(
     Iterable<TInner> other,
+    TResult Function(T, TInner) resultSelector, {
     TKey Function(T) outerKeySelector,
     TKey Function(TInner) innerKeySelector,
-    TResult Function(T, TInner) resultSelector, {
     EqualityComparer<TKey> keyComparer,
   }) sync* {
+    outerKeySelector ??= (T v) => v as TKey;
+    innerKeySelector ??= (TInner v) => v as TKey;
     keyComparer ??= EqualityComparer.forType<TKey>();
 
     final lookup = Lookup.createForJoin(other, innerKeySelector, keyComparer);
@@ -741,10 +918,19 @@ extension IterableExtensions<T> on Iterable<T> {
   /// returned instead. If [defaultValue] is omitted, the returned value will be
   /// `null`.
   ///
-  /// <strong>The [lastOrDefault] method is an iterable-consuming method. All lazy iterables
-  /// will be iterated fully in the process of calculating the result.</strong>
-  T lastOrDefault([T defaultVal]) {
-    if (isEmpty) return defaultVal;
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = <int>[];
+  ///       final result = list.lastOrDefault(defaultValue: -1);
+  ///
+  ///       // Result: -1
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
+  T lastOrDefault({T defaultValue}) {
+    if (isEmpty) return defaultValue;
     return last;
   }
 
@@ -758,10 +944,19 @@ extension IterableExtensions<T> on Iterable<T> {
   /// the value specified by [defaultValue] will be returned instead. If [defaultValue]
   /// is omitted, the returned value will be `null`.
   ///
-  /// <strong>The [lastWhereOrDefault] method is an iterable-consuming method. All lazy
-  /// iterables will be iterated fully in the process of calculating the result.</strong>
-  T lastWhereOrDefault(bool Function(T) condition, [T defaultVal]) {
-    if (isEmpty) return defaultVal;
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [1, 3, 5];
+  ///       final result = list.lastWhereOrDefault((x) => x.isEven, defaultValue: -1);
+  ///
+  ///       // Result: -1
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
+  T lastWhereOrDefault(bool Function(T) condition, [T defaultValue]) {
+    if (isEmpty) return defaultValue;
 
     var found = false;
     T val;
@@ -777,7 +972,7 @@ extension IterableExtensions<T> on Iterable<T> {
       return val;
     }
 
-    return defaultVal;
+    return defaultValue;
   }
 
   /// Returns the maximum value in the iterable.
@@ -800,8 +995,17 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// If the iterable is empty, a [StateError] will be thrown.
   ///
-  /// <strong>The [max] method is an iterable-consuming method. All lazy
-  /// iterables will be iterated fully in the process of calculating the result.</strong>
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [0, 1, 2, 3];
+  ///       final result = list.max();
+  ///
+  ///       // Result: 3
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   T max([int Function(T, T) comparer]) {
     if (comparer == null) {
       if (T == num) {
@@ -855,8 +1059,17 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// If the iterable is empty, a [StateError] will be thrown.
   ///
-  /// <strong>The [min] method is an iterable-consuming method. All lazy
-  /// iterables will be iterated fully in the process of calculating the result.</strong>
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [0, 1, 2, 3];
+  ///       final result = list.min();
+  ///
+  ///       // Result: 0
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   T min([int Function(T, T) comparer]) {
     if (comparer == null) {
       if (T == num) {
@@ -900,6 +1113,15 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If all elements in the source iterable can be safely cast to `TResult`,
   /// the resulting iterable will be unchanged.
   ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = <num>[0, 1.0, 2, 3.5];
+  ///       final result = list.ofType<int>();
+  ///
+  ///       // Result: [0, 2]
+  ///     }
+  ///
   /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
   /// Internally it functions identically to [whereType].)
   Iterable<TOther> ofType<TOther>() => whereType<TOther>();
@@ -926,8 +1148,17 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If the iterable is already sorted in ascending order, the resulting
   /// iterable will be unchanged.
   ///
-  /// <strong>The [orderBy] method is an iterable-consuming method. All lazy
-  /// iterables will be iterated fully in the process of calculating the result.</strong>
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [4, 3, 5, 2, 1];
+  ///       final result = list.orderBy((x) => x);
+  ///
+  ///       // Result: [1, 2, 3, 4, 5]
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   Iterable<T> orderBy<TKey>(
     TKey Function(T) keySelector, {
     EqualityComparer<TKey> keyComparer,
@@ -958,8 +1189,17 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If the iterable is already sorted in descending order, the resulting
   /// iterable will be unchanged.
   ///
-  /// <strong>The [orderByDescending] method is an iterable-consuming method. All lazy
-  /// iterables will be iterated fully in the process of calculating the result.</strong>
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [4, 3, 5, 2, 1];
+  ///       final result = list.orderByDescending((x) => x);
+  ///
+  ///       // Result: [5, 4, 3, 2, 1]
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   Iterable<T> orderByDescending<TKey>(
     TKey Function(T) keySelector, {
     EqualityComparer<TKey> keyComparer,
@@ -972,6 +1212,15 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// Takes the specified element and inserts it at the beginning of the
   /// iterable.
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [1, 2, 3, 4];
+  ///       final result = list.prepend(0);
+  ///
+  ///       // Result: [0, 1, 2, 3, 4]
+  ///     }
   Iterable<T> prepend(T value) sync* {
     yield value;
     yield* this;
@@ -983,11 +1232,19 @@ extension IterableExtensions<T> on Iterable<T> {
   /// iterable is the product of then iterating over that list in reverse
   /// order.
   ///
-  /// <strong>The [reverse] method is an iterable-consuming method. All lazy
-  /// iterables will be iterated fully in the process of calculating the result.</strong>
-  Iterable<T> reverse() sync* {
-    final list = toList();
-    yield* list.reversed;
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [1, 2, 3, 4];
+  ///       final result = list.reverse();
+  ///
+  ///       // Result: [4, 3, 2, 1]
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
+  Iterable<T> reverse() {
+    return toList().reversed;
   }
 
   /// Groups elements in the iterator into segments of [size] length, optionally
@@ -999,6 +1256,15 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If [includeTail] is false, when the source iteration is complete, any
   /// remaining elements are discarded. If true, these elements are returned as
   /// a final list of some length less than [size]. (False by default.)
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [1, 2, 3, 4, 5, 6];
+  ///       final result = list.segment(2);
+  ///
+  ///       // Result: [[1, 2], [3, 4], [5, 6]]
+  ///     }
   Iterable<Iterable<T>> segment(int size, {bool includeTail = false}) sync* {
     var package = List<T>(size);
     var index = 0;
@@ -1022,6 +1288,13 @@ extension IterableExtensions<T> on Iterable<T> {
   /// During iteration, the [selector] function is provided each value in the iterable
   /// along with the index of the value in the iteration. The returned value of that
   /// function is then provided as the next element of the resulting iterable.
+  ///
+  ///     void main() {
+  ///       final list = ['a', 'b', 'c', 'd'];
+  ///       final result = list.select((c, i) => '$i_$c');
+  ///
+  ///       // Result: ['0_a', '1_b', '2_c', '3_d']
+  ///     }
   Iterable<TResult> select<TResult>(TResult Function(T, int) selector) sync* {
     var index = 0;
     for (var v in this) {
@@ -1038,6 +1311,15 @@ extension IterableExtensions<T> on Iterable<T> {
   /// value in that iteration is provided as the next element of the
   /// resulting iterable. The result is all of the collections flattened so that
   /// their values become elements in a single iterable.
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = ['abc', 'de', 'f', 'ghij'];
+  ///       final result = list.selectMany((s, i) => s.iterable);
+  ///
+  ///       // Result: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+  ///     }
   Iterable<TResult> selectMany<TResult>(
       Iterable<TResult> Function(T, int) selector) sync* {
     var index = 0;
@@ -1065,11 +1347,26 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If either selector function is omitted, the omitted function will default to
   /// a selector that returns the value itself.
   ///
-  /// <strong>The [sequenceEqual] method is an iterable-consuming method. All lazy
-  /// iterables in this iterable and in the [other] iterable will be iterated fully
-  /// in the process of calculating the result.</strong>
-  bool sequenceEqual<TKey>(Iterable<T> other,
-      [TKey Function(T) outerSelector, TKey Function(T) innerSelector]) {
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final listA = ['a', 'b', 'c'];
+  ///       final listB = [97, 98, 99];
+  ///       final result = listA.sequenceEqual(
+  ///         listB,
+  ///         outerSelector: (c) => c.codeUnitAt(0),
+  ///       );
+  ///
+  ///       // Result: true
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
+  bool sequenceEqual<TOther, TKey>(
+    Iterable<TOther> other, {
+    TKey Function(T) outerSelector,
+    TKey Function(TOther) innerSelector,
+  }) {
     if (other == null) {
       return false;
     }
@@ -1081,7 +1378,7 @@ extension IterableExtensions<T> on Iterable<T> {
     bool bHasNext;
 
     outerSelector ??= (T v) => v as TKey;
-    innerSelector ??= (T v) => v as TKey;
+    innerSelector ??= (TOther v) => v as TKey;
 
     do {
       aHasNext = iterA.moveNext();
@@ -1110,9 +1407,21 @@ extension IterableExtensions<T> on Iterable<T> {
   /// The [singleOrDefault] function will short-circuit after reaching the second
   /// element of the iteration, if one exists. In the worst-case scenario,
   /// [singleOrDefault] will iterate over two elements of the iterable.
-  T singleOrDefault([T defaultVal]) {
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [1, 2];
+  ///       final result = list.singleOrDefault(defaultValue: -1);
+  ///
+  ///       // Result: -1
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
+  T singleOrDefault({T defaultValue}) {
     final iter = iterator;
-    if (!iter.moveNext()) return defaultVal;
+    if (!iter.moveNext()) return defaultValue;
 
     var val = iter.current;
     if (iter.moveNext()) {
@@ -1134,9 +1443,22 @@ extension IterableExtensions<T> on Iterable<T> {
   /// The [singleOrDefault] function will short-circuit after finding a second element
   /// that matches the [condition]. In the worst-case scenario, [singleOrDefault]
   /// will iterate over the entire iterable.
-  T singleWhereOrDefault(bool Function(T) condition, [T defaultVal]) {
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = [1, 2, 3];
+  ///       final result = list.singleWhereOrDefault((x) => x.isOdd, defaultValue: -1);
+  ///
+  ///       // Result: -1
+  ///     }
+  ///
+  ///
+  /// {@macro consuming}
+  ///
+  T singleWhereOrDefault(bool Function(T) condition, {T defaultValue}) {
     final iter = iterator;
-    if (!iter.moveNext()) return defaultVal;
+    if (!iter.moveNext()) return defaultValue;
 
     T val;
     var found = false;
@@ -1152,7 +1474,7 @@ extension IterableExtensions<T> on Iterable<T> {
       }
     } while (iter.moveNext());
 
-    if (!found) return defaultVal;
+    if (!found) return defaultValue;
     return val;
   }
 
@@ -1176,8 +1498,17 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If the type of the iterable is not a numeric primitive, the [selector]
   /// function must be provided. Otherwise, a [StateError] is thrown.
   ///
-  /// <strong>The [min] method is an iterable-consuming method. All lazy
-  /// iterables will be iterated fully in the process of calculating the result.</strong>
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final listA = [1, 2, 3, 4];
+  ///       final result = list.sum();
+  ///
+  ///       // Result: 10
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   num sum([num Function(T) selector]) {
     if (selector == null) {
       if (T == num) {
@@ -1210,7 +1541,7 @@ extension IterableExtensions<T> on Iterable<T> {
   /// Adds a secondary sorting pass to iteration in ascending
   /// (least-to-greatest) order.
   ///
-  /// [thenByE] applies to an iterable that has been sorted by [orderBy] or
+  /// [thenBy] applies to an iterable that has been sorted by [orderBy] or
   /// [orderByDescending] (or another [thenBy] or [thenByDescending]). Once the
   /// previous sorting mechanism is processed, the keys are then sorted again
   /// using the [EqualityComparer] given to this method. (The process of sorting
@@ -1229,8 +1560,19 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If the iterable is already sorted in ascending order, the resulting
   /// iterable will be unchanged.
   ///
-  /// <strong>The [thenBy] method is an iterable-consuming method. All lazy
-  /// iterables will be iterated fully in the process of calculating the result.</strong>
+  /// Example:
+  ///
+  ///     void main() {
+  ///       var list = ['ab', 'a', 'c', 'aa', ''];
+  ///       // Sort by string length followed by alphabetical order
+  ///       var result = list.orderBy((c) => c.length)
+  ///                        .thenBy((c) => c);
+  ///
+  ///       // Result: ['', 'a', 'c', 'aa', 'ab']
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   Iterable<T> thenBy<TKey>(
     TKey Function(T) keySelector, {
     EqualityComparer<TKey> keyComparer,
@@ -1266,8 +1608,19 @@ extension IterableExtensions<T> on Iterable<T> {
   /// If the iterable is already sorted in ascending order, the resulting
   /// iterable will be unchanged.
   ///
-  /// <strong>The [thenByDescending] method is an iterable-consuming method. All lazy
-  /// iterables will be iterated fully in the process of calculating the result.</strong>
+  /// Example:
+  ///
+  ///     void main() {
+  ///       var list = ['ab', 'a', 'c', 'aa', ''];
+  ///       // Sort by string length followed by reverse alphabetical order
+  ///       var result = list.orderBy((c) => c.length)
+  ///                        .thenByDescending((c) => c);
+  ///
+  ///       // Result: ['', 'c', 'a', 'ab', 'aa']
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   Iterable<T> thenByDescending<TKey>(
     TKey Function(T) keySelector, {
     EqualityComparer<TKey> keyComparer,
@@ -1291,8 +1644,17 @@ extension IterableExtensions<T> on Iterable<T> {
   /// overwritten. As such, the length of the resulting [Map] is not guaranteed
   /// to be the same length as the iterable.
   ///
-  /// <strong>The [toMap] method is an iterable-consuming method. All lazy
-  /// iterables will be iterated fully in the process of calculating the result.</strong>
+  /// Example:
+  ///
+  ///     void main() {
+  ///       var list = [97, 98, 99];
+  ///       var result = list.toMap((x) => MapEntry(x, String.fromCodeUnit(x)));
+  ///
+  ///       // Result: { 97: 'a', 98: 'b', 99: 'c' }
+  ///     }
+  ///
+  /// {@macro consuming}
+  ///
   Map<TKey, TValue> toMap<TKey, TValue>(
       MapEntry<TKey, TValue> Function(T) entrySelector) {
     return Map.fromEntries(map(entrySelector));
@@ -1316,6 +1678,16 @@ extension IterableExtensions<T> on Iterable<T> {
   /// [distinct] was applied to it, so duplicate elements after the first found
   /// will be discarded. If the intention is to combine elements of two
   /// iterables/collections, use [concat] instead.
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final listA = [1, 2, 3, 4];
+  ///       final listB = [3, 4, 5, 6];
+  ///       final result = listA.union(listB);
+  ///
+  ///       // Result: [1, 2, 3, 4, 5, 6]
+  ///     }
   Iterable<T> union<TKey>(Iterable<T> other,
       [TKey Function(T) selector]) sync* {
     selector ??= (T v) => v as TKey;
@@ -1346,6 +1718,16 @@ extension IterableExtensions<T> on Iterable<T> {
   ///
   /// The length of the resulting iterable will be equal to the lesser of the
   /// lengths of the source iterable or the given [other] collection.
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       var listA = [1, 2, 3, 4];
+  ///       var listB = [5.0, 6.0, 7.0];
+  ///       var result = listA.zip(listB, (a, b) => '$a: $b');
+  ///
+  ///       // Result: [ '1: 5.0', '2: 6.0', '7: 7.0' ]
+  ///     }
   Iterable<TResult> zip<TOther, TResult>(
       Iterable<TOther> other, TResult Function(T, TOther) selector) sync* {
     final sourceIterator = iterator;

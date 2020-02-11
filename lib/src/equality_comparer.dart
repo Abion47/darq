@@ -16,7 +16,7 @@ typedef Hasher<T> = int Function(T value);
 /// - If [left] and [right] are equal, 0 is returned.
 typedef Sorter<T> = int Function(T left, T right);
 
-/// Used in various enumeration methods for allowing user-defined comparisons
+/// Used in various iteration methods for allowing user-defined comparisons
 /// between complex elements.
 ///
 /// [EqualityComparer] exposes three different forms of comparison - equivalency,

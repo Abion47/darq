@@ -227,7 +227,7 @@ void main() {
       var result2 = list.elementAtOrDefault(6);
       expect(result2, isNull);
 
-      var result3 = list.elementAtOrDefault(6, 5);
+      var result3 = list.elementAtOrDefault(6, defaultValue: 5);
       expect(result3, equals(5));
     });
 
@@ -266,7 +266,7 @@ void main() {
       var result2 = test2.firstOrDefault();
       expect(result2, null);
 
-      var result3 = test2.firstOrDefault(4);
+      var result3 = test2.firstOrDefault(defaultValue: 4);
       expect(result3, 4);
     });
 
@@ -279,7 +279,7 @@ void main() {
       var result2 = test2.firstWhereOrDefault((i) => i.isOdd);
       expect(result2, null);
 
-      var result3 = test2.firstWhereOrDefault((i) => i.isOdd, 5);
+      var result3 = test2.firstWhereOrDefault((i) => i.isOdd, defaultValue: 5);
       expect(result3, 5);
     });
 
@@ -658,8 +658,12 @@ void main() {
       final a = {'1': 1, '2': 2, '3': 3, '4': 4};
       final b = {'1': 1.0, '2': 2.0, '3': 3.0, '5': 5.0};
 
-      final output = a.entries.joinMap(b.entries, (x) => x.key, (y) => y.key,
-          (x, y) => '${x.value}_${y.value}');
+      final output = a.entries.joinMap(
+        b.entries,
+        (x, y) => '${x.value}_${y.value}',
+        outerKeySelector: (x) => x.key,
+        innerKeySelector: (y) => y.key,
+      );
       expect(output, orderedEquals(['1_1.0', '2_2.0', '3_3.0']));
     });
 
@@ -672,7 +676,7 @@ void main() {
       var result2 = test2.lastOrDefault();
       expect(result2, null);
 
-      var result3 = test2.lastOrDefault(4);
+      var result3 = test2.lastOrDefault(defaultValue: 4);
       expect(result3, 4);
     });
 
@@ -793,6 +797,11 @@ void main() {
           output2,
           orderedEquals(
               [0, 0, 1, 2, 3, 4, 1, 5, 6, 7, 8, 9, 2, 10, 11, 12, 13, 14]));
+
+      final strings = ['abc', 'de', 'f', 'ghij'];
+      final result = strings.selectMany((s, i) => s.iterable);
+      expect(result,
+          orderedEquals(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']));
     });
 
     test('sequenceEqual', () {
@@ -812,9 +821,17 @@ void main() {
       final output5 = input.sequenceEqual(['A', 'B', 'C', 'D', 'E']);
       expect(output5, isFalse);
 
-      final output6 = input.sequenceEqual(
-          ['A', 'B', 'C', 'D', 'E'], null, (s) => s.toLowerCase());
+      final output6 = input.sequenceEqual(['A', 'B', 'C', 'D', 'E'],
+          innerSelector: (s) => s.toLowerCase());
       expect(output6, isTrue);
+
+      final listA = ['a', 'b', 'c'];
+      final listB = [97, 98, 99];
+      final result = listA.sequenceEqual(
+        listB,
+        outerSelector: (s) => s.codeUnitAt(0),
+      );
+      expect(result, isTrue);
     });
 
     test('singleOrDefault', () {
@@ -827,7 +844,7 @@ void main() {
       expect(output2, isNull);
 
       final input3 = [];
-      final output3 = input3.singleOrDefault(3);
+      final output3 = input3.singleOrDefault(defaultValue: 3);
       expect(output3, 3);
 
       final input4 = [0, 1];
@@ -845,7 +862,8 @@ void main() {
       expect(output2, isNull);
 
       final input3 = [];
-      final output3 = input3.singleWhereOrDefault((x) => x == 5, 5);
+      final output3 =
+          input3.singleWhereOrDefault((x) => x == 5, defaultValue: 5);
       expect(output3, 5);
 
       final input4 = [2, 2];

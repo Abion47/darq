@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the batch method from the GroupedIterableExtensions extension, for the Dart programming language.">
+  <title>batch method - GroupedIterableExtensions extension - darq library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+  <!-- header placeholder -->
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">darq</a></li>
+    <li><a href="darq/darq-library.html">darq</a></li>
+    <li><a href="darq/GroupedIterableExtensions.html">GroupedIterableExtensions<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">batch method</li>
+  </ol>
+  <div class="self-name">batch</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">darq</a></li>
+      <li><a href="darq/darq-library.html">darq</a></li>
+      <li><a href="darq/GroupedIterableExtensions.html">GroupedIterableExtensions<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+      <li class="self-crumb">batch method</li>
+    </ol>
+    
+    <h5>GroupedIterableExtensions extension</h5>
+    <ol>
+    
+    
+    
+        <li class="section-title"><a href="darq/GroupedIterableExtensions.html#instance-methods">Methods</a></li>
+        <li><a href="darq/GroupedIterableExtensions/batch.html">batch</a></li>
+        <li><a href="darq/GroupedIterableExtensions/batchSelect.html">batchSelect</a></li>
+        <li><a href="darq/GroupedIterableExtensions/groupBy.html">groupBy</a></li>
+        <li><a href="darq/GroupedIterableExtensions/groupByValue.html">groupByValue</a></li>
+        <li><a href="darq/GroupedIterableExtensions/groupJoin.html">groupJoin</a></li>
+        <li><a href="darq/GroupedIterableExtensions/groupSelect.html">groupSelect</a></li>
+        <li><a href="darq/GroupedIterableExtensions/groupSelectValue.html">groupSelectValue</a></li>
+        <li><a href="darq/GroupedIterableExtensions/pairwise.html">pairwise</a></li>
+        <li><a href="darq/GroupedIterableExtensions/partition.html">partition</a></li>
+    
+    
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">batch</span> method</h1></div>
+
+    <section class="multi-line-signature">
+      <span class="returntype">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span>
+            <span class="name ">batch</span>
+(<wbr><span class="parameter" id="batch-param-size"><span class="type-annotation">int</span> <span class="parameter-name">size</span>, {</span> <span class="parameter" id="batch-param-includeTail"><span class="type-annotation">bool</span> <span class="parameter-name">includeTail</span>: <span class="default-value">false</span></span> })
+      
+    </section>
+    <section class="desc markdown">
+      <p>Groups elements in the iterator into batches of <code>size</code> length, optionally
+truncating elements that don't fit into a full-size batch.</p>
+<p>Iterates through the iterator and groups elements into a secondary list
+of <code>size</code> length. Once the list is full, the list is then yielded.</p>
+<p>If <code>includeTail</code> is false, when the source iteration is complete, any
+remaining elements are discarded. If true, these elements are returned as
+a final list of some length less than <code>size</code>. (False by default.)</p>
+<p>Example:</p>
+<pre class="language-dart"><code>void main() {
+  final list = [1, 2, 3, 4, 5, 6];
+  final result = list.batch(2);
+
+  // Result: [[1, 2], [3, 4], [5, 6]]
+}
+</code></pre>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">Iterable&lt;Iterable&lt;T&gt;&gt; batch(int size, {bool includeTail = false}) sync* {
+  var package = List&lt;T&gt;(size);
+  var index = 0;
+
+  for (var v in this) {
+    package[index++] = v;
+    if (index &gt;= package.length) {
+      yield package;
+      package = List&lt;T&gt;(size);
+      index = 0;
+    }
+  }
+
+  if (index &gt; 0 &amp;&amp; includeTail) {
+    yield List&lt;T&gt;.of(package.sublist(0, index));
+  }
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    darq
+      0.4.0+1
+  </span>
+
+  <!-- footer-text placeholder -->
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+<!-- footer placeholder -->
+
+</body>
+
+</html>

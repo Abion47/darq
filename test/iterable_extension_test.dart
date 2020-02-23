@@ -755,16 +755,16 @@ void main() {
       expect(result, orderedEquals([3, 2, 1, 0]));
     });
 
-    test('segment', () {
+    test('batch', () {
       final input = [0, 1, 2, 3, 4, 5, 6];
 
-      final result = input.segment(2);
+      final result = input.batch(2);
       expect(result.length, 3);
       expect(result.elementAt(0), orderedEquals([0, 1]));
       expect(result.elementAt(1), orderedEquals([2, 3]));
       expect(result.elementAt(2), orderedEquals([4, 5]));
 
-      final result2 = input.segment(3, includeTail: true);
+      final result2 = input.batch(3, includeTail: true);
       expect(result2.length, 3);
       expect(result2.elementAt(0), orderedEquals([0, 1, 2]));
       expect(result2.elementAt(1), orderedEquals([3, 4, 5]));

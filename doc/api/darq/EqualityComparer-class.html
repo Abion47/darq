@@ -57,7 +57,19 @@
       <li><a href="darq/RepeatIterable-class.html">RepeatIterable</a></li>
     
       <li class="section-title"><a href="darq/darq-library.html#extension">Extensions</a></li>
-      <li><a href="darq/IterableExtensions.html">IterableExtensions</a></li>
+      <li><a href="darq/AsyncIterableExtensions.html">AsyncIterableExtensions</a></li>
+      <li><a href="darq/BooleanConsumerExtensions.html">BooleanConsumerExtensions</a></li>
+      <li><a href="darq/CheckedConsumerExtensions.html">CheckedConsumerExtensions</a></li>
+      <li><a href="darq/ComparisonConsumerExtensions.html">ComparisonConsumerExtensions</a></li>
+      <li><a href="darq/ConversionConsumerExtensions.html">ConversionConsumerExtensions</a></li>
+      <li><a href="darq/GroupedIterableExtensions.html">GroupedIterableExtensions</a></li>
+      <li><a href="darq/InsertionIterableExtensions.html">InsertionIterableExtensions</a></li>
+      <li><a href="darq/MathConsumerExtensions.html">MathConsumerExtensions</a></li>
+      <li><a href="darq/MutationIterableExtensions.html">MutationIterableExtensions</a></li>
+      <li><a href="darq/OrderedIterableExtensions.html">OrderedIterableExtensions</a></li>
+      <li><a href="darq/OtherConsumerExtensions.html">OtherConsumerExtensions</a></li>
+      <li><a href="darq/OtherIterableExtensions.html">OtherIterableExtensions</a></li>
+      <li><a href="darq/SetIterableExtensions.html">SetIterableExtensions</a></li>
       <li><a href="darq/StringExtensions.html">StringExtensions</a></li>
     
     
@@ -86,8 +98,11 @@ to default behavior as outlined below.</p>
 <p>The <a href="darq/EqualityComparer/compare.html">EqualityComparer.compare</a> field tests equivalency. Two elements of a
 given type are passed to the function, and the function returns whether or
 not the elements are deemed equal. If omitted, the function will default to
-checking for strict equivalency by using the <code>==</code> operator.</p>
+checking for strict equivalency by using the <code>==</code> operator. (With the exception of
+<code>Iterable</code>, which will default to using <code>BooleanConsumerExceptions.sequenceEqual</code>.)</p>
 <pre class="language-dart"><code class="language-dart">(left, right) { return left == right; }
+// For iterables
+(left, right) { return left.sequenceEqual(right); }
 </code></pre>
 <p>The <a href="darq/EqualityComparer/hash.html">EqualityComparer.hash</a> field generates hash codes. An element is passed
 to the function and the function returns an integer value that represents
@@ -111,6 +126,7 @@ behavior depends on the type argument passed to <a href="darq/EqualityComparer-c
 <li><code>String</code> will default to using <code>String.compareTo</code></li>
 <li><code>Duration</code> will default to using <code>Duration.compareTo</code></li>
 <li><code>BigInt</code> will default to using <code>BigInt.compareTo</code></li>
+<li><code>Iterable</code> will default to comparing lengths using <a href="darq/ComparisonConsumerExtensions/compareCount.html">ComparisonConsumerExtensions.compareCount</a></li>
 <li>All other types will default to a non-sorting function:</li>
 </ul>
 <pre class="language-dart"><code class="language-dart">(left, right) { return 0; }

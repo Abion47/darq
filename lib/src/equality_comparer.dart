@@ -1,3 +1,6 @@
+import 'consumers/boolean_consumers.dart';
+import 'consumers/comparison_consumers.dart';
+
 /// Takes two elements of type `T` and checks them for equality, returning `true`
 /// if the elements are equal and `false` otherwise.
 typedef Comparer<T> = bool Function(T left, T right);
@@ -27,10 +30,13 @@ typedef Sorter<T> = int Function(T left, T right);
 /// The [EqualityComparer.compare] field tests equivalency. Two elements of a
 /// given type are passed to the function, and the function returns whether or
 /// not the elements are deemed equal. If omitted, the function will default to
-/// checking for strict equivalency by using the `==` operator.
+/// checking for strict equivalency by using the `==` operator. (With the exception of
+/// `Iterable`, which will default to using `BooleanConsumerExceptions.sequenceEqual`.)
 ///
 /// ```dart
 /// (left, right) { return left == right; }
+/// // For iterables
+/// (left, right) { return left.sequenceEqual(right); }
 /// ```
 ///
 /// The [EqualityComparer.hash] field generates hash codes. An element is passed
@@ -59,6 +65,7 @@ typedef Sorter<T> = int Function(T left, T right);
 /// - `String` will default to using [String.compareTo]
 /// - `Duration` will default to using [Duration.compareTo]
 /// - `BigInt` will default to using [BigInt.compareTo]
+/// - `Iterable` will default to comparing lengths using [ComparisonConsumerExtensions.compareCount]
 /// - All other types will default to a non-sorting function:
 ///
 /// ```dart
@@ -135,6 +142,11 @@ class EqualityComparer<T> {
       comparer: (left, right) => left == right,
       hasher: (value) => value.hashCode,
       sorter: (left, right) => left.compareTo(right),
+    ),
+    Iterable: EqualityComparer<Iterable>(
+      comparer: (left, right) => left.sequenceEqual(right),
+      hasher: (value) => value.hashCode,
+      sorter: (left, right) => left.compareCount(right),
     ),
   };
 

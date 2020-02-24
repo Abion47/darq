@@ -21,6 +21,8 @@ extension SingleWhereOrDefaultExtension<T> on Iterable<T> {
   ///       // Result: -1
   ///     }
   T singleWhereOrDefault(bool Function(T) condition, {T defaultValue}) {
+    ArgumentError.checkNotNull(condition, 'condition');
+
     final iter = iterator;
     if (!iter.moveNext()) return defaultValue;
 

@@ -18,6 +18,12 @@ extension BatchExtension<T> on Iterable<T> {
   ///       // Result: [[1, 2], [3, 4], [5, 6]]
   ///     }
   Iterable<Iterable<T>> batch(int size, {bool includeTail = false}) sync* {
+    ArgumentError.checkNotNull(size, 'size');
+
+    if (size <= 0) {
+      throw ArgumentError('The value of "size" must be greater than zero');
+    }
+
     var package = List<T>(size);
     var index = 0;
 

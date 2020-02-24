@@ -13,6 +13,7 @@ extension SelectExtension<T> on Iterable<T> {
   ///       // Result: ['0_a', '1_b', '2_c', '3_d']
   ///     }
   Iterable<TResult> select<TResult>(TResult Function(T, int) selector) sync* {
+    ArgumentError.checkNotNull(selector, 'selector');
     var index = 0;
     for (var v in this) {
       yield selector(v, index++);

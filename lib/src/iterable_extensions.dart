@@ -78,7 +78,7 @@ export 'extensions/reverse.dart';
 export 'extensions/scan.dart';
 export 'extensions/select_many.dart';
 export 'extensions/select.dart';
-export 'extensions/sequence_equal.dart';
+export 'extensions/sequence_equals.dart';
 export 'extensions/single_or_default.dart';
 export 'extensions/single_where_or_default.dart';
 export 'extensions/skip_last.dart';

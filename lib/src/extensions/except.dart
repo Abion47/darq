@@ -24,8 +24,10 @@ extension ExceptExtension<T> on Iterable<T> {
   ///
   ///       // Result: [1, 2]
   ///     }
-  Iterable<T> except<TKey>(Iterable<T> other,
-      [TKey Function(T) selector]) sync* {
+  Iterable<T> except<TKey>(
+    Iterable<T> other, [
+    TKey Function(T) selector,
+  ]) sync* {
     selector ??= (T v) => v as TKey;
 
     final set = Set<TKey>.from(other.map(selector));

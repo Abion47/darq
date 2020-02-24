@@ -23,6 +23,7 @@ extension ToLinkedHashMapExtension<T> on Iterable<T> {
     MapEntry<TKey, TValue> Function(T) entrySelector, {
     bool modifiable = false,
   }) {
+    ArgumentError.checkNotNull(entrySelector, 'entrySelector');
     final map =
         LinkedHashMap.fromEntries([for (var o in this) entrySelector(o)]);
     if (modifiable) return map;

@@ -28,6 +28,10 @@ extension SumExtension<T> on Iterable<T> {
   ///       // Result: 10
   ///     }
   num sum([num Function(T) selector]) {
+    if (isEmpty) {
+      throw StateError('Iterator must not be empty.');
+    }
+
     if (selector == null) {
       if (T == num) {
         selector = (T n) => n as num;
@@ -38,14 +42,7 @@ extension SumExtension<T> on Iterable<T> {
       }
     }
 
-    if (isEmpty) {
-      throw StateError('Iterator must not be empty.');
-    }
-
-    if (selector == null) {
-      throw StateError(
-          'If T isn\'t a subtype of num, selector must not be null.');
-    }
+    ArgumentError.checkNotNull(selector);
 
     var total = T == int ? 0 : 0.0;
 

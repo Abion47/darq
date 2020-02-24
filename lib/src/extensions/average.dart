@@ -18,6 +18,10 @@ extension AverageExtension<T> on Iterable<T> {
   ///       // Result: 5.0
   ///     }
   double average([num Function(T) selector]) {
+    if (isEmpty) {
+      throw StateError('Iterator must not be empty.');
+    }
+
     if (selector == null) {
       if (T == num) {
         selector = (T n) => n as num;
@@ -28,14 +32,7 @@ extension AverageExtension<T> on Iterable<T> {
       }
     }
 
-    if (isEmpty) {
-      throw StateError('Iterator must not be empty.');
-    }
-
-    if (selector == null) {
-      throw StateError(
-          'If T isn\'t a subtype of num, selector must not be null.');
-    }
+    ArgumentError.checkNotNull(selector, 'selector');
 
     var total = 0.0;
     var count = 0;

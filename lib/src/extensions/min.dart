@@ -1,3 +1,5 @@
+import '../utility/equality_comparer.dart';
+
 extension MinExtension<T> on Iterable<T> {
   /// Returns the minimum value in the iterable.
   ///
@@ -28,25 +30,12 @@ extension MinExtension<T> on Iterable<T> {
   ///       // Result: 0
   ///     }
   T min([int Function(T, T) comparer]) {
-    if (comparer == null) {
-      if (T == num) {
-        comparer = (T a, T b) => (a as num).compareTo(b as num);
-      } else if (T == int) {
-        comparer = (T a, T b) => (a as int).compareTo(b as int);
-      } else if (T == double) {
-        comparer = (T a, T b) => (a as double).compareTo(b as double);
-      } else if (T == String) {
-        comparer = (T a, T b) => (a as String).compareTo(b as String);
-      }
-    }
-
     if (isEmpty) {
       throw StateError('Iterable must not be empty.');
     }
 
-    if (comparer == null) {
-      throw ArgumentError('comparer must not be null');
-    }
+    comparer ??= EqualityComparer.forType<T>()?.sort;
+    ArgumentError.checkNotNull(comparer, 'comparer');
 
     T min;
     for (var v in this) {

@@ -1,4 +1,4 @@
-import '../extensions/sequence_equal.dart';
+import '../extensions/sequence_equals.dart';
 import '../extensions/compare_count.dart';
 
 /// Takes two elements of type `T` and checks them for equality, returning `true`
@@ -101,11 +101,7 @@ class EqualityComparer<T> {
   ///
   /// If no registered comparer can be found, this method will return a new instance
   /// of [EqualityComparer] as if `EqualityComparer<T>()` was called instead.
-  static EqualityComparer<T> forType<T>() {
-    final equalityComparer = _registeredEqualityComparers[T];
-    if (equalityComparer == null) return EqualityComparer<T>();
-    return equalityComparer;
-  }
+  static EqualityComparer<T> forType<T>() => _registeredEqualityComparers[T];
 
   static final Map<Type, EqualityComparer> _registeredEqualityComparers = {
     dynamic: EqualityComparer<dynamic>(
@@ -144,7 +140,7 @@ class EqualityComparer<T> {
       sorter: (left, right) => left.compareTo(right),
     ),
     Iterable: EqualityComparer<Iterable>(
-      comparer: (left, right) => left.sequenceEqual(right),
+      comparer: (left, right) => left.sequenceEquals(right),
       hasher: (value) => value.hashCode,
       sorter: (left, right) => left.compareCount(right),
     ),

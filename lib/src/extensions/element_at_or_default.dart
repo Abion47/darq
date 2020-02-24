@@ -26,8 +26,10 @@ extension ElementAtOrDefaultExtension<T> on Iterable<T> {
   ///       // Result: -1
   ///     }
   T elementAtOrDefault(int index, {T defaultValue}) {
+    ArgumentError.checkNotNull(index, 'index');
     if (index < 0) {
-      throw RangeError.index(index, this, 'The index must not be negative.');
+      throw ArgumentError.value(
+          index, 'index', 'The index must not be negative.');
     }
 
     if (this is List) {

@@ -3,7 +3,7 @@
 class RangeIterable extends Iterable<int> {
   final int start;
   final int end;
-  final int interval;
+  final int step;
 
   /// Creates an iterable that contains all elements between [start] (inclusive)
   /// and [end] (exclusive, optionally inclusive).
@@ -15,21 +15,21 @@ class RangeIterable extends Iterable<int> {
   ///
   /// If [inclusive] is true, [end] will be included in the iterable as the last value.
   ///
-  /// If [interval] is not 1, the values in the interval will skip [interval] times. For
-  /// example, a range of \[2-7\] with an [interval] of 2 will result in the iterable \[2, 4, 6\].
-  /// If [interval] is negative, the iterable will be reversed, starting from [end] and
+  /// If [step] is not 1, the values in the interval will skip [step] times. For
+  /// example, a range of \[2-7\] with an [step] of 2 will result in the iterable \[2, 4, 6\].
+  /// If [step] is negative, the iterable will be reversed, starting from [end] and
   /// descending to [start]. (If [inclusive] is false, the first value will be `end - 1`.)
-  /// Having the value [interval] be 0 will result in an error.
+  /// Having the value [step] be 0 will result in an error.
   RangeIterable(
     this.start,
     int end, {
-    this.interval = 1,
+    this.step = 1,
     bool inclusive = false,
   })  : assert(start != null),
         assert(end != null),
         assert(end >= start),
-        assert(interval != null),
-        assert(interval != 0, 'The interval must be a non-zero integer.'),
+        assert(step != null),
+        assert(step != 0, 'The interval must be a non-zero integer.'),
         end = inclusive ? end : end - 1;
 
   /// Creates an iterable that describes a sequence starting at [start] and containing
@@ -41,25 +41,25 @@ class RangeIterable extends Iterable<int> {
   /// return an empty interval. Having the value of [count] be less than zero will result in
   /// an error.
   ///
-  /// If [interval] is not 1, the values in the interval will skip [interval] times. For
-  /// example, a [start] of 2, a [count] of 3, and an [interval] of 2 will result in the iterable \[2, 4, 6\].
-  /// If [interval] is negative, the iterable will instead count down from [start], e.g. the
-  /// previous [start] and [count] values with an [interval] of -2 will result in the iterable
-  /// \[2, 0, -2\]. Having the value of [interval] be zero will result in an error.
+  /// If [step] is not 1, the values in the interval will skip [step] times. For
+  /// example, a [start] of 2, a [count] of 3, and an [step] of 2 will result in the iterable \[2, 4, 6\].
+  /// If [step] is negative, the iterable will instead count down from [start], e.g. the
+  /// previous [start] and [count] values with an [step] of -2 will result in the iterable
+  /// \[2, 0, -2\]. Having the value of [step] be zero will result in an error.
   RangeIterable.count(
     int start,
     int count, {
-    this.interval = 1,
+    this.step = 1,
   })  : assert(start != null),
         assert(count != null),
-        assert(interval != null),
-        assert(interval != 0, 'The interval must be a positive integer.'),
+        assert(step != null),
+        assert(step != 0, 'The interval must be a positive integer.'),
         assert(count >= 0, 'The count must be a positive integer.'),
-        start = interval > 0 ? start : start - (count * -interval) + 1,
-        end = interval > 0 ? start + (count * interval) - 1 : start;
+        start = step > 0 ? start : start - (count * -step) + 1,
+        end = step > 0 ? start + (count * step) - 1 : start;
 
   @override
-  Iterator<int> get iterator => _RangeIterator(start, end, interval);
+  Iterator<int> get iterator => _RangeIterator(start, end, step);
 }
 
 class _RangeIterator extends Iterator<int> {

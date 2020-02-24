@@ -1,6 +1,6 @@
 import 'count.dart';
 import 'take_last.dart';
-import 'sequence_equal.dart';
+import 'sequence_equals.dart';
 import '../utility/equality_comparer.dart';
 
 extension EndsWithExtension<T> on Iterable<T> {
@@ -19,6 +19,6 @@ extension EndsWithExtension<T> on Iterable<T> {
     final count = other.count();
     final tail = takeLast(count);
 
-    return tail.sequenceEqual(other, comparer: comparer);
+    return tail.sequenceEquals(other, comparer: comparer);
   }
 }

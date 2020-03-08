@@ -1,13 +1,14 @@
+import 'dart:collection';
+
+import '../utility/error.dart';
+
 extension AggregateRightExtension<T> on Iterable<T> {
   /// Aggregates the iterable into a single value in a right-associative manner.
   ///
   /// Aggregates the source iterable by applying the [aggregator] function to
-  /// each value in the collection in the order they appear in reverse order. The
-  /// result is a single value that is the result of the aggregation.
-  ///
-  /// The [initialValue] parameter can be optionally applied, otherwise it
-  /// defaults to a predefined value for primitive types and `null` for
-  /// everything else.
+  /// each value in the collection in the order they appear, starting from the last
+  /// element and working backwards. The result is a single value that is the result
+  /// of the aggregation.
   ///
   /// The [aggregator] function offers two parameters - the `accumulator` and
   /// the `value`. In each iteration, the `accumulator` represents the running
@@ -17,17 +18,7 @@ extension AggregateRightExtension<T> on Iterable<T> {
   /// next iteration. Once the aggregation is complete, the last value to be
   /// returned is considered the result of the aggregation process.
   ///
-  /// When the type of the iterable is one of the below types, the [aggregator]
-  /// function can be omitted. In this case, the function defaults to predefined
-  /// aggregator functions depending on the type:
-  ///
-  /// - Numeric types (`num`, `int`, `double`) return the sum of all elements.
-  /// The initial value is set to the zero equivalent of the type.
-  /// - `String` types return all the elements concatenated into a single
-  /// string. The initial value is an empty string.
-  ///
-  /// If the iterable type is not one of these types, the [aggregator] function
-  /// must be provided. Otherwise, an [ArgumentError] will be thrown.
+  /// If this method is called on an empty iterable, a `StateError` is thrown.
   ///
   /// Example:
   ///
@@ -37,10 +28,30 @@ extension AggregateRightExtension<T> on Iterable<T> {
   ///
   ///       // Result: (a, (b, (c, d)))
   ///     }
-  TResult aggregateRight<TResult>(
-    TResult initialValue,
-    TResult Function(TResult, T) aggregator,
+  T aggregateRight<TResult>(
+    T Function(T, T) aggregator,
   ) {
-    // TODO
+    checkNullError(this);
+    ArgumentError.checkNotNull(aggregator, 'aggregator');
+
+    final stack = Queue<T>();
+    for (var obj in this) {
+      stack.add(obj);
+    }
+
+    if (stack.isEmpty) {
+      throw StateError('Cannot call "aggregateRight" on an empty iterable.');
+    }
+
+    var value = stack.removeLast();
+    if (stack.isEmpty) {
+      return value;
+    }
+
+    while (stack.isNotEmpty) {
+      value = aggregator(value, stack.removeLast());
+    }
+
+    return value;
   }
 }

@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension SingleWhereOrDefaultExtension<T> on Iterable<T> {
   /// Returns the single element in the iterable matching a
   /// [condition], or a [defaultValue] if no such element exists.
@@ -21,6 +23,7 @@ extension SingleWhereOrDefaultExtension<T> on Iterable<T> {
   ///       // Result: -1
   ///     }
   T singleWhereOrDefault(bool Function(T) condition, {T defaultValue}) {
+    checkNullError(this);
     ArgumentError.checkNotNull(condition, 'condition');
 
     final iter = iterator;

@@ -1,12 +1,15 @@
+import '../utility/error.dart';
+
 extension ScanExtension<T> on Iterable<T> {
-  /// Returns the exclusive prefix sum of this iterable.
+  /// Returns the scan (inclusive prefix sum) of this iterable.
   ///
-  /// The first element of the returned iterable will be the initial value. Each
-  /// subsequent element is the [aggregator] function applied to the previous
-  /// value and the corresponding element in this iterable.
+  /// The first element of the returned iterable is the first element of this
+  /// iterable. Each subsequent element is the [aggregator] function applied
+  /// to the previous value and the corresponding element in this iterable.
+  /// Put another way, the N-th element of the returned iterable will be the
+  /// sum of the first N elements in this iterable.
   ///
-  /// The resulting iterable will have the same length as this iterable. As such,
-  /// the final element in this iterable is ignored.
+  /// The resulting iterable will have the same length as this iterable.
   ///
   /// Example:
   ///
@@ -14,9 +17,12 @@ extension ScanExtension<T> on Iterable<T> {
   ///       final list = [1, 2, 3, 4];
   ///       final result = list.prescan(0, (a, b) => a + b);
   ///
-  ///       // Result: [0, 1, 3, 6]
+  ///       // Result: [1, 3, 6, 10]
   ///     }
   Iterable<T> scan(T Function(T, T) aggregator) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(aggregator, 'aggregator');
+
     final iterator = this.iterator;
     if (!iterator.moveNext()) {
       return;

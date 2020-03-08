@@ -27,6 +27,12 @@ void main() {
       expect(result, equals('xyzabcde'));
     });
 
+    test('on empty list', () {
+      final list = [];
+      final result = list.aggregateSelect('xyz', (a, b) => a + b);
+      expect(result, equals('xyz'));
+    });
+
     test('Error: null aggregator', () {
       final list = [0, 1, 2, 3, 4];
       final task = () => list.aggregateSelect(0, null);

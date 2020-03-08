@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension ExcludeRangeExtension<T> on Iterable<T> {
   /// Returns all elements in this iterable except those that are within the
   /// specified range.
@@ -6,6 +8,10 @@ extension ExcludeRangeExtension<T> on Iterable<T> {
   /// the iterable is unchanged. If [start] or [count] are less than zero, a
   /// [RangeException] is thrown.
   Iterable<T> excludeRange(int start, int count) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(start, 'start');
+    ArgumentError.checkNotNull(count, 'count');
+
     if (start < 0) {
       throw RangeError.index(start, this, 'start',
           'The value of "start" must be greater than zero.');
@@ -25,6 +31,7 @@ extension ExcludeRangeExtension<T> on Iterable<T> {
     while (iterator.moveNext()) {
       while (i >= start && i < start + count) {
         iterator.moveNext();
+        i++;
       }
       yield iterator.current;
       i++;

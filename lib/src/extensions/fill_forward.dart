@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension FillForwardExtension<T> on Iterable<T> {
   /// Returns this iterable with all null values replaced with the following element.
   ///
@@ -8,6 +10,7 @@ extension FillForwardExtension<T> on Iterable<T> {
   ///
   /// If this iterable contains only null values, a [StateError] will be thrown.
   Iterable<T> fillForward() sync* {
+    checkNullError(this);
     final iterator = this.iterator;
     if (!iterator.moveNext()) return;
 
@@ -25,14 +28,13 @@ extension FillForwardExtension<T> on Iterable<T> {
       yield lastValue;
     }
 
-    while (iterator.moveNext()) {
-      yield iterator.current ?? lastValue;
-      if (iterator.current != null) lastValue = iterator.current;
-    }
-
-    for (var o in this) {
-      yield o ?? lastValue;
-      if (o != null) lastValue = o;
-    }
+    do {
+      if (iterator.current != null) {
+        yield iterator.current;
+        lastValue = iterator.current;
+      } else {
+        yield lastValue;
+      }
+    } while (iterator.moveNext());
   }
 }

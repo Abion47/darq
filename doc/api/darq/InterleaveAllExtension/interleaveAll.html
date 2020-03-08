@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the interleaveAll method from the InterleaveAllExtension extension, for the Dart programming language.">
+  <title>interleaveAll method - InterleaveAllExtension extension - darq library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+  <!-- header placeholder -->
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">darq</a></li>
+    <li><a href="darq/darq-library.html">darq</a></li>
+    <li><a href="darq/InterleaveAllExtension.html">InterleaveAllExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">interleaveAll method</li>
+  </ol>
+  <div class="self-name">interleaveAll</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">darq</a></li>
+      <li><a href="darq/darq-library.html">darq</a></li>
+      <li><a href="darq/InterleaveAllExtension.html">InterleaveAllExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+      <li class="self-crumb">interleaveAll method</li>
+    </ol>
+    
+    <h5>InterleaveAllExtension extension</h5>
+    <ol>
+    
+    
+    
+        <li class="section-title"><a href="darq/InterleaveAllExtension.html#instance-methods">Methods</a></li>
+        <li><a href="darq/InterleaveAllExtension/interleaveAll.html">interleaveAll</a></li>
+    
+    
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">interleaveAll</span> method</h1></div>
+
+    <section class="multi-line-signature">
+      <span class="returntype">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+            <span class="name ">interleaveAll</span>
+(<wbr><span class="parameter" id="interleaveAll-param-others"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">others</span></span>)
+      
+    </section>
+    <section class="desc markdown">
+      <p>Returns the elements of this iterable interleaved with the elements of every iterable in
+<code>others</code>.</p>
+<p>The elements of the resulting iterable will consist of the first element of
+this iterable followed by the first element of each iterable in <code>others</code>, followed by the second
+element of this iterable, and so on until all iterables are fully consumed.</p>
+<p>If the iterables are not the same length, any iterable which is consumed before iteration is
+complete will be skipped for the remainder of iteration.</p>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">Iterable&lt;T&gt; interleaveAll(Iterable&lt;Iterable&lt;T&gt;&gt; others) sync* {
+  checkNullError(this);
+  ArgumentError.checkNotNull(others, &#39;others&#39;);
+  if (others.any((i) =&gt; i == null)) {
+    throw ArgumentError(&#39;Every element in &quot;others&quot; must not be null.&#39;);
+  }
+
+  final iterators = [
+    iterator,
+    ...others.map((i) =&gt; i.iterator),
+  ];
+
+  final isOpenMap = List&lt;bool&gt;(iterators.length);
+  void refreshMap() {
+    for (var i = 0; i &lt; isOpenMap.length; i++) {
+      isOpenMap[i] = iterators[i].moveNext();
+    }
+  }
+
+  do {
+    refreshMap();
+    for (var i = 0; i &lt; iterators.length; i++) {
+      if (isOpenMap[i]) yield iterators[i].current;
+    }
+  } while (isOpenMap.any((b) =&gt; b));
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    darq
+      0.5.0
+  </span>
+
+  <!-- footer-text placeholder -->
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+<!-- footer placeholder -->
+
+</body>
+
+</html>

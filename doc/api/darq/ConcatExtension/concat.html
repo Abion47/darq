@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the concat method from the ConcatExtension extension, for the Dart programming language.">
+  <title>concat method - ConcatExtension extension - darq library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+  <!-- header placeholder -->
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">darq</a></li>
+    <li><a href="darq/darq-library.html">darq</a></li>
+    <li><a href="darq/ConcatExtension.html">ConcatExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">concat method</li>
+  </ol>
+  <div class="self-name">concat</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">darq</a></li>
+      <li><a href="darq/darq-library.html">darq</a></li>
+      <li><a href="darq/ConcatExtension.html">ConcatExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+      <li class="self-crumb">concat method</li>
+    </ol>
+    
+    <h5>ConcatExtension extension</h5>
+    <ol>
+    
+    
+    
+        <li class="section-title"><a href="darq/ConcatExtension.html#instance-methods">Methods</a></li>
+        <li><a href="darq/ConcatExtension/concat.html">concat</a></li>
+        <li><a href="darq/ConcatExtension/concat2.html">concat2</a></li>
+        <li><a href="darq/ConcatExtension/concat3.html">concat3</a></li>
+        <li><a href="darq/ConcatExtension/concat4.html">concat4</a></li>
+        <li><a href="darq/ConcatExtension/concat5.html">concat5</a></li>
+        <li><a href="darq/ConcatExtension/concat6.html">concat6</a></li>
+        <li><a href="darq/ConcatExtension/concat7.html">concat7</a></li>
+        <li><a href="darq/ConcatExtension/concat8.html">concat8</a></li>
+        <li><a href="darq/ConcatExtension/concat9.html">concat9</a></li>
+    
+    
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">concat</span> method</h1></div>
+
+    <section class="multi-line-signature">
+      <span class="returntype">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+            <span class="name ">concat</span>
+(<wbr><span class="parameter" id="concat-param-other"><span class="type-annotation">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">other</span></span>)
+      
+    </section>
+    <section class="desc markdown">
+      <p>Concatenates this iterable and another iterables.</p>
+<p>Appends the values of a given <code>Iterable</code> to the end of this iterable,
+resulting in an iterable that is the concatenation of both.</p>
+<p>Example:</p>
+<pre class="language-dart"><code>void main() {
+  final list = [0, 1, 2];
+  final result = list.concat([3, 4, 5]);
+
+  // Result: [0, 1, 2, 3, 4, 5]
+}
+</code></pre>
+<p>(This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
+Internally it functions identically to <code>followedBy</code>.)</p>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">Iterable&lt;T&gt; concat(Iterable&lt;T&gt; other) {
+  checkNullError(this);
+  return followedBy(other);
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    darq
+      0.5.0
+  </span>
+
+  <!-- footer-text placeholder -->
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+<!-- footer placeholder -->
+
+</body>
+
+</html>

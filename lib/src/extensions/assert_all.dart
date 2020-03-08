@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension AssertAllExtension<T> on Iterable<T> {
   /// Asserts that all elements in this iterable meet a given condition. If not, an
   /// [AssertionError] is thrown.
@@ -9,6 +11,8 @@ extension AssertAllExtension<T> on Iterable<T> {
   /// If [message] is provided and an error is thrown, the message will be provided with the
   /// error.
   Iterable<T> assertAll(bool Function(T) condition, [String message]) {
+    checkNullError(this);
+    ArgumentError.checkNotNull(condition, 'condition');
     assert(every(condition), message);
     return this;
   }

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the distinct method from the DistinctExtension extension, for the Dart programming language.">
+  <title>distinct method - DistinctExtension extension - darq library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+  <!-- header placeholder -->
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">darq</a></li>
+    <li><a href="darq/darq-library.html">darq</a></li>
+    <li><a href="darq/DistinctExtension.html">DistinctExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">distinct&lt;<wbr><span class="type-parameter">TKey</span>&gt; method</li>
+  </ol>
+  <div class="self-name">distinct</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">darq</a></li>
+      <li><a href="darq/darq-library.html">darq</a></li>
+      <li><a href="darq/DistinctExtension.html">DistinctExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+      <li class="self-crumb">distinct&lt;<wbr><span class="type-parameter">TKey</span>&gt; method</li>
+    </ol>
+    
+    <h5>DistinctExtension extension</h5>
+    <ol>
+    
+    
+    
+        <li class="section-title"><a href="darq/DistinctExtension.html#instance-methods">Methods</a></li>
+        <li><a href="darq/DistinctExtension/distinct.html">distinct</a></li>
+    
+    
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">distinct&lt;<wbr><span class="type-parameter">TKey</span>&gt;</span> method</h1></div>
+
+    <section class="multi-line-signature">
+      <span class="returntype">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+            <span class="name ">distinct</span>
+&lt;<wbr><span class="type-parameter">TKey</span>&gt;(<wbr>[<span class="parameter" id="distinct-param-keySelector"><span class="type-annotation">TKey</span> <span class="parameter-name">keySelector</span>(<span class="parameter" id="param-"><span class="type-annotation">T</span></span>)</span> ])
+      
+    </section>
+    <section class="desc markdown">
+      <p>Returns an iterable representing the distinct values of this iterable.</p>
+<p>After applying the <code>distinct</code> method to an iterable, the resulting
+iterable will consist of distinct values in the source iterable.</p>
+<p>Optionally, a <code>keySelector</code> can be supplied to handle comparisons. If
+one is provided, the <code>distinct</code> method will use the <code>comparer</code> property in
+order to determine equivalency. If omitted, <code>distinct</code> will resort to strict
+equivalency (i.e. checking <code>if (value == element)</code>).</p>
+<p>Each element will be the first element found in the source iterable,
+meaning elements with unique data that are deemed non-distinct by the
+<code>keySelector</code> will be dropped.</p>
+<p>If none of the elements in the iterable match any other element in the
+iterable, the iterable will be unchanged.\</p>
+<p>Example:</p>
+<pre class="language-dart"><code>void main() {
+  final list = [0, 0, 0, 1, 1, 2, 3, 3, 3];
+  final result = list.distinct();
+
+  // Result: [0, 1, 2, 3]
+}
+</code></pre>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">Iterable&lt;T&gt; distinct&lt;TKey&gt;([TKey Function(T) keySelector]) sync* {
+  checkNullError(this);
+
+  keySelector ??= (T v) =&gt; v as TKey;
+  final set = &lt;TKey&gt;{};
+
+  for (var t in this) {
+    if (set.add(keySelector(t))) yield t;
+  }
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    darq
+      0.5.0
+  </span>
+
+  <!-- footer-text placeholder -->
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+<!-- footer placeholder -->
+
+</body>
+
+</html>

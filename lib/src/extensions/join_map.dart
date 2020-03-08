@@ -1,4 +1,5 @@
 import '../utility/equality_comparer.dart';
+import '../utility/error.dart';
 import '../utility/grouping.dart';
 import '../utility/lookup.dart';
 
@@ -41,6 +42,10 @@ extension JoinMapExtension<T> on Iterable<T> {
     TKey Function(TInner) innerKeySelector,
     EqualityComparer<TKey> keyComparer,
   }) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(other, 'other');
+    ArgumentError.checkNotNull(resultSelector, 'resultSelector');
+
     outerKeySelector ??= (T v) => v as TKey;
     innerKeySelector ??= (TInner v) => v as TKey;
     keyComparer ??= EqualityComparer.forType<TKey>();

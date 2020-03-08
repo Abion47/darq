@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension ElementAtOrDefaultExtension<T> on Iterable<T> {
   /// Returns the element at the specified index or a default value of one is
   /// not found.
@@ -26,6 +28,7 @@ extension ElementAtOrDefaultExtension<T> on Iterable<T> {
   ///       // Result: -1
   ///     }
   T elementAtOrDefault(int index, {T defaultValue}) {
+    checkNullError(this);
     ArgumentError.checkNotNull(index, 'index');
     if (index < 0) {
       throw ArgumentError.value(

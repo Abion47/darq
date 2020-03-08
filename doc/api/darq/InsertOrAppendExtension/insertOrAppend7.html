@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the insertOrAppend7 method from the InsertOrAppendExtension extension, for the Dart programming language.">
+  <title>insertOrAppend7 method - InsertOrAppendExtension extension - darq library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="../..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+  <!-- header placeholder -->
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">darq</a></li>
+    <li><a href="darq/darq-library.html">darq</a></li>
+    <li><a href="darq/InsertOrAppendExtension.html">InsertOrAppendExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">insertOrAppend7 method</li>
+  </ol>
+  <div class="self-name">insertOrAppend7</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="index.html">darq</a></li>
+      <li><a href="darq/darq-library.html">darq</a></li>
+      <li><a href="darq/InsertOrAppendExtension.html">InsertOrAppendExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+      <li class="self-crumb">insertOrAppend7 method</li>
+    </ol>
+    
+    <h5>InsertOrAppendExtension extension</h5>
+    <ol>
+    
+    
+    
+        <li class="section-title"><a href="darq/InsertOrAppendExtension.html#instance-methods">Methods</a></li>
+        <li><a href="darq/InsertOrAppendExtension/insertOrAppend.html">insertOrAppend</a></li>
+        <li><a href="darq/InsertOrAppendExtension/insertOrAppend2.html">insertOrAppend2</a></li>
+        <li><a href="darq/InsertOrAppendExtension/insertOrAppend3.html">insertOrAppend3</a></li>
+        <li><a href="darq/InsertOrAppendExtension/insertOrAppend4.html">insertOrAppend4</a></li>
+        <li><a href="darq/InsertOrAppendExtension/insertOrAppend5.html">insertOrAppend5</a></li>
+        <li><a href="darq/InsertOrAppendExtension/insertOrAppend6.html">insertOrAppend6</a></li>
+        <li><a href="darq/InsertOrAppendExtension/insertOrAppend7.html">insertOrAppend7</a></li>
+        <li><a href="darq/InsertOrAppendExtension/insertOrAppend8.html">insertOrAppend8</a></li>
+        <li><a href="darq/InsertOrAppendExtension/insertOrAppend9.html">insertOrAppend9</a></li>
+    
+    
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+  <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
+      <div><h1><span class="kind-method">insertOrAppend7</span> method</h1></div>
+
+    <section class="multi-line-signature">
+      <span class="returntype">Iterable<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+            <span class="name ">insertOrAppend7</span>
+(<wbr><span class="parameter" id="insertOrAppend7-param-index"><span class="type-annotation">int</span> <span class="parameter-name">index</span>, </span> <span class="parameter" id="insertOrAppend7-param-v1"><span class="type-annotation">T</span> <span class="parameter-name">v1</span></span> <span class="parameter" id="insertOrAppend7-param-v2"><span class="type-annotation">T</span> <span class="parameter-name">v2</span></span> <span class="parameter" id="insertOrAppend7-param-v3"><span class="type-annotation">T</span> <span class="parameter-name">v3</span></span> <span class="parameter" id="insertOrAppend7-param-v4"><span class="type-annotation">T</span> <span class="parameter-name">v4</span></span> <span class="parameter" id="insertOrAppend7-param-v5"><span class="type-annotation">T</span> <span class="parameter-name">v5</span></span> <span class="parameter" id="insertOrAppend7-param-v6"><span class="type-annotation">T</span> <span class="parameter-name">v6</span></span> <span class="parameter" id="insertOrAppend7-param-v7"><span class="type-annotation">T</span> <span class="parameter-name">v7</span></span>)
+      
+    </section>
+    <section class="desc markdown">
+      <p>Inserts seven elements into the iterable at the specified index.</p>
+<p>Takes the specified elements and inserts it into the iterable at the
+position <code>index</code>.</p>
+<p>If <code>index</code> is less than zero, an <code>ArgumentError</code> is thrown.</p>
+<p>If iteration of the underlying iterable is exausted before the position <code>index</code>
+is reached, the elements are added to the end iterable as if calling <code>append</code>.</p>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span></h2>
+      <pre class="language-dart"><code class="language-dart">Iterable&lt;T&gt; insertOrAppend7(
+    int index, T v1, T v2, T v3, T v4, T v5, T v6, T v7) sync* {
+  checkNullError(this);
+  ArgumentError.checkNotNull(index, &#39;index&#39;);
+
+  if (index == 0) {
+    yield* prepend7(v1, v2, v3, v4, v5, v6, v7);
+    return;
+  }
+  if (index &lt; 0) {
+    throw ArgumentError(&#39;Parameter &quot;index&quot; must be greater than zero.&#39;);
+  }
+
+  final iterator = this.iterator;
+  var i = 0;
+
+  while (iterator.moveNext()) {
+    if (i == index) {
+      yield v1;
+      yield v2;
+      yield v3;
+      yield v4;
+      yield v5;
+      yield v6;
+      yield v7;
+    }
+    yield iterator.current;
+    i++;
+  }
+
+  if (index &gt;= i) {
+    yield v1;
+    yield v2;
+    yield v3;
+    yield v4;
+    yield v5;
+    yield v6;
+    yield v7;
+  }
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    darq
+      0.5.0
+  </span>
+
+  <!-- footer-text placeholder -->
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+<!-- footer placeholder -->
+
+</body>
+
+</html>

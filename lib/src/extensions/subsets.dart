@@ -1,19 +1,31 @@
-import 'prepend.dart';
+import '../utility/error.dart';
 
 extension SubsetsExtension<T> on Iterable<T> {
-  /// Returns an iterable of iterables which represents the power set of this
-  /// iterable.
-  Iterable<Iterable<T>> subsets() {
-    return _subsetRecursive(this);
+  /// Returns an iterable of iterables which represents all of the subsets
+  /// of this iterable. (Also known as the power set of the iterable.)
+  Iterable<Iterable<T>> subsets() sync* {
+    checkNullError(this);
+
+    final asList = toList();
+
+    if (asList.isNotEmpty) {
+      yield* _subsetRecursive(asList, asList.length, asList.length - 1, <T>[]);
+    } else {
+      yield <T>[];
+    }
   }
 
-  Iterable<Iterable<T>> _subsetRecursive(Iterable<T> input) sync* {
-    var index = 0;
-
-    for (var o in input) {
-      yield [o];
-      yield* _subsetRecursive(input.skip(index)).map((l) => l.prepend(o));
-      index++;
+  Iterable<Iterable<T>> _subsetRecursive(
+    List<T> input,
+    int k,
+    int n, [
+    List<T> curr,
+  ]) sync* {
+    if (n < 0) {
+      yield curr;
+    } else {
+      yield* _subsetRecursive(input, k, n - 1, curr);
+      yield* _subsetRecursive(input, k, n - 1, [input[n], ...curr]);
     }
   }
 }

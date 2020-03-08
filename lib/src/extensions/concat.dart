@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension ConcatExtension<T> on Iterable<T> {
   /// Concatenates this iterable and another iterables.
   ///
@@ -15,7 +17,10 @@ extension ConcatExtension<T> on Iterable<T> {
   ///
   /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
   /// Internally it functions identically to [followedBy].)
-  Iterable<T> concat(Iterable<T> other) => followedBy(other);
+  Iterable<T> concat(Iterable<T> other) {
+    checkNullError(this);
+    return followedBy(other);
+  }
 
   /// Concatenates this iterable and two another iterables.
   ///
@@ -36,8 +41,10 @@ extension ConcatExtension<T> on Iterable<T> {
   Iterable<T> concat2(
     Iterable<T> c1,
     Iterable<T> c2,
-  ) =>
-      followedBy(c1).followedBy(c2);
+  ) {
+    checkNullError(this);
+    return followedBy(c1).followedBy(c2);
+  }
 
   /// Concatenates this iterable and three another iterables.
   ///
@@ -60,8 +67,10 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c1,
     Iterable<T> c2,
     Iterable<T> c3,
-  ) =>
-      followedBy(c1).followedBy(c2).followedBy(c3);
+  ) {
+    checkNullError(this);
+    return followedBy(c1).followedBy(c2).followedBy(c3);
+  }
 
   /// Concatenates this iterable and four another iterables.
   ///
@@ -86,8 +95,10 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c2,
     Iterable<T> c3,
     Iterable<T> c4,
-  ) =>
-      followedBy(c1).followedBy(c2).followedBy(c3).followedBy(c4);
+  ) {
+    checkNullError(this);
+    return followedBy(c1).followedBy(c2).followedBy(c3).followedBy(c4);
+  }
 
   /// Concatenates this iterable and five another iterables.
   ///
@@ -114,12 +125,14 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c3,
     Iterable<T> c4,
     Iterable<T> c5,
-  ) =>
-      followedBy(c1)
-          .followedBy(c2)
-          .followedBy(c3)
-          .followedBy(c4)
-          .followedBy(c5);
+  ) {
+    checkNullError(this);
+    return followedBy(c1)
+        .followedBy(c2)
+        .followedBy(c3)
+        .followedBy(c4)
+        .followedBy(c5);
+  }
 
   /// Concatenates this iterable and six another iterables.
   ///
@@ -148,13 +161,15 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c4,
     Iterable<T> c5,
     Iterable<T> c6,
-  ) =>
-      followedBy(c1)
-          .followedBy(c2)
-          .followedBy(c3)
-          .followedBy(c4)
-          .followedBy(c5)
-          .followedBy(c6);
+  ) {
+    checkNullError(this);
+    return followedBy(c1)
+        .followedBy(c2)
+        .followedBy(c3)
+        .followedBy(c4)
+        .followedBy(c5)
+        .followedBy(c6);
+  }
 
   /// Concatenates this iterable and seven another iterables.
   ///
@@ -185,14 +200,16 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c5,
     Iterable<T> c6,
     Iterable<T> c7,
-  ) =>
-      followedBy(c1)
-          .followedBy(c2)
-          .followedBy(c3)
-          .followedBy(c4)
-          .followedBy(c5)
-          .followedBy(c6)
-          .followedBy(c7);
+  ) {
+    checkNullError(this);
+    return followedBy(c1)
+        .followedBy(c2)
+        .followedBy(c3)
+        .followedBy(c4)
+        .followedBy(c5)
+        .followedBy(c6)
+        .followedBy(c7);
+  }
 
   /// Concatenates this iterable and eight another iterables.
   ///
@@ -225,15 +242,17 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c6,
     Iterable<T> c7,
     Iterable<T> c8,
-  ) =>
-      followedBy(c1)
-          .followedBy(c2)
-          .followedBy(c3)
-          .followedBy(c4)
-          .followedBy(c5)
-          .followedBy(c6)
-          .followedBy(c7)
-          .followedBy(c8);
+  ) {
+    checkNullError(this);
+    return followedBy(c1)
+        .followedBy(c2)
+        .followedBy(c3)
+        .followedBy(c4)
+        .followedBy(c5)
+        .followedBy(c6)
+        .followedBy(c7)
+        .followedBy(c8);
+  }
 
   /// Concatenates this iterable and nine another iterables.
   ///
@@ -268,14 +287,16 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c7,
     Iterable<T> c8,
     Iterable<T> c9,
-  ) =>
-      followedBy(c1)
-          .followedBy(c2)
-          .followedBy(c3)
-          .followedBy(c4)
-          .followedBy(c5)
-          .followedBy(c6)
-          .followedBy(c7)
-          .followedBy(c8)
-          .followedBy(c9);
+  ) {
+    checkNullError(this);
+    return followedBy(c1)
+        .followedBy(c2)
+        .followedBy(c3)
+        .followedBy(c4)
+        .followedBy(c5)
+        .followedBy(c6)
+        .followedBy(c7)
+        .followedBy(c8)
+        .followedBy(c9);
+  }
 }

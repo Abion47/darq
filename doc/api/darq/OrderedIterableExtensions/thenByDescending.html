@@ -57,10 +57,6 @@
     
     
         <li class="section-title"><a href="darq/OrderedIterableExtensions.html#instance-methods">Methods</a></li>
-        <li><a href="darq/OrderedIterableExtensions/orderBy.html">orderBy</a></li>
-        <li><a href="darq/OrderedIterableExtensions/orderByDescending.html">orderByDescending</a></li>
-        <li><a href="darq/OrderedIterableExtensions/reverse.html">reverse</a></li>
-        <li><a href="darq/OrderedIterableExtensions/thenBy.html">thenBy</a></li>
         <li><a href="darq/OrderedIterableExtensions/thenByDescending.html">thenByDescending</a></li>
     
     
@@ -112,13 +108,14 @@ iterable will be unchanged.</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">&#47;&#47;&#47;
-Iterable&lt;T&gt; thenByDescending&lt;TKey&gt;(
+      <pre class="language-dart"><code class="language-dart">Iterable&lt;T&gt; thenByDescending&lt;TKey&gt;(
   TKey Function(T) keySelector, {
   EqualityComparer&lt;TKey&gt; keyComparer,
 }) {
-  ArgumentError.checkNotNull(keySelector);
-  if (this is! _InternalOrderedIterable) {
+  checkNullError(this);
+  ArgumentError.checkNotNull(keySelector, &#39;keySelector&#39;);
+
+  if (this is! InternalOrderedIterable) {
     throw UnsupportedError(
         &#39;thenByDescending must be called immediately following a call to orderBy, orderByDescending, thenBy, or thenByDescending.&#39;);
   }
@@ -137,7 +134,7 @@ Iterable&lt;T&gt; thenByDescending&lt;TKey&gt;(
 <footer>
   <span class="no-break">
     darq
-      0.4.0+1
+      0.5.0
   </span>
 
   <!-- footer-text placeholder -->

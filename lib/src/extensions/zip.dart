@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension ZipExtension<T> on Iterable<T> {
   /// Combines the values of the iterable and another collection into an
   /// iterable of new values.
@@ -21,7 +23,13 @@ extension ZipExtension<T> on Iterable<T> {
   ///       // Result: [ '1: 5.0', '2: 6.0', '7: 7.0' ]
   ///     }
   Iterable<TResult> zip<TOther, TResult>(
-      Iterable<TOther> other, TResult Function(T, TOther) selector) sync* {
+    Iterable<TOther> other,
+    TResult Function(T, TOther) selector,
+  ) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(other, 'other');
+    ArgumentError.checkNotNull(selector, 'selector');
+
     final sourceIterator = iterator;
     final otherIterator = other.iterator;
 

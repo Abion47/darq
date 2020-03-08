@@ -1,19 +1,38 @@
-import 'package:darq/src/utility/equality_comparer.dart';
+import '../utility/equality_comparer.dart';
+import '../utility/error.dart';
 
 extension SplitExtension<T> on Iterable<T> {
   /// Splits the is iterable into multiple iterables on elements that match
   /// the separator.
+  ///
+  /// Optionally a [comparer] can be provided to determine if an element
+  /// is equal to the separator.
+  ///
+  /// Example:
+  ///
+  ///     void main() {
+  ///       final list = ['a', ' ', 'b', 'c', ' ', 'd'];
+  ///       final result = list.split(' ');
+  ///
+  ///       // Result: [
+  ///       //   ['a''],
+  ///       //   ['b', 'c'],
+  ///       //   ['d'],
+  ///       // ]
+  ///     }
   Iterable<Iterable<T>> split(
     T separator, {
     bool Function(T, T) comparer,
   }) sync* {
+    checkNullError(this);
+
     var buffer = <T>[];
 
-    comparer ??= EqualityComparer.forType<T>().compare ?? (a, b) => a == b;
+    comparer ??= EqualityComparer.forType<T>()?.compare ?? (a, b) => a == b;
 
     for (var o in this) {
       if (comparer(separator, o)) {
-        yield buffer;
+        yield List.unmodifiable(buffer);
         buffer = <T>[];
       } else {
         buffer.add(o);
@@ -21,7 +40,7 @@ extension SplitExtension<T> on Iterable<T> {
     }
 
     if (buffer.isNotEmpty) {
-      yield buffer;
+      yield List.unmodifiable(buffer);
     }
   }
 }

@@ -1,5 +1,7 @@
 import 'dart:collection';
 
+import '../utility/error.dart';
+
 extension ToHashMapExtension<T> on Iterable<T> {
   /// Converts the iterable to a [HashMap].
   ///
@@ -23,6 +25,7 @@ extension ToHashMapExtension<T> on Iterable<T> {
     MapEntry<TKey, TValue> Function(T) entrySelector, {
     bool modifiable = true,
   }) {
+    checkNullError(this);
     final map = HashMap.fromEntries([for (var o in this) entrySelector(o)]);
     if (modifiable) return map;
     return UnmodifiableMapView(map);

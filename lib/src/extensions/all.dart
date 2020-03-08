@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension AllExtension<T> on Iterable<T> {
   /// Returns `true` if all elements match a condition and `false` otherwise.
   ///
@@ -29,6 +31,8 @@ extension AllExtension<T> on Iterable<T> {
   /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
   /// Internally it functions identically to [every].)
   bool all([bool Function(T) condition]) {
+    checkNullError(this);
+
     if (condition == null) {
       if (T == bool) {
         condition = (T b) => b as bool;

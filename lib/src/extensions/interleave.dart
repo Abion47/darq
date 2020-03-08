@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension InterleaveExtension<T> on Iterable<T> {
   /// Returns the elements of this iterable interleaved with the elements of [other].
   ///
@@ -9,19 +11,20 @@ extension InterleaveExtension<T> on Iterable<T> {
   /// iterable will be appended to the end of the resulting iterable in iteration
   /// order.
   Iterable<T> interleave(Iterable<T> other) sync* {
-    if (other == null) {
-      throw ArgumentError.notNull('other');
-    }
+    checkNullError(this);
+    ArgumentError.checkNotNull(other, 'other');
 
     final iterator = this.iterator;
     final otherIterator = other.iterator;
 
-    var iteratorClosed = iterator.moveNext();
-    var otherIteratorClosed = otherIterator.moveNext();
+    bool iteratorOpen;
+    bool otherIteratorOpen;
 
     do {
-      if (!iteratorClosed) yield iterator.current;
-      if (!otherIteratorClosed) yield otherIterator.current;
-    } while (!(iteratorClosed && otherIteratorClosed));
+      iteratorOpen = iterator.moveNext();
+      otherIteratorOpen = otherIterator.moveNext();
+      if (iteratorOpen) yield iterator.current;
+      if (otherIteratorOpen) yield otherIterator.current;
+    } while (iteratorOpen || otherIteratorOpen);
   }
 }

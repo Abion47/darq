@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension SumExtension<T> on Iterable<T> {
   /// Calculates the sum of the elements in an iterable, optionally using
   /// [selector] to obtain the value to be summed.
@@ -28,6 +30,8 @@ extension SumExtension<T> on Iterable<T> {
   ///       // Result: 10
   ///     }
   num sum([num Function(T) selector]) {
+    checkNullError(this);
+
     if (isEmpty) {
       throw StateError('Iterator must not be empty.');
     }

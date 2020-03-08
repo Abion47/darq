@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension OfTypeExtension<T> on Iterable<T> {
   /// Returns all elements in the iterable that are castable to the specified
   /// type.
@@ -20,7 +22,10 @@ extension OfTypeExtension<T> on Iterable<T> {
   ///
   /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
   /// Internally it functions identically to [whereType].)
-  Iterable<TOther> ofType<TOther>() => whereType<TOther>();
+  Iterable<TOther> ofType<TOther>() {
+    checkNullError(this);
+    return whereType<TOther>();
+  }
 
   /// Returns all elements in the iterable that are castable to one of the specified
   /// types.
@@ -41,6 +46,7 @@ extension OfTypeExtension<T> on Iterable<T> {
   ///       // Result: [0, 1.2]
   ///     }
   Iterable<T> ofType2<T1, T2>() sync* {
+    checkNullError(this);
     for (var o in this) {
       if (o is T1 || o is T2) {
         yield o;
@@ -67,6 +73,7 @@ extension OfTypeExtension<T> on Iterable<T> {
   ///       // Result: [0, 1.2, 'a']
   ///     }
   Iterable<T> ofType3<T1, T2, T3>() sync* {
+    checkNullError(this);
     for (var o in this) {
       if (o is T1 || o is T2 || o is T3) {
         yield o;
@@ -84,6 +91,7 @@ extension OfTypeExtension<T> on Iterable<T> {
   /// If all elements in the source iterable can be safely cast to one of the provided types,
   /// the resulting iterable will be unchanged.
   Iterable<T> ofType4<T1, T2, T3, T4>() sync* {
+    checkNullError(this);
     for (var o in this) {
       if (o is T1 || o is T2 || o is T3 || o is T4) {
         yield o;
@@ -101,6 +109,7 @@ extension OfTypeExtension<T> on Iterable<T> {
   /// If all elements in the source iterable can be safely cast to one of the provided types,
   /// the resulting iterable will be unchanged.
   Iterable<T> ofType5<T1, T2, T3, T4, T5>() sync* {
+    checkNullError(this);
     for (var o in this) {
       if (o is T1 || o is T2 || o is T3 || o is T4 || o is T5) {
         yield o;
@@ -118,6 +127,7 @@ extension OfTypeExtension<T> on Iterable<T> {
   /// If all elements in the source iterable can be safely cast to one of the provided types,
   /// the resulting iterable will be unchanged.
   Iterable<T> ofType6<T1, T2, T3, T4, T5, T6>() sync* {
+    checkNullError(this);
     for (var o in this) {
       if (o is T1 || o is T2 || o is T3 || o is T4 || o is T5 || o is T6) {
         yield o;
@@ -135,6 +145,7 @@ extension OfTypeExtension<T> on Iterable<T> {
   /// If all elements in the source iterable can be safely cast to one of the provided types,
   /// the resulting iterable will be unchanged.
   Iterable<T> ofType7<T1, T2, T3, T4, T5, T6, T7>() sync* {
+    checkNullError(this);
     for (var o in this) {
       if (o is T1 ||
           o is T2 ||
@@ -158,6 +169,7 @@ extension OfTypeExtension<T> on Iterable<T> {
   /// If all elements in the source iterable can be safely cast to one of the provided types,
   /// the resulting iterable will be unchanged.
   Iterable<T> ofType8<T1, T2, T3, T4, T5, T6, T7, T8>() sync* {
+    checkNullError(this);
     for (var o in this) {
       if (o is T1 ||
           o is T2 ||
@@ -182,6 +194,7 @@ extension OfTypeExtension<T> on Iterable<T> {
   /// If all elements in the source iterable can be safely cast to one of the provided types,
   /// the resulting iterable will be unchanged.
   Iterable<T> ofType9<T1, T2, T3, T4, T5, T6, T7, T8, T9>() sync* {
+    checkNullError(this);
     for (var o in this) {
       if (o is T1 ||
           o is T2 ||

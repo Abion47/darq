@@ -1,4 +1,6 @@
-extension FlattenExtension<T> on Iterable<T> {
+import '../utility/error.dart';
+
+extension FlattenExtension<T> on Iterable<Iterable<T>> {
   /// Flattens this iterable of iterables into a single iterable.
   ///
   /// Flattens each iterable element contained in this iterable into a single
@@ -6,5 +8,8 @@ extension FlattenExtension<T> on Iterable<T> {
   /// inner iterable in a single iterable, maintaining iteration order.
   ///
   /// (This is a convenience method that is equivalent to calling `iterable.expand((e) => e))`.)
-  Iterable<TResult> flatten<TResult>() => expand((e) => e as Iterable<TResult>);
+  Iterable<T> flatten() {
+    checkNullError(this);
+    return expand((e) => e);
+  }
 }

@@ -1,4 +1,4 @@
-import 'all.dart';
+import '../utility/error.dart';
 
 extension InterleaveAllExtension<T> on Iterable<T> {
   /// Returns the elements of this iterable interleaved with the elements of every iterable in
@@ -11,9 +11,8 @@ extension InterleaveAllExtension<T> on Iterable<T> {
   /// If the iterables are not the same length, any iterable which is consumed before iteration is
   /// complete will be skipped for the remainder of iteration.
   Iterable<T> interleaveAll(Iterable<Iterable<T>> others) sync* {
-    if (others == null) {
-      throw ArgumentError.notNull('others');
-    }
+    checkNullError(this);
+    ArgumentError.checkNotNull(others, 'others');
     if (others.any((i) => i == null)) {
       throw ArgumentError('Every element in "others" must not be null.');
     }
@@ -23,12 +22,18 @@ extension InterleaveAllExtension<T> on Iterable<T> {
       ...others.map((i) => i.iterator),
     ];
 
-    final isClosedMap = [...iterators.map((i) => i.moveNext())];
+    final isOpenMap = List<bool>(iterators.length);
+    void refreshMap() {
+      for (var i = 0; i < isOpenMap.length; i++) {
+        isOpenMap[i] = iterators[i].moveNext();
+      }
+    }
 
     do {
+      refreshMap();
       for (var i = 0; i < iterators.length; i++) {
-        if (isClosedMap[i]) yield iterators[i].current;
+        if (isOpenMap[i]) yield iterators[i].current;
       }
-    } while (isClosedMap.all((b) => !b));
+    } while (isOpenMap.any((b) => b));
   }
 }

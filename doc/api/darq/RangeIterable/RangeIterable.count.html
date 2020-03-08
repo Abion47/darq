@@ -62,9 +62,9 @@
         <a href="darq/RangeIterable-class.html#instance-properties">Properties</a>
       </li>
       <li><a href="darq/RangeIterable/end.html">end</a></li>
-      <li><a href="darq/RangeIterable/interval.html">interval</a></li>
       <li><a href="darq/RangeIterable/iterator.html">iterator</a></li>
       <li><a href="darq/RangeIterable/start.html">start</a></li>
+      <li><a href="darq/RangeIterable/step.html">step</a></li>
       <li class="inherited"><a href="darq/RangeIterable/first.html">first</a></li>
       <li class="inherited"><a href="darq/RangeIterable/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="darq/RangeIterable/isEmpty.html">isEmpty</a></li>
@@ -115,7 +115,7 @@
 
     <section class="multi-line-signature">
       
-      <span class="name ">RangeIterable.count</span>(<wbr><span class="parameter" id="count-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, {</span> <span class="parameter" id="count-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span>, {</span> <span class="parameter" id="count-param-interval"><span class="type-annotation">int</span> <span class="parameter-name">interval</span>: <span class="default-value">1</span></span> })
+      <span class="name ">RangeIterable.count</span>(<wbr><span class="parameter" id="count-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, {</span> <span class="parameter" id="count-param-count"><span class="type-annotation">int</span> <span class="parameter-name">count</span>, {</span> <span class="parameter" id="count-param-step"><span class="type-annotation">int</span> <span class="parameter-name">step</span>: <span class="default-value">1</span></span> })
     </section>
 
     <section class="desc markdown">
@@ -126,11 +126,11 @@ the iterable will result in a range of values, typically in the range from <code
 (inclusive) to <code>start + count</code> (exclusive). Having the value of <code>count</code> be zero will
 return an empty interval. Having the value of <code>count</code> be less than zero will result in
 an error.</p>
-<p>If <code>interval</code> is not 1, the values in the interval will skip <code>interval</code> times. For
-example, a <code>start</code> of 2, a <code>count</code> of 3, and an <code>interval</code> of 2 will result in the iterable [2, 4, 6].
-If <code>interval</code> is negative, the iterable will instead count down from <code>start</code>, e.g. the
-previous <code>start</code> and <code>count</code> values with an <code>interval</code> of -2 will result in the iterable
-[2, 0, -2]. Having the value of <code>interval</code> be zero will result in an error.</p>
+<p>If <code>step</code> is not 1, the values in the interval will skip <code>step</code> times. For
+example, a <code>start</code> of 2, a <code>count</code> of 3, and an <code>step</code> of 2 will result in the iterable [2, 4, 6].
+If <code>step</code> is negative, the iterable will instead count down from <code>start</code>, e.g. the
+previous <code>start</code> and <code>count</code> values with an <code>step</code> of -2 will result in the iterable
+[2, 0, -2]. Having the value of <code>step</code> be zero will result in an error.</p>
     </section>
     
     <section class="summary source-code" id="source">
@@ -138,14 +138,14 @@ previous <code>start</code> and <code>count</code> values with an <code>interval
       <pre class="language-dart"><code class="language-dart">RangeIterable.count(
   int start,
   int count, {
-  this.interval = 1,
+  this.step = 1,
 })  : assert(start != null),
       assert(count != null),
-      assert(interval != null),
-      assert(interval != 0, &#39;The interval must be a positive integer.&#39;),
+      assert(step != null),
+      assert(step != 0, &#39;The interval must be a positive integer.&#39;),
       assert(count &gt;= 0, &#39;The count must be a positive integer.&#39;),
-      start = interval &gt; 0 ? start : start - (count * -interval) + 1,
-      end = interval &gt; 0 ? start + (count * interval) - 1 : start;</code></pre>
+      start = step &gt; 0 ? start : start - (count * -step) + 1,
+      end = step &gt; 0 ? start + (count * step) - 1 : start;</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
@@ -158,7 +158,7 @@ previous <code>start</code> and <code>count</code> values with an <code>interval
 <footer>
   <span class="no-break">
     darq
-      0.4.0+1
+      0.5.0
   </span>
 
   <!-- footer-text placeholder -->

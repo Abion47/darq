@@ -1,9 +1,14 @@
-import '../utility/tuple.dart';
+import '../utility/error.dart';
 
 extension PartitionExtension<T> on Iterable<T> {
-  /// Returns a [Tuple2] dividing this iterable into two iterables, one iterable
-  /// containing elements that match the condition and one containing elements
-  /// that do not.
+  /// Returns an iterable containing two iterables, one containing the
+  /// elements that match the condition and one containing those that
+  /// do not.
+  ///
+  /// The first iterable returned contains all the elements in this
+  /// iterable that returns true when passed to [condition]. The
+  /// second iterable returned contains all the elements in this iterable
+  /// that returns false when passed to [condition].
   ///
   /// Example:
   ///
@@ -13,10 +18,12 @@ extension PartitionExtension<T> on Iterable<T> {
   ///
   ///       // Result: ([2, 4], [1, 3])
   ///     }
-  Tuple2<Iterable<T>, Iterable<T>> partition(bool Function(T) condition) {
-    return Tuple2(
+  Iterable<Iterable<T>> partition(bool Function(T) condition) {
+    checkNullError(this);
+    ArgumentError.checkNotNull(condition, 'condition');
+    return [
       where((o) => condition(o)),
       where((o) => !condition(o)),
-    );
+    ];
   }
 }

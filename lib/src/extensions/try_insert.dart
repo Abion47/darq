@@ -1,3 +1,4 @@
+import '../utility/error.dart';
 import 'prepend.dart';
 
 extension TryInsertExtension<T> on Iterable<T> {
@@ -11,6 +12,10 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, [value] is not inserted and this iterable is unchanged.
   Iterable<T> tryInsert(int index, T value) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(index, 'index');
+    ArgumentError.checkNotNull(value, 'value');
+
     if (index == 0) {
       yield* prepend(value);
       return;
@@ -23,10 +28,10 @@ extension TryInsertExtension<T> on Iterable<T> {
     var i = 0;
 
     while (iterator.moveNext()) {
-      yield iterator.current;
       if (i == index) {
         yield value;
       }
+      yield iterator.current;
       i++;
     }
   }
@@ -41,6 +46,11 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
   Iterable<T> tryInsert2(int index, T v1, T v2) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(index, 'index');
+    ArgumentError.checkNotNull(v1, 'v1');
+    ArgumentError.checkNotNull(v2, 'v2');
+
     if (index == 0) {
       yield* prepend2(v1, v2);
       return;
@@ -53,11 +63,11 @@ extension TryInsertExtension<T> on Iterable<T> {
     var i = 0;
 
     while (iterator.moveNext()) {
-      yield iterator.current;
       if (i == index) {
         yield v1;
         yield v2;
       }
+      yield iterator.current;
       i++;
     }
   }
@@ -72,6 +82,12 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
   Iterable<T> tryInsert3(int index, T v1, T v2, T v3) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(index, 'index');
+    ArgumentError.checkNotNull(v1, 'v1');
+    ArgumentError.checkNotNull(v2, 'v2');
+    ArgumentError.checkNotNull(v3, 'v3');
+
     if (index == 0) {
       yield* prepend3(v1, v2, v3);
       return;
@@ -84,12 +100,12 @@ extension TryInsertExtension<T> on Iterable<T> {
     var i = 0;
 
     while (iterator.moveNext()) {
-      yield iterator.current;
       if (i == index) {
         yield v1;
         yield v2;
         yield v3;
       }
+      yield iterator.current;
       i++;
     }
   }
@@ -104,6 +120,13 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
   Iterable<T> tryInsert4(int index, T v1, T v2, T v3, T v4) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(index, 'index');
+    ArgumentError.checkNotNull(v1, 'v1');
+    ArgumentError.checkNotNull(v2, 'v2');
+    ArgumentError.checkNotNull(v3, 'v3');
+    ArgumentError.checkNotNull(v4, 'v4');
+
     if (index == 0) {
       yield* prepend4(v1, v2, v3, v4);
       return;
@@ -116,13 +139,13 @@ extension TryInsertExtension<T> on Iterable<T> {
     var i = 0;
 
     while (iterator.moveNext()) {
-      yield iterator.current;
       if (i == index) {
         yield v1;
         yield v2;
         yield v3;
         yield v4;
       }
+      yield iterator.current;
       i++;
     }
   }
@@ -137,6 +160,14 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
   Iterable<T> tryInsert5(int index, T v1, T v2, T v3, T v4, T v5) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(index, 'index');
+    ArgumentError.checkNotNull(v1, 'v1');
+    ArgumentError.checkNotNull(v2, 'v2');
+    ArgumentError.checkNotNull(v3, 'v3');
+    ArgumentError.checkNotNull(v4, 'v4');
+    ArgumentError.checkNotNull(v5, 'v5');
+
     if (index == 0) {
       yield* prepend5(v1, v2, v3, v4, v5);
       return;
@@ -149,7 +180,6 @@ extension TryInsertExtension<T> on Iterable<T> {
     var i = 0;
 
     while (iterator.moveNext()) {
-      yield iterator.current;
       if (i == index) {
         yield v1;
         yield v2;
@@ -157,6 +187,7 @@ extension TryInsertExtension<T> on Iterable<T> {
         yield v4;
         yield v5;
       }
+      yield iterator.current;
       i++;
     }
   }
@@ -171,6 +202,15 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
   Iterable<T> tryInsert6(int index, T v1, T v2, T v3, T v4, T v5, T v6) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(index, 'index');
+    ArgumentError.checkNotNull(v1, 'v1');
+    ArgumentError.checkNotNull(v2, 'v2');
+    ArgumentError.checkNotNull(v3, 'v3');
+    ArgumentError.checkNotNull(v4, 'v4');
+    ArgumentError.checkNotNull(v5, 'v5');
+    ArgumentError.checkNotNull(v6, 'v6');
+
     if (index == 0) {
       yield* prepend6(v1, v2, v3, v4, v5, v6);
       return;
@@ -183,7 +223,6 @@ extension TryInsertExtension<T> on Iterable<T> {
     var i = 0;
 
     while (iterator.moveNext()) {
-      yield iterator.current;
       if (i == index) {
         yield v1;
         yield v2;
@@ -192,6 +231,7 @@ extension TryInsertExtension<T> on Iterable<T> {
         yield v5;
         yield v6;
       }
+      yield iterator.current;
       i++;
     }
   }
@@ -207,6 +247,16 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// is reached, the given elements are not inserted and this iterable is unchanged.
   Iterable<T> tryInsert7(
       int index, T v1, T v2, T v3, T v4, T v5, T v6, T v7) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(index, 'index');
+    ArgumentError.checkNotNull(v1, 'v1');
+    ArgumentError.checkNotNull(v2, 'v2');
+    ArgumentError.checkNotNull(v3, 'v3');
+    ArgumentError.checkNotNull(v4, 'v4');
+    ArgumentError.checkNotNull(v5, 'v5');
+    ArgumentError.checkNotNull(v6, 'v6');
+    ArgumentError.checkNotNull(v7, 'v7');
+
     if (index == 0) {
       yield* prepend7(v1, v2, v3, v4, v5, v6, v7);
       return;
@@ -219,7 +269,6 @@ extension TryInsertExtension<T> on Iterable<T> {
     var i = 0;
 
     while (iterator.moveNext()) {
-      yield iterator.current;
       if (i == index) {
         yield v1;
         yield v2;
@@ -229,6 +278,7 @@ extension TryInsertExtension<T> on Iterable<T> {
         yield v6;
         yield v7;
       }
+      yield iterator.current;
       i++;
     }
   }
@@ -244,6 +294,17 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// is reached, the given elements are not inserted and this iterable is unchanged.
   Iterable<T> tryInsert8(
       int index, T v1, T v2, T v3, T v4, T v5, T v6, T v7, T v8) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(index, 'index');
+    ArgumentError.checkNotNull(v1, 'v1');
+    ArgumentError.checkNotNull(v2, 'v2');
+    ArgumentError.checkNotNull(v3, 'v3');
+    ArgumentError.checkNotNull(v4, 'v4');
+    ArgumentError.checkNotNull(v5, 'v5');
+    ArgumentError.checkNotNull(v6, 'v6');
+    ArgumentError.checkNotNull(v7, 'v7');
+    ArgumentError.checkNotNull(v8, 'v8');
+
     if (index == 0) {
       yield* prepend8(v1, v2, v3, v4, v5, v6, v7, v8);
       return;
@@ -256,7 +317,6 @@ extension TryInsertExtension<T> on Iterable<T> {
     var i = 0;
 
     while (iterator.moveNext()) {
-      yield iterator.current;
       if (i == index) {
         yield v1;
         yield v2;
@@ -267,6 +327,7 @@ extension TryInsertExtension<T> on Iterable<T> {
         yield v7;
         yield v8;
       }
+      yield iterator.current;
       i++;
     }
   }
@@ -282,6 +343,18 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// is reached, the given elements are not inserted and this iterable is unchanged.
   Iterable<T> tryInsert9(
       int index, T v1, T v2, T v3, T v4, T v5, T v6, T v7, T v8, T v9) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(index, 'index');
+    ArgumentError.checkNotNull(v1, 'v1');
+    ArgumentError.checkNotNull(v2, 'v2');
+    ArgumentError.checkNotNull(v3, 'v3');
+    ArgumentError.checkNotNull(v4, 'v4');
+    ArgumentError.checkNotNull(v5, 'v5');
+    ArgumentError.checkNotNull(v6, 'v6');
+    ArgumentError.checkNotNull(v7, 'v7');
+    ArgumentError.checkNotNull(v8, 'v8');
+    ArgumentError.checkNotNull(v9, 'v9');
+
     if (index == 0) {
       yield* prepend9(v1, v2, v3, v4, v5, v6, v7, v8, v9);
       return;
@@ -294,7 +367,6 @@ extension TryInsertExtension<T> on Iterable<T> {
     var i = 0;
 
     while (iterator.moveNext()) {
-      yield iterator.current;
       if (i == index) {
         yield v1;
         yield v2;
@@ -306,6 +378,7 @@ extension TryInsertExtension<T> on Iterable<T> {
         yield v8;
         yield v9;
       }
+      yield iterator.current;
       i++;
     }
   }

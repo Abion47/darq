@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension FirstWhereOrDefaultExtension<T> on Iterable<T> {
   /// Returns the first element in the iterable matching a specified condition,
   /// or a default value if none is found.
@@ -23,6 +25,9 @@ extension FirstWhereOrDefaultExtension<T> on Iterable<T> {
   ///       // Result: -1
   ///     }
   T firstWhereOrDefault(bool Function(T) condition, {T defaultValue}) {
+    checkNullError(this);
+    ArgumentError.checkNotNull(condition, 'condition');
+
     if (isEmpty) return defaultValue;
 
     for (var v in this) {

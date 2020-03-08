@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension CartesianSelectExtension<T> on Iterable<T> {
   /// Generates the cartesian product of this iterable and [other], returning an
   /// iterable of mapped elements.
@@ -10,6 +12,7 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T2> other,
     TResult Function(T, T2) selector,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(selector, 'selector');
     ArgumentError.checkNotNull(other, 'other');
     for (var a in this) {
@@ -32,6 +35,7 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T3> o3,
     TResult Function(T, T2, T3) selector,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(selector, 'selector');
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
@@ -58,6 +62,7 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T4> o4,
     TResult Function(T, T2, T3, T4) selector,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(selector, 'selector');
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
@@ -88,6 +93,7 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T5> o5,
     TResult Function(T, T2, T3, T4, T5) selector,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(selector, 'selector');
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
@@ -122,6 +128,7 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T6> o6,
     TResult Function(T, T2, T3, T4, T5, T6) selector,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(selector, 'selector');
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
@@ -160,6 +167,7 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T7> o7,
     TResult Function(T, T2, T3, T4, T5, T6, T7) selector,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(selector, 'selector');
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
@@ -202,6 +210,7 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T8> o8,
     TResult Function(T, T2, T3, T4, T5, T6, T7, T8) selector,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(selector, 'selector');
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
@@ -248,6 +257,7 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T9> o9,
     TResult Function(T, T2, T3, T4, T5, T6, T7, T8, T9) selector,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(selector, 'selector');
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');

@@ -57,14 +57,7 @@
     
     
         <li class="section-title"><a href="darq/MathConsumerExtensions.html#instance-methods">Methods</a></li>
-        <li><a href="darq/MathConsumerExtensions/aggregate.html">aggregate</a></li>
-        <li><a href="darq/MathConsumerExtensions/aggregateRight.html">aggregateRight</a></li>
-        <li><a href="darq/MathConsumerExtensions/average.html">average</a></li>
         <li><a href="darq/MathConsumerExtensions/count.html">count</a></li>
-        <li><a href="darq/MathConsumerExtensions/countBy.html">countBy</a></li>
-        <li><a href="darq/MathConsumerExtensions/max.html">max</a></li>
-        <li><a href="darq/MathConsumerExtensions/min.html">min</a></li>
-        <li><a href="darq/MathConsumerExtensions/sum.html">sum</a></li>
     
     
     
@@ -105,8 +98,8 @@ or implements <code>EfficientLengthIterable</code>, the <code>count</code> metho
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">&#47;&#47;&#47;
-int count([bool Function(T) condition]) {
+      <pre class="language-dart"><code class="language-dart">int count([bool Function(T) condition]) {
+  checkNullError(this);
   if (condition == null) return length;
 
   var count = 0;
@@ -130,7 +123,7 @@ int count([bool Function(T) condition]) {
 <footer>
   <span class="no-break">
     darq
-      0.4.0+1
+      0.5.0
   </span>
 
   <!-- footer-text placeholder -->

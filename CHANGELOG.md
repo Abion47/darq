@@ -1,3 +1,92 @@
+## [0.5.0]
+
+* Added a ton more extension methods, effectively quadrupling the number of methods added to `Iterable` (from 40 up to 160). Many of these methods were ported from the MoreLINQ library and modified to be more idiomatic to Dart.
+* New methods:
+  * `aggregateRight`
+  * `aggregateRightSelect`
+  * `aggregateSelect`
+  * `appendAll`
+  * `assertAll`
+  * `assertAny`
+  * `assertCount`
+  * `atLeast`
+  * `atMost`
+  * `awaitAll`
+  * `awaitAny`
+  * `batch`
+  * `batchSelect`
+  * `between`
+  * `cartesian`
+  * `cartesianSelect`
+  * `compareCount`
+  * `concatAll`
+  * `consume`
+  * `countBy`
+  * `defaultRangeIfEmpty`
+  * `endsWith`
+  * `exclude`
+  * `excludeAt`
+  * `excludeRange`
+  * `fillBackward`
+  * `fillForward`
+  * `fillMissing`
+  * `flatten`
+  * `index`
+  * `insert`
+  * `insertAll`
+  * `insertOrAppend`
+  * `interleave`
+  * `interleaveAll`
+  * `lag`
+  * `lagSelect`
+  * `lead`
+  * `leadSelect`
+  * `memoize`
+  * `move`
+  * `nonNull`
+  * `padEnd`
+  * `padStart`
+  * `pairwise`
+  * `partition`
+  * `permutations`
+  * `prependAll`
+  * `preScan`
+  * `randomSubset`
+  * `repeat`
+  * `scan`
+  * `skipLast`
+  * `split`
+  * `startsWith`
+  * `subsets`
+  * `takeEvery`
+  * `takeLast`
+  * `toHashMap`
+  * `toLinkedHashMap`
+  * `toSplayTreeMap`
+  * `toStream`
+* Added "try" variants of several methods which will return `null` or a default value upon a failed iteration rather than throwing an error.
+  * `tryAggregate`
+  * `tryAggregateRight`
+  * `tryInsert`
+  * `tryInsertAll`
+  * `trySingleOrDefault`
+  * `trySingleWhereOrDefault`
+* Added "X" variants of several methods with more parameters to perform the same operation multiple times. (The "X" ranges from 2 to 9, representing the number of parameters in the method.)
+  * `appendX`
+  * `cartesianX`
+  * `cartesianSelectX`
+  * `concatX`
+  * `insertX`
+  * `insertOrAppendX`
+  * `ofTypeX`
+  * `prependX`
+  * `tryInsertX`
+* Breaking changes:
+  * `aggregate`
+    * Returns the same type as the source iterable. (Old functionality moved to `aggregateSelect`.)
+  * `segment`
+    * Renamed to `batch`
+
 ## [0.4.0+1]
 
 * Fixing a bug in the documentation

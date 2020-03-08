@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension AggregateExtension<T> on Iterable<T> {
   /// Aggregates the iterable into a single value.
   ///
@@ -13,6 +15,8 @@ extension AggregateExtension<T> on Iterable<T> {
   /// next iteration. Once the aggregation is complete, the last value to be
   /// returned is considered the result of the aggregation process.
   ///
+  /// If this method is called on an empty iterable, a `StateError` is thrown.
+  ///
   /// Example:
   ///
   ///     void main() {
@@ -24,10 +28,14 @@ extension AggregateExtension<T> on Iterable<T> {
   T aggregate(
     T Function(T, T) aggregator,
   ) {
+    checkNullError(this);
+    ArgumentError.checkNotNull(aggregator, 'aggregator');
+
     final iterator = this.iterator;
     if (!iterator.moveNext()) {
       throw StateError('Cannot call "aggregate" on an empty iterable.');
     }
+
     var result = iterator.current;
 
     while (iterator.moveNext()) {

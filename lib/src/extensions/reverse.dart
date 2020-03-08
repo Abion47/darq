@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension ReverseExtension<T> on Iterable<T> {
   /// Reverses the order of the iterable.
   ///
@@ -14,6 +16,7 @@ extension ReverseExtension<T> on Iterable<T> {
   ///       // Result: [4, 3, 2, 1]
   ///     }
   Iterable<T> reverse() {
+    checkNullError(this);
     return toList().reversed;
   }
 }

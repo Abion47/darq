@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import '../utility/equality_comparer.dart';
+import '../utility/error.dart';
 
 extension ToSplayTreeMapExtension<T> on Iterable<T> {
   /// Converts the iterable to a [SplayTreeMap].
@@ -24,8 +25,11 @@ extension ToSplayTreeMapExtension<T> on Iterable<T> {
   Map<TKey, TValue> toSplayTreeMap<TKey, TValue>(
     MapEntry<TKey, TValue> Function(T) entrySelector, {
     int Function(TKey k1, TKey k2) keyComparer,
-    bool modifiable = false,
+    bool modifiable = true,
   }) {
+    checkNullError(this);
+    ArgumentError.checkNotNull(entrySelector, 'entrySelector');
+
     keyComparer ??= EqualityComparer.forType<TKey>().sort;
 
     final map = SplayTreeMap<TKey, TValue>(keyComparer);

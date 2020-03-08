@@ -62,9 +62,9 @@
         <a href="darq/RangeIterable-class.html#instance-properties">Properties</a>
       </li>
       <li><a href="darq/RangeIterable/end.html">end</a></li>
-      <li><a href="darq/RangeIterable/interval.html">interval</a></li>
       <li><a href="darq/RangeIterable/iterator.html">iterator</a></li>
       <li><a href="darq/RangeIterable/start.html">start</a></li>
+      <li><a href="darq/RangeIterable/step.html">step</a></li>
       <li class="inherited"><a href="darq/RangeIterable/first.html">first</a></li>
       <li class="inherited"><a href="darq/RangeIterable/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="darq/RangeIterable/isEmpty.html">isEmpty</a></li>
@@ -115,7 +115,7 @@
 
     <section class="multi-line-signature">
       
-      <span class="name ">RangeIterable</span>(<wbr><span class="parameter" id="-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, {</span> <span class="parameter" id="-param-end"><span class="type-annotation">int</span> <span class="parameter-name">end</span>, {</span> <span class="parameter" id="-param-interval"><span class="type-annotation">int</span> <span class="parameter-name">interval</span>: <span class="default-value">1</span>, </span> <span class="parameter" id="-param-inclusive"><span class="type-annotation">bool</span> <span class="parameter-name">inclusive</span>: <span class="default-value">false</span></span> })
+      <span class="name ">RangeIterable</span>(<wbr><span class="parameter" id="-param-start"><span class="type-annotation">int</span> <span class="parameter-name">start</span>, {</span> <span class="parameter" id="-param-end"><span class="type-annotation">int</span> <span class="parameter-name">end</span>, {</span> <span class="parameter" id="-param-step"><span class="type-annotation">int</span> <span class="parameter-name">step</span>: <span class="default-value">1</span>, </span> <span class="parameter" id="-param-inclusive"><span class="type-annotation">bool</span> <span class="parameter-name">inclusive</span>: <span class="default-value">false</span></span> })
     </section>
 
     <section class="desc markdown">
@@ -126,11 +126,11 @@ the iterable will result in a range of values, typically in the range from <code
 to <code>end</code>, including <code>start</code> but not including <code>end</code>. Having the value of <code>start</code> be
 greater than <code>end</code> will result in an error.</p>
 <p>If <code>inclusive</code> is true, <code>end</code> will be included in the iterable as the last value.</p>
-<p>If <code>interval</code> is not 1, the values in the interval will skip <code>interval</code> times. For
-example, a range of [2-7] with an <code>interval</code> of 2 will result in the iterable [2, 4, 6].
-If <code>interval</code> is negative, the iterable will be reversed, starting from <code>end</code> and
+<p>If <code>step</code> is not 1, the values in the interval will skip <code>step</code> times. For
+example, a range of [2-7] with an <code>step</code> of 2 will result in the iterable [2, 4, 6].
+If <code>step</code> is negative, the iterable will be reversed, starting from <code>end</code> and
 descending to <code>start</code>. (If <code>inclusive</code> is false, the first value will be <code>end - 1</code>.)
-Having the value <code>interval</code> be 0 will result in an error.</p>
+Having the value <code>step</code> be 0 will result in an error.</p>
     </section>
     
     <section class="summary source-code" id="source">
@@ -138,13 +138,13 @@ Having the value <code>interval</code> be 0 will result in an error.</p>
       <pre class="language-dart"><code class="language-dart">RangeIterable(
   this.start,
   int end, {
-  this.interval = 1,
+  this.step = 1,
   bool inclusive = false,
 })  : assert(start != null),
       assert(end != null),
       assert(end &gt;= start),
-      assert(interval != null),
-      assert(interval != 0, &#39;The interval must be a non-zero integer.&#39;),
+      assert(step != null),
+      assert(step != 0, &#39;The interval must be a non-zero integer.&#39;),
       end = inclusive ? end : end - 1;</code></pre>
     </section>
 
@@ -158,7 +158,7 @@ Having the value <code>interval</code> be 0 will result in an error.</p>
 <footer>
   <span class="no-break">
     darq
-      0.4.0+1
+      0.5.0
   </span>
 
   <!-- footer-text placeholder -->

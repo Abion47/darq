@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension UnionExtension<T> on Iterable<T> {
   /// Returns the set union between the iterable and the given
   /// collection.
@@ -29,6 +31,9 @@ extension UnionExtension<T> on Iterable<T> {
   ///     }
   Iterable<T> union<TKey>(Iterable<T> other,
       [TKey Function(T) selector]) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(other, 'other');
+
     selector ??= (T v) => v as TKey;
 
     final set = <TKey>{};

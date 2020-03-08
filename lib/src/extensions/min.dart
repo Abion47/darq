@@ -1,4 +1,5 @@
 import '../utility/equality_comparer.dart';
+import '../utility/error.dart';
 
 extension MinExtension<T> on Iterable<T> {
   /// Returns the minimum value in the iterable.
@@ -30,6 +31,8 @@ extension MinExtension<T> on Iterable<T> {
   ///       // Result: 0
   ///     }
   T min([int Function(T, T) comparer]) {
+    checkNullError(this);
+
     if (isEmpty) {
       throw StateError('Iterable must not be empty.');
     }

@@ -1,7 +1,8 @@
-import 'count.dart';
-import 'take_last.dart';
-import 'sequence_equals.dart';
 import '../utility/equality_comparer.dart';
+import '../utility/error.dart';
+import 'count.dart';
+import 'sequence_equals.dart';
+import 'take_last.dart';
 
 extension EndsWithExtension<T> on Iterable<T> {
   /// Returns true if this iterable ends with the same elements that are in
@@ -10,6 +11,7 @@ extension EndsWithExtension<T> on Iterable<T> {
     Iterable<T> other, {
     bool Function(T, T) comparer,
   }) {
+    checkNullError(this);
     if (other == null) {
       throw ArgumentError.notNull('other');
     }

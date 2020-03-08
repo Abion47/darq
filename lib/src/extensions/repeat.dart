@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension RepeatExtension<T> on Iterable<T> {
   /// Repeats this iterable a specified number of times.
   ///
@@ -5,10 +7,14 @@ extension RepeatExtension<T> on Iterable<T> {
   ///
   /// If count is less than zero, an [ArgumentError] is thrown.
   Iterable<T> repeat(int count) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(count, 'count');
+
     if (count < 0) {
       throw ArgumentError.value(
           count, 'count', 'The value of "count" must be greater than zero.');
     }
+
     for (var i = 0; i < count; i++) {
       yield* this;
     }

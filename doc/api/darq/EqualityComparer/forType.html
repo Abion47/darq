@@ -108,11 +108,7 @@ of <a href="darq/EqualityComparer-class.html">EqualityComparer</a> as if <code>E
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">static EqualityComparer&lt;T&gt; forType&lt;T&gt;() {
-  final equalityComparer = _registeredEqualityComparers[T];
-  if (equalityComparer == null) return EqualityComparer&lt;T&gt;();
-  return equalityComparer;
-}</code></pre>
+      <pre class="language-dart"><code class="language-dart">static EqualityComparer&lt;T&gt; forType&lt;T&gt;() =&gt; _registeredEqualityComparers[T];</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
@@ -125,7 +121,7 @@ of <a href="darq/EqualityComparer-class.html">EqualityComparer</a> as if <code>E
 <footer>
   <span class="no-break">
     darq
-      0.4.0+1
+      0.5.0
   </span>
 
   <!-- footer-text placeholder -->

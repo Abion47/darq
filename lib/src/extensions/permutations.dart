@@ -1,5 +1,4 @@
-import 'prepend.dart';
-import 'exclude_at.dart';
+import '../utility/error.dart';
 
 extension PermutationsExtension<T> on Iterable<T> {
   /// Returns an iterable that consists of iterables, where each iterable is
@@ -12,42 +11,46 @@ extension PermutationsExtension<T> on Iterable<T> {
   ///       final result = list.permutations();
   ///
   ///       // Result: [
-  ///       //   [ 1, 2, 3],
-  ///       //   [ 1, 3, 2],
-  ///       //   [ 2, 1, 3],
-  ///       //   [ 2, 3, 1],
-  ///       //   [ 3, 1, 2],
-  ///       //   [ 3, 2, 1],
+  ///       //   [1, 2, 3],
+  ///       //   [2, 1, 3],
+  ///       //   [3, 1, 2],
+  ///       //   [1, 3, 2],
+  ///       //   [2, 3, 1],
+  ///       //   [3, 2, 1],
   ///       // ]
   ///     }
   Iterable<Iterable<T>> permutations() {
-    return _permutationsRecursive(this);
+    checkNullError(this);
+
+    final tempList = toList();
+    return _permutationsRecursive(tempList, tempList.length, tempList.length);
   }
 
-  Iterable<Iterable<T>> _permutationsRecursive(Iterable<T> input) sync* {
-    var index = 0;
-    for (var o in input) {
-      yield* _permutationsRecursive(input.excludeAt(index))
-          .map((i) => i.prepend(o));
-      index++;
+  Iterable<Iterable<T>> _permutationsRecursive(
+    List<T> input,
+    int size,
+    int n,
+  ) sync* {
+    if (size == 0) {
+      yield [];
+    } else if (size == 1) {
+      yield List.unmodifiable(input);
+    } else {
+      for (var i = 0; i < size; i++) {
+        yield* _permutationsRecursive(input, size - 1, n);
+
+        if (size.isOdd) {
+          swap(input, 0, size - 1);
+        } else {
+          swap(input, i, size - 1);
+        }
+      }
     }
-    // if (input.length <= 1) {
-    //   yield input;
-    //   return;
-    // }
+  }
 
-    // if (input.length == 2) {
-    //   yield [input[0], input[1]];
-    //   yield [input[1], input[0]];
-    //   return;
-    // }
-
-    // for (var i = 0; i < input.length; i++) {
-    //   final element = input[i];
-    //   yield* _permutationsRecursive([
-    //     ...input.sublist(0, i),
-    //     ...input.sublist(i + 1, input.length),
-    //   ]).map((l) => l.prepend(element));
-    // }
+  void swap(List<T> input, int a, int b) {
+    final temp = input[a];
+    input[a] = input[b];
+    input[b] = temp;
   }
 }

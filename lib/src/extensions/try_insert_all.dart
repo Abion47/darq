@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension TryInsertAllExtension<T> on Iterable<T> {
   /// Inserts an element into the iterable at the specified index.
   ///
@@ -9,22 +11,26 @@ extension TryInsertAllExtension<T> on Iterable<T> {
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the elements in [other] are not inserted and this iterable is unchanged.
   Iterable<T> tryInsertAll(int index, Iterable<T> other) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(index, 'index');
+    ArgumentError.checkNotNull(other, 'other');
+
+    if (index < 0) {
+      throw ArgumentError('Parameter "index" must be greater than zero.');
+    }
     if (index == 0) {
       yield* other.followedBy(this);
       return;
-    }
-    if (index < 0) {
-      throw ArgumentError('Parameter "index" must be greater than zero.');
     }
 
     final iterator = this.iterator;
     var i = 0;
 
     while (iterator.moveNext()) {
-      yield iterator.current;
       if (i == index) {
         yield* other;
       }
+      yield iterator.current;
       i++;
     }
   }

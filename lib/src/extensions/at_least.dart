@@ -1,4 +1,5 @@
 import '../utility/equality_comparer.dart';
+import '../utility/error.dart';
 
 extension AtLeastExtension<T> on Iterable<T> {
   /// Returns true if all elements in the iterable are equal to or greater than [value].
@@ -10,20 +11,29 @@ extension AtLeastExtension<T> on Iterable<T> {
   /// If [sorter] is omitted, the method checks [EqualityComparer.forType] to see if a default
   /// sorting function exists. If one is found, it is used. If one is not found, this method
   /// throws an [ArgumentError].
+  ///
+  /// If the iterable is empty, a [StateError] will be thrown.
   bool atLeast(
     T value, {
     int Function(T, T) sorter,
   }) {
-    sorter ??= EqualityComparer.forType<T>().sort;
+    checkNullError(this);
+
+    sorter ??= EqualityComparer.forType<T>()?.sort;
     if (sorter == null) {
       throw ArgumentError.notNull('sorter');
     }
 
-    for (var elem in this) {
-      if (sorter(value, elem) < 0) {
+    final iterator = this.iterator;
+    if (!iterator.moveNext()) {
+      throw StateError('Cannot call "atLeast" on an empty iterable.');
+    }
+
+    do {
+      if (sorter(iterator.current, value) < 0) {
         return false;
       }
-    }
+    } while (iterator.moveNext());
 
     return true;
   }

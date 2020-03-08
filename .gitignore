@@ -3,3 +3,6 @@
 
 .packages
 linq-to-dart-iterable.txt
+
+coverage/
+test/.test_coverage.dart

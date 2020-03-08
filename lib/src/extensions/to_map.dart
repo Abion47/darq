@@ -1,3 +1,4 @@
+import '../utility/error.dart';
 import 'to_linked_hash_map.dart';
 
 extension ToMapExtension<T> on Iterable<T> {
@@ -24,6 +25,8 @@ extension ToMapExtension<T> on Iterable<T> {
   Map<TKey, TValue> toMap<TKey, TValue>(
     MapEntry<TKey, TValue> Function(T) entrySelector, {
     bool modifiable = false,
-  }) =>
-      toLinkedHashMap(entrySelector, modifiable: modifiable);
+  }) {
+    checkNullError(this);
+    return toLinkedHashMap(entrySelector, modifiable: modifiable);
+  }
 }

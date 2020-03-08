@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension LastWhereOrDefaultExtension<T> on Iterable<T> {
   /// Returns the last element in the iterable matching a specified condition,
   /// or a default value if none is found.
@@ -18,6 +20,9 @@ extension LastWhereOrDefaultExtension<T> on Iterable<T> {
   ///       // Result: -1
   ///     }
   T lastWhereOrDefault(bool Function(T) condition, {T defaultValue}) {
+    checkNullError(this);
+    ArgumentError.checkNotNull(condition, 'condition');
+
     if (isEmpty) return defaultValue;
 
     var found = false;

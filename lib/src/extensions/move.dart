@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension MoveExtension<T> on Iterable<T> {
   /// Moves a range of elements in this iterable to a new position, offsetting
   /// other elements to compensate.
@@ -11,6 +13,11 @@ extension MoveExtension<T> on Iterable<T> {
   ///       // Result: [3, 4, 0, 1, 2, 5]
   ///     }
   Iterable<T> move(int from, int count, int to) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(from, 'from');
+    ArgumentError.checkNotNull(count, 'count');
+    ArgumentError.checkNotNull(to, 'to');
+
     if (from < 0) {
       ArgumentError.value(
           from, 'from', 'The value of "from" must be greater than zero.');
@@ -26,42 +33,43 @@ extension MoveExtension<T> on Iterable<T> {
 
     if (from == to || count == 0) {
       yield* this;
-      return;
     }
 
-    Iterable<T> _innerMove(
-        int startIndex, int yieldIndex, int bufferSize) sync* {
-      final iterator = this.iterator;
+    Iterable<T> _innerLoop(
+      int startIndex,
+      int bufferSize,
+      int yieldIndex,
+    ) sync* {
       var hasMore = true;
+      bool moveNext(Iterator<T> e) => hasMore && (hasMore = e.moveNext());
 
-      bool moveNext() => hasMore && (hasMore = iterator.moveNext());
-
-      for (var i = 0; i < from && moveNext(); i++) {
-        yield iterator.current;
+      var e = iterator;
+      for (var i = 0; i < startIndex && moveNext(e); i++) {
+        yield e.current;
       }
 
-      final buffer = List<T>(bufferSize);
+      var buffer = List<T>(bufferSize);
       var length = 0;
 
-      for (; length < bufferSize && moveNext(); length++) {
-        buffer[length] = iterator.current;
+      for (; length < bufferSize && moveNext(e); length++) {
+        buffer[length] = e.current;
       }
 
-      for (var i = 0; i < yieldIndex && moveNext(); i++) {
-        yield iterator.current;
+      for (var i = 0; i < yieldIndex && moveNext(e); i++) {
+        yield e.current;
       }
 
       for (var i = 0; i < length; i++) {
         yield buffer[i];
       }
 
-      while (moveNext()) {
-        yield iterator.current;
+      while (moveNext(e)) {
+        yield e.current;
       }
     }
 
     yield* to < from
-        ? _innerMove(to, count, from - to)
-        : _innerMove(from, to - from, count);
+        ? _innerLoop(to, from - to, count)
+        : _innerLoop(from, count, to - from);
   }
 }

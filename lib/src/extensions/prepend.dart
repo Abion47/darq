@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension PrependExtension<T> on Iterable<T> {
   /// Inserts an element at the beginning of the iterable.
   ///
@@ -13,6 +15,7 @@ extension PrependExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4]
   ///     }
   Iterable<T> prepend(T value) sync* {
+    checkNullError(this);
     yield value;
     yield* this;
   }
@@ -31,6 +34,7 @@ extension PrependExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4]
   ///     }
   Iterable<T> prepend2(T v1, T v2) sync* {
+    checkNullError(this);
     yield v1;
     yield v2;
     yield* this;
@@ -50,6 +54,7 @@ extension PrependExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5]
   ///     }
   Iterable<T> prepend3(T v1, T v2, T v3) sync* {
+    checkNullError(this);
     yield v1;
     yield v2;
     yield v3;
@@ -70,6 +75,7 @@ extension PrependExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5, 6]
   ///     }
   Iterable<T> prepend4(T v1, T v2, T v3, T v4) sync* {
+    checkNullError(this);
     yield v1;
     yield v2;
     yield v3;
@@ -91,6 +97,7 @@ extension PrependExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5, 6, 7]
   ///     }
   Iterable<T> prepend5(T v1, T v2, T v3, T v4, T v5) sync* {
+    checkNullError(this);
     yield v1;
     yield v2;
     yield v3;
@@ -113,6 +120,7 @@ extension PrependExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5, 6, 7, 8]
   ///     }
   Iterable<T> prepend6(T v1, T v2, T v3, T v4, T v5, T v6) sync* {
+    checkNullError(this);
     yield v1;
     yield v2;
     yield v3;
@@ -136,6 +144,7 @@ extension PrependExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   ///     }
   Iterable<T> prepend7(T v1, T v2, T v3, T v4, T v5, T v6, T v7) sync* {
+    checkNullError(this);
     yield v1;
     yield v2;
     yield v3;
@@ -160,6 +169,7 @@ extension PrependExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   ///     }
   Iterable<T> prepend8(T v1, T v2, T v3, T v4, T v5, T v6, T v7, T v8) sync* {
+    checkNullError(this);
     yield v1;
     yield v2;
     yield v3;
@@ -186,6 +196,7 @@ extension PrependExtension<T> on Iterable<T> {
   ///     }
   Iterable<T> prepend9(
       T v1, T v2, T v3, T v4, T v5, T v6, T v7, T v8, T v9) sync* {
+    checkNullError(this);
     yield v1;
     yield v2;
     yield v3;

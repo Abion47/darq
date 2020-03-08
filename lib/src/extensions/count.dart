@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension MathConsumerExtensions<T> on Iterable<T> {
   /// Returns the number of elements in the iterable.
   ///
@@ -21,6 +23,7 @@ extension MathConsumerExtensions<T> on Iterable<T> {
   ///       // ResultB: 2
   ///     }
   int count([bool Function(T) condition]) {
+    checkNullError(this);
     if (condition == null) return length;
 
     var count = 0;

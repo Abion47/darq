@@ -1,4 +1,5 @@
 import '../utility/equality_comparer.dart';
+import '../utility/error.dart';
 import '../utility/ordered.dart';
 
 extension ThenByExtension<T> on Iterable<T> {
@@ -41,7 +42,9 @@ extension ThenByExtension<T> on Iterable<T> {
     TKey Function(T) keySelector, {
     EqualityComparer<TKey> keyComparer,
   }) {
+    checkNullError(this);
     ArgumentError.checkNotNull(keySelector, 'keySelector');
+
     if (this is! InternalOrderedIterable) {
       throw UnsupportedError(
           'thenBy must be called immediately following a call to orderBy, orderByDescending, thenBy, or thenByDescending.');

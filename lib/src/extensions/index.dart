@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension IndexExtension<T> on Iterable<T> {
   /// Returns an iterable of [MapEntry] representing the elements in this iterable combined with
   /// the zero-based index where the element was found.
@@ -12,6 +14,7 @@ extension IndexExtension<T> on Iterable<T> {
   /// iterable will count down from the starting index. (Defaults to false)
   Iterable<MapEntry<int, T>> index(
       [int startIndex = 0, bool descending = false]) sync* {
+    checkNullError(this);
     var index = startIndex;
     for (var o in this) {
       yield MapEntry(index, o);

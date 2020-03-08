@@ -1,3 +1,4 @@
+import '../utility/error.dart';
 import '../utility/tuple.dart';
 
 extension CartesianExtension<T> on Iterable<T> {
@@ -8,6 +9,7 @@ extension CartesianExtension<T> on Iterable<T> {
   /// of an iterable of [Tuple2] with each combination of each element from this
   /// iterable and each element from [other].
   Iterable<Tuple2<T, T2>> cartesian<T2>(Iterable<T2> other) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(other, 'other');
     for (var a in this) {
       for (var b in other) {
@@ -26,6 +28,7 @@ extension CartesianExtension<T> on Iterable<T> {
     Iterable<T2> o2,
     Iterable<T3> o3,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
     for (var a in this) {
@@ -48,6 +51,7 @@ extension CartesianExtension<T> on Iterable<T> {
     Iterable<T3> o3,
     Iterable<T4> o4,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
     ArgumentError.checkNotNull(o4, 'o4');
@@ -74,6 +78,7 @@ extension CartesianExtension<T> on Iterable<T> {
     Iterable<T4> o4,
     Iterable<T5> o5,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
     ArgumentError.checkNotNull(o4, 'o4');
@@ -104,6 +109,7 @@ extension CartesianExtension<T> on Iterable<T> {
     Iterable<T5> o5,
     Iterable<T6> o6,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
     ArgumentError.checkNotNull(o4, 'o4');
@@ -139,6 +145,7 @@ extension CartesianExtension<T> on Iterable<T> {
     Iterable<T6> o6,
     Iterable<T7> o7,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
     ArgumentError.checkNotNull(o4, 'o4');
@@ -178,6 +185,7 @@ extension CartesianExtension<T> on Iterable<T> {
     Iterable<T7> o7,
     Iterable<T8> o8,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
     ArgumentError.checkNotNull(o4, 'o4');
@@ -221,6 +229,7 @@ extension CartesianExtension<T> on Iterable<T> {
     Iterable<T8> o8,
     Iterable<T9> o9,
   ) sync* {
+    checkNullError(this);
     ArgumentError.checkNotNull(o2, 'o2');
     ArgumentError.checkNotNull(o3, 'o3');
     ArgumentError.checkNotNull(o4, 'o4');

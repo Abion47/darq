@@ -1,3 +1,5 @@
+import '../utility/error.dart';
+
 extension InsertOrAppendAll<T> on Iterable<T> {
   /// Inserts all elements from another iterable into this iterable at the specified index.
   ///
@@ -9,6 +11,10 @@ extension InsertOrAppendAll<T> on Iterable<T> {
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the elements in [other] are added to the end iterable as if calling [append].
   Iterable<T> insertOrAppendAll(int index, Iterable<T> other) sync* {
+    checkNullError(this);
+    ArgumentError.checkNotNull(index, 'index');
+    ArgumentError.checkNotNull(other, 'other');
+
     if (index == 0) {
       yield* other.followedBy(this);
       return;
@@ -21,10 +27,10 @@ extension InsertOrAppendAll<T> on Iterable<T> {
     var i = 0;
 
     while (iterator.moveNext()) {
-      yield iterator.current;
       if (i == index) {
         yield* other;
       }
+      yield iterator.current;
       i++;
     }
 

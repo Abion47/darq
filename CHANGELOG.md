@@ -86,6 +86,11 @@
     * Returns the same type as the source iterable. (Old functionality moved to `aggregateSelect`.)
   * `segment`
     * Renamed to `batch`
+* New utility types:
+  * `TupleX`
+    * Members are accessed by `itemX`, where X is the zero-based index of the item to get in the tuple.
+    * Members can also be accessed using an indexer with list-style notation.
+    * Tuples also extend `Iterable` so the members can be iterated and the tuple also has access to all iterable methods.
 
 ## [0.4.0+1]
 

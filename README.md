@@ -182,7 +182,17 @@ var split = list.split(' ');
 // [ ['a'], ['b', 'c'], ['d'] ]
 ```
 
-## Full Function List
+## New Iterable Types
+
+ - [RangeIterable](https://pub.dev/documentation/darq/latest/darq/RangeIterable-class.html)
+ - [RepeatIterable](https://pub.dev/documentation/darq/latest/darq/RepeatIterable-class.html)
+
+## String Extension Methods
+
+ - [iterable](https://pub.dev/documentation/darq/latest/darq/StringExtension/iterable.html)
+ - [iterableRunes](https://pub.dev/documentation/darq/latest/darq/StringExtension/iterableRunes.html)
+
+## Iterable Extension Methods
 
  - [aggregate](https://pub.dev/documentation/darq/latest/darq/AggregateExtension/aggregate.html)
  - [aggregateRight](https://pub.dev/documentation/darq/latest/darq/AggregateRightExtension/aggregateRight.html)

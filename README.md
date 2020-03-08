@@ -128,6 +128,19 @@ list.assertAll((x) => x.isEven);
 // Throws an assertion error
 ```
 
+`awaitAll`:
+
+```dart
+var list = [
+  Future.delayed(Duration(seconds: 1)),
+  Future.delayed(Duration(seconds: 2)),
+  Future.delayed(Duration(seconds: 3)),
+];
+await list.awaitAll();
+
+// Waits for 3 seconds before continuing
+```
+
 `subsets`:
 
 ```dart

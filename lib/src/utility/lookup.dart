@@ -148,7 +148,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     var newSize = count * 2 + 1;
     if (newSize < count) throw Exception('Integer overflow');
 
-    final newGroupings = List<Grouping>(newSize);
+    final newGroupings = List<Grouping<TKey, TValue>>(newSize);
     var g = lastGrouping;
     do {
       g = g.next;

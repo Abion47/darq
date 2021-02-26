@@ -37,9 +37,9 @@ extension JoinMapExtension<T> on Iterable<T> {
   ///     }
   Iterable<TResult> joinMap<TInner, TKey, TResult>(
     Iterable<TInner> other,
-    TResult Function(T, TInner) resultSelector, {
-    TKey Function(T) outerKeySelector,
-    TKey Function(TInner) innerKeySelector,
+    TResult Function(T element, TInner otherElement) resultSelector, {
+    TKey Function(T element) outerKeySelector,
+    TKey Function(TInner otherElement) innerKeySelector,
     EqualityComparer<TKey> keyComparer,
   }) sync* {
     checkNullError(this);

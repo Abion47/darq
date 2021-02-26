@@ -1,3 +1,11 @@
+## [0.5.1]
+
+* Added identifiers to paarmeters for all function types to aid with IntelliSense
+* Tweaked various types' documentation for clarity
+* Overrode `toList` on `MemoizedIterable` to return the cached list if the cache had already been filled
+* `sum`, `average` converted to use generic type arguments instead of num. (@rodion-m)
+* Fixed typo in grouping generic type parameters that was resulting in groups defaulting to `Grouping<dynamic, dynamic>` (@Miiite)
+
 ## [0.5.0]
 
 * Added a ton more extension methods, effectively quadrupling the number of methods added to `Iterable` (from 40 up to 160). Many of these methods were ported from the MoreLINQ library and modified to be more idiomatic to Dart.

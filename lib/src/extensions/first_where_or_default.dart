@@ -24,7 +24,7 @@ extension FirstWhereOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T firstWhereOrDefault(bool Function(T) condition, {T defaultValue}) {
+  T firstWhereOrDefault(bool Function(T value) condition, {T defaultValue}) {
     checkNullError(this);
     ArgumentError.checkNotNull(condition, 'condition');
 

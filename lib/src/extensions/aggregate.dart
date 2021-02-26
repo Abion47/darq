@@ -26,7 +26,7 @@ extension AggregateExtension<T> on Iterable<T> {
   ///       // Result: 10
   ///     }
   T aggregate(
-    T Function(T, T) aggregator,
+    T Function(T aggregate, T select) aggregator,
   ) {
     checkNullError(this);
     ArgumentError.checkNotNull(aggregator, 'aggregator');

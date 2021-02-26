@@ -34,7 +34,7 @@ extension OrderByDescendingExtension<T> on Iterable<T> {
   ///       // Result: [5, 4, 3, 2, 1]
   ///     }
   Iterable<T> orderByDescending<TKey>(
-    TKey Function(T) keySelector, {
+    TKey Function(T element) keySelector, {
     EqualityComparer<TKey> keyComparer,
   }) {
     checkNullError(this);

@@ -29,7 +29,7 @@ extension AggregateRightExtension<T> on Iterable<T> {
   ///       // Result: (a, (b, (c, d)))
   ///     }
   T aggregateRight<TResult>(
-    T Function(T, T) aggregator,
+    T Function(T aggregate, T element) aggregator,
   ) {
     checkNullError(this);
     ArgumentError.checkNotNull(aggregator, 'aggregator');

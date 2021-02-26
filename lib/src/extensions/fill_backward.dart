@@ -1,12 +1,14 @@
 import '../utility/error.dart';
 
 extension FillBackwardExtension<T> on Iterable<T> {
-  /// Returns this iterable with all null values replaced with the following element.
+  /// Returns this iterable with all null values replaced with the next non-null
+  /// element following it.
   ///
-  /// If the null value appears at the end of the iterable, it will be filled forward instead.
+  /// If the null value appears at the end of the iterable, it will be filled
+  /// forward instead.
   ///
-  /// If this iterable doesn't contain any null values, the
-  /// iterable will be unaffected.
+  /// If this iterable doesn't contain any null values, the iterable will be
+  /// unaffected.
   ///
   /// If this iterable contains only null values, a [StateError] will be thrown.
   Iterable<T> fillBackward() sync* {

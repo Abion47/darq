@@ -56,8 +56,8 @@ extension GroupByValueExtension<T> on Iterable<T> {
   ///       // ]
   ///     }
   GroupByValueIterable<T, TKey, TValue> groupByValue<TKey, TValue>({
-    TKey Function(T) keySelector,
-    TValue Function(T) valueSelector,
+    TKey Function(T element) keySelector,
+    TValue Function(T element) valueSelector,
     EqualityComparer<TKey> keyComparer,
   }) {
     checkNullError(this);

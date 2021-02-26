@@ -6,7 +6,7 @@ extension StartsWithExtension<T> on Iterable<T> {
   /// [other].
   bool startsWith(
     Iterable<T> other, {
-    bool Function(T, T) comparer,
+    bool Function(T otherElement, T element) comparer,
   }) {
     checkNullError(this);
     ArgumentError.checkNotNull(other, 'other');

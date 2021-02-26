@@ -22,7 +22,7 @@ extension SplitExtension<T> on Iterable<T> {
   ///     }
   Iterable<Iterable<T>> split(
     T separator, {
-    bool Function(T, T) comparer,
+    bool Function(T separator, T element) comparer,
   }) sync* {
     checkNullError(this);
 

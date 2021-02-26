@@ -27,7 +27,7 @@ extension TryAggregateExtension<T> on Iterable<T> {
   ///       // Result: 10
   ///     }
   T tryAggregate(
-    T Function(T, T) aggregator, {
+    T Function(T aggregate, T element) aggregator, {
     T defaultValue,
   }) {
     checkNullError(this);

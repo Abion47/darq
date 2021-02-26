@@ -30,7 +30,7 @@ extension MinExtension<T> on Iterable<T> {
   ///
   ///       // Result: 0
   ///     }
-  T min([int Function(T, T) comparer]) {
+  T min([int Function(T e1, T e2) comparer]) {
     checkNullError(this);
 
     if (isEmpty) {

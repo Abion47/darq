@@ -26,7 +26,7 @@ extension LagSelectExtension<T> on Iterable<T> {
   ///     }
   Iterable<TResult> lagSelect<TResult>(
     int offset,
-    TResult Function(T, T) selector, {
+    TResult Function(T element, T laggedElement) selector, {
     T defaultValue,
   }) sync* {
     checkNullError(this);

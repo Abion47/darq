@@ -30,7 +30,7 @@ extension UnionExtension<T> on Iterable<T> {
   ///       // Result: [1, 2, 3, 4, 5, 6]
   ///     }
   Iterable<T> union<TKey>(Iterable<T> other,
-      [TKey Function(T) selector]) sync* {
+      [TKey Function(T element) selector]) sync* {
     checkNullError(this);
     ArgumentError.checkNotNull(other, 'other');
 

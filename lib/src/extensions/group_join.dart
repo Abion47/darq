@@ -81,9 +81,9 @@ extension GroupJoinExtension<T> on Iterable<T> {
   ///     }
   GroupJoinIterable<T, TInner, TKey, TResult> groupJoin<TInner, TKey, TResult>(
     Iterable<TInner> other,
-    TResult Function(T, Iterable<TInner>) resultSelector, {
-    TKey Function(T) outerKeySelector,
-    TKey Function(TInner) innerKeySelector,
+    TResult Function(T element, Iterable<TInner> other) resultSelector, {
+    TKey Function(T element) outerKeySelector,
+    TKey Function(TInner otherElement) innerKeySelector,
     EqualityComparer<TKey> keyComparer,
   }) {
     checkNullError(this);

@@ -9,7 +9,7 @@ extension EndsWithExtension<T> on Iterable<T> {
   /// [other].
   bool endsWith(
     Iterable<T> other, {
-    bool Function(T, T) comparer,
+    bool Function(T value, T otherValue) comparer,
   }) {
     checkNullError(this);
     if (other == null) {

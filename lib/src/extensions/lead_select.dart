@@ -26,7 +26,7 @@ extension LeadSelectExtension<T> on Iterable<T> {
   ///     }
   Iterable<TResult> leadSelect<TResult>(
     int offset,
-    TResult Function(T, T) selector, {
+    TResult Function(T leadedElement, T element) selector, {
     T defaultValue,
   }) sync* {
     checkNullError(this);

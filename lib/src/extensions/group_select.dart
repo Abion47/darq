@@ -63,8 +63,8 @@ extension GroupSelectExtension<T> on Iterable<T> {
 
   ///
   GroupSelectIterable<T, TKey, TResult> groupSelect<TKey, TResult>(
-    TResult Function(TKey, Iterable<T>) resultSelector, {
-    TKey Function(T) keySelector,
+    TResult Function(TKey key, Iterable<T> group) resultSelector, {
+    TKey Function(T key) keySelector,
     EqualityComparer<TKey> keyComparer,
   }) {
     checkNullError(this);

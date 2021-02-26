@@ -22,7 +22,7 @@ extension SingleWhereOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T singleWhereOrDefault(bool Function(T) condition, {T defaultValue}) {
+  T singleWhereOrDefault(bool Function(T element) condition, {T defaultValue}) {
     checkNullError(this);
     ArgumentError.checkNotNull(condition, 'condition');
 

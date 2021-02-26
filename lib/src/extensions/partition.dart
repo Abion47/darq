@@ -18,7 +18,7 @@ extension PartitionExtension<T> on Iterable<T> {
   ///
   ///       // Result: ([2, 4], [1, 3])
   ///     }
-  Iterable<Iterable<T>> partition(bool Function(T) condition) {
+  Iterable<Iterable<T>> partition(bool Function(T element) condition) {
     checkNullError(this);
     ArgumentError.checkNotNull(condition, 'condition');
     return [

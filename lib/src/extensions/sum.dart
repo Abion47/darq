@@ -30,16 +30,23 @@ extension SumExtension<T> on Iterable<T> {
   ///       // Result: 10
   ///     }
   TNum sum<TNum extends num>([TNum Function(T) selector]) {
+    checkNullError(this);
+
+    if (isEmpty) {
+      throw StateError('Iterator must not be empty.');
+    }
+
     var _selector = selector;
     if (_selector == null) {
       if (T is TNum) {
         _selector = (n) => n as TNum;
       } else {
-        throw StateError("If T isn't a subtype of num, selector must not be null.");
+        throw StateError(
+            "If T isn't a subtype of num, selector must not be null.");
       }
     }
 
-    num total = TNum is double ? 0.0 : 0;
+    var total = TNum is double ? 0.0 : 0;
     for (final n in this) {
       total += _selector(n);
     }

@@ -30,7 +30,7 @@ extension TryAggregateRightExtension<T> on Iterable<T> {
   ///       // Result: (a, (b, (c, d)))
   ///     }
   T tryAggregateRight<TResult>(
-    T Function(T, T) aggregator, {
+    T Function(T aggregate, T element) aggregator, {
     T defaultValue,
   }) {
     checkNullError(this);

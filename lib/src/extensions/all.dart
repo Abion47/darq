@@ -30,7 +30,7 @@ extension AllExtension<T> on Iterable<T> {
   ///
   /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
   /// Internally it functions identically to [every].)
-  bool all([bool Function(T) condition]) {
+  bool all([bool Function(T element) condition]) {
     checkNullError(this);
 
     if (condition == null) {

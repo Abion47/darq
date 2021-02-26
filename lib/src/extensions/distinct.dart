@@ -26,7 +26,7 @@ extension DistinctExtension<T> on Iterable<T> {
   ///
   ///       // Result: [0, 1, 2, 3]
   ///     }
-  Iterable<T> distinct<TKey>([TKey Function(T) keySelector]) sync* {
+  Iterable<T> distinct<TKey>([TKey Function(T element) keySelector]) sync* {
     checkNullError(this);
 
     keySelector ??= (T v) => v as TKey;

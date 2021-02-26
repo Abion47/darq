@@ -22,7 +22,7 @@ extension ToLinkedHashMapExtension<T> on Iterable<T> {
   ///       // Result: { 97: 'a', 98: 'b', 99: 'c' }
   ///     }
   Map<TKey, TValue> toLinkedHashMap<TKey, TValue>(
-    MapEntry<TKey, TValue> Function(T) entrySelector, {
+    MapEntry<TKey, TValue> Function(T element) entrySelector, {
     bool modifiable = true,
   }) {
     checkNullError(this);

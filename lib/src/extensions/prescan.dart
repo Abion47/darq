@@ -22,7 +22,8 @@ extension PreScanExtension<T> on Iterable<T> {
   ///
   ///       // Result: [0, 1, 3, 6]
   ///     }
-  Iterable<T> preScan(T initialValue, T Function(T, T) aggregator) sync* {
+  Iterable<T> preScan(
+      T initialValue, T Function(T value, T element) aggregator) sync* {
     checkNullError(this);
     ArgumentError.checkNotNull(aggregator, 'aggregator');
 

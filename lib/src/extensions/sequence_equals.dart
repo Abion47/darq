@@ -35,9 +35,9 @@ extension SequenceEqualsExtension<T> on Iterable<T> {
   ///     }
   bool sequenceEquals<TOther, TKey>(
     Iterable<TOther> other, {
-    TKey Function(T) outerSelector,
-    TKey Function(TOther) innerSelector,
-    bool Function(TKey, TKey) comparer,
+    TKey Function(T element) outerSelector,
+    TKey Function(TOther element) innerSelector,
+    bool Function(TKey outer, TKey inner) comparer,
   }) {
     checkNullError(this);
 

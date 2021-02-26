@@ -9,7 +9,7 @@ extension CountByExtension<T> on Iterable<T> {
   ///
   /// The order of the resulting iterable is not guaranteed to be any particular order.
   Iterable<MapEntry<TKey, int>> countBy<TKey>(
-    TKey Function(T) keySelector,
+    TKey Function(T element) keySelector,
   ) {
     checkNullError(this);
     ArgumentError.checkNotNull(keySelector, 'keySelector');

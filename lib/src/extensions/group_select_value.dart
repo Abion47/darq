@@ -62,9 +62,9 @@ extension GroupSelectValueExtension<T> on Iterable<T> {
   ///     }
   GroupSelectValueIterable<T, TKey, TValue, TResult>
       groupSelectValue<TKey, TValue, TResult>(
-    TResult Function(TKey, Iterable<TValue>) resultSelector, {
-    TKey Function(T) keySelector,
-    TValue Function(T) valueSelector,
+    TResult Function(TKey key, Iterable<TValue> group) resultSelector, {
+    TKey Function(T element) keySelector,
+    TValue Function(T element) valueSelector,
     EqualityComparer<TKey> keyComparer,
   }) {
     checkNullError(this);

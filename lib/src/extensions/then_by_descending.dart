@@ -36,7 +36,7 @@ extension OrderedIterableExtensions<T> on Iterable<T> {
   ///       // Result: ['', 'c', 'a', 'ab', 'aa']
   ///     }
   Iterable<T> thenByDescending<TKey>(
-    TKey Function(T) keySelector, {
+    TKey Function(T element) keySelector, {
     EqualityComparer<TKey> keyComparer,
   }) {
     checkNullError(this);

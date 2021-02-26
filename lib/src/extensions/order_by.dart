@@ -34,7 +34,7 @@ extension OrderByExtension<T> on Iterable<T> {
   ///       // Result: [1, 2, 3, 4, 5]
   ///     }
   Iterable<T> orderBy<TKey>(
-    TKey Function(T) keySelector, {
+    TKey Function(T element) keySelector, {
     EqualityComparer<TKey> keyComparer,
   }) {
     checkNullError(this);

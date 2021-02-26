@@ -23,7 +23,7 @@ extension ToSplayTreeMapExtension<T> on Iterable<T> {
   ///       // Result: { 97: 'a', 98: 'b', 99: 'c' }
   ///     }
   Map<TKey, TValue> toSplayTreeMap<TKey, TValue>(
-    MapEntry<TKey, TValue> Function(T) entrySelector, {
+    MapEntry<TKey, TValue> Function(T element) entrySelector, {
     int Function(TKey k1, TKey k2) keyComparer,
     bool modifiable = true,
   }) {

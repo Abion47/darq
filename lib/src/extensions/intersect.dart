@@ -28,7 +28,7 @@ extension IntersectExtension<T> on Iterable<T> {
   ///     }
   Iterable<T> intersect<TKey>(
     Iterable<T> other, [
-    TKey Function(T) selector,
+    TKey Function(T element) selector,
   ]) sync* {
     checkNullError(this);
     ArgumentError.checkNotNull(other, 'other');

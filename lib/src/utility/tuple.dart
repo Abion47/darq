@@ -1,3 +1,77 @@
+/// A finite fixed-length ordered list containing 0 dynamically-typed elements.
+class Tuple0 extends Iterable<dynamic> {
+  const Tuple0();
+
+  factory Tuple0.fromJson(Map<String, dynamic> map) => Tuple0();
+
+  Tuple0 copyWith() => Tuple0();
+
+  Map<String, dynamic> toMap() => {};
+
+  dynamic operator [](int index) {
+    throw RangeError.index(index, this, 'index', 'index out of range', 0);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is Tuple0;
+  }
+
+  @override
+  int get hashCode {
+    return 0;
+  }
+
+  @override
+  Iterator get iterator => _Tuple0Iterator();
+
+  @override
+  String toString() => '()';
+}
+
+/// A finite fixed-length ordered list containing 1 dynamically-typed element.
+class Tuple1<T> extends Iterable<dynamic> {
+  final T item;
+
+  const Tuple1(this.item);
+
+  factory Tuple1.fromJson(Map<String, dynamic> map) => Tuple1(map['item']);
+
+  Tuple1 copyWith(T item) => Tuple1(item ?? this.item);
+
+  Map<String, dynamic> toMap() => {'item': item};
+
+  dynamic operator [](int index) {
+    switch (index) {
+      case 0:
+        return item;
+    }
+    throw RangeError.index(index, this, 'index', 'index out of range', 2);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is Tuple1 && item == other.item;
+  }
+
+  @override
+  int get hashCode {
+    final prime = 31;
+    var result = 1;
+
+    result = prime * result + item.hashCode;
+
+    return result;
+  }
+
+  @override
+  Iterator get iterator => _Tuple1Iterator(this);
+
+  @override
+  String toString() => '($item)';
+}
+
+/// A finite fixed-length ordered list containing 2 dynamically-typed elements.
 class Tuple2<T0, T1> extends Iterable<dynamic> {
   final T0 item0;
   final T1 item1;
@@ -59,6 +133,7 @@ class Tuple2<T0, T1> extends Iterable<dynamic> {
   String toString() => '($item0, $item1)';
 }
 
+/// A finite fixed-length ordered list containing 3 dynamically-typed elements.
 class Tuple3<T0, T1, T2> extends Iterable<dynamic> {
   final T0 item0;
   final T1 item1;
@@ -132,6 +207,7 @@ class Tuple3<T0, T1, T2> extends Iterable<dynamic> {
   String toString() => '($item0, $item1, $item2)';
 }
 
+/// A finite fixed-length ordered list containing 4 dynamically-typed elements.
 class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
   final T0 item0;
   final T1 item1;
@@ -215,6 +291,7 @@ class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
   String toString() => '($item0, $item1, $item2, $item3)';
 }
 
+/// A finite fixed-length ordered list containing 5 dynamically-typed elements.
 class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
   final T0 item0;
   final T1 item1;
@@ -308,6 +385,7 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
   String toString() => '($item0, $item1, $item2, $item3, $item4)';
 }
 
+/// A finite fixed-length ordered list containing 6 dynamically-typed elements.
 class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
   final T0 item0;
   final T1 item1;
@@ -411,6 +489,7 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
   String toString() => '($item0, $item1, $item2, $item3, $item4, $item5)';
 }
 
+/// A finite fixed-length ordered list containing 7 dynamically-typed elements.
 class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
   final T0 item0;
   final T1 item1;
@@ -525,6 +604,7 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
       '($item0, $item1, $item2, $item3, $item4, $item5, $item6)';
 }
 
+/// A finite fixed-length ordered list containing 8 dynamically-typed elements.
 class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
   final T0 item0;
   final T1 item1;
@@ -649,6 +729,7 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
       '($item0, $item1, $item2, $item3, $item4, $item5, $item6, $item7)';
 }
 
+/// A finite fixed-length ordered list containing 9 dynamically-typed elements.
 class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
   final T0 item0;
   final T1 item1;
@@ -784,6 +865,36 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
 }
 
 // Iterators
+
+class _Tuple0Iterator extends Iterator<dynamic> {
+  _Tuple0Iterator();
+
+  @override
+  dynamic get current => null;
+
+  @override
+  bool moveNext() {
+    return false;
+  }
+}
+
+class _Tuple1Iterator extends Iterator<dynamic> {
+  _Tuple1Iterator(this.tuple);
+  final Tuple1 tuple;
+
+  int index = 0;
+  dynamic _current;
+  @override
+  dynamic get current => _current;
+
+  @override
+  bool moveNext() {
+    if (index >= 1) return false;
+    _current = tuple[index];
+    index++;
+    return true;
+  }
+}
 
 class _Tuple2Iterator extends Iterator<dynamic> {
   _Tuple2Iterator(this.tuple);

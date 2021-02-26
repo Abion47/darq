@@ -15,7 +15,7 @@ extension AtLeastExtension<T> on Iterable<T> {
   /// If the iterable is empty, a [StateError] will be thrown.
   bool atLeast(
     T value, {
-    int Function(T, T) sorter,
+    int Function(T element, T value) sorter,
   }) {
     checkNullError(this);
 

@@ -51,7 +51,7 @@ extension GroupByExtension<T> on Iterable<T> {
   ///       // ]
   ///     }
   GroupByIterable<T, TKey> groupBy<TKey>(
-    TKey Function(T) keySelector, {
+    TKey Function(T element) keySelector, {
     EqualityComparer<TKey> keyComparer,
   }) {
     checkNullError(this);

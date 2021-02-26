@@ -32,7 +32,7 @@ extension AggregateRightSelectExtension<T> on Iterable<T> {
   ///     }
   TResult aggregateRightSelect<TResult>(
     TResult initialValue,
-    TResult Function(TResult, T) aggregator,
+    TResult Function(TResult aggregate, T element) aggregator,
   ) {
     checkNullError(this);
     ArgumentError.checkNotNull(aggregator, 'aggregator');

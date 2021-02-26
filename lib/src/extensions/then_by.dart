@@ -39,7 +39,7 @@ extension ThenByExtension<T> on Iterable<T> {
 
   ///
   Iterable<T> thenBy<TKey>(
-    TKey Function(T) keySelector, {
+    TKey Function(T element) keySelector, {
     EqualityComparer<TKey> keyComparer,
   }) {
     checkNullError(this);

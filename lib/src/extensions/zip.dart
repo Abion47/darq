@@ -24,7 +24,7 @@ extension ZipExtension<T> on Iterable<T> {
   ///     }
   Iterable<TResult> zip<TOther, TResult>(
     Iterable<TOther> other,
-    TResult Function(T, TOther) selector,
+    TResult Function(T element, TOther otherElement) selector,
   ) sync* {
     checkNullError(this);
     ArgumentError.checkNotNull(other, 'other');

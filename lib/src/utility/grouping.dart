@@ -1,6 +1,8 @@
 import 'equality_comparer.dart';
 import 'lookup.dart';
 
+/// This class is created by calls to `Iterable.groupBy` and isn't intended to be
+/// instantiated directly.
 class GroupByIterable<TSource, TKey> extends Iterable<Grouping<TKey, TSource>> {
   final Iterable<TSource> source;
   final TKey Function(TSource) keySelector;
@@ -16,6 +18,8 @@ class GroupByIterable<TSource, TKey> extends Iterable<Grouping<TKey, TSource>> {
   }
 }
 
+/// This class is created by calls to `Iterable.groupByValue` and isn't intended to be
+/// instantiated directly.
 class GroupByValueIterable<TSource, TKey, TValue>
     extends Iterable<Grouping<TKey, TValue>> {
   final Iterable<TSource> source;
@@ -34,6 +38,8 @@ class GroupByValueIterable<TSource, TKey, TValue>
   }
 }
 
+/// This class is created by calls to `Iterable.groupJoin` and isn't intended to be
+/// instantiated directly.
 class GroupJoinIterable<TSource, TInner, TKey, TResult>
     extends Iterable<TResult> {
   final Iterable<TSource> source;
@@ -50,6 +56,8 @@ class GroupJoinIterable<TSource, TInner, TKey, TResult>
   Iterator<TResult> get iterator => GroupJoinIterator(this);
 }
 
+/// This class is created by calls to `Iterable.groupJoinIterator` and isn't intended to be
+/// instantiated directly.
 class GroupJoinIterator<TSource, TInner, TKey, TResult>
     extends Iterator<TResult> {
   final GroupJoinIterable<TSource, TInner, TKey, TResult> iterable;
@@ -86,6 +94,8 @@ class GroupJoinIterator<TSource, TInner, TKey, TResult>
   }
 }
 
+/// This class is created by calls to `Iterable.groupSelectIterable` and isn't intended to be
+/// instantiated directly.
 class GroupSelectIterable<TSource, TKey, TResult> extends Iterable<TResult> {
   final Iterable<TSource> source;
   final TKey Function(TSource) keySelector;
@@ -103,6 +113,8 @@ class GroupSelectIterable<TSource, TKey, TResult> extends Iterable<TResult> {
   }
 }
 
+/// This class is created by calls to `Iterable.groupSelectValueIterable` and isn't intended to be
+/// instantiated directly.
 class GroupSelectValueIterable<TSource, TKey, TValue, TResult>
     extends Iterable<TResult> {
   final Iterable<TSource> source;
@@ -122,6 +134,8 @@ class GroupSelectValueIterable<TSource, TKey, TValue, TResult>
   }
 }
 
+/// This class is created by calls to grouping `Iterable` methods and isn't
+/// intended to be instantiated directly.
 class Grouping<TKey, TValue> extends Iterable<TValue> {
   List<TValue> elements;
   Grouping hashNext;

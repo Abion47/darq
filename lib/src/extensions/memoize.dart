@@ -8,6 +8,9 @@ extension MemoizeExtension<T> on Iterable<T> {
   /// its elements are placed into a cache, which is finalized
   /// once iteration is complete. On subsequent times the
   /// iterable is consumed, the elements from the cache are reused.
+  ///
+  /// Warning: Calling `toList` on a memoized iterable without setting
+  /// growable to false will undo the memoization on the returned list.
   Iterable<T> memoize() {
     checkNullError(this);
     return MemoizedIterable(this);
@@ -23,6 +26,15 @@ class MemoizedIterable<T> extends Iterable<T> {
 
   @override
   Iterator<T> get iterator => _MemoizedIterator(this);
+
+  @override
+  List<T> toList({bool growable = true}) {
+    if (_isCached) {
+      if (growable) return _cache;
+      return List.unmodifiable(_cache);
+    }
+    return super.toList(growable: growable);
+  }
 }
 
 class _MemoizedIterator<T> extends Iterator<T> {

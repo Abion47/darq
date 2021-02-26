@@ -20,7 +20,7 @@ extension SelectManyExtension<T> on Iterable<T> {
   ///       // Result: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
   ///     }
   Iterable<TResult> selectMany<TResult>(
-      Iterable<TResult> Function(T, int) selector) sync* {
+      Iterable<TResult> Function(T element, int index) selector) sync* {
     checkNullError(this);
     ArgumentError.checkNotNull(selector, 'selector');
 

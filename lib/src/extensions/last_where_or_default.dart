@@ -19,7 +19,7 @@ extension LastWhereOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T lastWhereOrDefault(bool Function(T) condition, {T defaultValue}) {
+  T lastWhereOrDefault(bool Function(T element) condition, {T defaultValue}) {
     checkNullError(this);
     ArgumentError.checkNotNull(condition, 'condition');
 

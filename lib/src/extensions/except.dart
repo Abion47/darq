@@ -28,7 +28,7 @@ extension ExceptExtension<T> on Iterable<T> {
   ///     }
   Iterable<T> except<TKey>(
     Iterable<T> other, [
-    TKey Function(T) selector,
+    TKey Function(T element) selector,
   ]) sync* {
     checkNullError(this);
     ArgumentError.checkNotNull(other, 'other');

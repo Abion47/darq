@@ -9,6 +9,8 @@ abstract class ILookup<TKey, TValue> {
   Iterable<TValue> operator [](TKey key);
 }
 
+/// This is a utility class used by grouping `Iterable` methods and isn't
+/// intended to be instantiated directly.
 class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     implements ILookup<TKey, TValue> {
   EqualityComparer<TKey> comparer;

@@ -10,7 +10,7 @@ extension AssertAllExtension<T> on Iterable<T> {
   ///
   /// If [message] is provided and an error is thrown, the message will be provided with the
   /// error.
-  Iterable<T> assertAll(bool Function(T) condition, [String message]) {
+  Iterable<T> assertAll(bool Function(T element) condition, [String message]) {
     checkNullError(this);
     ArgumentError.checkNotNull(condition, 'condition');
     assert(every(condition), message);

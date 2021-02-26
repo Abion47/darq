@@ -30,7 +30,7 @@ extension MaxExtension<T> on Iterable<T> {
   ///
   ///       // Result: 3
   ///     }
-  T max([int Function(T, T) comparer]) {
+  T max([int Function(T e1, T e2) comparer]) {
     checkNullError(this);
 
     if (isEmpty) {

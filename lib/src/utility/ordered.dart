@@ -17,6 +17,8 @@ abstract class OrderedIterable<T> extends Iterable<T> {
   }
 }
 
+/// This class is created by calls to `Iterable.orderBy` (and related) and isn't
+/// intended to be instantiated directly.
 class InternalOrderedIterable<TValue, TKey> extends OrderedIterable<TValue> {
   OrderedIterable<TValue> parent;
   TKey Function(TValue) keySelector;
@@ -92,6 +94,8 @@ abstract class IterableSorter<T> {
   }
 }
 
+/// This class is created by calls to `Iterable.orderBy` (and related) and isn't
+/// intended to be instantiated directly.
 class InternalIterableSorter<TValue, TKey> extends IterableSorter<TValue> {
   TKey Function(TValue) keySelector;
   EqualityComparer<TKey> comparer;
@@ -128,6 +132,8 @@ class InternalIterableSorter<TValue, TKey> extends IterableSorter<TValue> {
   }
 }
 
+/// This class is created by calls to `Iterable.orderBy` (and related) and isn't
+/// intended to be instantiated directly.
 class OrderedBuffer<T> extends Iterable<T> {
   List<T> data;
   List<int> orderedMap;

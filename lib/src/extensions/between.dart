@@ -20,7 +20,7 @@ extension BetweenExtension<T> on Iterable<T> {
   bool between(
     T minimum,
     T maximum, {
-    int Function(T, T) sorter,
+    int Function(T value, T element) sorter,
     bool minimumInclusive = false,
     bool maximumInclusive = false,
   }) {

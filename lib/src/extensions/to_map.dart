@@ -23,7 +23,7 @@ extension ToMapExtension<T> on Iterable<T> {
   ///       // Result: { 97: 'a', 98: 'b', 99: 'c' }
   ///     }
   Map<TKey, TValue> toMap<TKey, TValue>(
-    MapEntry<TKey, TValue> Function(T) entrySelector, {
+    MapEntry<TKey, TValue> Function(T element) entrySelector, {
     bool modifiable = false,
   }) {
     checkNullError(this);

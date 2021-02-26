@@ -1,10 +1,10 @@
 ## [0.5.1]
 
-* Added identifiers to paarmeters for all function types to aid with IntelliSense
+* Added identifiers to paarmeters for all function types to aid with IntelliSense (Issue #4)
 * Tweaked various types' documentation for clarity
 * Overrode `toList` on `MemoizedIterable` to return the cached list if the cache had already been filled
 * `sum`, `average` converted to use generic type arguments instead of num. (@rodion-m)
-* Fixed typo in grouping generic type parameters that was resulting in groups defaulting to `Grouping<dynamic, dynamic>` (@Miiite)
+* Fixed typo in grouping generic type parameters that was resulting in groups defaulting to `Grouping<dynamic, dynamic>` (Issue #3, @Miiite)
 
 ## [0.5.0]
 

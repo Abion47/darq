@@ -6,27 +6,27 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
   <meta name="description" content="API docs for the aggregate method from the AggregateExtension extension, for the Dart programming language.">
   <title>aggregate method - AggregateExtension extension - darq library - Dart API</title>
-  <!-- required because all the links are pseudo-absolute -->
-  <base href="../..">
 
+  
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="static-assets/github.css">
-  <link rel="stylesheet" href="static-assets/styles.css">
-  <link rel="icon" href="static-assets/favicon.png">
-  <!-- header placeholder -->
+  <link rel="stylesheet" href="../../static-assets/github.css">
+  <link rel="stylesheet" href="../../static-assets/styles.css">
+  <link rel="icon" href="../../static-assets/favicon.png">
+
 </head>
 
-<body>
+<body data-base-href="../../"
+      data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
 <header id="title">
   <button id="sidenav-left-toggle" type="button">&nbsp;</button>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="index.html">darq</a></li>
-    <li><a href="darq/darq-library.html">darq</a></li>
-    <li><a href="darq/AggregateExtension.html">AggregateExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li><a href="../../index.html">darq</a></li>
+    <li><a href="../../darq/darq-library.html">darq</a></li>
+    <li><a href="../../darq/AggregateExtension.html">AggregateExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
     <li class="self-crumb">aggregate method</li>
   </ol>
   <div class="self-name">aggregate</div>
@@ -45,9 +45,9 @@
     </header>
     
     <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-      <li><a href="index.html">darq</a></li>
-      <li><a href="darq/darq-library.html">darq</a></li>
-      <li><a href="darq/AggregateExtension.html">AggregateExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+      <li><a href="../../index.html">darq</a></li>
+      <li><a href="../../darq/darq-library.html">darq</a></li>
+      <li><a href="../../darq/AggregateExtension.html">AggregateExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
       <li class="self-crumb">aggregate method</li>
     </ol>
     
@@ -56,8 +56,8 @@
     
     
     
-        <li class="section-title"><a href="darq/AggregateExtension.html#instance-methods">Methods</a></li>
-        <li><a href="darq/AggregateExtension/aggregate.html">aggregate</a></li>
+        <li class="section-title"><a href="../../darq/AggregateExtension.html#instance-methods">Methods</a></li>
+        <li><a href="../../darq/AggregateExtension/aggregate.html">aggregate</a></li>
     
     
     
@@ -67,12 +67,16 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-method">aggregate</span> method</h1></div>
+      <div><h1><span class="kind-method">aggregate</span> method </h1></div>
 
     <section class="multi-line-signature">
       <span class="returntype">T</span>
             <span class="name ">aggregate</span>
-(<wbr><span class="parameter" id="aggregate-param-aggregator"><span class="type-annotation">T</span> <span class="parameter-name">aggregator</span>(<span class="parameter" id="param-"><span class="type-annotation">T</span></span> <span class="parameter" id="param-"><span class="type-annotation">T</span></span>)</span>)
+(<wbr><ol class="parameter-list"><li><span class="parameter" id="aggregate-param-aggregator"><span class="type-annotation">T</span> <span class="parameter-name">aggregator</span>(<ol class="parameter-list"><li><span class="parameter" id="param-aggregate"><span class="type-annotation">T</span> <span class="parameter-name">aggregate</span>, </span></li>
+<li><span class="parameter" id="param-select"><span class="type-annotation">T</span> <span class="parameter-name">select</span></span></li>
+</ol>
+)</span></li>
+</ol>)
       
     </section>
     <section class="desc markdown">
@@ -101,7 +105,7 @@ returned is considered the result of the aggregation process.</p>
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">T aggregate(
-  T Function(T, T) aggregator,
+  T Function(T aggregate, T select) aggregator,
 ) {
   checkNullError(this);
   ArgumentError.checkNotNull(aggregator, &#39;aggregator&#39;);
@@ -134,15 +138,14 @@ returned is considered the result of the aggregation process.</p>
       0.5.0
   </span>
 
-  <!-- footer-text placeholder -->
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="static-assets/typeahead.bundle.min.js"></script>
-<script src="static-assets/highlight.pack.js"></script>
-<script src="static-assets/URI.js"></script>
-<script src="static-assets/script.js"></script>
-<!-- footer placeholder -->
+<script src="../../static-assets/typeahead.bundle.min.js"></script>
+<script src="../../static-assets/highlight.pack.js"></script>
+<script src="../../static-assets/URI.js"></script>
+<script src="../../static-assets/script.js"></script>
+
 
 </body>
 

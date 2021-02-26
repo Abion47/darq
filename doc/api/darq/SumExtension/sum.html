@@ -6,28 +6,28 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
   <meta name="description" content="API docs for the sum method from the SumExtension extension, for the Dart programming language.">
   <title>sum method - SumExtension extension - darq library - Dart API</title>
-  <!-- required because all the links are pseudo-absolute -->
-  <base href="../..">
 
+  
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="static-assets/github.css">
-  <link rel="stylesheet" href="static-assets/styles.css">
-  <link rel="icon" href="static-assets/favicon.png">
-  <!-- header placeholder -->
+  <link rel="stylesheet" href="../../static-assets/github.css">
+  <link rel="stylesheet" href="../../static-assets/styles.css">
+  <link rel="icon" href="../../static-assets/favicon.png">
+
 </head>
 
-<body>
+<body data-base-href="../../"
+      data-using-base-href="false">
 
 <div id="overlay-under-drawer"></div>
 
 <header id="title">
   <button id="sidenav-left-toggle" type="button">&nbsp;</button>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li><a href="index.html">darq</a></li>
-    <li><a href="darq/darq-library.html">darq</a></li>
-    <li><a href="darq/SumExtension.html">SumExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-    <li class="self-crumb">sum method</li>
+    <li><a href="../../index.html">darq</a></li>
+    <li><a href="../../darq/darq-library.html">darq</a></li>
+    <li><a href="../../darq/SumExtension.html">SumExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">sum&lt;<wbr><span class="type-parameter">TNum extends num</span>&gt; method</li>
   </ol>
   <div class="self-name">sum</div>
   <form class="search navbar-right" role="search">
@@ -45,10 +45,10 @@
     </header>
     
     <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-      <li><a href="index.html">darq</a></li>
-      <li><a href="darq/darq-library.html">darq</a></li>
-      <li><a href="darq/SumExtension.html">SumExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
-      <li class="self-crumb">sum method</li>
+      <li><a href="../../index.html">darq</a></li>
+      <li><a href="../../darq/darq-library.html">darq</a></li>
+      <li><a href="../../darq/SumExtension.html">SumExtension<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+      <li class="self-crumb">sum&lt;<wbr><span class="type-parameter">TNum extends num</span>&gt; method</li>
     </ol>
     
     <h5>SumExtension extension</h5>
@@ -56,8 +56,8 @@
     
     
     
-        <li class="section-title"><a href="darq/SumExtension.html#instance-methods">Methods</a></li>
-        <li><a href="darq/SumExtension/sum.html">sum</a></li>
+        <li class="section-title"><a href="../../darq/SumExtension.html#instance-methods">Methods</a></li>
+        <li><a href="../../darq/SumExtension/sum.html">sum</a></li>
     
     
     
@@ -67,12 +67,15 @@
   </div><!--/.sidebar-offcanvas-->
 
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
-      <div><h1><span class="kind-method">sum</span> method</h1></div>
+      <div><h1><span class="kind-method">sum&lt;<wbr><span class="type-parameter">TNum extends num</span>&gt;</span> method </h1></div>
 
     <section class="multi-line-signature">
-      <span class="returntype">num</span>
+      <span class="returntype">TNum</span>
             <span class="name ">sum</span>
-(<wbr>[<span class="parameter" id="sum-param-selector"><span class="type-annotation">num</span> <span class="parameter-name">selector</span>(<span class="parameter" id="param-"><span class="type-annotation">T</span></span>)</span> ])
+&lt;<wbr><span class="type-parameter">TNum extends num</span>&gt;(<wbr><ol class="parameter-list"><li><span class="parameter" id="sum-param-selector">[<span class="type-annotation">TNum</span> <span class="parameter-name">selector</span>(<ol class="parameter-list"><li><span class="parameter" id="param-"><span class="type-annotation">T</span></span></li>
+</ol>
+)]</span></li>
+</ol>)
       
     </section>
     <section class="desc markdown">
@@ -103,32 +106,29 @@ function must be provided. Otherwise, a <code>StateError</code> is thrown.</p>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">num sum([num Function(T) selector]) {
+      <pre class="language-dart"><code class="language-dart">TNum sum&lt;TNum extends num&gt;([TNum Function(T) selector]) {
   checkNullError(this);
 
   if (isEmpty) {
     throw StateError(&#39;Iterator must not be empty.&#39;);
   }
 
-  if (selector == null) {
-    if (T == num) {
-      selector = (T n) =&gt; n as num;
-    } else if (T == int) {
-      selector = (T n) =&gt; n as int;
-    } else if (T == double) {
-      selector = (T n) =&gt; n as double;
+  var _selector = selector;
+  if (_selector == null) {
+    if (T is TNum) {
+      _selector = (n) =&gt; n as TNum;
+    } else {
+      throw StateError(
+          &quot;If T isn&#39;t a subtype of num, selector must not be null.&quot;);
     }
   }
 
-  ArgumentError.checkNotNull(selector);
-
-  var total = T == int ? 0 : 0.0;
-
-  for (var n in this) {
-    total += selector(n);
+  var total = TNum is double ? 0.0 : 0;
+  for (final n in this) {
+    total += _selector(n);
   }
 
-  return total;
+  return total as TNum;
 }</code></pre>
     </section>
 
@@ -145,15 +145,14 @@ function must be provided. Otherwise, a <code>StateError</code> is thrown.</p>
       0.5.0
   </span>
 
-  <!-- footer-text placeholder -->
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="static-assets/typeahead.bundle.min.js"></script>
-<script src="static-assets/highlight.pack.js"></script>
-<script src="static-assets/URI.js"></script>
-<script src="static-assets/script.js"></script>
-<!-- footer placeholder -->
+<script src="../../static-assets/typeahead.bundle.min.js"></script>
+<script src="../../static-assets/highlight.pack.js"></script>
+<script src="../../static-assets/URI.js"></script>
+<script src="../../static-assets/script.js"></script>
+
 
 </body>
 

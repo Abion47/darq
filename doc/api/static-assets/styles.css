@@ -381,6 +381,12 @@ dl dt.callable .name {
   display: unset;
 }
 
+.parameter-list {
+  display: table-cell;
+  margin-left: 10px;
+  list-style-type: none;
+}
+
 .signature {
   color: #727272;
 }
@@ -451,6 +457,22 @@ dl dt.callable .name {
 }
 
 h1 .category {
+  vertical-align: middle;
+}
+
+.feature {
+  display: inline-block;
+  background: white;
+  border: 1px solid #0175c2;
+  border-radius: 20px;
+  color: #0175c2;
+
+  font-size: 12px;
+  padding: 1px 6px;
+  margin: 0 8px 0 0;
+}
+
+h1 .feature {
   vertical-align: middle;
 }
 

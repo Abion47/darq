@@ -27,16 +27,17 @@ extension AverageExtension<T> on Iterable<T> {
     }
 
     var _selector = selector;
+    var total = TNum == int ? 0 : 0.0;
     if (_selector == null) {
-      if (T is TNum) {
+      if (T == num || T == int || T == double) {
         selector = (n) => n as TNum;
+        total = T == int ? 0 : 0.0;
       } else {
-        throw StateError(
+        throw ArgumentError(
             "If T isn't a subtype of num, selector must not be null.");
       }
     }
 
-    var total = TNum is double ? 0.0 : 0;
     var count = 0;
 
     for (var n in this) {
@@ -44,7 +45,7 @@ extension AverageExtension<T> on Iterable<T> {
       count++;
     }
 
-    if (TNum is int) {
+    if (TNum == int) {
       return total ~/ count as TNum;
     }
 

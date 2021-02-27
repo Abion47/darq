@@ -1,9 +1,12 @@
-.dart_tool
-.idea
-.vscode
+.dart_tool/
+.idea/
+.vscode/
 
 .packages
 linq-to-dart-iterable.txt
 
 coverage/
 test/.test_coverage.dart
+
+build/
+pubspec.lock

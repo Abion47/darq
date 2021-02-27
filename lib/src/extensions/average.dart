@@ -30,7 +30,7 @@ extension AverageExtension<T> on Iterable<T> {
     var total = TNum == int ? 0 : 0.0;
     if (_selector == null) {
       if (T == num || T == int || T == double) {
-        selector = (n) => n as TNum;
+        _selector = (n) => n as TNum;
         total = T == int ? 0 : 0.0;
       } else {
         throw ArgumentError(
@@ -41,7 +41,7 @@ extension AverageExtension<T> on Iterable<T> {
     var count = 0;
 
     for (var n in this) {
-      total += selector(n);
+      total += _selector(n);
       count++;
     }
 

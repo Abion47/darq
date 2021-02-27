@@ -1,3 +1,7 @@
+## [0.5.1+1]
+
+* Fixed a typo in `average` that wasn't assigning the default selector properly
+
 ## [0.5.1]
 
 * Added identifiers to parameters for all function types to aid with IntelliSense (Issue #4)

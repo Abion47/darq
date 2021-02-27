@@ -1,5 +1,8 @@
 .dart_tool
 .idea
+.vscode
+
+doc/
 
 .packages
 linq-to-dart-iterable.txt

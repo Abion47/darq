@@ -34,9 +34,6 @@ extension AggregateRightSelectExtension<T> on Iterable<T> {
     TResult initialValue,
     TResult Function(TResult aggregate, T element) aggregator,
   ) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(aggregator, 'aggregator');
-
     final stack = Queue<T>();
     for (var obj in this) {
       stack.add(obj);

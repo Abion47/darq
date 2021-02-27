@@ -26,23 +26,19 @@ extension BatchSelectExtension<T> on Iterable<T> {
     TResult Function(List<T> batch) selector, {
     bool includeTail = false,
   }) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(size, 'size');
-    ArgumentError.checkNotNull(selector, 'selector');
-
     if (size <= 0) {
       throw RangeError.value(
           size, 'size', 'The value of "size" must be a positive integer.');
     }
 
-    var package = List<T>(size);
+    var package = <T>[];
     var index = 0;
 
     for (var v in this) {
       package[index++] = v;
       if (index >= package.length) {
         yield selector(package);
-        package = List<T>(size);
+        package = <T>[];
         index = 0;
       }
     }

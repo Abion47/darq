@@ -72,14 +72,14 @@ typedef Sorter<T> = int Function(T left, T right);
 /// (left, right) { return 0; }
 /// ```
 class EqualityComparer<T> {
-  final Comparer<T> compare;
-  final Hasher<T> hash;
-  final Sorter<T> sort;
+  final Comparer<T>? compare;
+  final Hasher<T>? hash;
+  final Sorter<T>? sort;
 
   EqualityComparer({
-    Comparer<T> comparer,
-    Hasher<T> hasher,
-    Sorter<T> sorter,
+    Comparer<T>? comparer,
+    Hasher<T>? hasher,
+    Sorter<T>? sorter,
   })  : compare = comparer ?? _getDefaultComparer<T>(),
         hash = hasher ?? _getDefaultHasher<T>(),
         sort = sorter ?? _getDefaultSorter<T>();
@@ -99,9 +99,9 @@ class EqualityComparer<T> {
   /// or will be a comparer that has been registered via a call to
   /// [EqualityComparer.addDefaultEqualityComparer].
   ///
-  /// If no registered comparer can be found, this method will return a new instance
-  /// of [EqualityComparer] as if `EqualityComparer<T>()` was called instead.
-  static EqualityComparer<T> forType<T>() => _registeredEqualityComparers[T];
+  /// If no registered comparer can be found, this method returns null;
+  static EqualityComparer<T>? forType<T>() =>
+      _registeredEqualityComparers[T] as EqualityComparer<T>;
 
   static final Map<Type, EqualityComparer> _registeredEqualityComparers = {
     dynamic: EqualityComparer<dynamic>(

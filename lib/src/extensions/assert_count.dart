@@ -1,4 +1,3 @@
-import '../utility/error.dart';
 import 'count.dart';
 
 extension AssertCountExtension<T> on Iterable<T> {
@@ -11,9 +10,7 @@ extension AssertCountExtension<T> on Iterable<T> {
   ///
   /// If [message] is provided and an error is thrown, the message will be provided with the
   /// error.
-  Iterable<T> assertCount(int count, [String message]) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(count, 'count');
+  Iterable<T> assertCount(int count, [String? message]) {
     assert(count == this.count(), message);
     return this;
   }

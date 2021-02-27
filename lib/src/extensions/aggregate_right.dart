@@ -31,9 +31,6 @@ extension AggregateRightExtension<T> on Iterable<T> {
   T aggregateRight<TResult>(
     T Function(T aggregate, T element) aggregator,
   ) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(aggregator, 'aggregator');
-
     final stack = Queue<T>();
     for (var obj in this) {
       stack.add(obj);

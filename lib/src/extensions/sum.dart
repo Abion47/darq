@@ -29,7 +29,7 @@ extension SumExtension<T> on Iterable<T> {
   ///
   ///       // Result: 10
   ///     }
-  TNum sum<TNum extends num>([TNum Function(T) selector]) {
+  TNum sum<TNum extends num>([TNum Function(T)? selector]) {
     checkNullError(this);
 
     if (isEmpty) {

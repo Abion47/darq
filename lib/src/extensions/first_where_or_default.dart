@@ -24,10 +24,8 @@ extension FirstWhereOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T firstWhereOrDefault(bool Function(T value) condition, {T defaultValue}) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(condition, 'condition');
-
+  T firstWhereOrDefault(bool Function(T value) condition,
+      {required T defaultValue}) {
     if (isEmpty) return defaultValue;
 
     for (var v in this) {

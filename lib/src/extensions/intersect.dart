@@ -28,11 +28,8 @@ extension IntersectExtension<T> on Iterable<T> {
   ///     }
   Iterable<T> intersect<TKey>(
     Iterable<T> other, [
-    TKey Function(T element) selector,
+    TKey Function(T element)? selector,
   ]) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(other, 'other');
-
     selector ??= (T v) => v as TKey;
 
     final set = Set<TKey>.from(other.map(selector));

@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension InsertAllExtension<T> on Iterable<T> {
   /// Inserts all elements from another iterable into this iterable at the specified index.
   ///
@@ -11,10 +9,6 @@ extension InsertAllExtension<T> on Iterable<T> {
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, a [RangeError] is thrown.
   Iterable<T> insertAll(int index, Iterable<T> other) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(index, 'index');
-    ArgumentError.checkNotNull(other, 'other');
-
     if (index == 0) {
       yield* other.followedBy(this);
       return;

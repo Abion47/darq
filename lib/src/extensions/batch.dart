@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension BatchExtension<T> on Iterable<T> {
   /// Groups elements in the iterator into batches of [size] length, optionally
   /// truncating elements that don't fit into a full-size batch.
@@ -20,21 +18,18 @@ extension BatchExtension<T> on Iterable<T> {
   ///       // Result: [[1, 2], [3, 4], [5, 6]]
   ///     }
   Iterable<Iterable<T>> batch(int size, {bool includeTail = false}) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(size, 'size');
-
     if (size <= 0) {
       throw ArgumentError('The value of "size" must be greater than zero');
     }
 
-    var package = List<T>(size);
+    var package = <T>[];
     var index = 0;
 
     for (var v in this) {
       package[index++] = v;
       if (index >= package.length) {
         yield package;
-        package = List<T>(size);
+        package = <T>[];
         index = 0;
       }
     }

@@ -19,14 +19,12 @@ extension LastWhereOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T lastWhereOrDefault(bool Function(T element) condition, {T defaultValue}) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(condition, 'condition');
-
+  T lastWhereOrDefault(bool Function(T element) condition,
+      {required T defaultValue}) {
     if (isEmpty) return defaultValue;
 
     var found = false;
-    T val;
+    T? val;
 
     for (var v in this) {
       if (condition(v)) {
@@ -36,7 +34,7 @@ extension LastWhereOrDefaultExtension<T> on Iterable<T> {
     }
 
     if (found) {
-      return val;
+      return val as T;
     }
 
     return defaultValue;

@@ -16,7 +16,7 @@ extension AtLeastExtension<T> on Iterable<T> {
     T value, {
     int Function(T element, T value)? sorter,
   }) {
-    final _sorter = sorter ?? EqualityComparer.forType<T>()?.sort;
+    final _sorter = sorter ?? EqualityComparer.tryForType<T>()?.sort;
     if (_sorter == null) {
       throw ArgumentError.notNull('sorter');
     }

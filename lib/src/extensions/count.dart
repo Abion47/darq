@@ -22,8 +22,7 @@ extension MathConsumerExtensions<T> on Iterable<T> {
   ///       // ResultA: 4
   ///       // ResultB: 2
   ///     }
-  int count([bool Function(T element) condition]) {
-    checkNullError(this);
+  int count([bool Function(T element)? condition]) {
     if (condition == null) return length;
 
     var count = 0;

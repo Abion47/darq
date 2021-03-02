@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension AverageExtension<T> on Iterable<T> {
   /// Calculates the average of all numerical values in the iterable.
   ///

@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension LastWhereOrDefaultExtension<T> on Iterable<T> {
   /// Returns the last element in the iterable matching a specified condition,
   /// or a default value if none is found.

@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension MathConsumerExtensions<T> on Iterable<T> {
   /// Returns the number of elements in the iterable.
   ///

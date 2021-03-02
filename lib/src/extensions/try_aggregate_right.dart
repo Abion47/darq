@@ -1,7 +1,5 @@
 import 'dart:collection';
 
-import '../utility/error.dart';
-
 extension TryAggregateRightExtension<T> on Iterable<T> {
   /// Aggregates the iterable into a single value in a right-associative manner.
   ///
@@ -29,13 +27,10 @@ extension TryAggregateRightExtension<T> on Iterable<T> {
   ///
   ///       // Result: (a, (b, (c, d)))
   ///     }
-  T tryAggregateRight<TResult>(
+  T? tryAggregateRight<TResult>(
     T Function(T aggregate, T element) aggregator, {
-    T defaultValue,
+    T? defaultValue,
   }) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(aggregator, 'aggregator');
-
     final stack = Queue<T>();
     for (var obj in this) {
       stack.add(obj);

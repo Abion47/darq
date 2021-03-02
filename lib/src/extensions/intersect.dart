@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension IntersectExtension<T> on Iterable<T> {
   /// Returns the set intersection between the iterable and the given
   /// collection.

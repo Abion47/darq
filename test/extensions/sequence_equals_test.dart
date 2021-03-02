@@ -29,7 +29,7 @@ void main() {
 
     test('Sequences match with outer selector', () {
       final list = ['a', 'b', 'c', 'd', 'e'];
-      final result = list.sequenceEquals(
+      final result = list.sequenceEquals<String, String>(
         ['A', 'B', 'C', 'D', 'E'],
         innerSelector: (s) => s.toLowerCase(),
       );

@@ -1,12 +1,8 @@
-import '../utility/error.dart';
 import 'count.dart';
 
 extension SkipLastExtension<T> on Iterable<T> {
   /// Skips the last [count] elements in an iterable.
   Iterable<T> skipLast(int count) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(count, 'count');
-
     final length = this.count();
     if (length < count) {
       throw ArgumentError.value(count, 'count',

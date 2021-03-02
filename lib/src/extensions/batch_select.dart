@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension BatchSelectExtension<T> on Iterable<T> {
   /// Groups elements in the iterator into batches of [size] length and puts them
   /// through a mapping function, optionally truncating elements that don't fit

@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension AppendExtension<T> on Iterable<T> {
   /// Inserts an element to the end of the iterable.
   ///

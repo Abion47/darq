@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension SelectExtension<T> on Iterable<T> {
   /// Applies a mapping function to the elements in the iterable, including the index
   /// where each element is found.
@@ -16,8 +14,6 @@ extension SelectExtension<T> on Iterable<T> {
   ///     }
   Iterable<TResult> select<TResult>(
       TResult Function(T element, int index) selector) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
     var index = 0;
     for (var v in this) {
       yield selector(v, index++);

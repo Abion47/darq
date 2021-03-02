@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension AllExtension<T> on Iterable<T> {
   /// Returns `true` if all elements match a condition and `false` otherwise.
   ///

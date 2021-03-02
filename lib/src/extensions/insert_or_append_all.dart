@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension InsertOrAppendAll<T> on Iterable<T> {
   /// Inserts all elements from another iterable into this iterable at the specified index.
   ///

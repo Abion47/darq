@@ -16,11 +16,6 @@ void main() {
       expect(e, orderedEquals([]));
     });
 
-    test('Error: null count', () {
-      final task = () => RepeatIterable('abc', null);
-      expect(task, throwsA(isA<AssertionError>()));
-    });
-
     test('Error: negative count', () {
       final task = () => RepeatIterable('abc', -1);
       expect(task, throwsA(isA<AssertionError>()));

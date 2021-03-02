@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension AggregateSelectExtension<T> on Iterable<T> {
   /// Aggregates the iterable into a single value.
   ///

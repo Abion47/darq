@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension ToStreamExtension<T> on Iterable<T> {
   /// Converts the iterable to a [Stream].
   ///
@@ -12,7 +10,6 @@ extension ToStreamExtension<T> on Iterable<T> {
   ///
   /// (This is a convenience method that wraps [Stream.fromIterable].)
   Stream<T> toStream({bool isBroadcast = false}) {
-    checkNullError(this);
     final stream = Stream.fromIterable(this);
     if (isBroadcast) return stream.asBroadcastStream();
     return stream;

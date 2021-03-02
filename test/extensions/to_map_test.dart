@@ -17,11 +17,5 @@ void main() {
       final task = () => result[6] = '6';
       expect(task, throwsA(isA<UnsupportedError>()));
     });
-
-    test('Error: null selector', () {
-      final list = [1, 2, 3];
-      final task = () => list.select(null);
-      expect(task, throwsA(isA<ArgumentError>()));
-    });
   });
 }

@@ -1,7 +1,5 @@
 import 'dart:collection';
 
-import '../utility/error.dart';
-
 extension AggregateRightExtension<T> on Iterable<T> {
   /// Aggregates the iterable into a single value in a right-associative manner.
   ///

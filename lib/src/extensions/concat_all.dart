@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension ConcatAllExtension<T> on Iterable<T> {
   /// Concatenates this iterable and a provided iterable of iterables.
   ///

@@ -14,11 +14,5 @@ void main() {
       final result = list.startsWith([1, 2, 3]);
       expect(result, isFalse);
     });
-
-    test('Error: null other', () {
-      final list = [0, 1, 2, 3, 4, 5];
-      final result = () => list.startsWith(null);
-      expect(result, throwsA(isA<ArgumentError>()));
-    });
   });
 }

@@ -58,7 +58,7 @@ void main() {
         },
         keySelector: (pet) => pet.age,
         valueSelector: (pet) => pet.name,
-        keyComparer: EqualityComparer(
+        keyComparer: EqualityComparer<double>(
           comparer: (k1, k2) => k1.floor() == k2.floor(),
           hasher: (key) => key.floor().hashCode,
         ),

@@ -21,7 +21,7 @@ void main() {
 
       final pets = [barley, boots, whiskers, daisy];
 
-      final result = people.groupJoin(
+      final result = people.groupJoin<Pet, String, Map<String, dynamic>>(
         pets,
         (person, pets) => <String, dynamic>{
           'ownerName': person.name,
@@ -66,7 +66,7 @@ void main() {
 
       final pets = [barley, boots, whiskers, daisy];
 
-      final result2 = people.groupJoin(
+      final result2 = people.groupJoin<Pet, String, Map<String, dynamic>>(
         pets,
         (person, pets) => {
           'ownerName': person.name,

@@ -3,6 +3,13 @@ class Tuple0 extends Iterable<dynamic> {
   const Tuple0();
 
   factory Tuple0.fromJson(Map<String, dynamic> map) => Tuple0();
+  factory Tuple0.fromList(List list, [bool trim = false]) {
+    if (!trim && list.isNotEmpty) {
+      throw ArgumentError.value('list',
+          'The given list has more than 0 elements. Use `trim: true` if you intended to ignore excess elements.');
+    }
+    return Tuple0();
+  }
 
   Tuple0 copyWith() => Tuple0();
 
@@ -36,6 +43,17 @@ class Tuple1<T> extends Iterable<dynamic> {
   const Tuple1(this.item);
 
   factory Tuple1.fromJson(Map<String, dynamic> map) => Tuple1(map['item']);
+  factory Tuple1.fromList(List list, [bool trim = false]) {
+    if (list.isEmpty) {
+      throw ArgumentError.value(
+          'list', 'The given list has less than 1 element.');
+    }
+    if (!trim && list.length > 1) {
+      throw ArgumentError.value('list',
+          'The given list has more than 1 element. Use `trim: true` if you intended to ignore excess elements.');
+    }
+    return Tuple1(list[0] as T);
+  }
 
   Tuple1 copyWith(T? item) => Tuple1(item ?? this.item);
 
@@ -85,6 +103,20 @@ class Tuple2<T0, T1> extends Iterable<dynamic> {
         map['item0'],
         map['item1'],
       );
+  factory Tuple2.fromList(List list, [bool trim = false]) {
+    if (list.length < 2) {
+      throw ArgumentError.value(
+          'list', 'The given list has less than 2 elements.');
+    }
+    if (!trim && list.length > 2) {
+      throw ArgumentError.value('list',
+          'The given list has more than 2 elements. Use `trim: true` if you intended to ignore excess elements.');
+    }
+    return Tuple2(
+      list[0] as T0,
+      list[1] as T1,
+    );
+  }
 
   Tuple2 copyWith({
     T0? item0,
@@ -150,6 +182,21 @@ class Tuple3<T0, T1, T2> extends Iterable<dynamic> {
         map['item1'],
         map['item2'],
       );
+  factory Tuple3.fromList(List list, [bool trim = false]) {
+    if (list.length < 3) {
+      throw ArgumentError.value(
+          'list', 'The given list has less than 3 elements.');
+    }
+    if (!trim && list.length > 3) {
+      throw ArgumentError.value('list',
+          'The given list has more than 3 elements. Use `trim: true` if you intended to ignore excess elements.');
+    }
+    return Tuple3(
+      list[0] as T0,
+      list[1] as T1,
+      list[2] as T2,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'item0': item0,
@@ -227,6 +274,22 @@ class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
         map['item2'],
         map['item3'],
       );
+  factory Tuple4.fromList(List list, [bool trim = false]) {
+    if (list.length < 4) {
+      throw ArgumentError.value(
+          'list', 'The given list has less than 4 elements.');
+    }
+    if (!trim && list.length > 4) {
+      throw ArgumentError.value('list',
+          'The given list has more than 4 elements. Use `trim: true` if you intended to ignore excess elements.');
+    }
+    return Tuple4(
+      list[0] as T0,
+      list[1] as T1,
+      list[2] as T2,
+      list[3] as T3,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'item0': item0,
@@ -314,6 +377,23 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
         map['item3'],
         map['item4'],
       );
+  factory Tuple5.fromList(List list, [bool trim = false]) {
+    if (list.length < 5) {
+      throw ArgumentError.value(
+          'list', 'The given list has less than 5 elements.');
+    }
+    if (!trim && list.length > 5) {
+      throw ArgumentError.value('list',
+          'The given list has more than 5 elements. Use `trim: true` if you intended to ignore excess elements.');
+    }
+    return Tuple5(
+      list[0] as T0,
+      list[1] as T1,
+      list[2] as T2,
+      list[3] as T3,
+      list[4] as T4,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'item0': item0,
@@ -411,6 +491,24 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
         map['item4'],
         map['item5'],
       );
+  factory Tuple6.fromList(List list, [bool trim = false]) {
+    if (list.length < 6) {
+      throw ArgumentError.value(
+          'list', 'The given list has less than 6 elements.');
+    }
+    if (!trim && list.length > 6) {
+      throw ArgumentError.value('list',
+          'The given list has more than 6 elements. Use `trim: true` if you intended to ignore excess elements.');
+    }
+    return Tuple6(
+      list[0] as T0,
+      list[1] as T1,
+      list[2] as T2,
+      list[3] as T3,
+      list[4] as T4,
+      list[5] as T5,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'item0': item0,
@@ -518,6 +616,25 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
         map['item5'],
         map['item6'],
       );
+  factory Tuple7.fromList(List list, [bool trim = false]) {
+    if (list.length < 7) {
+      throw ArgumentError.value(
+          'list', 'The given list has less than 7 elements.');
+    }
+    if (!trim && list.length > 7) {
+      throw ArgumentError.value('list',
+          'The given list has more than 7 elements. Use `trim: true` if you intended to ignore excess elements.');
+    }
+    return Tuple7(
+      list[0] as T0,
+      list[1] as T1,
+      list[2] as T2,
+      list[3] as T3,
+      list[4] as T4,
+      list[5] as T5,
+      list[6] as T6,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'item0': item0,
@@ -636,6 +753,26 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
         map['item6'],
         map['item7'],
       );
+  factory Tuple8.fromList(List list, [bool trim = false]) {
+    if (list.length < 8) {
+      throw ArgumentError.value(
+          'list', 'The given list has less than 8 elements.');
+    }
+    if (!trim && list.length > 8) {
+      throw ArgumentError.value('list',
+          'The given list has more than 8 elements. Use `trim: true` if you intended to ignore excess elements.');
+    }
+    return Tuple8(
+      list[0] as T0,
+      list[1] as T1,
+      list[2] as T2,
+      list[3] as T3,
+      list[4] as T4,
+      list[5] as T5,
+      list[6] as T6,
+      list[7] as T7,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'item0': item0,
@@ -752,6 +889,27 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
     this.item7,
     this.item8,
   );
+  factory Tuple9.fromList(List list, [bool trim = false]) {
+    if (list.length < 9) {
+      throw ArgumentError.value(
+          'list', 'The given list has less than 9 elements.');
+    }
+    if (!trim && list.length > 9) {
+      throw ArgumentError.value('list',
+          'The given list has more than 9 elements. Use `trim: true` if you intended to ignore excess elements.');
+    }
+    return Tuple9(
+      list[0] as T0,
+      list[1] as T1,
+      list[2] as T2,
+      list[3] as T3,
+      list[4] as T4,
+      list[5] as T5,
+      list[6] as T6,
+      list[7] as T7,
+      list[8] as T8,
+    );
+  }
 
   factory Tuple9.fromJson(Map<String, dynamic> map) => Tuple9(
         map['item0'],

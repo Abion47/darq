@@ -1,3 +1,7 @@
+## Future
+
+* Added `toList` factory constructors to all `Tuple` classes.
+
 ## [1.0.0-dev.2]
 
 * Accidentally uploaded the previous version without updating the documentation first. Oops.

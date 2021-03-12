@@ -1,6 +1,6 @@
 ## Future
 
-* Added `toList` factory constructors to all `Tuple` classes.
+* Added `fromList` factory constructors to all `Tuple` classes.
 
 ## [1.0.0-dev.2]
 

@@ -34,7 +34,10 @@ extension MinExtension<T> on Iterable<T> {
       throw StateError('Iterable must not be empty.');
     }
 
-    comparer ??= EqualityComparer.forType<T>().sort;
+    comparer ??= EqualityComparer.tryForType<T>()?.sort;
+    if (comparer == null) {
+      throw ArgumentError.notNull('comparer');
+    }
 
     final iter = iterator..moveNext();
     var min = iter.current;

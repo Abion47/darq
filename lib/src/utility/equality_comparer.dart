@@ -116,7 +116,7 @@ class EqualityComparer<T> {
   ///
   /// If no registered comparer can be found, this method returns null.
   static EqualityComparer<T>? tryForType<T>() {
-    if (!_registeredEqualityComparers.containsKey(T)) {
+    if (_registeredEqualityComparers.containsKey(T)) {
       return _registeredEqualityComparers[T] as EqualityComparer<T>;
     }
     return null;

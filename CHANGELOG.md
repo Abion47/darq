@@ -1,11 +1,12 @@
 ## [1.0.0-dev.1]
 
-* Null safety!
+* Null safety! 
 * The `default` named parameter of methods which take a default value are now marked as required (but can still be explicitly set to null if the generic type argument of the iterable is a nullable type). This affects the following methods: `elementAtOrDefault`, `firstOrDefault`, `firstWhereOrDefault`, `lagSelect`, `lag`, `lastOrDefault`, `lastWhereOrDefault`, `leadSelect`, `lead`, `padEnd`, `padStart`
 * The `fillBackward`, `fillForward`, and `fillMissing` extensions have been reconfigured to only target iterables of nullable types
 * `EqualityComparer.forType` has been refactored to return a default `EqualityComparer` when a patching comparer for the requested type was not found. The previous behavior has been converted into the new `EqualityComaprer.tryForType` method which instead returns null when a match is not found.
 * * As a reminder, the default `EqualityComparer` has a comparer of `(a, b) => a == b`, a hasher of `(a) => a.hashCode`, and a sorter of `(a, b) => 0`
 * Removed all calls to `checkNullError` and argument null checks as they are now redundant
+* Fixed a misordering of the parameters in `aggregateRight` and `tryAggregateRight` that led to incorrect results in cases where the aggregation depended on concatenation (e.g. strings)
 
 ## [0.5.1]
 

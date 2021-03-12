@@ -23,19 +23,17 @@ extension BatchExtension<T> on Iterable<T> {
     }
 
     var package = <T>[];
-    var index = 0;
 
     for (var v in this) {
-      package[index++] = v;
-      if (index >= package.length) {
+      package.add(v);
+      if (package.length >= size) {
         yield package;
         package = <T>[];
-        index = 0;
       }
     }
 
-    if (index > 0 && includeTail) {
-      yield List<T>.of(package.sublist(0, index));
+    if (package.isNotEmpty && includeTail) {
+      yield package;
     }
   }
 }

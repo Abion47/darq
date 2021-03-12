@@ -15,14 +15,14 @@ abstract class ILookup<TKey, TValue> {
 class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     implements ILookup<TKey, TValue> {
   late EqualityComparer<TKey> comparer;
-  late List<Grouping<TKey, TValue>> groupings;
+  late List<Grouping<TKey, TValue>?> groupings;
   late int _count;
 
   Grouping<TKey, TValue>? lastGrouping;
 
   Lookup._internal(EqualityComparer<TKey>? comparer) {
     this.comparer = comparer ?? EqualityComparer.forType<TKey>();
-    groupings = <Grouping<TKey, TValue>>[];
+    groupings = List<Grouping<TKey, TValue>?>.filled(7, null);
     _count = 0;
   }
 
@@ -59,7 +59,9 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     final lookup = Lookup<TKey, TValue>._internal(comparer);
     for (final item in source) {
       final key = keySelector(item);
-      if (key != null) lookup.getGrouping(key, true)?.add(item);
+      if (key != null) {
+        lookup.getGrouping(key, true)?.add(item);
+      }
     }
     return lookup;
   }
@@ -113,7 +115,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
 
   Grouping<TKey, TValue>? getGrouping(TKey key, bool shouldCreate) {
     var hash = _internalGetHash(key);
-    for (Grouping<TKey, TValue>? g = groupings[hash % groupings.length];
+    for (var g = groupings[hash % groupings.length];
         g != null;
         g = g.hashNext) {
       if (g.hashCode == hash && comparer.compare(g.key, key)) return g;

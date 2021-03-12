@@ -1,5 +1,6 @@
 import 'equality_comparer.dart';
 import 'grouping.dart';
+import '../extensions/non_null.dart';
 
 abstract class ILookup<TKey, TValue> {
   int get count;
@@ -13,14 +14,15 @@ abstract class ILookup<TKey, TValue> {
 /// intended to be instantiated directly.
 class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     implements ILookup<TKey, TValue> {
-  EqualityComparer<TKey> comparer;
-  List<Grouping<TKey, TValue>> groupings;
-  Grouping<TKey, TValue> lastGrouping;
-  int _count;
+  late EqualityComparer<TKey> comparer;
+  late List<Grouping<TKey, TValue>?> groupings;
+  late int _count;
 
-  Lookup._internal(this.comparer) {
-    comparer ??= EqualityComparer.forType<TKey>();
-    groupings = List<Grouping<TKey, TValue>>(7);
+  Grouping<TKey, TValue>? lastGrouping;
+
+  Lookup._internal(EqualityComparer<TKey>? comparer) {
+    this.comparer = comparer ?? EqualityComparer.forType<TKey>();
+    groupings = List<Grouping<TKey, TValue>?>.filled(7, null);
     _count = 0;
   }
 
@@ -30,12 +32,9 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     TValue Function(TSource) valueSelector,
     EqualityComparer<TKey> comparer,
   ) {
-    ArgumentError.checkNotNull(source);
-    ArgumentError.checkNotNull(keySelector);
-    ArgumentError.checkNotNull(valueSelector);
     final lookup = Lookup<TKey, TValue>._internal(comparer);
     for (final item in source) {
-      lookup.getGrouping(keySelector(item), true).add(valueSelector(item));
+      lookup.getGrouping(keySelector(item), true)?.add(valueSelector(item));
     }
     return lookup;
   }
@@ -44,8 +43,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     Map<TKey, TValue> map,
     EqualityComparer<TKey> comparer,
   ) {
-    ArgumentError.checkNotNull(map);
-    return Lookup.create(
+    return Lookup.create<MapEntry<TKey, TValue>, TKey, TValue>(
       map.entries,
       (entry) => entry.key,
       (entry) => entry.value,
@@ -58,12 +56,12 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     TKey Function(TValue) keySelector,
     EqualityComparer<TKey> comparer,
   ) {
-    ArgumentError.checkNotNull(source);
-    ArgumentError.checkNotNull(keySelector);
     final lookup = Lookup<TKey, TValue>._internal(comparer);
     for (final item in source) {
       final key = keySelector(item);
-      if (key != null) lookup.getGrouping(key, true).add(item);
+      if (key != null) {
+        lookup.getGrouping(key, true)?.add(item);
+      }
     }
     return lookup;
   }
@@ -79,7 +77,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
   }
 
   operator []=(TKey key, TValue value) {
-    getGrouping(key, true).add(value);
+    getGrouping(key, true)?.add(value);
   }
 
   @override
@@ -93,8 +91,8 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     var g = lastGrouping;
     if (g != null) {
       do {
-        g = g.next;
-        yield g;
+        g = g!.next;
+        yield g!;
       } while (g != lastGrouping);
     }
   }
@@ -108,14 +106,14 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     var g = lastGrouping;
     if (g != null) {
       do {
-        g = g.next;
-        if (g.count != g.elements.length) g.elements.length = g.count;
+        g = g!.next;
+        if (g!.count != g.elements.length) g.elements.length = g.count;
         yield resultSelector(g.key, g.elements);
       } while (g != lastGrouping);
     }
   }
 
-  Grouping<TKey, TValue> getGrouping(TKey key, bool shouldCreate) {
+  Grouping<TKey, TValue>? getGrouping(TKey key, bool shouldCreate) {
     var hash = _internalGetHash(key);
     for (var g = groupings[hash % groupings.length];
         g != null;
@@ -126,7 +124,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     if (shouldCreate) {
       if (_count == groupings.length) resizeBuffer();
       final index = hash % groupings.length;
-      final g = Grouping<TKey, TValue>();
+      final g = Grouping<TKey, TValue>([], key, hash);
       g.key = key;
       g.hash = hash;
       g.elements = [];
@@ -135,8 +133,8 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
       if (lastGrouping == null) {
         g.next = g;
       } else {
-        g.next = lastGrouping.next;
-        lastGrouping.next = g;
+        g.next = lastGrouping?.next;
+        lastGrouping?.next = g;
       }
       lastGrouping = g;
       _count++;
@@ -150,15 +148,18 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     var newSize = count * 2 + 1;
     if (newSize < count) throw Exception('Integer overflow');
 
-    final newGroupings = List<Grouping<TKey, TValue>>(newSize);
+    final newGroupings = List<Grouping<TKey, TValue>?>.filled(newSize, null);
     var g = lastGrouping;
     do {
-      g = g.next;
+      g = g?.next;
+      if (g == null) {
+        throw StateError('There shouldn\'t be a null group in groupings');
+      }
       final index = g.hashCode % newSize;
       g.hashNext = newGroupings[index];
       newGroupings[index] = g;
     } while (g != lastGrouping);
 
-    groupings = newGroupings;
+    groupings = newGroupings.nonNull().toList();
   }
 }

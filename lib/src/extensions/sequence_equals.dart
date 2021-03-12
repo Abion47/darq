@@ -1,5 +1,4 @@
 import '../utility/equality_comparer.dart';
-import '../utility/error.dart';
 
 extension SequenceEqualsExtension<T> on Iterable<T> {
   /// Returns `true` if this iterable is equivalent to the given collection.
@@ -35,16 +34,10 @@ extension SequenceEqualsExtension<T> on Iterable<T> {
   ///     }
   bool sequenceEquals<TOther, TKey>(
     Iterable<TOther> other, {
-    TKey Function(T element) outerSelector,
-    TKey Function(TOther element) innerSelector,
-    bool Function(TKey outer, TKey inner) comparer,
+    TKey Function(T element)? outerSelector,
+    TKey Function(TOther element)? innerSelector,
+    bool Function(TKey outer, TKey inner)? comparer,
   }) {
-    checkNullError(this);
-
-    if (other == null) {
-      return false;
-    }
-
     final iterA = iterator;
     final iterB = other.iterator;
 
@@ -53,7 +46,7 @@ extension SequenceEqualsExtension<T> on Iterable<T> {
 
     outerSelector ??= (T v) => v as TKey;
     innerSelector ??= (TOther v) => v as TKey;
-    comparer ??= EqualityComparer.forType<TKey>()?.compare ?? (a, b) => a == b;
+    comparer ??= EqualityComparer.forType<TKey>().compare;
 
     do {
       aHasNext = iterA.moveNext();

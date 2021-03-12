@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension BatchSelectExtension<T> on Iterable<T> {
   /// Groups elements in the iterator into batches of [size] length and puts them
   /// through a mapping function, optionally truncating elements that don't fit
@@ -26,29 +24,23 @@ extension BatchSelectExtension<T> on Iterable<T> {
     TResult Function(List<T> batch) selector, {
     bool includeTail = false,
   }) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(size, 'size');
-    ArgumentError.checkNotNull(selector, 'selector');
-
     if (size <= 0) {
       throw RangeError.value(
           size, 'size', 'The value of "size" must be a positive integer.');
     }
 
-    var package = List<T>(size);
-    var index = 0;
+    var package = <T>[];
 
     for (var v in this) {
-      package[index++] = v;
-      if (index >= package.length) {
+      package.add(v);
+      if (package.length >= size) {
         yield selector(package);
-        package = List<T>(size);
-        index = 0;
+        package = <T>[];
       }
     }
 
-    if (index > 0 && includeTail) {
-      yield selector(List<T>.of(package.sublist(0, index)));
+    if (package.isNotEmpty && includeTail) {
+      yield selector(List<T>.of(package));
     }
   }
 }

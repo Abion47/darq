@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension LastOrDefaultExtension<T> on Iterable<T> {
   /// Returns the last element in the iterable.
   ///
@@ -15,8 +13,7 @@ extension LastOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T lastOrDefault({T defaultValue}) {
-    checkNullError(this);
+  T lastOrDefault({required T defaultValue}) {
     if (isEmpty) return defaultValue;
     return last;
   }

@@ -1,4 +1,3 @@
-import '../utility/error.dart';
 import 'count.dart';
 
 extension CompareCountExtension<T> on Iterable<T> {
@@ -11,8 +10,6 @@ extension CompareCountExtension<T> on Iterable<T> {
   ///
   /// If this iterable and [other] are the same length, this method returns 0.
   int compareCount(Iterable other) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(other, 'other');
     return count().compareTo(other.count());
   }
 }

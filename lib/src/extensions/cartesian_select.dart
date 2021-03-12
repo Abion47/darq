@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension CartesianSelectExtension<T> on Iterable<T> {
   /// Generates the cartesian product of this iterable and [other], returning an
   /// iterable of mapped elements.
@@ -12,9 +10,6 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T2> other,
     TResult Function(T element, T2 otherElement) selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(other, 'other');
     for (var a in this) {
       for (var b in other) {
         yield selector(a, b);
@@ -35,10 +30,6 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T3> o3,
     TResult Function(T element, T2 o2Element, T3 o3Element) selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -63,11 +54,6 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     TResult Function(T element, T2 o2Element, T3 o3Element, T4 o4Element)
         selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -96,12 +82,6 @@ extension CartesianSelectExtension<T> on Iterable<T> {
             T element, T2 o2Element, T3 o3Element, T4 o4Element, T5 o5Element)
         selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
-    ArgumentError.checkNotNull(o5, 'o5');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -133,13 +113,6 @@ extension CartesianSelectExtension<T> on Iterable<T> {
             T5 o5Element, T6 o6Element)
         selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
-    ArgumentError.checkNotNull(o5, 'o5');
-    ArgumentError.checkNotNull(o6, 'o6');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -174,14 +147,6 @@ extension CartesianSelectExtension<T> on Iterable<T> {
             T5 o5Element, T6 o6Element, T7 o7Element)
         selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
-    ArgumentError.checkNotNull(o5, 'o5');
-    ArgumentError.checkNotNull(o6, 'o6');
-    ArgumentError.checkNotNull(o7, 'o7');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -219,15 +184,6 @@ extension CartesianSelectExtension<T> on Iterable<T> {
             T5 o5Element, T6 o6Element, T7 o7Element, T8 o8Element)
         selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
-    ArgumentError.checkNotNull(o5, 'o5');
-    ArgumentError.checkNotNull(o6, 'o6');
-    ArgumentError.checkNotNull(o7, 'o7');
-    ArgumentError.checkNotNull(o8, 'o8');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -276,16 +232,6 @@ extension CartesianSelectExtension<T> on Iterable<T> {
             T9 o9Element)
         selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
-    ArgumentError.checkNotNull(o5, 'o5');
-    ArgumentError.checkNotNull(o6, 'o6');
-    ArgumentError.checkNotNull(o7, 'o7');
-    ArgumentError.checkNotNull(o8, 'o8');
-    ArgumentError.checkNotNull(o9, 'o9');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {

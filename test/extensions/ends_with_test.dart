@@ -14,11 +14,5 @@ void main() {
       final result = list.endsWith([4, 5, 6]);
       expect(result, isFalse);
     });
-
-    test('Error: null other', () {
-      final list = [0, 1, 2, 3, 4, 5];
-      final result = () => list.endsWith(null);
-      expect(result, throwsA(isA<ArgumentError>()));
-    });
   });
 }

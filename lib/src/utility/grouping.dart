@@ -62,24 +62,26 @@ class GroupJoinIterator<TSource, TInner, TKey, TResult>
     extends Iterator<TResult> {
   final GroupJoinIterable<TSource, TInner, TKey, TResult> iterable;
 
-  GroupJoinIterator(this.iterable);
+  GroupJoinIterator(this.iterable) {
+    _sourceIterator = iterable.source.iterator;
+    _lookup = Lookup.createForJoin<TKey, TInner>(
+        iterable.inner, iterable.innerKeySelector, iterable.keyComparer);
+  }
 
-  Lookup<TKey, TInner> _lookup;
+  late Lookup<TKey, TInner> _lookup;
+  late Iterator<TSource> _sourceIterator;
 
-  TResult _current;
+  TResult? _current;
   @override
-  TResult get current => _current;
-
-  Iterator<TSource> _sourceIterator;
+  TResult get current {
+    if (_current == null) {
+      throw StateError('Cannot get current before starting iteration');
+    }
+    return _current!;
+  }
 
   @override
   bool moveNext() {
-    if (_sourceIterator == null) {
-      _sourceIterator = iterable.source.iterator;
-      _lookup = Lookup.createForJoin<TKey, TInner>(
-          iterable.inner, iterable.innerKeySelector, iterable.keyComparer);
-    }
-
     if (_sourceIterator.moveNext()) {
       final item = _sourceIterator.current;
       _current = iterable.resultSelector(
@@ -87,8 +89,6 @@ class GroupJoinIterator<TSource, TInner, TKey, TResult>
       return true;
     }
 
-    _sourceIterator = null;
-    _lookup = null;
     _current = null;
     return false;
   }
@@ -138,12 +138,15 @@ class GroupSelectValueIterable<TSource, TKey, TValue, TResult>
 /// intended to be instantiated directly.
 class Grouping<TKey, TValue> extends Iterable<TValue> {
   List<TValue> elements;
-  Grouping hashNext;
-  Grouping next;
   TKey key;
   int hash;
 
+  Grouping<TKey, TValue>? hashNext;
+  Grouping<TKey, TValue>? next;
+
   int get count => elements.length;
+
+  Grouping(this.elements, this.key, this.hash);
 
   @override
   Iterator<TValue> get iterator => elements.iterator;

@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension AppendExtension<T> on Iterable<T> {
   /// Inserts an element to the end of the iterable.
   ///
@@ -14,8 +12,6 @@ extension AppendExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4]
   ///     }
   Iterable<T> append(T value) sync* {
-    checkNullError(this);
-
     yield* this;
     yield value;
   }
@@ -33,8 +29,6 @@ extension AppendExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5]
   ///     }
   Iterable<T> append2(T v1, T v2) sync* {
-    checkNullError(this);
-
     yield* this;
     yield v1;
     yield v2;
@@ -53,8 +47,6 @@ extension AppendExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5, 6]
   ///     }
   Iterable<T> append3(T v1, T v2, T v3) sync* {
-    checkNullError(this);
-
     yield* this;
     yield v1;
     yield v2;
@@ -74,8 +66,6 @@ extension AppendExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5, 6, 7]
   ///     }
   Iterable<T> append4(T v1, T v2, T v3, T v4) sync* {
-    checkNullError(this);
-
     yield* this;
     yield v1;
     yield v2;
@@ -96,8 +86,6 @@ extension AppendExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5, 6, 7, 8]
   ///     }
   Iterable<T> append5(T v1, T v2, T v3, T v4, T v5) sync* {
-    checkNullError(this);
-
     yield* this;
     yield v1;
     yield v2;
@@ -119,8 +107,6 @@ extension AppendExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   ///     }
   Iterable<T> append6(T v1, T v2, T v3, T v4, T v5, T v6) sync* {
-    checkNullError(this);
-
     yield* this;
     yield v1;
     yield v2;
@@ -143,8 +129,6 @@ extension AppendExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   ///     }
   Iterable<T> append7(T v1, T v2, T v3, T v4, T v5, T v6, T v7) sync* {
-    checkNullError(this);
-
     yield* this;
     yield v1;
     yield v2;
@@ -168,8 +152,6 @@ extension AppendExtension<T> on Iterable<T> {
   ///       // Result: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
   ///     }
   Iterable<T> append8(T v1, T v2, T v3, T v4, T v5, T v6, T v7, T v8) sync* {
-    checkNullError(this);
-
     yield* this;
     yield v1;
     yield v2;
@@ -195,8 +177,6 @@ extension AppendExtension<T> on Iterable<T> {
   ///     }
   Iterable<T> append9(
       T v1, T v2, T v3, T v4, T v5, T v6, T v7, T v8, T v9) sync* {
-    checkNullError(this);
-
     yield* this;
     yield v1;
     yield v2;

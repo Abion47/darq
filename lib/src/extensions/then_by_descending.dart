@@ -1,5 +1,4 @@
 import '../utility/equality_comparer.dart';
-import '../utility/error.dart';
 import '../utility/ordered.dart';
 
 extension OrderedIterableExtensions<T> on Iterable<T> {
@@ -37,15 +36,13 @@ extension OrderedIterableExtensions<T> on Iterable<T> {
   ///     }
   Iterable<T> thenByDescending<TKey>(
     TKey Function(T element) keySelector, {
-    EqualityComparer<TKey> keyComparer,
+    EqualityComparer<TKey>? keyComparer,
   }) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(keySelector, 'keySelector');
-
     if (this is! InternalOrderedIterable) {
       throw UnsupportedError(
           'thenByDescending must be called immediately following a call to orderBy, orderByDescending, thenBy, or thenByDescending.');
     }
+    keyComparer ??= EqualityComparer.forType<TKey>();
     return (this as dynamic)
         .createOrderedIterable<TKey>(keySelector, keyComparer, true);
   }

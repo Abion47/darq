@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension TryAggregateExtension<T> on Iterable<T> {
   /// Aggregates the iterable into a single value.
   ///
@@ -26,13 +24,10 @@ extension TryAggregateExtension<T> on Iterable<T> {
   ///
   ///       // Result: 10
   ///     }
-  T tryAggregate(
+  T? tryAggregate(
     T Function(T aggregate, T element) aggregator, {
-    T defaultValue,
+    T? defaultValue,
   }) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(aggregator, 'aggregator');
-
     final iterator = this.iterator;
     if (!iterator.moveNext()) {
       return defaultValue;

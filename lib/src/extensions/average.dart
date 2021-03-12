@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension AverageExtension<T> on Iterable<T> {
   /// Calculates the average of all numerical values in the iterable.
   ///
@@ -19,9 +17,7 @@ extension AverageExtension<T> on Iterable<T> {
   ///
   ///       // Result: 5.0
   ///     }
-  TNum average<TNum extends num>([TNum Function(T value) selector]) {
-    checkNullError(this);
-
+  TNum average<TNum extends num>([TNum Function(T value)? selector]) {
     if (isEmpty) {
       throw StateError('Iterator must not be empty.');
     }

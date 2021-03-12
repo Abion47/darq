@@ -77,9 +77,9 @@ class EqualityComparer<T> {
   final Sorter<T> sort;
 
   EqualityComparer({
-    Comparer<T> comparer,
-    Hasher<T> hasher,
-    Sorter<T> sorter,
+    Comparer<T>? comparer,
+    Hasher<T>? hasher,
+    Sorter<T>? sorter,
   })  : compare = comparer ?? _getDefaultComparer<T>(),
         hash = hasher ?? _getDefaultHasher<T>(),
         sort = sorter ?? _getDefaultSorter<T>();
@@ -99,9 +99,28 @@ class EqualityComparer<T> {
   /// or will be a comparer that has been registered via a call to
   /// [EqualityComparer.addDefaultEqualityComparer].
   ///
-  /// If no registered comparer can be found, this method will return a new instance
-  /// of [EqualityComparer] as if `EqualityComparer<T>()` was called instead.
-  static EqualityComparer<T> forType<T>() => _registeredEqualityComparers[T];
+  /// If no registered comparer can be found, this method returns a default `EqualityComparer`;
+  static EqualityComparer<T> forType<T>() =>
+      (_registeredEqualityComparers[T] ?? EqualityComparer<T>())
+          as EqualityComparer<T>;
+
+  /// Returns the default [EqualityComparer] that has been registered for type
+  /// `T`.
+  ///
+  /// The returned [EqualityComparer] will be the type registered to `T` for use
+  /// as the comparer when the `comparer` parameter in various LINQ methods is
+  /// omitted. The [EqualityComparer] will be one of the built-in default comparers
+  /// (for [dynamic], [num], [int], [double], [String], [Duration], or [BigInt])
+  /// or will be a comparer that has been registered via a call to
+  /// [EqualityComparer.addDefaultEqualityComparer].
+  ///
+  /// If no registered comparer can be found, this method returns null.
+  static EqualityComparer<T>? tryForType<T>() {
+    if (_registeredEqualityComparers.containsKey(T)) {
+      return _registeredEqualityComparers[T] as EqualityComparer<T>;
+    }
+    return null;
+  }
 
   static final Map<Type, EqualityComparer> _registeredEqualityComparers = {
     dynamic: EqualityComparer<dynamic>(

@@ -37,7 +37,7 @@ class Tuple1<T> extends Iterable<dynamic> {
 
   factory Tuple1.fromJson(Map<String, dynamic> map) => Tuple1(map['item']);
 
-  Tuple1 copyWith(T item) => Tuple1(item ?? this.item);
+  Tuple1 copyWith(T? item) => Tuple1(item ?? this.item);
 
   Map<String, dynamic> toMap() => {'item': item};
 
@@ -87,8 +87,8 @@ class Tuple2<T0, T1> extends Iterable<dynamic> {
       );
 
   Tuple2 copyWith({
-    T0 item0,
-    T1 item1,
+    T0? item0,
+    T1? item1,
   }) =>
       Tuple2(
         item0 ?? this.item0,
@@ -158,9 +158,9 @@ class Tuple3<T0, T1, T2> extends Iterable<dynamic> {
       };
 
   Tuple3 copyWith({
-    T0 item0,
-    T1 item1,
-    T2 item2,
+    T0? item0,
+    T1? item1,
+    T2? item2,
   }) =>
       Tuple3(
         item0 ?? this.item0,
@@ -236,10 +236,10 @@ class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
       };
 
   Tuple4 copyWith({
-    T0 item0,
-    T1 item1,
-    T2 item2,
-    T3 item3,
+    T0? item0,
+    T1? item1,
+    T2? item2,
+    T3? item3,
   }) =>
       Tuple4(
         item0 ?? this.item0,
@@ -324,11 +324,11 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
       };
 
   Tuple5 copyWith({
-    T0 item0,
-    T1 item1,
-    T2 item2,
-    T3 item3,
-    T4 item4,
+    T0? item0,
+    T1? item1,
+    T2? item2,
+    T3? item3,
+    T4? item4,
   }) =>
       Tuple5(
         item0 ?? this.item0,
@@ -422,12 +422,12 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
       };
 
   Tuple6 copyWith({
-    T0 item0,
-    T1 item1,
-    T2 item2,
-    T3 item3,
-    T4 item4,
-    T5 item5,
+    T0? item0,
+    T1? item1,
+    T2? item2,
+    T3? item3,
+    T4? item4,
+    T5? item5,
   }) =>
       Tuple6(
         item0 ?? this.item0,
@@ -530,13 +530,13 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
       };
 
   Tuple7 copyWith({
-    T0 item0,
-    T1 item1,
-    T2 item2,
-    T3 item3,
-    T4 item4,
-    T5 item5,
-    T6 item6,
+    T0? item0,
+    T1? item1,
+    T2? item2,
+    T3? item3,
+    T4? item4,
+    T5? item5,
+    T6? item6,
   }) =>
       Tuple7(
         item0 ?? this.item0,
@@ -649,14 +649,14 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
       };
 
   Tuple8 copyWith({
-    T0 item0,
-    T1 item1,
-    T2 item2,
-    T3 item3,
-    T4 item4,
-    T5 item5,
-    T6 item6,
-    T7 item7,
+    T0? item0,
+    T1? item1,
+    T2? item2,
+    T3? item3,
+    T4? item4,
+    T5? item5,
+    T6? item6,
+    T7? item7,
   }) =>
       Tuple8(
         item0 ?? this.item0,
@@ -778,15 +778,15 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
       };
 
   Tuple9 copyWith({
-    T0 item0,
-    T1 item1,
-    T2 item2,
-    T3 item3,
-    T4 item4,
-    T5 item5,
-    T6 item6,
-    T7 item7,
-    T8 item8,
+    T0? item0,
+    T1? item1,
+    T2? item2,
+    T3? item3,
+    T4? item4,
+    T5? item5,
+    T6? item6,
+    T7? item7,
+    T8? item8,
   }) =>
       Tuple9(
         item0 ?? this.item0,

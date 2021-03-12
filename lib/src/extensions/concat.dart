@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension ConcatExtension<T> on Iterable<T> {
   /// Concatenates this iterable and another iterables.
   ///
@@ -18,7 +16,6 @@ extension ConcatExtension<T> on Iterable<T> {
   /// (This is a convenience method to maintain naming-consistency with its .NET LINQ equivalent.
   /// Internally it functions identically to [followedBy].)
   Iterable<T> concat(Iterable<T> other) {
-    checkNullError(this);
     return followedBy(other);
   }
 
@@ -42,7 +39,6 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c1,
     Iterable<T> c2,
   ) {
-    checkNullError(this);
     return followedBy(c1).followedBy(c2);
   }
 
@@ -68,7 +64,6 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c2,
     Iterable<T> c3,
   ) {
-    checkNullError(this);
     return followedBy(c1).followedBy(c2).followedBy(c3);
   }
 
@@ -96,7 +91,6 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c3,
     Iterable<T> c4,
   ) {
-    checkNullError(this);
     return followedBy(c1).followedBy(c2).followedBy(c3).followedBy(c4);
   }
 
@@ -126,7 +120,6 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c4,
     Iterable<T> c5,
   ) {
-    checkNullError(this);
     return followedBy(c1)
         .followedBy(c2)
         .followedBy(c3)
@@ -162,7 +155,6 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c5,
     Iterable<T> c6,
   ) {
-    checkNullError(this);
     return followedBy(c1)
         .followedBy(c2)
         .followedBy(c3)
@@ -201,7 +193,6 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c6,
     Iterable<T> c7,
   ) {
-    checkNullError(this);
     return followedBy(c1)
         .followedBy(c2)
         .followedBy(c3)
@@ -243,7 +234,6 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c7,
     Iterable<T> c8,
   ) {
-    checkNullError(this);
     return followedBy(c1)
         .followedBy(c2)
         .followedBy(c3)
@@ -288,7 +278,6 @@ extension ConcatExtension<T> on Iterable<T> {
     Iterable<T> c8,
     Iterable<T> c9,
   ) {
-    checkNullError(this);
     return followedBy(c1)
         .followedBy(c2)
         .followedBy(c3)

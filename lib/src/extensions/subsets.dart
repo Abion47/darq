@@ -1,11 +1,7 @@
-import '../utility/error.dart';
-
 extension SubsetsExtension<T> on Iterable<T> {
   /// Returns an iterable of iterables which represents all of the subsets
   /// of this iterable. (Also known as the power set of the iterable.)
   Iterable<Iterable<T>> subsets() sync* {
-    checkNullError(this);
-
     final asList = toList();
 
     if (asList.isNotEmpty) {
@@ -18,9 +14,9 @@ extension SubsetsExtension<T> on Iterable<T> {
   Iterable<Iterable<T>> _subsetRecursive(
     List<T> input,
     int k,
-    int n, [
+    int n,
     List<T> curr,
-  ]) sync* {
+  ) sync* {
     if (n < 0) {
       yield curr;
     } else {

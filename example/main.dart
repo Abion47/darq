@@ -42,7 +42,7 @@ class Pet {
 void benchmark() {
   final source = List.generate(1000000, (i) => i);
   final iterations = 100;
-  final benchmarks = List<double>(iterations);
+  final benchmarks = List<double>.generate(iterations, (_) => -1);
 
   // LINQ style
   for (int i = 0; i < iterations; i++) {

@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension ScanExtension<T> on Iterable<T> {
   /// Returns the scan (inclusive prefix sum) of this iterable.
   ///
@@ -20,9 +18,6 @@ extension ScanExtension<T> on Iterable<T> {
   ///       // Result: [1, 3, 6, 10]
   ///     }
   Iterable<T> scan(T Function(T previousElement, T element) aggregator) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(aggregator, 'aggregator');
-
     final iterator = this.iterator;
     if (!iterator.moveNext()) {
       return;

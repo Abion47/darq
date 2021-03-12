@@ -15,12 +15,6 @@ void main() {
       expect(result, orderedEquals([]));
     });
 
-    test('Error: null step', () {
-      final list = [1, 2, 3];
-      final task = () => list.takeEvery(null);
-      expect(task, throwsA(isA<ArgumentError>()));
-    });
-
     test('Error: zero step', () {
       final list = [1, 2, 3];
       final task = () => list.takeEvery(0);

@@ -1,6 +1,4 @@
-import 'dart:collection';
-
-import '../utility/error.dart';
+import 'reverse.dart';
 
 extension AggregateRightExtension<T> on Iterable<T> {
   /// Aggregates the iterable into a single value in a right-associative manner.
@@ -31,27 +29,15 @@ extension AggregateRightExtension<T> on Iterable<T> {
   T aggregateRight<TResult>(
     T Function(T aggregate, T element) aggregator,
   ) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(aggregator, 'aggregator');
-
-    final stack = Queue<T>();
-    for (var obj in this) {
-      stack.add(obj);
-    }
-
-    if (stack.isEmpty) {
+    var reversed = reverse().iterator;
+    if (!reversed.moveNext()) {
       throw StateError('Cannot call "aggregateRight" on an empty iterable.');
     }
 
-    var value = stack.removeLast();
-    if (stack.isEmpty) {
-      return value;
+    var result = reversed.current;
+    while (reversed.moveNext()) {
+      result = aggregator(result, reversed.current);
     }
-
-    while (stack.isNotEmpty) {
-      value = aggregator(value, stack.removeLast());
-    }
-
-    return value;
+    return result;
   }
 }

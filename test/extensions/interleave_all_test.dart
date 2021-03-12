@@ -22,17 +22,5 @@ void main() {
       var result = list.interleaveAll(others);
       expect(result, orderedEquals([0, 2, 5, 1, 3, 4]));
     });
-
-    test('Error: null others', () {
-      var list = [0, 1];
-      var task = () => list.interleaveAll(null);
-      expect(task, throwsA(isA<ArgumentError>()));
-    });
-
-    test('Error: null in others', () {
-      var list = [0, 1];
-      var task = () => list.interleaveAll([null]);
-      expect(task, throwsA(isA<ArgumentError>()));
-    });
   });
 }

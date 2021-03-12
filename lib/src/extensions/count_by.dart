@@ -1,7 +1,5 @@
 import 'dart:collection';
 
-import '../utility/error.dart';
-
 extension CountByExtension<T> on Iterable<T> {
   /// Applies [keySelector] to every element in this iterable and returns an iterable
   /// containing each resulting key and the number of times that key appears in this
@@ -11,13 +9,10 @@ extension CountByExtension<T> on Iterable<T> {
   Iterable<MapEntry<TKey, int>> countBy<TKey>(
     TKey Function(T element) keySelector,
   ) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(keySelector, 'keySelector');
     final countMap = HashMap<TKey, int>();
     for (var o in this) {
       final key = keySelector(o);
-      countMap.putIfAbsent(key, () => 0);
-      countMap[key]++;
+      countMap[key] = (countMap[key] ?? 0) + 1;
     }
     return countMap.entries;
   }

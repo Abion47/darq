@@ -1,4 +1,3 @@
-import '../utility/error.dart';
 import '../utility/tuple.dart';
 
 extension PairwiseExtension<T> on Iterable<T> {
@@ -12,8 +11,6 @@ extension PairwiseExtension<T> on Iterable<T> {
   /// If this iterable is empty or only contains one element, a [StateError] will be
   /// thrown.
   Iterable<Tuple2<T, T>> pairwise() sync* {
-    checkNullError(this);
-
     final iterator = this.iterator;
     if (!iterator.moveNext()) {
       throw StateError('Cannot perform pairwise on an empty iterable.');

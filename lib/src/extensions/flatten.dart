@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension FlattenExtension<T> on Iterable<Iterable<T>> {
   /// Flattens this iterable of iterables into a single iterable.
   ///
@@ -9,7 +7,6 @@ extension FlattenExtension<T> on Iterable<Iterable<T>> {
   ///
   /// (This is a convenience method that is equivalent to calling `iterable.expand((e) => e))`.)
   Iterable<T> flatten() {
-    checkNullError(this);
     return expand((e) => e);
   }
 }

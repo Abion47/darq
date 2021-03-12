@@ -1,4 +1,3 @@
-import '../utility/error.dart';
 import 'count.dart';
 
 extension InsertionIterableExtensions<T> on Iterable<T> {
@@ -7,9 +6,7 @@ extension InsertionIterableExtensions<T> on Iterable<T> {
   ///
   /// If the iterable is already has at least [length] elements,
   /// the iterable is unchanged.
-  Iterable<T> padStart(int length, {T padding}) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(length, 'length');
+  Iterable<T> padStart(int length, {required T padding}) sync* {
     if (length < 0) {
       throw ArgumentError.value(
           length, 'length', 'The value for "length" cannot be less than zero.');

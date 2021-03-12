@@ -26,17 +26,5 @@ void main() {
       final task = () => list.tryInsertAll(-1, [4, 5]);
       expect(task, throwsA(isA<ArgumentError>()));
     });
-
-    test('Error: index is null', () {
-      final Iterable<int> list = [1, 2, 3];
-      final task = () => list.tryInsertAll(null, [4, 5]);
-      expect(task, throwsA(isA<ArgumentError>()));
-    });
-
-    test('Error: other is null', () {
-      final Iterable<int> list = [1, 2, 3];
-      final task = () => list.tryInsertAll(5, null);
-      expect(task, throwsA(isA<ArgumentError>()));
-    });
   });
 }

@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension MoveExtension<T> on Iterable<T> {
   /// Moves a range of elements in this iterable to a new position, offsetting
   /// other elements to compensate.
@@ -13,11 +11,6 @@ extension MoveExtension<T> on Iterable<T> {
   ///       // Result: [3, 4, 0, 1, 2, 5]
   ///     }
   Iterable<T> move(int from, int count, int to) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(from, 'from');
-    ArgumentError.checkNotNull(count, 'count');
-    ArgumentError.checkNotNull(to, 'to');
-
     if (from < 0) {
       ArgumentError.value(
           from, 'from', 'The value of "from" must be greater than zero.');
@@ -48,7 +41,7 @@ extension MoveExtension<T> on Iterable<T> {
         yield e.current;
       }
 
-      var buffer = List<T>(bufferSize);
+      var buffer = List<T?>.filled(bufferSize, null);
       var length = 0;
 
       for (; length < bufferSize && moveNext(e); length++) {
@@ -60,7 +53,7 @@ extension MoveExtension<T> on Iterable<T> {
       }
 
       for (var i = 0; i < length; i++) {
-        yield buffer[i];
+        yield buffer[i]!;
       }
 
       while (moveNext(e)) {

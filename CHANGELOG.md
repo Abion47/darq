@@ -1,3 +1,6 @@
+## [1.0.0-dev.2]
+
+* Accidentally uploaded the previous version without updating the documentation first. Oops.
 ## [1.0.0-dev.1]
 
 * Null safety! 

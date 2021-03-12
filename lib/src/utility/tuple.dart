@@ -19,6 +19,8 @@ class Tuple0 extends Iterable<dynamic> {
     throw RangeError.index(index, this, 'index', 'index out of range', 0);
   }
 
+  void mapActions() {}
+
   @override
   bool operator ==(Object other) {
     return other is Tuple0;
@@ -67,6 +69,12 @@ class Tuple1<T> extends Iterable<dynamic> {
     throw RangeError.index(index, this, 'index', 'index out of range', 2);
   }
 
+  void mapActions({
+    required void Function(T) item,
+  }) {
+    item(this.item);
+  }
+
   @override
   bool operator ==(Object other) {
     return other is Tuple1 && item == other.item;
@@ -94,7 +102,7 @@ class Tuple2<T0, T1> extends Iterable<dynamic> {
   final T0 item0;
   final T1 item1;
 
-  Tuple2(
+  const Tuple2(
     this.item0,
     this.item1,
   );
@@ -142,6 +150,14 @@ class Tuple2<T0, T1> extends Iterable<dynamic> {
     throw RangeError.index(index, this, 'index', 'index out of range', 2);
   }
 
+  void mapActions({
+    required void Function(T0) item0,
+    required void Function(T1) item1,
+  }) {
+    item0(this.item0);
+    item1(this.item1);
+  }
+
   @override
   bool operator ==(Object other) {
     return other is Tuple2 && item0 == other.item0 && item1 == other.item1;
@@ -171,7 +187,7 @@ class Tuple3<T0, T1, T2> extends Iterable<dynamic> {
   final T1 item1;
   final T2 item2;
 
-  Tuple3(
+  const Tuple3(
     this.item0,
     this.item1,
     this.item2,
@@ -230,6 +246,16 @@ class Tuple3<T0, T1, T2> extends Iterable<dynamic> {
   @override
   Iterator get iterator => _Tuple3Iterator(this);
 
+  void mapActions({
+    required void Function(T0) item0,
+    required void Function(T1) item1,
+    required void Function(T2) item2,
+  }) {
+    item0(this.item0);
+    item1(this.item1);
+    item2(this.item2);
+  }
+
   @override
   bool operator ==(Object other) {
     return other is Tuple3 &&
@@ -261,7 +287,7 @@ class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
   final T2 item2;
   final T3 item3;
 
-  Tuple4(
+  const Tuple4(
     this.item0,
     this.item1,
     this.item2,
@@ -328,6 +354,18 @@ class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
   @override
   Iterator get iterator => _Tuple4Iterator(this);
 
+  void mapActions({
+    required void Function(T0) item0,
+    required void Function(T1) item1,
+    required void Function(T2) item2,
+    required void Function(T3) item3,
+  }) {
+    item0(this.item0);
+    item1(this.item1);
+    item2(this.item2);
+    item3(this.item3);
+  }
+
   @override
   bool operator ==(Object other) {
     return other is Tuple4 &&
@@ -362,7 +400,7 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
   final T3 item3;
   final T4 item4;
 
-  Tuple5(
+  const Tuple5(
     this.item0,
     this.item1,
     this.item2,
@@ -437,6 +475,20 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
   @override
   Iterator get iterator => _Tuple5Iterator(this);
 
+  void mapActions({
+    required void Function(T0) item0,
+    required void Function(T1) item1,
+    required void Function(T2) item2,
+    required void Function(T3) item3,
+    required void Function(T4) item4,
+  }) {
+    item0(this.item0);
+    item1(this.item1);
+    item2(this.item2);
+    item3(this.item3);
+    item4(this.item4);
+  }
+
   @override
   bool operator ==(Object other) {
     return other is Tuple5 &&
@@ -474,7 +526,7 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
   final T4 item4;
   final T5 item5;
 
-  Tuple6(
+  const Tuple6(
     this.item0,
     this.item1,
     this.item2,
@@ -557,6 +609,22 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
   @override
   Iterator get iterator => _Tuple6Iterator(this);
 
+  void mapActions({
+    required void Function(T0) item0,
+    required void Function(T1) item1,
+    required void Function(T2) item2,
+    required void Function(T3) item3,
+    required void Function(T4) item4,
+    required void Function(T5) item5,
+  }) {
+    item0(this.item0);
+    item1(this.item1);
+    item2(this.item2);
+    item3(this.item3);
+    item4(this.item4);
+    item5(this.item5);
+  }
+
   @override
   bool operator ==(Object other) {
     return other is Tuple6 &&
@@ -597,7 +665,7 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
   final T5 item5;
   final T6 item6;
 
-  Tuple7(
+  const Tuple7(
     this.item0,
     this.item1,
     this.item2,
@@ -688,6 +756,24 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
   @override
   Iterator get iterator => _Tuple7Iterator(this);
 
+  void mapActions({
+    required void Function(T0) item0,
+    required void Function(T1) item1,
+    required void Function(T2) item2,
+    required void Function(T3) item3,
+    required void Function(T4) item4,
+    required void Function(T5) item5,
+    required void Function(T6) item6,
+  }) {
+    item0(this.item0);
+    item1(this.item1);
+    item2(this.item2);
+    item3(this.item3);
+    item4(this.item4);
+    item5(this.item5);
+    item6(this.item6);
+  }
+
   @override
   bool operator ==(Object other) {
     return other is Tuple7 &&
@@ -732,7 +818,7 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
   final T6 item6;
   final T7 item7;
 
-  Tuple8(
+  const Tuple8(
     this.item0,
     this.item1,
     this.item2,
@@ -831,6 +917,26 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
   @override
   Iterator get iterator => _Tuple8Iterator(this);
 
+  void mapActions({
+    required void Function(T0) item0,
+    required void Function(T1) item1,
+    required void Function(T2) item2,
+    required void Function(T3) item3,
+    required void Function(T4) item4,
+    required void Function(T5) item5,
+    required void Function(T6) item6,
+    required void Function(T7) item7,
+  }) {
+    item0(this.item0);
+    item1(this.item1);
+    item2(this.item2);
+    item3(this.item3);
+    item4(this.item4);
+    item5(this.item5);
+    item6(this.item6);
+    item7(this.item7);
+  }
+
   @override
   bool operator ==(Object other) {
     return other is Tuple8 &&
@@ -878,7 +984,7 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
   final T7 item7;
   final T8 item8;
 
-  Tuple9(
+  const Tuple9(
     this.item0,
     this.item1,
     this.item2,
@@ -984,6 +1090,28 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
 
   @override
   Iterator get iterator => _Tuple9Iterator(this);
+
+  void mapActions({
+    required void Function(T0) item0,
+    required void Function(T1) item1,
+    required void Function(T2) item2,
+    required void Function(T3) item3,
+    required void Function(T4) item4,
+    required void Function(T5) item5,
+    required void Function(T6) item6,
+    required void Function(T7) item7,
+    required void Function(T8) item8,
+  }) {
+    item0(this.item0);
+    item1(this.item1);
+    item2(this.item2);
+    item3(this.item3);
+    item4(this.item4);
+    item5(this.item5);
+    item6(this.item6);
+    item7(this.item7);
+    item8(this.item8);
+  }
 
   @override
   bool operator ==(Object other) {

@@ -1,6 +1,10 @@
 ## Future
 
-* Added `fromList` factory constructors to all `Tuple` classes.
+* Quality of life changes to the `Tuple` family classes:
+  * Added `fromList` factory constructors to all `Tuple` classes.
+  * Made all tuple constructors `const`.
+  * Added `mapActions` to all `Tuple` classes.
+* Added a section in the README for tuples.
 
 ## [1.0.0-dev.2]
 

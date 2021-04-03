@@ -1,9 +1,9 @@
 name: darq
 description: The power of lazy-evaluated enumerables in your hands! (A port of functional LINQ from the .NET library.)
-version: "1.0.1"
-homepage: https://github.com/andrewackerman/darq
-repository: https://github.com/andrewackerman/darq
-issue_tracker: https://github.com/andrewackerman/darq/issues
+version: "1.0.1+1"
+homepage: https://github.com/abion47/darq
+repository: https://github.com/abion47/darq
+issue_tracker: https://github.com/abion47/darq/issues
 
 environment:
   sdk: ">=2.12.0 <3.0.0" 

@@ -1,3 +1,7 @@
+## [1.0.1+1]
+
+* Updating references to the repository following transfer.
+
 ## [1.0.1]
 
 * Fixed a bug with `Tuple.fromMap` that would've made it fail with `Tuple1` map representation.

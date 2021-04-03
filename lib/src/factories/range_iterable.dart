@@ -25,10 +25,7 @@ class RangeIterable extends Iterable<int> {
     int end, {
     this.step = 1,
     bool inclusive = false,
-  })  : assert(start != null),
-        assert(end != null),
-        assert(end >= start),
-        assert(step != null),
+  })  : assert(end >= start),
         assert(step != 0, 'The interval must be a non-zero integer.'),
         end = inclusive ? end : end - 1;
 
@@ -50,10 +47,7 @@ class RangeIterable extends Iterable<int> {
     int start,
     int count, {
     this.step = 1,
-  })  : assert(start != null),
-        assert(count != null),
-        assert(step != null),
-        assert(step != 0, 'The interval must be a positive integer.'),
+  })  : assert(step != 0, 'The interval must be a positive integer.'),
         assert(count >= 0, 'The count must be a positive integer.'),
         start = step > 0 ? start : start - (count * -step) + 1,
         end = step > 0 ? start + (count * step) - 1 : start;
@@ -73,25 +67,29 @@ class _RangeIterator extends Iterator<int> {
       _initialValue = start;
       _targetValue = end;
     }
+
+    _currentValue = _initialValue;
   }
 
   final int start;
   final int end;
   final int interval;
 
-  int _initialValue;
-  int _targetValue;
-  bool _descending;
+  late int _initialValue;
+  late int _targetValue;
+  late bool _descending;
+  late int _currentValue;
 
-  int _currentValue;
+  bool _interationBegan = false;
 
   @override
   int get current => _currentValue;
 
   @override
   bool moveNext() {
-    if (_currentValue == null) {
+    if (!_interationBegan) {
       _currentValue = _initialValue;
+      _interationBegan = true;
     } else {
       _currentValue += interval;
     }

@@ -65,7 +65,7 @@ void main() {
           'max': pets.max(ageComparer),
         },
         keySelector: (pet) => pet.age,
-        keyComparer: EqualityComparer(
+        keyComparer: EqualityComparer<double>(
           comparer: (k1, k2) => k1.floor() == k2.floor(),
           hasher: (key) => key.floor().hashCode,
         ),

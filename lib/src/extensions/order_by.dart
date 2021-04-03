@@ -1,5 +1,4 @@
 import '../utility/equality_comparer.dart';
-import '../utility/error.dart';
 import '../utility/ordered.dart';
 
 extension OrderByExtension<T> on Iterable<T> {
@@ -34,11 +33,10 @@ extension OrderByExtension<T> on Iterable<T> {
   ///       // Result: [1, 2, 3, 4, 5]
   ///     }
   Iterable<T> orderBy<TKey>(
-    TKey Function(T) keySelector, {
-    EqualityComparer<TKey> keyComparer,
+    TKey Function(T element) keySelector, {
+    EqualityComparer<TKey>? keyComparer,
   }) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(keySelector, 'keySelector');
+    keyComparer ??= EqualityComparer.forType<TKey>();
     return InternalOrderedIterable(this, keySelector, keyComparer, false);
   }
 }

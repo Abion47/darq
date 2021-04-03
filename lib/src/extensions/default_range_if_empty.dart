@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension DefaultRangeIfEmptyExtension<T> on Iterable<T> {
   /// Returns this iterable, or [defaultVal] if this iterable is empty.
   ///
@@ -18,7 +16,6 @@ extension DefaultRangeIfEmptyExtension<T> on Iterable<T> {
   ///       // Result: [1, 2, 3]
   ///     }
   Iterable<T> defaultRangeIfEmpty(Iterable<T> defaultVal) sync* {
-    checkNullError(this);
     ArgumentError.checkNotNull(defaultVal, 'defaultVal');
 
     var hasValues = false;

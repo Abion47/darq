@@ -1,7 +1,5 @@
 import 'dart:collection';
 
-import '../utility/error.dart';
-
 extension LagSelectExtension<T> on Iterable<T> {
   /// Returns an iterable that projects the elements in this iterable upon other
   /// elements in this iterable offset backwards by a given value.
@@ -26,13 +24,9 @@ extension LagSelectExtension<T> on Iterable<T> {
   ///     }
   Iterable<TResult> lagSelect<TResult>(
     int offset,
-    TResult Function(T, T) selector, {
-    T defaultValue,
+    TResult Function(T element, T laggedElement) selector, {
+    required T defaultValue,
   }) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(offset, 'offset');
-    ArgumentError.checkNotNull(selector, 'selector');
-
     final queue = Queue<T>();
     offset = offset < 0 ? -offset : offset;
     var index = 0;

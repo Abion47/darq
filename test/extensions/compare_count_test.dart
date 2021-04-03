@@ -23,11 +23,5 @@ void main() {
       final result = list.compareCount(other);
       expect(result, 1);
     });
-
-    test('Error: other is null', () {
-      final list = [1];
-      final task = () => list.compareCount(null);
-      expect(task, throwsA(isA<ArgumentError>()));
-    });
   });
 }

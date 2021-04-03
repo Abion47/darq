@@ -1,5 +1,4 @@
 import '../utility/equality_comparer.dart';
-import '../utility/error.dart';
 import '../utility/grouping.dart';
 
 extension GroupSelectExtension<T> on Iterable<T> {
@@ -63,13 +62,10 @@ extension GroupSelectExtension<T> on Iterable<T> {
 
   ///
   GroupSelectIterable<T, TKey, TResult> groupSelect<TKey, TResult>(
-    TResult Function(TKey, Iterable<T>) resultSelector, {
-    TKey Function(T) keySelector,
-    EqualityComparer<TKey> keyComparer,
+    TResult Function(TKey key, Iterable<T> group) resultSelector, {
+    TKey Function(T key)? keySelector,
+    EqualityComparer<TKey>? keyComparer,
   }) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(resultSelector, 'resultSelector');
-
     keySelector ??= (T v) => v as TKey;
     keyComparer ??= EqualityComparer.forType<TKey>();
 

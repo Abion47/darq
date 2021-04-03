@@ -1,11 +1,10 @@
-import '../utility/error.dart';
-
 extension ReverseExtension<T> on Iterable<T> {
   /// Reverses the order of the iterable.
   ///
   /// The iterable is iterated over and stored in a list. The resulting
   /// iterable is the product of then iterating over that list in reverse
-  /// order.
+  /// order. (This method is identical to calling `toList` on the iterable
+  /// and then calling the `reversed` property.)
   ///
   /// Example:
   ///
@@ -16,7 +15,6 @@ extension ReverseExtension<T> on Iterable<T> {
   ///       // Result: [4, 3, 2, 1]
   ///     }
   Iterable<T> reverse() {
-    checkNullError(this);
     return toList().reversed;
   }
 }

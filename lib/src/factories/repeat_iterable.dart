@@ -9,9 +9,7 @@ class RepeatIterable<T> extends Iterable<T> {
   /// If the value of [count] is zero, this will result in an empty
   /// iterable. Having the value of [count] be less than zero will result
   /// in an empty iterable.
-  RepeatIterable(this.element, this.count)
-      : assert(count != null),
-        assert(count >= 0);
+  RepeatIterable(this.element, this.count) : assert(count >= 0);
 
   @override
   Iterator<T> get iterator => _RepeatIterator(element, count);

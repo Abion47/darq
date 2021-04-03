@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension AverageExtension<T> on Iterable<T> {
   /// Calculates the average of all numerical values in the iterable.
   ///
@@ -19,33 +17,34 @@ extension AverageExtension<T> on Iterable<T> {
   ///
   ///       // Result: 5.0
   ///     }
-  double average([num Function(T) selector]) {
-    checkNullError(this);
-
+  TNum average<TNum extends num>([TNum Function(T value)? selector]) {
     if (isEmpty) {
       throw StateError('Iterator must not be empty.');
     }
 
-    if (selector == null) {
-      if (T == num) {
-        selector = (T n) => n as num;
-      } else if (T == int) {
-        selector = (T n) => n as int;
-      } else if (T == double) {
-        selector = (T n) => n as double;
+    var _selector = selector;
+    var total = TNum == int ? 0 : 0.0;
+    if (_selector == null) {
+      if (T == num || T == int || T == double) {
+        _selector = (n) => n as TNum;
+        total = T == int ? 0 : 0.0;
+      } else {
+        throw ArgumentError(
+            "If T isn't a subtype of num, selector must not be null.");
       }
     }
 
-    ArgumentError.checkNotNull(selector, 'selector');
-
-    var total = 0.0;
     var count = 0;
 
     for (var n in this) {
-      total += selector(n);
+      total += _selector(n);
       count++;
     }
 
-    return total / count;
+    if (TNum == int) {
+      return total ~/ count as TNum;
+    }
+
+    return total / count as TNum;
   }
 }

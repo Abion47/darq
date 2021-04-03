@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension FirstOrDefaultExtension<T> on Iterable<T> {
   /// Returns the first element in the iterable.
   ///
@@ -15,8 +13,7 @@ extension FirstOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T firstOrDefault({T defaultValue}) {
-    checkNullError(this);
+  T firstOrDefault({required T defaultValue}) {
     if (isEmpty) return defaultValue;
     return first;
   }

@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension TrySingleOrDefaultExtension<T> on Iterable<T> {
   /// Returns the single element in the iterable, or a [defaultValue] if no
   /// such element exists.
@@ -20,9 +18,7 @@ extension TrySingleOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T trySingleOrDefault({T defaultValue}) {
-    checkNullError(this);
-
+  T? trySingleOrDefault({T? defaultValue}) {
     final iter = iterator;
     if (!iter.moveNext()) return defaultValue;
 

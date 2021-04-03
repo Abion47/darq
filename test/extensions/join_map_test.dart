@@ -7,7 +7,7 @@ void main() {
       final a = {'1': 1, '2': 2, '3': 3, '4': 4};
       final b = {'1': 1.0, '2': 2.0, '3': 3.0, '5': 5.0};
 
-      final output = a.entries.joinMap(
+      final output = a.entries.joinMap<MapEntry<String, num>, String, String>(
         b.entries,
         (x, y) => '${x.value}_${y.value}',
         outerKeySelector: (x) => x.key,

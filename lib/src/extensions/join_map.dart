@@ -1,5 +1,4 @@
 import '../utility/equality_comparer.dart';
-import '../utility/error.dart';
 import '../utility/grouping.dart';
 import '../utility/lookup.dart';
 
@@ -37,15 +36,11 @@ extension JoinMapExtension<T> on Iterable<T> {
   ///     }
   Iterable<TResult> joinMap<TInner, TKey, TResult>(
     Iterable<TInner> other,
-    TResult Function(T, TInner) resultSelector, {
-    TKey Function(T) outerKeySelector,
-    TKey Function(TInner) innerKeySelector,
-    EqualityComparer<TKey> keyComparer,
+    TResult Function(T element, TInner otherElement) resultSelector, {
+    TKey Function(T element)? outerKeySelector,
+    TKey Function(TInner otherElement)? innerKeySelector,
+    EqualityComparer<TKey>? keyComparer,
   }) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(other, 'other');
-    ArgumentError.checkNotNull(resultSelector, 'resultSelector');
-
     outerKeySelector ??= (T v) => v as TKey;
     innerKeySelector ??= (TInner v) => v as TKey;
     keyComparer ??= EqualityComparer.forType<TKey>();
@@ -54,11 +49,11 @@ extension JoinMapExtension<T> on Iterable<T> {
 
     final outerIterator = iterator;
 
-    Iterator<TInner> groupIterator;
+    Iterator<TInner>? groupIterator;
 
     TKey outerKey;
     T outerValue;
-    Grouping<TKey, TInner> grouping;
+    Grouping<TKey, TInner>? grouping;
     while (outerIterator.moveNext()) {
       outerValue = outerIterator.current;
       outerKey = outerKeySelector(outerIterator.current);

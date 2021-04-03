@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension DistinctExtension<T> on Iterable<T> {
   /// Returns an iterable representing the distinct values of this iterable.
   ///
@@ -26,9 +24,7 @@ extension DistinctExtension<T> on Iterable<T> {
   ///
   ///       // Result: [0, 1, 2, 3]
   ///     }
-  Iterable<T> distinct<TKey>([TKey Function(T) keySelector]) sync* {
-    checkNullError(this);
-
+  Iterable<T> distinct<TKey>([TKey Function(T element)? keySelector]) sync* {
     keySelector ??= (T v) => v as TKey;
     final set = <TKey>{};
 

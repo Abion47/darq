@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension CartesianSelectExtension<T> on Iterable<T> {
   /// Generates the cartesian product of this iterable and [other], returning an
   /// iterable of mapped elements.
@@ -10,11 +8,8 @@ extension CartesianSelectExtension<T> on Iterable<T> {
   /// generate the result.
   Iterable<TResult> cartesianSelect<T2, TResult>(
     Iterable<T2> other,
-    TResult Function(T, T2) selector,
+    TResult Function(T element, T2 otherElement) selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(other, 'other');
     for (var a in this) {
       for (var b in other) {
         yield selector(a, b);
@@ -33,12 +28,8 @@ extension CartesianSelectExtension<T> on Iterable<T> {
   Iterable<TResult> cartesianSelect3<T2, T3, TResult>(
     Iterable<T2> o2,
     Iterable<T3> o3,
-    TResult Function(T, T2, T3) selector,
+    TResult Function(T element, T2 o2Element, T3 o3Element) selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -60,13 +51,9 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T2> o2,
     Iterable<T3> o3,
     Iterable<T4> o4,
-    TResult Function(T, T2, T3, T4) selector,
+    TResult Function(T element, T2 o2Element, T3 o3Element, T4 o4Element)
+        selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -91,14 +78,10 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T3> o3,
     Iterable<T4> o4,
     Iterable<T5> o5,
-    TResult Function(T, T2, T3, T4, T5) selector,
+    TResult Function(
+            T element, T2 o2Element, T3 o3Element, T4 o4Element, T5 o5Element)
+        selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
-    ArgumentError.checkNotNull(o5, 'o5');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -126,15 +109,10 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T4> o4,
     Iterable<T5> o5,
     Iterable<T6> o6,
-    TResult Function(T, T2, T3, T4, T5, T6) selector,
+    TResult Function(T element, T2 o2Element, T3 o3Element, T4 o4Element,
+            T5 o5Element, T6 o6Element)
+        selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
-    ArgumentError.checkNotNull(o5, 'o5');
-    ArgumentError.checkNotNull(o6, 'o6');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -165,16 +143,10 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T5> o5,
     Iterable<T6> o6,
     Iterable<T7> o7,
-    TResult Function(T, T2, T3, T4, T5, T6, T7) selector,
+    TResult Function(T element, T2 o2Element, T3 o3Element, T4 o4Element,
+            T5 o5Element, T6 o6Element, T7 o7Element)
+        selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
-    ArgumentError.checkNotNull(o5, 'o5');
-    ArgumentError.checkNotNull(o6, 'o6');
-    ArgumentError.checkNotNull(o7, 'o7');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -208,17 +180,10 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T6> o6,
     Iterable<T7> o7,
     Iterable<T8> o8,
-    TResult Function(T, T2, T3, T4, T5, T6, T7, T8) selector,
+    TResult Function(T element, T2 o2Element, T3 o3Element, T4 o4Element,
+            T5 o5Element, T6 o6Element, T7 o7Element, T8 o8Element)
+        selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
-    ArgumentError.checkNotNull(o5, 'o5');
-    ArgumentError.checkNotNull(o6, 'o6');
-    ArgumentError.checkNotNull(o7, 'o7');
-    ArgumentError.checkNotNull(o8, 'o8');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {
@@ -255,18 +220,18 @@ extension CartesianSelectExtension<T> on Iterable<T> {
     Iterable<T7> o7,
     Iterable<T8> o8,
     Iterable<T9> o9,
-    TResult Function(T, T2, T3, T4, T5, T6, T7, T8, T9) selector,
+    TResult Function(
+            T element,
+            T2 o2Element,
+            T3 o3Element,
+            T4 o4Element,
+            T5 o5Element,
+            T6 o6Element,
+            T7 o7Element,
+            T8 o8Element,
+            T9 o9Element)
+        selector,
   ) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-    ArgumentError.checkNotNull(o2, 'o2');
-    ArgumentError.checkNotNull(o3, 'o3');
-    ArgumentError.checkNotNull(o4, 'o4');
-    ArgumentError.checkNotNull(o5, 'o5');
-    ArgumentError.checkNotNull(o6, 'o6');
-    ArgumentError.checkNotNull(o7, 'o7');
-    ArgumentError.checkNotNull(o8, 'o8');
-    ArgumentError.checkNotNull(o9, 'o9');
     for (var a in this) {
       for (var b in o2) {
         for (var c in o3) {

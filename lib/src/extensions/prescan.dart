@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension PreScanExtension<T> on Iterable<T> {
   /// Returns the pre-scan (exclusive prefix sum) of this iterable.
   ///
@@ -22,10 +20,8 @@ extension PreScanExtension<T> on Iterable<T> {
   ///
   ///       // Result: [0, 1, 3, 6]
   ///     }
-  Iterable<T> preScan(T initialValue, T Function(T, T) aggregator) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(aggregator, 'aggregator');
-
+  Iterable<T> preScan(
+      T initialValue, T Function(T value, T element) aggregator) sync* {
     var value = initialValue;
     final iterator = this.iterator;
 

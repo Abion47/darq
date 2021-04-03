@@ -103,6 +103,26 @@ var result = list.select((i, idx) => i * 2 + idx)     // [6, 3, 14, 8, 10, 10, 1
                  .map((i) => i.toRadixString(16));    // [6, 8, 9, A, E]
 ```
 
+## Tuples
+
+As a necessity for some operations, I needed a `Tuple` class, and as I was unsatisfied with the current offerings out there right now, I elected to create my own.
+
+For the uninitiated, tuples are similar to lists in concept that they contain multiple values addressable by index. But where every element of a list must resolve to the same type (the type of the list), each element in a tuple can be its own specified type. This results in being able to contain, distribute, and access the items in a tuple in a type-safe way. You could, for example, use a `Tuple2<double, String>` to return two values from a function and be able to access both the `double` and the `String` values without needing to resort to fragile methods such as `dynamic` or runtime type casting. Another difference between lists and tuples is that tuples are inherently immutable, so they aren't susceptible to side effects stemming from mutation and can even benefit from being declared as constants.
+
+This package exposes tuple classes from `Tuple0` up to `Tuple9`, depending on how many items the tuple contains. (Yes, I agree that `Tuple0` and `Tuple1` seem largely redundant, but I've seen them exist in the tuple libraries of many programming languages so it must serve some purpose or other, so I included them here all the same for completeness if nothing else.) Each tuple class includes the following features:
+
+* Constant constructors allow for efficient use of known tuple values.
+* Includes access to the item(s) by getter (`tuple.item2`) or by indexer(`tuple[2]`). (Note that access by indexer is not type-safe)
+* Factory constructor `fromJson` and method `toJson` means tuples are seralization-ready. 
+* Additional factory constructor `fromList` to generate a tuple from a list (automatically casting when specifying type parameters for the constructor).
+* An `asType` method allows freely casting the tuple from any assortment of types to any other assortment of types (provided the items are compatible with those types).
+  * Additionally, there is an `asDynamic` convenience method for casting a tuple to dynamic items.
+* Although tuples themselves are immutable, a `copyWith` method allows easy generation of duplicate tuples, optionally specifying new values for specific items.
+  * Additionally, a `copyWithout` method allows selective filtering of items from a tuple resulting in a lower-order tuple.
+* A `mapActions` method allows you to iterate over each item with an exhaustive list of type-safe callbacks.
+* Each tuple class extends `Iterable<dynamic>`, so it can be treated as a normal iterable (and thus combined with any darq extension method).
+* As `==` and `hashCode` are both implemented, tuples can be directly compared for equality or used as keys for maps and other hash sets.
+
 ## MoreLINQ Extension Methods
 
 As of version 0.5, this package also contains the extension methods from the [MoreLINQ](https://morelinq.github.io/) .NET library. This more than triples the available number of extension methods over vanilla LINQ.

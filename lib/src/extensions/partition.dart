@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension PartitionExtension<T> on Iterable<T> {
   /// Returns an iterable containing two iterables, one containing the
   /// elements that match the condition and one containing those that
@@ -18,9 +16,7 @@ extension PartitionExtension<T> on Iterable<T> {
   ///
   ///       // Result: ([2, 4], [1, 3])
   ///     }
-  Iterable<Iterable<T>> partition(bool Function(T) condition) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(condition, 'condition');
+  Iterable<Iterable<T>> partition(bool Function(T element) condition) {
     return [
       where((o) => condition(o)),
       where((o) => !condition(o)),

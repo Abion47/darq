@@ -23,7 +23,7 @@ void main() {
 
     test('on strings', () {
       final list = ['a', 'ab', 'abc'];
-      final result = list.average((s) => s.length);
+      final result = list.average<int>((s) => s.length);
       expect(result, equals(2.0));
     });
 

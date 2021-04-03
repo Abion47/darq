@@ -21,12 +21,6 @@ void main() {
       expect(result.elementAt(2), orderedEquals([6]));
     });
 
-    test('Error: null count', () {
-      final list = [0, 1, 2, 3, 4, 5, 6];
-      final task = () => list.batch(null);
-      expect(task, throwsA(isA<ArgumentError>()));
-    });
-
     test('Error: zero count', () {
       final list = [0, 1, 2, 3, 4, 5, 6];
       final task = () => list.batch(0);

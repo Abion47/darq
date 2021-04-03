@@ -14,11 +14,5 @@ void main() {
       final result = list.select((c, i) => '${i}_${c.codeUnits[0]}');
       expect(result, orderedEquals(['0_97', '1_98', '2_99', '3_100', '4_101']));
     });
-
-    test('Error: null selector', () {
-      final list = ['a', 'b', 'c', 'd', 'e'];
-      final task = () => list.select(null);
-      expect(task, throwsA(isA<ArgumentError>()));
-    });
   });
 }

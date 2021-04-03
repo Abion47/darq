@@ -1,5 +1,4 @@
 import '../utility/equality_comparer.dart';
-import '../utility/error.dart';
 
 extension MaxExtension<T> on Iterable<T> {
   /// Returns the maximum value in the iterable.
@@ -30,22 +29,21 @@ extension MaxExtension<T> on Iterable<T> {
   ///
   ///       // Result: 3
   ///     }
-  T max([int Function(T, T) comparer]) {
-    checkNullError(this);
-
+  T max([int Function(T e1, T e2)? comparer]) {
     if (isEmpty) {
       throw StateError('Iterable must not be empty.');
     }
 
-    comparer ??= EqualityComparer.forType<T>()?.sort;
-    ArgumentError.checkNotNull(comparer, 'comparer');
+    comparer ??= EqualityComparer.tryForType<T>()?.sort;
+    if (comparer == null) {
+      throw ArgumentError.notNull('comparer');
+    }
 
-    T max;
-    for (var v in this) {
-      if (max == null) {
-        max = v;
-      } else if (comparer(v, max) > 0) {
-        max = v;
+    final iter = iterator..moveNext();
+    var max = iter.current;
+    while (iter.moveNext()) {
+      if (comparer(iter.current, max) > 0) {
+        max = iter.current;
       }
     }
 

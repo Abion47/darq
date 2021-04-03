@@ -41,11 +41,5 @@ void main() {
           list.trySingleWhereOrDefault((x) => x == 2, defaultValue: 3);
       expect(result, 3);
     });
-
-    test('Error: null condition', () {
-      final list = [];
-      final task = () => list.trySingleWhereOrDefault(null);
-      expect(task, throwsA(isA<ArgumentError>()));
-    });
   });
 }

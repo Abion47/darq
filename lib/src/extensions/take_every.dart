@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension TakeEveryExtension<T> on Iterable<T> {
   /// Takes every N-th element in this iterable.
   ///
@@ -7,9 +5,6 @@ extension TakeEveryExtension<T> on Iterable<T> {
   /// the resulting iterable will be empty. If it is less than or
   /// equal to zero, a [RangeError] will be thrown.
   Iterable<T> takeEvery(int step) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(step, 'step');
-
     if (step <= 0) {
       throw RangeError.value(
           step, 'step', 'The value of "step" must be a positive integer.');

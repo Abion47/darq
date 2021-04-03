@@ -1,5 +1,4 @@
 import '../utility/equality_comparer.dart';
-import '../utility/error.dart';
 import '../utility/grouping.dart';
 
 extension GroupJoinExtension<T> on Iterable<T> {
@@ -81,15 +80,11 @@ extension GroupJoinExtension<T> on Iterable<T> {
   ///     }
   GroupJoinIterable<T, TInner, TKey, TResult> groupJoin<TInner, TKey, TResult>(
     Iterable<TInner> other,
-    TResult Function(T, Iterable<TInner>) resultSelector, {
-    TKey Function(T) outerKeySelector,
-    TKey Function(TInner) innerKeySelector,
-    EqualityComparer<TKey> keyComparer,
+    TResult Function(T element, Iterable<TInner> other) resultSelector, {
+    TKey Function(T element)? outerKeySelector,
+    TKey Function(TInner otherElement)? innerKeySelector,
+    EqualityComparer<TKey>? keyComparer,
   }) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(other, 'other');
-    ArgumentError.checkNotNull(resultSelector, 'resultSelector');
-
     outerKeySelector ??= (T v) => v as TKey;
     innerKeySelector ??= (TInner v) => v as TKey;
     keyComparer ??= EqualityComparer.forType<TKey>();

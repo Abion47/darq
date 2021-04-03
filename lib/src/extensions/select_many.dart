@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension SelectManyExtension<T> on Iterable<T> {
   /// Maps elements in an iterable to collections and then flattens those
   /// collections into a single iterable.
@@ -20,10 +18,7 @@ extension SelectManyExtension<T> on Iterable<T> {
   ///       // Result: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
   ///     }
   Iterable<TResult> selectMany<TResult>(
-      Iterable<TResult> Function(T, int) selector) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(selector, 'selector');
-
+      Iterable<TResult> Function(T element, int index) selector) sync* {
     var index = 0;
     for (var v in this) {
       yield* selector(v, index++);

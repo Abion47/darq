@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension DefaultIfEmptyExtension<T> on Iterable<T> {
   /// Returns a new iterable containing [value] if this iterable is empty. Otherwise,
   /// the source iterable will be unaffected.
@@ -20,7 +18,6 @@ extension DefaultIfEmptyExtension<T> on Iterable<T> {
   ///       // Result: [-1]
   ///     }
   Iterable<T> defaultIfEmpty(T defaultVal) sync* {
-    checkNullError(this);
     var hasValues = false;
     for (var v in this) {
       yield v;

@@ -17,11 +17,14 @@ abstract class OrderedIterable<T> extends Iterable<T> {
   }
 }
 
+/// This class is created by calls to `Iterable.orderBy` (and related) and isn't
+/// intended to be instantiated directly.
 class InternalOrderedIterable<TValue, TKey> extends OrderedIterable<TValue> {
-  OrderedIterable<TValue> parent;
   TKey Function(TValue) keySelector;
   EqualityComparer<TKey> keyComparer;
   bool descending;
+
+  OrderedIterable<TValue>? parent;
 
   InternalOrderedIterable(Iterable<TValue> source, this.keySelector,
       this.keyComparer, this.descending)
@@ -41,10 +44,10 @@ class InternalOrderedIterable<TValue, TKey> extends OrderedIterable<TValue> {
   }
 
   @override
-  IterableSorter<TValue> getIterableSorter(IterableSorter<TValue> next) {
+  IterableSorter<TValue> getIterableSorter(IterableSorter<TValue>? next) {
     IterableSorter<TValue> sorter = InternalIterableSorter<TValue, TKey>(
         keySelector, keyComparer, descending, next);
-    if (parent != null) sorter = parent.getIterableSorter(sorter);
+    if (parent != null) sorter = parent!.getIterableSorter(sorter);
     return sorter;
   }
 }
@@ -92,42 +95,51 @@ abstract class IterableSorter<T> {
   }
 }
 
+/// This class is created by calls to `Iterable.orderBy` (and related) and isn't
+/// intended to be instantiated directly.
 class InternalIterableSorter<TValue, TKey> extends IterableSorter<TValue> {
   TKey Function(TValue) keySelector;
-  EqualityComparer<TKey> comparer;
   bool descending;
-  IterableSorter<TValue> next;
-  List<TKey> keys;
+
+  late EqualityComparer<TKey> comparer;
+
+  List<TKey>? keys;
+  IterableSorter<TValue>? next;
 
   InternalIterableSorter(
     this.keySelector,
-    this.comparer,
+    EqualityComparer<TKey>? comparer,
     this.descending,
     this.next,
   ) {
-    comparer ??= EqualityComparer.forType<TKey>();
+    this.comparer = comparer ?? EqualityComparer.forType<TKey>();
   }
 
   @override
   void computeKeys(List<TValue> elements, int count) {
-    keys = List<TKey>(count);
+    keys = <TKey>[];
     for (var i = 0; i < count; i++) {
-      keys[i] = keySelector(elements[i]);
+      keys?.add(keySelector(elements[i]));
     }
-    if (next != null) next.computeKeys(elements, count);
+    if (next != null) next!.computeKeys(elements, count);
   }
 
   @override
   int compareKeys(int index1, int index2) {
-    final c = comparer.sort(keys[index1], keys[index2]);
+    if (keys == null) {
+      throw StateError('Cannot sort keys when the keys list is null');
+    }
+    final c = comparer.sort(keys![index1], keys![index2]);
     if (c == 0) {
       if (next == null) return index1 - index2;
-      return next.compareKeys(index1, index2);
+      return next!.compareKeys(index1, index2);
     }
     return descending ? -c : c;
   }
 }
 
+/// This class is created by calls to `Iterable.orderBy` (and related) and isn't
+/// intended to be instantiated directly.
 class OrderedBuffer<T> extends Iterable<T> {
   List<T> data;
   List<int> orderedMap;

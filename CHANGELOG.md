@@ -1,3 +1,56 @@
+## [1.0.1+1]
+
+* Updating references to the repository following transfer.
+
+## [1.0.1]
+
+* Fixed a bug with `Tuple.fromMap` that would've made it fail with `Tuple1` map representation.
+* Added `asType` and `asDynamic` methods to tuple classes for convenient casting of tuples.
+
+## [1.0.0+1]
+
+* Corrected some parts of the README tuple section
+
+## [1.0.0]
+
+* Pushing to full release!
+* Fully documented the tuple classes so they can actually be used.
+* Changed tuple classes to inherit from a common `Tuple` abstract class, which also contains generalized factory methods for creating tuples of a dynamic length.
+* Added `copyWithout` method to tuple classes as a utility operation for trimming values from existing tuple objects.
+* Overrode `length` in tuple classes to return a constant value.
+
+## [1.0.0-dev.3]
+
+* Quality of life changes to the `Tuple` family classes:
+  * Added `fromList` factory constructors to all `Tuple` classes.
+  * Made all tuple constructors `const`.
+  * Added `mapActions` to all `Tuple` classes.
+* Added a section in the README for tuples.
+
+## [1.0.0-dev.2]
+
+* Accidentally uploaded the previous version without updating the documentation first. Oops.
+## [1.0.0-dev.1]
+
+* Null safety! 
+* The `default` named parameter of methods which take a default value are now marked as required (but can still be explicitly set to null if the generic type argument of the iterable is a nullable type). This affects the following methods: `elementAtOrDefault`, `firstOrDefault`, `firstWhereOrDefault`, `lagSelect`, `lag`, `lastOrDefault`, `lastWhereOrDefault`, `leadSelect`, `lead`, `padEnd`, `padStart`
+* The `fillBackward`, `fillForward`, and `fillMissing` extensions have been reconfigured to only target iterables of nullable types
+* `EqualityComparer.forType` has been refactored to return a default `EqualityComparer` when a patching comparer for the requested type was not found. The previous behavior has been converted into the new `EqualityComaprer.tryForType` method which instead returns null when a match is not found.
+  * As a reminder, the default `EqualityComparer` has a comparer of `(a, b) => a == b`, a hasher of `(a) => a.hashCode`, and a sorter of `(a, b) => 0`
+* Removed all calls to `checkNullError` and argument null checks as they are now redundant
+* Fixed a misordering of the parameters in `aggregateRight` and `tryAggregateRight` that led to incorrect results in cases where the aggregation depended on concatenation (e.g. strings)
+## [0.5.1+1]
+
+* Fixed a typo in `average` that wasn't assigning the default selector properly
+  
+## [0.5.1]
+
+* Added identifiers to parameters for all function types to aid with IntelliSense (Issue #4)
+* Tweaked various types' documentation for clarity
+* Overrode `toList` on `MemoizedIterable` to return the cached list if the cache had already been filled
+* `sum`, `average` converted to use generic type arguments instead of num. (@rodion-m)
+* Fixed typo in grouping generic type parameters that was resulting in groups defaulting to `Grouping<dynamic, dynamic>` (Issue #3, @Miiite)
+
 ## [0.5.0]
 
 * Added a ton more extension methods, effectively quadrupling the number of methods added to `Iterable` (from 40 up to 160). Many of these methods were ported from the MoreLINQ library and modified to be more idiomatic to Dart.

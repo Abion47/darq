@@ -1,5 +1,4 @@
 import '../utility/equality_comparer.dart';
-import '../utility/error.dart';
 import '../utility/grouping.dart';
 
 extension GroupByExtension<T> on Iterable<T> {
@@ -51,14 +50,10 @@ extension GroupByExtension<T> on Iterable<T> {
   ///       // ]
   ///     }
   GroupByIterable<T, TKey> groupBy<TKey>(
-    TKey Function(T) keySelector, {
-    EqualityComparer<TKey> keyComparer,
+    TKey Function(T element) keySelector, {
+    EqualityComparer<TKey>? keyComparer,
   }) {
-    checkNullError(this);
-
-    keySelector ??= (T v) => v as TKey;
     keyComparer ??= EqualityComparer.forType<TKey>();
-
     return GroupByIterable<T, TKey>(this, keySelector, keyComparer);
   }
 }

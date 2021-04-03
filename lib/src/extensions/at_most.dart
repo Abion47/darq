@@ -1,5 +1,4 @@
 import '../utility/equality_comparer.dart';
-import '../utility/error.dart';
 
 extension AtMostExtension<T> on Iterable<T> {
   /// Returns true if all elements in the iterable are equal to or less than [value].
@@ -15,12 +14,10 @@ extension AtMostExtension<T> on Iterable<T> {
   /// If the iterable is empty, a [StateError] will be thrown.
   bool atMost(
     T value, {
-    int Function(T, T) sorter,
+    int Function(T element, T value)? sorter,
   }) {
-    checkNullError(this);
-
-    sorter ??= EqualityComparer.forType<T>()?.sort;
-    if (sorter == null) {
+    final _sorter = sorter ?? EqualityComparer.tryForType<T>()?.sort;
+    if (_sorter == null) {
       throw ArgumentError.notNull('sorter');
     }
 
@@ -30,7 +27,7 @@ extension AtMostExtension<T> on Iterable<T> {
     }
 
     do {
-      if (sorter(iterator.current, value) > 0) {
+      if (_sorter(iterator.current, value) > 0) {
         return false;
       }
     } while (iterator.moveNext());

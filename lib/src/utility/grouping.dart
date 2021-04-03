@@ -1,6 +1,8 @@
 import 'equality_comparer.dart';
 import 'lookup.dart';
 
+/// This class is created by calls to `Iterable.groupBy` and isn't intended to be
+/// instantiated directly.
 class GroupByIterable<TSource, TKey> extends Iterable<Grouping<TKey, TSource>> {
   final Iterable<TSource> source;
   final TKey Function(TSource) keySelector;
@@ -16,6 +18,8 @@ class GroupByIterable<TSource, TKey> extends Iterable<Grouping<TKey, TSource>> {
   }
 }
 
+/// This class is created by calls to `Iterable.groupByValue` and isn't intended to be
+/// instantiated directly.
 class GroupByValueIterable<TSource, TKey, TValue>
     extends Iterable<Grouping<TKey, TValue>> {
   final Iterable<TSource> source;
@@ -34,6 +38,8 @@ class GroupByValueIterable<TSource, TKey, TValue>
   }
 }
 
+/// This class is created by calls to `Iterable.groupJoin` and isn't intended to be
+/// instantiated directly.
 class GroupJoinIterable<TSource, TInner, TKey, TResult>
     extends Iterable<TResult> {
   final Iterable<TSource> source;
@@ -50,28 +56,32 @@ class GroupJoinIterable<TSource, TInner, TKey, TResult>
   Iterator<TResult> get iterator => GroupJoinIterator(this);
 }
 
+/// This class is created by calls to `Iterable.groupJoinIterator` and isn't intended to be
+/// instantiated directly.
 class GroupJoinIterator<TSource, TInner, TKey, TResult>
     extends Iterator<TResult> {
   final GroupJoinIterable<TSource, TInner, TKey, TResult> iterable;
 
-  GroupJoinIterator(this.iterable);
+  GroupJoinIterator(this.iterable) {
+    _sourceIterator = iterable.source.iterator;
+    _lookup = Lookup.createForJoin<TKey, TInner>(
+        iterable.inner, iterable.innerKeySelector, iterable.keyComparer);
+  }
 
-  Lookup<TKey, TInner> _lookup;
+  late Lookup<TKey, TInner> _lookup;
+  late Iterator<TSource> _sourceIterator;
 
-  TResult _current;
+  TResult? _current;
   @override
-  TResult get current => _current;
-
-  Iterator<TSource> _sourceIterator;
+  TResult get current {
+    if (_current == null) {
+      throw StateError('Cannot get current before starting iteration');
+    }
+    return _current!;
+  }
 
   @override
   bool moveNext() {
-    if (_sourceIterator == null) {
-      _sourceIterator = iterable.source.iterator;
-      _lookup = Lookup.createForJoin<TKey, TInner>(
-          iterable.inner, iterable.innerKeySelector, iterable.keyComparer);
-    }
-
     if (_sourceIterator.moveNext()) {
       final item = _sourceIterator.current;
       _current = iterable.resultSelector(
@@ -79,13 +89,13 @@ class GroupJoinIterator<TSource, TInner, TKey, TResult>
       return true;
     }
 
-    _sourceIterator = null;
-    _lookup = null;
     _current = null;
     return false;
   }
 }
 
+/// This class is created by calls to `Iterable.groupSelectIterable` and isn't intended to be
+/// instantiated directly.
 class GroupSelectIterable<TSource, TKey, TResult> extends Iterable<TResult> {
   final Iterable<TSource> source;
   final TKey Function(TSource) keySelector;
@@ -103,6 +113,8 @@ class GroupSelectIterable<TSource, TKey, TResult> extends Iterable<TResult> {
   }
 }
 
+/// This class is created by calls to `Iterable.groupSelectValueIterable` and isn't intended to be
+/// instantiated directly.
 class GroupSelectValueIterable<TSource, TKey, TValue, TResult>
     extends Iterable<TResult> {
   final Iterable<TSource> source;
@@ -122,14 +134,19 @@ class GroupSelectValueIterable<TSource, TKey, TValue, TResult>
   }
 }
 
+/// This class is created by calls to grouping `Iterable` methods and isn't
+/// intended to be instantiated directly.
 class Grouping<TKey, TValue> extends Iterable<TValue> {
   List<TValue> elements;
-  Grouping hashNext;
-  Grouping next;
   TKey key;
   int hash;
 
+  Grouping<TKey, TValue>? hashNext;
+  Grouping<TKey, TValue>? next;
+
   int get count => elements.length;
+
+  Grouping(this.elements, this.key, this.hash);
 
   @override
   Iterator<TValue> get iterator => elements.iterator;

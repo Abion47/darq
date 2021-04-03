@@ -1,5 +1,4 @@
 import 'package:darq/src/utility/equality_comparer.dart';
-import 'package:darq/src/utility/error.dart';
 
 extension BetweenExtension<T> on Iterable<T> {
   /// Returns true if all elements in the iterable are between [minimum] and [maximum].
@@ -20,13 +19,11 @@ extension BetweenExtension<T> on Iterable<T> {
   bool between(
     T minimum,
     T maximum, {
-    int Function(T, T) sorter,
+    int Function(T value, T element)? sorter,
     bool minimumInclusive = false,
     bool maximumInclusive = false,
   }) {
-    checkNullError(this);
-
-    sorter ??= EqualityComparer.forType<T>()?.sort;
+    sorter ??= EqualityComparer.tryForType<T>()?.sort;
     if (sorter == null) {
       throw ArgumentError.notNull('sorter');
     }

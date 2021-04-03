@@ -1,5 +1,4 @@
 import '../utility/equality_comparer.dart';
-import '../utility/error.dart';
 
 extension SplitExtension<T> on Iterable<T> {
   /// Splits the is iterable into multiple iterables on elements that match
@@ -22,13 +21,11 @@ extension SplitExtension<T> on Iterable<T> {
   ///     }
   Iterable<Iterable<T>> split(
     T separator, {
-    bool Function(T, T) comparer,
+    bool Function(T separator, T element)? comparer,
   }) sync* {
-    checkNullError(this);
-
     var buffer = <T>[];
 
-    comparer ??= EqualityComparer.forType<T>()?.compare ?? (a, b) => a == b;
+    comparer ??= EqualityComparer.forType<T>().compare;
 
     for (var o in this) {
       if (comparer(separator, o)) {

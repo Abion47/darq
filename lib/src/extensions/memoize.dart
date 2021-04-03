@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension MemoizeExtension<T> on Iterable<T> {
   /// Returns an iterable whose elements are cached during the
   /// first iteration.
@@ -8,8 +6,10 @@ extension MemoizeExtension<T> on Iterable<T> {
   /// its elements are placed into a cache, which is finalized
   /// once iteration is complete. On subsequent times the
   /// iterable is consumed, the elements from the cache are reused.
+  ///
+  /// Warning: Calling `toList` on a memoized iterable without setting
+  /// growable to false will undo the memoization on the returned list.
   Iterable<T> memoize() {
-    checkNullError(this);
     return MemoizedIterable(this);
   }
 }
@@ -23,18 +23,27 @@ class MemoizedIterable<T> extends Iterable<T> {
 
   @override
   Iterator<T> get iterator => _MemoizedIterator(this);
+
+  @override
+  List<T> toList({bool growable = true}) {
+    if (_isCached) {
+      if (growable) return _cache;
+      return List.unmodifiable(_cache);
+    }
+    return super.toList(growable: growable);
+  }
 }
 
 class _MemoizedIterator<T> extends Iterator<T> {
   _MemoizedIterator(this._iterable);
   final MemoizedIterable<T> _iterable;
 
-  Iterator<T> _sourceIterator;
+  Iterator<T>? _sourceIterator;
   int _index = 0;
 
-  T _current;
+  T? _current;
   @override
-  T get current => _current;
+  T get current => _current as T;
 
   @override
   bool moveNext() {
@@ -47,9 +56,9 @@ class _MemoizedIterator<T> extends Iterator<T> {
       return true;
     } else {
       _sourceIterator ??= _iterable._source.iterator;
-      if (_sourceIterator.moveNext()) {
-        _iterable._cache.add(_sourceIterator.current);
-        _current = _sourceIterator.current;
+      if (_sourceIterator!.moveNext()) {
+        _iterable._cache.add(_sourceIterator!.current);
+        _current = _sourceIterator!.current;
         return true;
       } else {
         _iterable._cache = List.unmodifiable(_iterable._cache);

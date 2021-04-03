@@ -1,7 +1,5 @@
 import 'dart:collection';
 
-import '../utility/error.dart';
-
 extension LeadSelectExtension<T> on Iterable<T> {
   /// Returns an iterable that projects the elements in this iterable upon other
   /// elements in this iterable offset forwards by a given value.
@@ -26,13 +24,9 @@ extension LeadSelectExtension<T> on Iterable<T> {
   ///     }
   Iterable<TResult> leadSelect<TResult>(
     int offset,
-    TResult Function(T, T) selector, {
-    T defaultValue,
+    TResult Function(T leadedElement, T element) selector, {
+    required T defaultValue,
   }) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(offset, 'offset');
-    ArgumentError.checkNotNull(selector, 'selector');
-
     final queue = Queue<T>();
     offset = offset < 0 ? -offset : offset;
     var index = 0;

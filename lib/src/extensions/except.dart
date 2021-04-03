@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension ExceptExtension<T> on Iterable<T> {
   /// Returns the set difference between the iterable and the given
   /// collection.
@@ -28,11 +26,8 @@ extension ExceptExtension<T> on Iterable<T> {
   ///     }
   Iterable<T> except<TKey>(
     Iterable<T> other, [
-    TKey Function(T) selector,
+    TKey Function(T element)? selector,
   ]) sync* {
-    checkNullError(this);
-    ArgumentError.checkNotNull(other, 'other');
-
     selector ??= (T v) => v as TKey;
 
     final set = Set<TKey>.from(other.map(selector));

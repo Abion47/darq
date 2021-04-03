@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension AggregateSelectExtension<T> on Iterable<T> {
   /// Aggregates the iterable into a single value.
   ///
@@ -29,11 +27,8 @@ extension AggregateSelectExtension<T> on Iterable<T> {
   ///     }
   TResult aggregateSelect<TResult>(
     TResult initialValue,
-    TResult Function(TResult, T) aggregator,
+    TResult Function(TResult aggregate, T element) aggregator,
   ) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(aggregator, 'aggregator');
-
     final iterator = this.iterator;
     var result = initialValue;
 

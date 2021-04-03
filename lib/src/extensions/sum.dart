@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension SumExtension<T> on Iterable<T> {
   /// Calculates the sum of the elements in an iterable, optionally using
   /// [selector] to obtain the value to be summed.
@@ -29,17 +27,23 @@ extension SumExtension<T> on Iterable<T> {
   ///
   ///       // Result: 10
   ///     }
-  TNum sum<TNum extends num>([TNum Function(T) selector]) {
+  TNum sum<TNum extends num>([TNum Function(T)? selector]) {
+    if (isEmpty) {
+      throw StateError('Iterator must not be empty.');
+    }
+
     var _selector = selector;
+    var total = TNum == int ? 0 : 0.0;
     if (_selector == null) {
-      if (T is TNum) {
+      if (T == num || T == int || T == double) {
         _selector = (n) => n as TNum;
+        total = T == int ? 0 : 0.0;
       } else {
-        throw StateError("If T isn't a subtype of num, selector must not be null.");
+        throw ArgumentError(
+            "If T isn't a subtype of num, selector must not be null.");
       }
     }
 
-    num total = TNum is double ? 0.0 : 0;
     for (final n in this) {
       total += _selector(n);
     }

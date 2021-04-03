@@ -1,5 +1,3 @@
-import '../utility/error.dart';
-
 extension PermutationsExtension<T> on Iterable<T> {
   /// Returns an iterable that consists of iterables, where each iterable is
   /// a collection of all the permutations of the elements in this iterable.
@@ -20,8 +18,6 @@ extension PermutationsExtension<T> on Iterable<T> {
   ///       // ]
   ///     }
   Iterable<Iterable<T>> permutations() {
-    checkNullError(this);
-
     final tempList = toList();
     return _permutationsRecursive(tempList, tempList.length, tempList.length);
   }

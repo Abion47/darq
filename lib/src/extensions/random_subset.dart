@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import '../utility/error.dart';
-
 extension RandomSubsetExtension<T> on Iterable<T> {
   /// Returns an iterable of the specified size consisting of
   /// random elements from this iterable.
@@ -10,10 +8,7 @@ extension RandomSubsetExtension<T> on Iterable<T> {
   /// shuffle of the list. A partial shuffle is to avoid a wasteful
   /// amount of shuffling when [size] is less than the length of
   /// the iterable.
-  Iterable<T> randomSubset(int size, [Random random]) {
-    checkNullError(this);
-    ArgumentError.checkNotNull(size, 'size');
-
+  Iterable<T> randomSubset(int size, [Random? random]) {
     final list = toList();
     random ??= Random();
 

@@ -1,3 +1,7 @@
+## [1.0.0+1]
+
+* Corrected some parts of the README tuple section
+
 ## [1.0.0]
 
 * Pushing to full release!

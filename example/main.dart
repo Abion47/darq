@@ -4,8 +4,8 @@ void main() {
   benchmark();
 }
 
-typedef T2 Foo2<T1, T2>(T1 a);
-typedef T3 Foo3<T1, T2, T3>(T1 a, T2 b);
+typedef Foo2<T1, T2> = T2 Function(T1 a);
+typedef Foo3<T1, T2, T3> = T3 Function(T1 a, T2 b);
 
 class Bar<A> {
   final List<A> outer;
@@ -45,7 +45,7 @@ void benchmark() {
   final benchmarks = List<double>.generate(iterations, (_) => -1);
 
   // LINQ style
-  for (int i = 0; i < iterations; i++) {
+  for (var i = 0; i < iterations; i++) {
     final start = DateTime.now();
 
     // ======================BENCHMARK START=============================
@@ -64,7 +64,7 @@ void benchmark() {
   print('Average execution time in seconds (LINQ): ${benchmarks.average()}');
 
   // Vanilla Style
-  for (int i = 0; i < iterations; i++) {
+  for (var i = 0; i < iterations; i++) {
     final start = DateTime.now();
 
     // ======================BENCHMARK START=============================

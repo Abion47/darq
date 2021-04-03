@@ -1,3 +1,11 @@
+## [1.0.0]
+
+* Pushing to full release!
+* Fully documented the tuple classes so they can actually be used.
+* Changed tuple classes to inherit from a common `Tuple` abstract class, which also contains generalized factory methods for creating tuples of a dynamic length.
+* Added `copyWithout` method to tuple classes as a utility operation for trimming values from existing tuple objects.
+* Overrode `length` in tuple classes to return a constant value.
+
 ## [1.0.0-dev.3]
 
 * Quality of life changes to the `Tuple` family classes:

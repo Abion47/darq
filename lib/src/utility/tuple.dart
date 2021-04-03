@@ -1,8 +1,135 @@
+abstract class Tuple extends Iterable<dynamic> {
+  const Tuple();
+
+  /// Utility method for creating a [Tuple0].
+  factory Tuple.t0() => Tuple0();
+
+  /// Utility method for creating a [Tuple1].
+  factory Tuple.t1(a) => Tuple1(a);
+
+  /// Utility method for creating a [Tuple2].
+  factory Tuple.t2(a, b) => Tuple2(a, b);
+
+  /// Utility method for creating a [Tuple3].
+  factory Tuple.t3(a, b, c) => Tuple3(a, b, c);
+
+  /// Utility method for creating a [Tuple4].
+  factory Tuple.t4(a, b, c, d) => Tuple4(a, b, c, d);
+
+  /// Utility method for creating a [Tuple5].
+  factory Tuple.t5(a, b, c, d, e) => Tuple5(a, b, c, d, e);
+
+  /// Utility method for creating a [Tuple6].
+  factory Tuple.t6(a, b, c, d, e, f) => Tuple6(a, b, c, d, e, f);
+
+  /// Utility method for creating a [Tuple7].
+  factory Tuple.t7(a, b, c, d, e, f, g) => Tuple7(a, b, c, d, e, f, g);
+
+  /// Utility method for creating a [Tuple8].
+  factory Tuple.t8(a, b, c, d, e, f, g, h) => Tuple8(a, b, c, d, e, f, g, h);
+
+  /// Utility method for creating a [Tuple9].
+  factory Tuple.t9(a, b, c, d, e, f, g, h, i) =>
+      Tuple9(a, b, c, d, e, f, g, h, i);
+
+  /// Creates a tuple from a map/JSON source.
+  ///
+  /// The type of tuple created is based on the existance of keys in the map
+  /// object. Because of this, if the map was generated from a JSON string where
+  /// null values were omitted, the resulting tuple might not be the desired
+  /// length. In these cases, you can use `forceLength` to force a particular
+  /// length tuple to be returned.
+  factory Tuple.fromJson(Map<String, dynamic> map, {int? forceLength}) {
+    if (forceLength != null) {
+      assert(forceLength >= 0 && forceLength <= 9,
+          'The value of forceLength must be between 0 and 9');
+
+      switch (forceLength) {
+        case 0:
+          return Tuple0.fromJson(map);
+        case 1:
+          return Tuple1.fromJson(map);
+        case 2:
+          return Tuple2.fromJson(map);
+        case 3:
+          return Tuple3.fromJson(map);
+        case 4:
+          return Tuple4.fromJson(map);
+        case 5:
+          return Tuple5.fromJson(map);
+        case 6:
+          return Tuple6.fromJson(map);
+        case 7:
+          return Tuple7.fromJson(map);
+        case 8:
+          return Tuple8.fromJson(map);
+        case 9:
+          return Tuple9.fromJson(map);
+      }
+    }
+    if (map.containsKey('item8')) return Tuple9.fromJson(map);
+    if (map.containsKey('item7')) return Tuple8.fromJson(map);
+    if (map.containsKey('item6')) return Tuple7.fromJson(map);
+    if (map.containsKey('item5')) return Tuple6.fromJson(map);
+    if (map.containsKey('item4')) return Tuple5.fromJson(map);
+    if (map.containsKey('item3')) return Tuple4.fromJson(map);
+    if (map.containsKey('item2')) return Tuple3.fromJson(map);
+    if (map.containsKey('item1')) return Tuple2.fromJson(map);
+    if (map.containsKey('item0')) return Tuple1.fromJson(map);
+    return Tuple0.fromJson(map);
+  }
+
+  /// Creates a tuple from a list source.
+  ///
+  /// The list must have a length between 0 and 9.
+  factory Tuple.fromList(List<dynamic> items) {
+    assert(
+        items.length <= 9, 'Tuples of length greater than 9 are unsupported');
+
+    switch (items.length) {
+      case 0:
+        return Tuple0();
+      case 1:
+        return Tuple1.fromList(items);
+      case 2:
+        return Tuple2.fromList(items);
+      case 3:
+        return Tuple3.fromList(items);
+      case 4:
+        return Tuple4.fromList(items);
+      case 5:
+        return Tuple5.fromList(items);
+      case 6:
+        return Tuple6.fromList(items);
+      case 7:
+        return Tuple7.fromList(items);
+      case 8:
+        return Tuple8.fromList(items);
+      case 9:
+        return Tuple9.fromList(items);
+    }
+
+    throw StateError('Unknown error, this shouldn\'t happen');
+  }
+}
+
 /// A finite fixed-length ordered list containing 0 dynamically-typed elements.
-class Tuple0 extends Iterable<dynamic> {
+class Tuple0 extends Tuple {
+  /// Creates an empty tuple. This can be useful as a placeholder object
+  /// or as a constant symbol.
   const Tuple0();
 
+  /// Creates an empty tuple from a map/JSON source.
+  ///
+  /// (For [Tuple0], the value of `map` is ignored and the constructor just
+  /// returns an empty tuple by default.)
   factory Tuple0.fromJson(Map<String, dynamic> map) => Tuple0();
+
+  /// Creates an empty tuple from a list source, optionally trimming excess items
+  /// from the list.
+  ///
+  /// If the list is not empty and `trim` is false, an [ArgumentError] will be
+  /// thrown.
   factory Tuple0.fromList(List list, [bool trim = false]) {
     if (!trim && list.isNotEmpty) {
       throw ArgumentError.value('list',
@@ -11,15 +138,36 @@ class Tuple0 extends Iterable<dynamic> {
     return Tuple0();
   }
 
+  /// Creates a copy tuple with the elements from this tuple with the value of
+  /// each item optionally overridden.
+  ///
+  /// (For [Tuple0], this merely produces another empty tuple.)
   Tuple0 copyWith() => Tuple0();
 
-  Map<String, dynamic> toMap() => {};
+  /// A list of boolean values indicating whether certain items in this
+  /// tuple should be retained or discarded. The length of the list must
+  /// be the same as the length of this tuple.
+  ///
+  /// This method is unsupported on [Tuple0] as there are no items to either
+  /// retain or support.
+  Tuple copyWithout({required List<bool> indices}) {
+    throw StateError('Tuple0 does not have any items to retain or discard.');
+  }
 
+  /// Converts this tuple into a map for JSON serialization.
+  ///
+  /// (For [Tuple0], this method returns an empty map.)
+  Map<String, dynamic> toJson() => {};
+
+  /// A utility method for mapping a function to every item in this tuple.
+  ///
+  /// (For [Tuple0], this method has no parameters and does nothing.)
+  void mapActions() {}
+
+  /// Provides an indexable way to access this tuple's items.
   dynamic operator [](int index) {
     throw RangeError.index(index, this, 'index', 'index out of range', 0);
   }
-
-  void mapActions() {}
 
   @override
   bool operator ==(Object other) {
@@ -31,6 +179,10 @@ class Tuple0 extends Iterable<dynamic> {
     return 0;
   }
 
+  /// Returns the constant length of this tuple.
+  @override
+  int get length => 0;
+
   @override
   Iterator get iterator => _Tuple0Iterator();
 
@@ -39,12 +191,16 @@ class Tuple0 extends Iterable<dynamic> {
 }
 
 /// A finite fixed-length ordered list containing 1 dynamically-typed element.
-class Tuple1<T> extends Iterable<dynamic> {
+class Tuple1<T> extends Tuple {
   final T item;
 
+  /// Creates a tuple of length 1.
   const Tuple1(this.item);
 
+  /// Creates an tuple from a map/JSON source.
   factory Tuple1.fromJson(Map<String, dynamic> map) => Tuple1(map['item']);
+
+  /// Creates an tuple from a list source.
   factory Tuple1.fromList(List list, [bool trim = false]) {
     if (list.isEmpty) {
       throw ArgumentError.value(
@@ -57,22 +213,44 @@ class Tuple1<T> extends Iterable<dynamic> {
     return Tuple1(list[0] as T);
   }
 
+  /// Creates a copy tuple with the elements from this tuple with the value of
+  /// each item optionally overridden.
   Tuple1 copyWith(T? item) => Tuple1(item ?? this.item);
 
-  Map<String, dynamic> toMap() => {'item': item};
+  /// A list of boolean values indicating whether certain items in this
+  /// tuple should be retained or discarded. The length of the list must
+  /// be the same as the length of this tuple.
+  Tuple copyWithout({required List<bool> indices}) {
+    assert(indices.length == 1,
+        'Length of given list must be same length as tuple.');
 
+    var values = [];
+    for (var i = 0; i < indices.length; i++) {
+      if (indices[i]) {
+        values.add(this[i]);
+      }
+    }
+
+    return Tuple.fromList(values);
+  }
+
+  /// Converts this tuple into a map for JSON serialization.
+  Map<String, dynamic> toJson() => {'item': item};
+
+  /// A utility method for mapping a function to every item in this tuple.
+  void mapActions({
+    required void Function(T) item,
+  }) {
+    item(this.item);
+  }
+
+  /// Provides an indexable way to access this tuple's items.
   dynamic operator [](int index) {
     switch (index) {
       case 0:
         return item;
     }
     throw RangeError.index(index, this, 'index', 'index out of range', 2);
-  }
-
-  void mapActions({
-    required void Function(T) item,
-  }) {
-    item(this.item);
   }
 
   @override
@@ -90,6 +268,10 @@ class Tuple1<T> extends Iterable<dynamic> {
     return result;
   }
 
+  /// Returns the constant length of this tuple.
+  @override
+  int get length => 1;
+
   @override
   Iterator get iterator => _Tuple1Iterator(this);
 
@@ -98,19 +280,23 @@ class Tuple1<T> extends Iterable<dynamic> {
 }
 
 /// A finite fixed-length ordered list containing 2 dynamically-typed elements.
-class Tuple2<T0, T1> extends Iterable<dynamic> {
+class Tuple2<T0, T1> extends Tuple {
   final T0 item0;
   final T1 item1;
 
+  /// Creates a tuple of length 2.
   const Tuple2(
     this.item0,
     this.item1,
   );
 
+  /// Creates an tuple from a map/JSON source.
   factory Tuple2.fromJson(Map<String, dynamic> map) => Tuple2(
         map['item0'],
         map['item1'],
       );
+
+  /// Creates an tuple from a list source.
   factory Tuple2.fromList(List list, [bool trim = false]) {
     if (list.length < 2) {
       throw ArgumentError.value(
@@ -126,6 +312,8 @@ class Tuple2<T0, T1> extends Iterable<dynamic> {
     );
   }
 
+  /// Creates a copy tuple with the elements from this tuple with the value of
+  /// each item optionally overridden.
   Tuple2 copyWith({
     T0? item0,
     T1? item1,
@@ -135,10 +323,37 @@ class Tuple2<T0, T1> extends Iterable<dynamic> {
         item1 ?? this.item1,
       );
 
+  /// A list of boolean values indicating whether certain items in this
+  /// tuple should be retained or discarded. The length of the list must
+  /// be the same as the length of this tuple.
+  Tuple copyWithout({required List<bool> indices}) {
+    assert(indices.length == 2,
+        'Length of given list must be same length as tuple.');
+
+    var values = [];
+    for (var i = 0; i < indices.length; i++) {
+      if (indices[i]) {
+        values.add(this[i]);
+      }
+    }
+
+    return Tuple.fromList(values);
+  }
+
+  /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
         'item0': item0,
         'item1': item1,
       };
+
+  /// A utility method for mapping a function to every item in this tuple.
+  void mapActions({
+    required void Function(T0) item0,
+    required void Function(T1) item1,
+  }) {
+    item0(this.item0);
+    item1(this.item1);
+  }
 
   dynamic operator [](int index) {
     switch (index) {
@@ -148,14 +363,6 @@ class Tuple2<T0, T1> extends Iterable<dynamic> {
         return item1;
     }
     throw RangeError.index(index, this, 'index', 'index out of range', 2);
-  }
-
-  void mapActions({
-    required void Function(T0) item0,
-    required void Function(T1) item1,
-  }) {
-    item0(this.item0);
-    item1(this.item1);
   }
 
   @override
@@ -174,6 +381,10 @@ class Tuple2<T0, T1> extends Iterable<dynamic> {
     return result;
   }
 
+  /// Returns the constant length of this tuple.
+  @override
+  int get length => 2;
+
   @override
   Iterator get iterator => _Tuple2Iterator(this);
 
@@ -182,22 +393,26 @@ class Tuple2<T0, T1> extends Iterable<dynamic> {
 }
 
 /// A finite fixed-length ordered list containing 3 dynamically-typed elements.
-class Tuple3<T0, T1, T2> extends Iterable<dynamic> {
+class Tuple3<T0, T1, T2> extends Tuple {
   final T0 item0;
   final T1 item1;
   final T2 item2;
 
+  /// Creates a tuple of length 3.
   const Tuple3(
     this.item0,
     this.item1,
     this.item2,
   );
 
+  /// Creates an tuple from a map/JSON source.
   factory Tuple3.fromJson(Map<String, dynamic> map) => Tuple3(
         map['item0'],
         map['item1'],
         map['item2'],
       );
+
+  /// Creates an tuple from a list source.
   factory Tuple3.fromList(List list, [bool trim = false]) {
     if (list.length < 3) {
       throw ArgumentError.value(
@@ -214,12 +429,15 @@ class Tuple3<T0, T1, T2> extends Iterable<dynamic> {
     );
   }
 
+  /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
         'item0': item0,
         'item1': item1,
         'item2': item2,
       };
 
+  /// Creates a copy tuple with the elements from this tuple with the value of
+  /// each item optionally overridden.
   Tuple3 copyWith({
     T0? item0,
     T1? item1,
@@ -231,6 +449,24 @@ class Tuple3<T0, T1, T2> extends Iterable<dynamic> {
         item2 ?? this.item2,
       );
 
+  /// A list of boolean values indicating whether certain items in this
+  /// tuple should be retained or discarded. The length of the list must
+  /// be the same as the length of this tuple.
+  Tuple copyWithout({required List<bool> indices}) {
+    assert(indices.length == 3,
+        'Length of given list must be same length as tuple.');
+
+    var values = [];
+    for (var i = 0; i < indices.length; i++) {
+      if (indices[i]) {
+        values.add(this[i]);
+      }
+    }
+
+    return Tuple.fromList(values);
+  }
+
+  /// Provides an indexable way to access this tuple's items.
   dynamic operator [](int index) {
     switch (index) {
       case 0:
@@ -243,9 +479,14 @@ class Tuple3<T0, T1, T2> extends Iterable<dynamic> {
     throw RangeError.index(index, this, 'index', 'index out of range', 3);
   }
 
+  /// Returns the constant length of this tuple.
+  @override
+  int get length => 3;
+
   @override
   Iterator get iterator => _Tuple3Iterator(this);
 
+  /// A utility method for mapping a function to every item in this tuple.
   void mapActions({
     required void Function(T0) item0,
     required void Function(T1) item1,
@@ -281,12 +522,13 @@ class Tuple3<T0, T1, T2> extends Iterable<dynamic> {
 }
 
 /// A finite fixed-length ordered list containing 4 dynamically-typed elements.
-class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
+class Tuple4<T0, T1, T2, T3> extends Tuple {
   final T0 item0;
   final T1 item1;
   final T2 item2;
   final T3 item3;
 
+  /// Creates a tuple of length 4.
   const Tuple4(
     this.item0,
     this.item1,
@@ -294,12 +536,15 @@ class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
     this.item3,
   );
 
+  /// Creates an tuple from a map/JSON source.
   factory Tuple4.fromJson(Map<String, dynamic> map) => Tuple4(
         map['item0'],
         map['item1'],
         map['item2'],
         map['item3'],
       );
+
+  /// Creates an tuple from a list source.
   factory Tuple4.fromList(List list, [bool trim = false]) {
     if (list.length < 4) {
       throw ArgumentError.value(
@@ -317,6 +562,7 @@ class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
     );
   }
 
+  /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
         'item0': item0,
         'item1': item1,
@@ -324,6 +570,8 @@ class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
         'item3': item3,
       };
 
+  /// Creates a copy tuple with the elements from this tuple with the value of
+  /// each item optionally overridden.
   Tuple4 copyWith({
     T0? item0,
     T1? item1,
@@ -337,6 +585,24 @@ class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
         item3 ?? this.item3,
       );
 
+  /// A list of boolean values indicating whether certain items in this
+  /// tuple should be retained or discarded. The length of the list must
+  /// be the same as the length of this tuple.
+  Tuple copyWithout({required List<bool> indices}) {
+    assert(indices.length == 4,
+        'Length of given list must be same length as tuple.');
+
+    var values = [];
+    for (var i = 0; i < indices.length; i++) {
+      if (indices[i]) {
+        values.add(this[i]);
+      }
+    }
+
+    return Tuple.fromList(values);
+  }
+
+  /// Provides an indexable way to access this tuple's items.
   dynamic operator [](int index) {
     switch (index) {
       case 0:
@@ -351,9 +617,14 @@ class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
     throw RangeError.index(index, this, 'index', 'index out of range', 4);
   }
 
+  /// Returns the constant length of this tuple.
+  @override
+  int get length => 4;
+
   @override
   Iterator get iterator => _Tuple4Iterator(this);
 
+  /// A utility method for mapping a function to every item in this tuple.
   void mapActions({
     required void Function(T0) item0,
     required void Function(T1) item1,
@@ -393,13 +664,14 @@ class Tuple4<T0, T1, T2, T3> extends Iterable<dynamic> {
 }
 
 /// A finite fixed-length ordered list containing 5 dynamically-typed elements.
-class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
+class Tuple5<T0, T1, T2, T3, T4> extends Tuple {
   final T0 item0;
   final T1 item1;
   final T2 item2;
   final T3 item3;
   final T4 item4;
 
+  /// Creates a tuple of length 5.
   const Tuple5(
     this.item0,
     this.item1,
@@ -408,6 +680,7 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
     this.item4,
   );
 
+  /// Creates an tuple from a map/JSON source.
   factory Tuple5.fromJson(Map<String, dynamic> map) => Tuple5(
         map['item0'],
         map['item1'],
@@ -415,6 +688,8 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
         map['item3'],
         map['item4'],
       );
+
+  /// Creates an tuple from a list source.
   factory Tuple5.fromList(List list, [bool trim = false]) {
     if (list.length < 5) {
       throw ArgumentError.value(
@@ -433,6 +708,7 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
     );
   }
 
+  /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
         'item0': item0,
         'item1': item1,
@@ -441,6 +717,8 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
         'item4': item4,
       };
 
+  /// Creates a copy tuple with the elements from this tuple with the value of
+  /// each item optionally overridden.
   Tuple5 copyWith({
     T0? item0,
     T1? item1,
@@ -456,6 +734,24 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
         item4 ?? this.item4,
       );
 
+  /// A list of boolean values indicating whether certain items in this
+  /// tuple should be retained or discarded. The length of the list must
+  /// be the same as the length of this tuple.
+  Tuple copyWithout({required List<bool> indices}) {
+    assert(indices.length == 5,
+        'Length of given list must be same length as tuple.');
+
+    var values = [];
+    for (var i = 0; i < indices.length; i++) {
+      if (indices[i]) {
+        values.add(this[i]);
+      }
+    }
+
+    return Tuple.fromList(values);
+  }
+
+  /// Provides an indexable way to access this tuple's items.
   dynamic operator [](int index) {
     switch (index) {
       case 0:
@@ -472,9 +768,14 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
     throw RangeError.index(index, this, 'index', 'index out of range', 5);
   }
 
+  /// Returns the constant length of this tuple.
+  @override
+  int get length => 5;
+
   @override
   Iterator get iterator => _Tuple5Iterator(this);
 
+  /// A utility method for mapping a function to every item in this tuple.
   void mapActions({
     required void Function(T0) item0,
     required void Function(T1) item1,
@@ -518,7 +819,7 @@ class Tuple5<T0, T1, T2, T3, T4> extends Iterable<dynamic> {
 }
 
 /// A finite fixed-length ordered list containing 6 dynamically-typed elements.
-class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
+class Tuple6<T0, T1, T2, T3, T4, T5> extends Tuple {
   final T0 item0;
   final T1 item1;
   final T2 item2;
@@ -526,6 +827,7 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
   final T4 item4;
   final T5 item5;
 
+  /// Creates a tuple of length 6.
   const Tuple6(
     this.item0,
     this.item1,
@@ -535,6 +837,7 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
     this.item5,
   );
 
+  /// Creates an tuple from a map/JSON source.
   factory Tuple6.fromJson(Map<String, dynamic> map) => Tuple6(
         map['item0'],
         map['item1'],
@@ -543,6 +846,8 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
         map['item4'],
         map['item5'],
       );
+
+  /// Creates an tuple from a list source.
   factory Tuple6.fromList(List list, [bool trim = false]) {
     if (list.length < 6) {
       throw ArgumentError.value(
@@ -562,6 +867,7 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
     );
   }
 
+  /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
         'item0': item0,
         'item1': item1,
@@ -571,6 +877,8 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
         'item5': item5,
       };
 
+  /// Creates a copy tuple with the elements from this tuple with the value of
+  /// each item optionally overridden.
   Tuple6 copyWith({
     T0? item0,
     T1? item1,
@@ -588,6 +896,24 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
         item5 ?? this.item5,
       );
 
+  /// A list of boolean values indicating whether certain items in this
+  /// tuple should be retained or discarded. The length of the list must
+  /// be the same as the length of this tuple.
+  Tuple copyWithout({required List<bool> indices}) {
+    assert(indices.length == 6,
+        'Length of given list must be same length as tuple.');
+
+    var values = [];
+    for (var i = 0; i < indices.length; i++) {
+      if (indices[i]) {
+        values.add(this[i]);
+      }
+    }
+
+    return Tuple.fromList(values);
+  }
+
+  /// Provides an indexable way to access this tuple's items.
   dynamic operator [](int index) {
     switch (index) {
       case 0:
@@ -606,9 +932,14 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
     throw RangeError.index(index, this, 'index', 'index out of range', 6);
   }
 
+  /// Returns the constant length of this tuple.
+  @override
+  int get length => 6;
+
   @override
   Iterator get iterator => _Tuple6Iterator(this);
 
+  /// A utility method for mapping a function to every item in this tuple.
   void mapActions({
     required void Function(T0) item0,
     required void Function(T1) item1,
@@ -656,7 +987,7 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Iterable<dynamic> {
 }
 
 /// A finite fixed-length ordered list containing 7 dynamically-typed elements.
-class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
+class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Tuple {
   final T0 item0;
   final T1 item1;
   final T2 item2;
@@ -665,6 +996,7 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
   final T5 item5;
   final T6 item6;
 
+  /// Creates a tuple of length 7.
   const Tuple7(
     this.item0,
     this.item1,
@@ -675,6 +1007,7 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
     this.item6,
   );
 
+  /// Creates an tuple from a map/JSON source.
   factory Tuple7.fromJson(Map<String, dynamic> map) => Tuple7(
         map['item0'],
         map['item1'],
@@ -684,6 +1017,8 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
         map['item5'],
         map['item6'],
       );
+
+  /// Creates an tuple from a list source.
   factory Tuple7.fromList(List list, [bool trim = false]) {
     if (list.length < 7) {
       throw ArgumentError.value(
@@ -704,6 +1039,7 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
     );
   }
 
+  /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
         'item0': item0,
         'item1': item1,
@@ -714,6 +1050,8 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
         'item6': item6,
       };
 
+  /// Creates a copy tuple with the elements from this tuple with the value of
+  /// each item optionally overridden.
   Tuple7 copyWith({
     T0? item0,
     T1? item1,
@@ -733,6 +1071,24 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
         item6 ?? this.item6,
       );
 
+  /// A list of boolean values indicating whether certain items in this
+  /// tuple should be retained or discarded. The length of the list must
+  /// be the same as the length of this tuple.
+  Tuple copyWithout({required List<bool> indices}) {
+    assert(indices.length == 7,
+        'Length of given list must be same length as tuple.');
+
+    var values = [];
+    for (var i = 0; i < indices.length; i++) {
+      if (indices[i]) {
+        values.add(this[i]);
+      }
+    }
+
+    return Tuple.fromList(values);
+  }
+
+  /// Provides an indexable way to access this tuple's items.
   dynamic operator [](int index) {
     switch (index) {
       case 0:
@@ -753,9 +1109,14 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
     throw RangeError.index(index, this, 'index', 'index out of range', 7);
   }
 
+  /// Returns the constant length of this tuple.
+  @override
+  int get length => 7;
+
   @override
   Iterator get iterator => _Tuple7Iterator(this);
 
+  /// A utility method for mapping a function to every item in this tuple.
   void mapActions({
     required void Function(T0) item0,
     required void Function(T1) item1,
@@ -808,7 +1169,7 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Iterable<dynamic> {
 }
 
 /// A finite fixed-length ordered list containing 8 dynamically-typed elements.
-class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
+class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Tuple {
   final T0 item0;
   final T1 item1;
   final T2 item2;
@@ -818,6 +1179,7 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
   final T6 item6;
   final T7 item7;
 
+  /// Creates a tuple of length 8.
   const Tuple8(
     this.item0,
     this.item1,
@@ -829,6 +1191,7 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
     this.item7,
   );
 
+  /// Creates an tuple from a map/JSON source.
   factory Tuple8.fromJson(Map<String, dynamic> map) => Tuple8(
         map['item0'],
         map['item1'],
@@ -839,6 +1202,8 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
         map['item6'],
         map['item7'],
       );
+
+  /// Creates an tuple from a list source.
   factory Tuple8.fromList(List list, [bool trim = false]) {
     if (list.length < 8) {
       throw ArgumentError.value(
@@ -860,6 +1225,7 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
     );
   }
 
+  /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
         'item0': item0,
         'item1': item1,
@@ -871,6 +1237,8 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
         'item7': item7,
       };
 
+  /// Creates a copy tuple with the elements from this tuple with the value of
+  /// each item optionally overridden.
   Tuple8 copyWith({
     T0? item0,
     T1? item1,
@@ -892,6 +1260,24 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
         item7 ?? this.item7,
       );
 
+  /// A list of boolean values indicating whether certain items in this
+  /// tuple should be retained or discarded. The length of the list must
+  /// be the same as the length of this tuple.
+  Tuple copyWithout({required List<bool> indices}) {
+    assert(indices.length == 8,
+        'Length of given list must be same length as tuple.');
+
+    var values = [];
+    for (var i = 0; i < indices.length; i++) {
+      if (indices[i]) {
+        values.add(this[i]);
+      }
+    }
+
+    return Tuple.fromList(values);
+  }
+
+  /// Provides an indexable way to access this tuple's items.
   dynamic operator [](int index) {
     switch (index) {
       case 0:
@@ -914,9 +1300,14 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
     throw RangeError.index(index, this, 'index', 'index out of range', 8);
   }
 
+  /// Returns the constant length of this tuple.
+  @override
+  int get length => 8;
+
   @override
   Iterator get iterator => _Tuple8Iterator(this);
 
+  /// A utility method for mapping a function to every item in this tuple.
   void mapActions({
     required void Function(T0) item0,
     required void Function(T1) item1,
@@ -973,7 +1364,7 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Iterable<dynamic> {
 }
 
 /// A finite fixed-length ordered list containing 9 dynamically-typed elements.
-class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
+class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Tuple {
   final T0 item0;
   final T1 item1;
   final T2 item2;
@@ -984,6 +1375,7 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
   final T7 item7;
   final T8 item8;
 
+  /// Creates a tuple of length 9.
   const Tuple9(
     this.item0,
     this.item1,
@@ -995,6 +1387,21 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
     this.item7,
     this.item8,
   );
+
+  /// Creates an tuple from a map/JSON source.
+  factory Tuple9.fromJson(Map<String, dynamic> map) => Tuple9(
+        map['item0'],
+        map['item1'],
+        map['item2'],
+        map['item3'],
+        map['item4'],
+        map['item5'],
+        map['item6'],
+        map['item7'],
+        map['item8'],
+      );
+
+  /// Creates an tuple from a list source.
   factory Tuple9.fromList(List list, [bool trim = false]) {
     if (list.length < 9) {
       throw ArgumentError.value(
@@ -1017,18 +1424,7 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
     );
   }
 
-  factory Tuple9.fromJson(Map<String, dynamic> map) => Tuple9(
-        map['item0'],
-        map['item1'],
-        map['item2'],
-        map['item3'],
-        map['item4'],
-        map['item5'],
-        map['item6'],
-        map['item7'],
-        map['item8'],
-      );
-
+  /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
         'item0': item0,
         'item1': item1,
@@ -1041,6 +1437,8 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
         'item8': item8,
       };
 
+  /// Creates a copy tuple with the elements from this tuple with the value of
+  /// each item optionally overridden.
   Tuple9 copyWith({
     T0? item0,
     T1? item1,
@@ -1064,6 +1462,24 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
         item8 ?? this.item8,
       );
 
+  /// A list of boolean values indicating whether certain items in this
+  /// tuple should be retained or discarded. The length of the list must
+  /// be the same as the length of this tuple.
+  Tuple copyWithout({required List<bool> indices}) {
+    assert(indices.length == 9,
+        'Length of given list must be same length as tuple.');
+
+    var values = [];
+    for (var i = 0; i < indices.length; i++) {
+      if (indices[i]) {
+        values.add(this[i]);
+      }
+    }
+
+    return Tuple.fromList(values);
+  }
+
+  /// Provides an indexable way to access this tuple's items.
   dynamic operator [](int index) {
     switch (index) {
       case 0:
@@ -1088,9 +1504,14 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Iterable<dynamic> {
     throw RangeError.index(index, this, 'index', 'index out of range', 9);
   }
 
+  /// Returns the constant length of this tuple.
+  @override
+  int get length => 9;
+
   @override
   Iterator get iterator => _Tuple9Iterator(this);
 
+  /// A utility method for mapping a function to every item in this tuple.
   void mapActions({
     required void Function(T0) item0,
     required void Function(T1) item1,

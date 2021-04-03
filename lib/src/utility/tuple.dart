@@ -75,7 +75,7 @@ abstract class Tuple extends Iterable<dynamic> {
     if (map.containsKey('item3')) return Tuple4.fromJson(map);
     if (map.containsKey('item2')) return Tuple3.fromJson(map);
     if (map.containsKey('item1')) return Tuple2.fromJson(map);
-    if (map.containsKey('item0')) return Tuple1.fromJson(map);
+    if (map.containsKey('item')) return Tuple1.fromJson(map);
     return Tuple0.fromJson(map);
   }
 
@@ -136,6 +136,18 @@ class Tuple0 extends Tuple {
           'The given list has more than 0 elements. Use `trim: true` if you intended to ignore excess elements.');
     }
     return Tuple0();
+  }
+
+  /// Clones this tuple where the clone is cast with the specified type arguments.
+  Tuple0 asType() {
+    throw StateError(
+        'Tuple0 does not have any items and therefore no types to cast');
+  }
+
+  /// Clones this tuple where the clone is cast with dynamically-typed items.
+  Tuple1<dynamic> asDynamic() {
+    throw StateError(
+        'Tuple0 does not have any items and therefore no types to cast');
   }
 
   /// Creates a copy tuple with the elements from this tuple with the value of
@@ -212,6 +224,18 @@ class Tuple1<T> extends Tuple {
     }
     return Tuple1(list[0] as T);
   }
+
+  /// Clones this tuple where the clone is cast with the specified type arguments.
+  Tuple1<U> asType<U>() {
+    if (item is! U) {
+      throw StateError(
+          'The provided type arguments do not match the runtime type of this tuple\'s items');
+    }
+    return Tuple1<U>(item as U);
+  }
+
+  /// Clones this tuple where the clone is cast with dynamically-typed items.
+  Tuple1<dynamic> asDynamic() => Tuple1<dynamic>(item);
 
   /// Creates a copy tuple with the elements from this tuple with the value of
   /// each item optionally overridden.
@@ -311,6 +335,21 @@ class Tuple2<T0, T1> extends Tuple {
       list[1] as T1,
     );
   }
+
+  /// Clones this tuple where the clone is cast with the specified type arguments.
+  Tuple2<U0, U1> asType<U0, U1>() {
+    if (item0 is! U0 || item1 is! U1) {
+      throw StateError(
+          'The provided type arguments do not match the runtime type of this tuple\'s items');
+    }
+    return Tuple2<U0, U1>(item0 as U0, item1 as U1);
+  }
+
+  /// Clones this tuple where the clone is cast with dynamically-typed items.
+  Tuple2<dynamic, dynamic> asDynamic() => Tuple2<dynamic, dynamic>(
+        item0,
+        item1,
+      );
 
   /// Creates a copy tuple with the elements from this tuple with the value of
   /// each item optionally overridden.
@@ -428,6 +467,27 @@ class Tuple3<T0, T1, T2> extends Tuple {
       list[2] as T2,
     );
   }
+
+  /// Clones this tuple where the clone is cast with the specified type arguments.
+  Tuple3<U0, U1, U2> asType<U0, U1, U2>() {
+    if (item0 is! U0 || item1 is! U1 || item2 is! U2) {
+      throw StateError(
+          'The provided type arguments do not match the runtime type of this tuple\'s items');
+    }
+    return Tuple3<U0, U1, U2>(
+      item0 as U0,
+      item1 as U1,
+      item2 as U2,
+    );
+  }
+
+  /// Clones this tuple where the clone is cast with dynamically-typed items.
+  Tuple3<dynamic, dynamic, dynamic> asDynamic() =>
+      Tuple3<dynamic, dynamic, dynamic>(
+        item0,
+        item1,
+        item2,
+      );
 
   /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
@@ -561,6 +621,29 @@ class Tuple4<T0, T1, T2, T3> extends Tuple {
       list[3] as T3,
     );
   }
+
+  /// Clones this tuple where the clone is cast with the specified type arguments.
+  Tuple4<U0, U1, U2, U3> asType<U0, U1, U2, U3>() {
+    if (item0 is! U0 || item1 is! U1 || item2 is! U2 || item3 is! U3) {
+      throw StateError(
+          'The provided type arguments do not match the runtime type of this tuple\'s items');
+    }
+    return Tuple4<U0, U1, U2, U3>(
+      item0 as U0,
+      item1 as U1,
+      item2 as U2,
+      item3 as U3,
+    );
+  }
+
+  /// Clones this tuple where the clone is cast with dynamically-typed items.
+  Tuple4<dynamic, dynamic, dynamic, dynamic> asDynamic() =>
+      Tuple4<dynamic, dynamic, dynamic, dynamic>(
+        item0,
+        item1,
+        item2,
+        item3,
+      );
 
   /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
@@ -707,6 +790,35 @@ class Tuple5<T0, T1, T2, T3, T4> extends Tuple {
       list[4] as T4,
     );
   }
+
+  /// Clones this tuple where the clone is cast with the specified type arguments.
+  Tuple5<U0, U1, U2, U3, U4> asType<U0, U1, U2, U3, U4>() {
+    if (item0 is! U0 ||
+        item1 is! U1 ||
+        item2 is! U2 ||
+        item3 is! U3 ||
+        item4 is! U4) {
+      throw StateError(
+          'The provided type arguments do not match the runtime type of this tuple\'s items');
+    }
+    return Tuple5<U0, U1, U2, U3, U4>(
+      item0 as U0,
+      item1 as U1,
+      item2 as U2,
+      item3 as U3,
+      item4 as U4,
+    );
+  }
+
+  /// Clones this tuple where the clone is cast with dynamically-typed items.
+  Tuple5<dynamic, dynamic, dynamic, dynamic, dynamic> asDynamic() =>
+      Tuple5<dynamic, dynamic, dynamic, dynamic, dynamic>(
+        item0,
+        item1,
+        item2,
+        item3,
+        item4,
+      );
 
   /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
@@ -866,6 +978,38 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Tuple {
       list[5] as T5,
     );
   }
+
+  /// Clones this tuple where the clone is cast with the specified type arguments.
+  Tuple6<U0, U1, U2, U3, U4, U5> asType<U0, U1, U2, U3, U4, U5>() {
+    if (item0 is! U0 ||
+        item1 is! U1 ||
+        item2 is! U2 ||
+        item3 is! U3 ||
+        item4 is! U4 ||
+        item5 is! U5) {
+      throw StateError(
+          'The provided type arguments do not match the runtime type of this tuple\'s items');
+    }
+    return Tuple6<U0, U1, U2, U3, U4, U5>(
+      item0 as U0,
+      item1 as U1,
+      item2 as U2,
+      item3 as U3,
+      item4 as U4,
+      item5 as U5,
+    );
+  }
+
+  /// Clones this tuple where the clone is cast with dynamically-typed items.
+  Tuple6<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic> asDynamic() =>
+      Tuple6<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic>(
+        item0,
+        item1,
+        item2,
+        item3,
+        item4,
+        item5,
+      );
 
   /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
@@ -1038,6 +1182,42 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Tuple {
       list[6] as T6,
     );
   }
+
+  /// Clones this tuple where the clone is cast with the specified type arguments.
+  Tuple7<U0, U1, U2, U3, U4, U5, U6> asType<U0, U1, U2, U3, U4, U5, U6>() {
+    if (item0 is! U0 ||
+        item1 is! U1 ||
+        item2 is! U2 ||
+        item3 is! U3 ||
+        item4 is! U4 ||
+        item5 is! U5 ||
+        item6 is! U6) {
+      throw StateError(
+          'The provided type arguments do not match the runtime type of this tuple\'s items');
+    }
+    return Tuple7<U0, U1, U2, U3, U4, U5, U6>(
+      item0 as U0,
+      item1 as U1,
+      item2 as U2,
+      item3 as U3,
+      item4 as U4,
+      item5 as U5,
+      item6 as U6,
+    );
+  }
+
+  /// Clones this tuple where the clone is cast with dynamically-typed items.
+  Tuple7<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic>
+      asDynamic() =>
+          Tuple7<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic>(
+            item0,
+            item1,
+            item2,
+            item3,
+            item4,
+            item5,
+            item6,
+          );
 
   /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
@@ -1224,6 +1404,46 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Tuple {
       list[7] as T7,
     );
   }
+
+  /// Clones this tuple where the clone is cast with the specified type arguments.
+  Tuple8<U0, U1, U2, U3, U4, U5, U6, U7>
+      asType<U0, U1, U2, U3, U4, U5, U6, U7>() {
+    if (item0 is! U0 ||
+        item1 is! U1 ||
+        item2 is! U2 ||
+        item3 is! U3 ||
+        item4 is! U4 ||
+        item5 is! U5 ||
+        item6 is! U6 ||
+        item7 is! U7) {
+      throw StateError(
+          'The provided type arguments do not match the runtime type of this tuple\'s items');
+    }
+    return Tuple8<U0, U1, U2, U3, U4, U5, U6, U7>(
+      item0 as U0,
+      item1 as U1,
+      item2 as U2,
+      item3 as U3,
+      item4 as U4,
+      item5 as U5,
+      item6 as U6,
+      item7 as U7,
+    );
+  }
+
+  /// Clones this tuple where the clone is cast with dynamically-typed items.
+  Tuple8<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic>
+      asDynamic() => Tuple8<dynamic, dynamic, dynamic, dynamic, dynamic,
+              dynamic, dynamic, dynamic>(
+            item0,
+            item1,
+            item2,
+            item3,
+            item4,
+            item5,
+            item6,
+            item7,
+          );
 
   /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {
@@ -1423,6 +1643,49 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Tuple {
       list[8] as T8,
     );
   }
+
+  /// Clones this tuple where the clone is cast with the specified type arguments.
+  Tuple9<U0, U1, U2, U3, U4, U5, U6, U7, U8>
+      asType<U0, U1, U2, U3, U4, U5, U6, U7, U8>() {
+    if (item0 is! U0 ||
+        item1 is! U1 ||
+        item2 is! U2 ||
+        item3 is! U3 ||
+        item4 is! U4 ||
+        item5 is! U5 ||
+        item6 is! U6 ||
+        item7 is! U7 ||
+        item8 is! U8) {
+      throw StateError(
+          'The provided type arguments do not match the runtime type of this tuple\'s items');
+    }
+    return Tuple9<U0, U1, U2, U3, U4, U5, U6, U7, U8>(
+      item0 as U0,
+      item1 as U1,
+      item2 as U2,
+      item3 as U3,
+      item4 as U4,
+      item5 as U5,
+      item6 as U6,
+      item7 as U7,
+      item8 as U8,
+    );
+  }
+
+  /// Clones this tuple where the clone is cast with dynamically-typed items.
+  Tuple9<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+      dynamic> asDynamic() => Tuple9<dynamic, dynamic, dynamic, dynamic,
+          dynamic, dynamic, dynamic, dynamic, dynamic>(
+        item0,
+        item1,
+        item2,
+        item3,
+        item4,
+        item5,
+        item6,
+        item7,
+        item8,
+      );
 
   /// Converts this tuple into a map for JSON serialization.
   Map<String, dynamic> toJson() => {

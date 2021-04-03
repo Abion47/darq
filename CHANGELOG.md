@@ -1,3 +1,8 @@
+## [1.0.1]
+
+* Fixed a bug with `Tuple.fromMap` that would've made it fail with `Tuple1` map representation.
+* Added `asType` and `asDynamic` methods to tuple classes for convenient casting of tuples.
+
 ## [1.0.0+1]
 
 * Corrected some parts of the README tuple section

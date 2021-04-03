@@ -111,11 +111,14 @@ For the uninitiated, tuples are similar to lists in concept that they contain mu
 
 This package exposes tuple classes from `Tuple0` up to `Tuple9`, depending on how many items the tuple contains. (Yes, I agree that `Tuple0` and `Tuple1` seem largely redundant, but I've seen them exist in the tuple libraries of many programming languages so it must serve some purpose or other, so I included them here all the same for completeness if nothing else.) Each tuple class includes the following features:
 
+* Constant constructors allow for efficient use of known tuple values.
 * Includes access to the item(s) by getter (`tuple.item2`) or by indexer(`tuple[2]`). (Note that access by indexer is not type-safe)
 * Factory constructor `fromJson` and method `toJson` means tuples are seralization-ready. 
 * Additional factory constructor `fromList` to generate a tuple from a list (automatically casting when specifying type parameters for the constructor).
+* An `asType` method allows freely casting the tuple from any assortment of types to any other assortment of types (provided the items are compatible with those types).
+  * Additionally, there is an `asDynamic` convenience method for casting a tuple to dynamic items.
 * Although tuples themselves are immutable, a `copyWith` method allows easy generation of duplicate tuples, optionally specifying new values for specific items.
-* Additionally, a `copyWithout` method allows selective filtering of items from a tuple resulting in a lower-order tuple.
+  * Additionally, a `copyWithout` method allows selective filtering of items from a tuple resulting in a lower-order tuple.
 * A `mapActions` method allows you to iterate over each item with an exhaustive list of type-safe callbacks.
 * Each tuple class extends `Iterable<dynamic>`, so it can be treated as a normal iterable (and thus combined with any darq extension method).
 * As `==` and `hashCode` are both implemented, tuples can be directly compared for equality or used as keys for maps and other hash sets.

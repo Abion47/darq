@@ -106,3 +106,4 @@ export 'extensions/try_single_or_default.dart';
 export 'extensions/try_single_where_or_default.dart';
 export 'extensions/union.dart';
 export 'extensions/zip.dart';
+export 'extensions/shake.dart';

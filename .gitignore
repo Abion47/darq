@@ -26,6 +26,7 @@ coverage/
 .history
 .svn/
 coverage.lcov
+coverage_badge.svg
 **/*.log
 
 # IntelliJ related

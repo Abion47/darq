@@ -26,14 +26,17 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
+      - name: Install coverage tools
+        run: dart pub global activate coverage
+
       - name: Analyze project source
         run: dart analyze
 
       - name: Run tests
-        run: dart test
+        run: dart test --coverage="coverage"
 
       - name: Generate code coverage report
-        run: ./script/coverage.sh
+        run: format_coverage --lcov --in=coverage --out=coverage.lcov --packages=.packages --report-on=lib
 
       - name: Upload coverage to codecov
         run: curl -s https://codecov.io/bash | bash

@@ -2,6 +2,7 @@
 [![github stars](https://img.shields.io/github/stars/abion47/darq.svg?style=flat&logo=github&colorB=deeppink&label=stars)](https://github.com/abion47/darq)
 [![license MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://github.com/abion47/darq/workflows/Dart/badge.svg)](https://github.com/abion47/darq/actions)
+[![Code Coverage](https://codecov.io/gh/abion47/darq/branch/master/graph/badge.svg)](https://codecov.io/gh/abion47/darq)
 
 A port of .NET's LINQ IEnumerable functions to Dart. This package extends the native `Iterable` type with all of the LINQ methods that do not exist in native Dart. Starting with version 0.5, this package also contains the extension methods from the [MoreLINQ](https://morelinq.github.io/) .NET library.
 

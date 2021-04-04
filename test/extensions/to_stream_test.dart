@@ -6,7 +6,7 @@ void main() {
     test('int list to stream', () {
       final input = [1, 2, 3, 4, 5];
       final result = input.toStream();
-      expect(result, emitsInOrder([1, 2, 3, 4, 5]));
+      expect(result, emitsInOrder(<int>[1, 2, 3, 4, 5]));
     });
   });
 }

@@ -8,7 +8,7 @@ void main() {
       final b = [5.0, 6.0, 7.0];
 
       final output = a.zip(b, (x, y) => '$x-$y');
-      expect(output, orderedEquals(['1-5.0', '2-6.0', '3-7.0']));
+      expect(output, orderedEquals(<String>['1-5.0', '2-6.0', '3-7.0']));
     });
   });
 }

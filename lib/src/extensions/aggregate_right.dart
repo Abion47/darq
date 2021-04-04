@@ -26,7 +26,7 @@ extension AggregateRightExtension<T> on Iterable<T> {
   ///
   ///       // Result: (a, (b, (c, d)))
   ///     }
-  T aggregateRight<TResult>(
+  T aggregateRight(
     T Function(T aggregate, T element) aggregator,
   ) {
     var reversed = reverse().iterator;

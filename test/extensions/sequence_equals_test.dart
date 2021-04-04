@@ -26,23 +26,5 @@ void main() {
       final result = list.sequenceEquals(['a', 'b', 'c', 'd', 'e', 'f']);
       expect(result, isFalse);
     });
-
-    test('Sequences match with outer selector', () {
-      final list = ['a', 'b', 'c', 'd', 'e'];
-      final result = list.sequenceEquals<String, String>(
-        ['A', 'B', 'C', 'D', 'E'],
-        innerSelector: (s) => s.toLowerCase(),
-      );
-      expect(result, isTrue);
-    });
-
-    test('Sequences match with inner selector', () {
-      final list = ['a', 'b', 'c'];
-      final result = list.sequenceEquals(
-        [97, 98, 99],
-        outerSelector: (s) => s.codeUnitAt(0),
-      );
-      expect(result, isTrue);
-    });
   });
 }

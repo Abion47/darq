@@ -16,7 +16,7 @@ void main() {
       expect(
         pets,
         orderedEquals(
-          [
+          <Pet>[
             barley,
             whiskers,
             boots,
@@ -30,7 +30,7 @@ void main() {
       expect(
         interim,
         orderedEquals(
-          [
+          <Pet>[
             whiskers,
             boots,
             daisy,
@@ -44,7 +44,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <Pet>[
             whiskers,
             daisy,
             boots,

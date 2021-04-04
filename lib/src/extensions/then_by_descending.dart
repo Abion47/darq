@@ -43,7 +43,7 @@ extension OrderedIterableExtensions<T> on Iterable<T> {
           'thenByDescending must be called immediately following a call to orderBy, orderByDescending, thenBy, or thenByDescending.');
     }
     keyComparer ??= EqualityComparer.forType<TKey>();
-    return (this as dynamic)
+    return (this as OrderedIterable<T>)
         .createOrderedIterable<TKey>(keySelector, keyComparer, true);
   }
 }

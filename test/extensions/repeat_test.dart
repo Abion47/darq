@@ -6,13 +6,13 @@ void main() {
     test('on ints', () {
       final list = [1, 2, 3];
       final result = list.repeat(3);
-      expect(result, orderedEquals([1, 2, 3, 1, 2, 3, 1, 2, 3]));
+      expect(result, orderedEquals(<int>[1, 2, 3, 1, 2, 3, 1, 2, 3]));
     });
 
     test('on ints with zero count', () {
       final list = [1, 2, 3];
       final result = list.repeat(0);
-      expect(result, orderedEquals([]));
+      expect(result, orderedEquals(<int>[]));
     });
 
     test('Error: on ints with negative count', () {

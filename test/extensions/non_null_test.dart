@@ -6,13 +6,13 @@ void main() {
     test('Filter nulls', () {
       final list = [1, null, 2, null, 3];
       final result = list.nonNull();
-      expect(result, orderedEquals([1, 2, 3]));
+      expect(result, orderedEquals(<int>[1, 2, 3]));
     });
 
     test('No nulls', () {
       final list = [1, 2, 3];
       final result = list.nonNull();
-      expect(result, orderedEquals([1, 2, 3]));
+      expect(result, orderedEquals(<int>[1, 2, 3]));
     });
   });
 }

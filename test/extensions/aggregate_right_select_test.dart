@@ -29,7 +29,7 @@ void main() {
     });
 
     test('on empty list', () {
-      final list = [];
+      final list = <String>[];
       final result = list.aggregateRightSelect<String>('xyz', (a, b) => a + b);
       expect(result, equals('xyz'));
     });

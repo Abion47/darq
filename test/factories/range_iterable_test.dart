@@ -6,7 +6,7 @@ void main() {
     test('Creating a range iterable', () {
       final e = RangeIterable(2, 5);
       expect(e, isA<Iterable<int>>());
-      expect(e, orderedEquals([2, 3, 4]));
+      expect(e, orderedEquals(<int>[2, 3, 4]));
       // Negative inclusive interval behavior
 
       // Default count behavior
@@ -28,49 +28,49 @@ void main() {
     test('Creating an inclusive range iterable', () {
       final e = RangeIterable(2, 5, inclusive: true);
       expect(e, isA<Iterable<int>>());
-      expect(e, orderedEquals([2, 3, 4, 5]));
+      expect(e, orderedEquals(<int>[2, 3, 4, 5]));
     });
 
     test('Creating a range iterable with step', () {
       final e = RangeIterable(2, 5, step: 2);
       expect(e, isA<Iterable<int>>());
-      expect(e, orderedEquals([2, 4]));
+      expect(e, orderedEquals(<int>[2, 4]));
     });
 
     test('Creating a range iterable with negative step', () {
       final e = RangeIterable(2, 5, step: -1);
       expect(e, isA<Iterable<int>>());
-      expect(e, orderedEquals([4, 3, 2]));
+      expect(e, orderedEquals(<int>[4, 3, 2]));
     });
 
     test('Creating an inclusive range iterable with negative step', () {
       final e = RangeIterable(2, 5, step: -1, inclusive: true);
       expect(e, isA<Iterable<int>>());
-      expect(e, orderedEquals([5, 4, 3, 2]));
+      expect(e, orderedEquals(<int>[5, 4, 3, 2]));
     });
 
     test('Creating a range iterable from count', () {
       final e = RangeIterable.count(2, 5);
       expect(e, isA<Iterable<int>>());
-      expect(e, orderedEquals([2, 3, 4, 5, 6]));
+      expect(e, orderedEquals(<int>[2, 3, 4, 5, 6]));
     });
 
     test('Creating a range iterable from zero count', () {
       final e = RangeIterable.count(2, 0);
       expect(e, isA<Iterable<int>>());
-      expect(e, orderedEquals([]));
+      expect(e, orderedEquals(<int>[]));
     });
 
     test('Creating a range iterable from count with step', () {
       final e = RangeIterable.count(2, 5, step: 2);
       expect(e, isA<Iterable<int>>());
-      expect(e, orderedEquals([2, 4, 6, 8, 10]));
+      expect(e, orderedEquals(<int>[2, 4, 6, 8, 10]));
     });
 
     test('Creating a range iterable from count with negative step', () {
       final e = RangeIterable.count(2, 5, step: -1);
       expect(e, isA<Iterable<int>>());
-      expect(e, orderedEquals([2, 1, 0, -1, -2]));
+      expect(e, orderedEquals(<int>[2, 1, 0, -1, -2]));
     });
 
     test('Error: end < start', () {

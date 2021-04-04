@@ -6,19 +6,19 @@ void main() {
     test('Insert all list', () {
       final Iterable<int> list = [1, 2, 3];
       final result = list.tryInsertAll(2, [4, 5, 6]);
-      expect(result, orderedEquals([1, 2, 4, 5, 6, 3]));
+      expect(result, orderedEquals(<int>[1, 2, 4, 5, 6, 3]));
     });
 
     test('Insert empty list', () {
       final Iterable<int> list = [1, 2, 3];
       final result = list.tryInsertAll(2, []);
-      expect(result, orderedEquals([1, 2, 3]));
+      expect(result, orderedEquals(<int>[1, 2, 3]));
     });
 
     test('Index past length of source', () {
       final Iterable<int> list = [1, 2, 3];
       final result = list.tryInsertAll(5, [4, 5]);
-      expect(result, orderedEquals([1, 2, 3]));
+      expect(result, orderedEquals(<int>[1, 2, 3]));
     });
 
     test('Error: index less than zero', () {

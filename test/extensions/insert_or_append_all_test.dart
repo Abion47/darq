@@ -6,13 +6,13 @@ void main() {
     test('Insert all list', () {
       final Iterable<int> list = [1, 2, 3];
       final result = list.insertOrAppendAll(2, [4, 5, 6]);
-      expect(result, orderedEquals([1, 2, 4, 5, 6, 3]));
+      expect(result, orderedEquals(<int>[1, 2, 4, 5, 6, 3]));
     });
 
     test('Insert empty list', () {
       final Iterable<int> list = [1, 2, 3];
       final result = list.insertOrAppendAll(2, []);
-      expect(result, orderedEquals([1, 2, 3]));
+      expect(result, orderedEquals(<int>[1, 2, 3]));
     });
 
     test('Append list', () {

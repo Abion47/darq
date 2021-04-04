@@ -15,6 +15,50 @@ extension ReverseExtension<T> on Iterable<T> {
   ///       // Result: [4, 3, 2, 1]
   ///     }
   Iterable<T> reverse() {
-    return toList().reversed;
+    return _ReversedIterable(this);
+  }
+}
+
+class _ReversedIterable<T> extends Iterable<T> {
+  final Iterable<T> _source;
+
+  _ReversedIterable(this._source);
+
+  @override
+  Iterator<T> get iterator => _ReversedIterator(this);
+}
+
+class _ReversedIterator<T> extends Iterator<T> {
+  final _ReversedIterable<T> _iterable;
+
+  _ReversedIterator(this._iterable);
+
+  late List<T> _reversed;
+  late T _current;
+  bool _initialized = false;
+  int _idx = -1;
+
+  @override
+  T get current => _current;
+
+  void initialize() {
+    _reversed = _iterable._source.toList().reversed.toList();
+    _initialized = true;
+  }
+
+  @override
+  bool moveNext() {
+    if (!_initialized) {
+      initialize();
+    }
+
+    _idx++;
+
+    if (_idx >= _reversed.length) {
+      return false;
+    }
+
+    _current = _reversed[_idx];
+    return true;
   }
 }

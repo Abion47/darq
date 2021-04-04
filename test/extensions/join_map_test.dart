@@ -13,7 +13,7 @@ void main() {
         outerKeySelector: (x) => x.key,
         innerKeySelector: (y) => y.key,
       );
-      expect(output, orderedEquals(['1_1.0', '2_2.0', '3_3.0']));
+      expect(output, orderedEquals(<String>['1_1.0', '2_2.0', '3_3.0']));
     });
   });
 }

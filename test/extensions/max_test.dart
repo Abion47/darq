@@ -28,7 +28,7 @@ void main() {
     });
 
     test('Error: on unsupported type with no comparer', () {
-      var list = [{}, {}];
+      var list = [Symbol.empty, Symbol.empty];
       var task = () => list.max();
       expect(task, throwsA(isA<ArgumentError>()));
     });

@@ -7,7 +7,7 @@ void main() {
       final list = ['a', 'b'];
       final other = ['c', 'd'];
       final result = list.cartesianSelect(other, (a, b) => '$a,$b');
-      expect(result, orderedEquals(['a,c', 'a,d', 'b,c', 'b,d']));
+      expect(result, orderedEquals(<String>['a,c', 'a,d', 'b,c', 'b,d']));
     });
 
     test('three lists', () {
@@ -22,7 +22,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <String>[
             'a,c,e',
             'a,c,f',
             'a,d,e',
@@ -50,7 +50,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <String>[
             'a,c,e,g',
             'a,c,e,h',
             'a,c,f,g',
@@ -88,7 +88,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <String>[
             'a,c,e,g,i',
             'a,c,e,g,j',
             'a,c,e,h,i',
@@ -144,7 +144,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <String>[
             'a,c,e,g,i,k',
             'a,c,e,g,i,l',
             'a,c,e,g,j,k',
@@ -234,7 +234,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <String>[
             'a,c,e,g,i,k,m',
             'a,c,e,g,i,k,n',
             'a,c,e,g,i,l,m',
@@ -390,7 +390,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <String>[
             'a,c,e,g,i,k,m,o',
             'a,c,e,g,i,k,m,p',
             'a,c,e,g,i,k,n,o',
@@ -676,7 +676,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <String>[
             'a,c,e,g,i,k,m,o,q',
             'a,c,e,g,i,k,m,o,r',
             'a,c,e,g,i,k,m,p,q',

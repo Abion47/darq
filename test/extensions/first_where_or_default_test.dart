@@ -10,7 +10,7 @@ void main() {
     });
 
     test('empty list with defaultValue', () {
-      final test = [];
+      final test = <int>[];
       final result = test.firstWhereOrDefault((i) => i.isOdd, defaultValue: -1);
       expect(result, -1);
     });

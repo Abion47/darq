@@ -46,7 +46,7 @@ void main() {
         },
         {
           'ownerName': 'Benny',
-          'pets': [],
+          'pets': <String>[],
         },
       ]);
     });
@@ -68,7 +68,7 @@ void main() {
 
       final result2 = people.groupJoin<Pet, String, Map<String, dynamic>>(
         pets,
-        (person, pets) => {
+        (person, pets) => <String, dynamic>{
           'ownerName': person.name,
           'pets': pets.map((pet) => pet.name),
         },
@@ -93,7 +93,7 @@ void main() {
           'ownerName': 'Charlotte',
           'pets': ['Whiskers']
         },
-        {'ownerName': 'Benny', 'pets': []},
+        {'ownerName': 'Benny', 'pets': <String>[]},
       ]);
     });
   });

@@ -6,7 +6,7 @@ void main() {
     test('Count empty list', () {
       final list = <int>[];
       final result = list.countBy((i) => i);
-      expect(result, orderedEquals([]));
+      expect(result, orderedEquals(<int>[]));
     });
 
     test('Count odds and evens', () {

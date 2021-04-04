@@ -124,9 +124,9 @@ class EqualityComparer<T> {
 
   static final Map<Type, EqualityComparer> _registeredEqualityComparers = {
     dynamic: EqualityComparer<dynamic>(
-      comparer: (left, right) => left == right,
-      hasher: (value) => value.hashCode,
-      sorter: (left, right) => 0,
+      comparer: (dynamic left, dynamic right) => left == right,
+      hasher: (dynamic value) => value.hashCode,
+      sorter: (dynamic left, dynamic right) => 0,
     ),
     num: EqualityComparer<num>(
       comparer: (left, right) => left == right,

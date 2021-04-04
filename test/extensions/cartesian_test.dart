@@ -10,7 +10,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <Tuple2<String, String>>[
             Tuple2('a', 'c'),
             Tuple2('a', 'd'),
             Tuple2('b', 'c'),
@@ -31,7 +31,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <Tuple3<String, String, String>>[
             Tuple3('a', 'c', 'e'),
             Tuple3('a', 'c', 'f'),
             Tuple3('a', 'd', 'e'),
@@ -58,7 +58,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <Tuple4<String, String, String, String>>[
             Tuple4('a', 'c', 'e', 'g'),
             Tuple4('a', 'c', 'e', 'h'),
             Tuple4('a', 'c', 'f', 'g'),
@@ -95,7 +95,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <Tuple5<String, String, String, String, String>>[
             Tuple5('a', 'c', 'e', 'g', 'i'),
             Tuple5('a', 'c', 'e', 'g', 'j'),
             Tuple5('a', 'c', 'e', 'h', 'i'),
@@ -150,7 +150,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <Tuple6<String, String, String, String, String, String>>[
             Tuple6('a', 'c', 'e', 'g', 'i', 'k'),
             Tuple6('a', 'c', 'e', 'g', 'i', 'l'),
             Tuple6('a', 'c', 'e', 'g', 'j', 'k'),
@@ -239,7 +239,7 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <Tuple7<String, String, String, String, String, String, String>>[
             Tuple7('a', 'c', 'e', 'g', 'i', 'k', 'm'),
             Tuple7('a', 'c', 'e', 'g', 'i', 'k', 'n'),
             Tuple7('a', 'c', 'e', 'g', 'i', 'l', 'm'),
@@ -394,7 +394,9 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <
+              Tuple8<String, String, String, String, String, String, String,
+                  String>>[
             Tuple8('a', 'c', 'e', 'g', 'i', 'k', 'm', 'o'),
             Tuple8('a', 'c', 'e', 'g', 'i', 'k', 'm', 'p'),
             Tuple8('a', 'c', 'e', 'g', 'i', 'k', 'n', 'o'),
@@ -679,7 +681,9 @@ void main() {
       expect(
         result,
         orderedEquals(
-          [
+          <
+              Tuple9<String, String, String, String, String, String, String,
+                  String, String>>[
             Tuple9('a', 'c', 'e', 'g', 'i', 'k', 'm', 'o', 'q'),
             Tuple9('a', 'c', 'e', 'g', 'i', 'k', 'm', 'o', 'r'),
             Tuple9('a', 'c', 'e', 'g', 'i', 'k', 'm', 'p', 'q'),

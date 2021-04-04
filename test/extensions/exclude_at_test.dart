@@ -6,13 +6,13 @@ void main() {
     test('Exclude at index', () {
       final list = [1, 2, 3, 4, 5];
       final result = list.excludeAt(2);
-      expect(result, orderedEquals([1, 2, 4, 5]));
+      expect(result, orderedEquals(<int>[1, 2, 4, 5]));
     });
 
     test('Index greater than length', () {
       final list = [1, 2, 3, 4, 5];
       final result = list.excludeAt(5);
-      expect(result, orderedEquals([1, 2, 3, 4, 5]));
+      expect(result, orderedEquals(<int>[1, 2, 3, 4, 5]));
     });
 
     test('Error: Index less than zero', () {

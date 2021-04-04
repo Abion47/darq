@@ -6,7 +6,7 @@ void main() {
     test('on ints', () {
       final list = [1, 2, 3, 4];
       final result = list.preScan(0, (a, b) => a + b);
-      expect(result, orderedEquals([0, 1, 3, 6]));
+      expect(result, orderedEquals(<int>[0, 1, 3, 6]));
     });
   });
 }

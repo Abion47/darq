@@ -24,13 +24,13 @@ extension IntersectExtension<T> on Iterable<T> {
   ///
   ///       // Result: [3, 4]
   ///     }
-  Iterable<T> intersect<TKey>(
+  Iterable<T> intersect(
     Iterable<T> other, [
-    TKey Function(T element)? selector,
+    dynamic Function(T element)? selector,
   ]) sync* {
-    selector ??= (T v) => v as TKey;
+    selector ??= (T v) => v;
 
-    final set = Set<TKey>.from(other.map(selector));
+    final set = Set<dynamic>.from(other.map<dynamic>(selector));
     for (var v in this) {
       if (set.contains(selector(v))) yield v;
     }

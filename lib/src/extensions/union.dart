@@ -27,11 +27,11 @@ extension UnionExtension<T> on Iterable<T> {
   ///
   ///       // Result: [1, 2, 3, 4, 5, 6]
   ///     }
-  Iterable<T> union<TKey>(Iterable<T> other,
-      [TKey Function(T element)? selector]) sync* {
-    selector ??= (T v) => v as TKey;
+  Iterable<T> union(Iterable<T> other,
+      [dynamic Function(T element)? selector]) sync* {
+    selector ??= (T v) => v as dynamic;
 
-    final set = <TKey>{};
+    final set = <dynamic>{};
 
     for (var v in this) {
       if (set.add(selector(v))) {

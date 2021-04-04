@@ -10,7 +10,7 @@ void main() {
     });
 
     test('Count empty list', () {
-      final list = [];
+      final list = <int>[];
       final result = list.count();
       expect(result, equals(0));
     });

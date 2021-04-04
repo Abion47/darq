@@ -6,19 +6,19 @@ void main() {
     test('Pad start with value', () {
       final list = [1, 2];
       final result = list.padStart(3, padding: 3);
-      expect(result, orderedEquals([3, 1, 2]));
+      expect(result, orderedEquals(<int>[3, 1, 2]));
     });
 
     test('Pad start long with value', () {
       final list = [1, 2];
       final result = list.padStart(10, padding: 3);
-      expect(result, orderedEquals([3, 3, 3, 3, 3, 3, 3, 3, 1, 2]));
+      expect(result, orderedEquals(<int>[3, 3, 3, 3, 3, 3, 3, 3, 1, 2]));
     });
 
     test('Pad start list already long enough', () {
       final list = [1, 2, 3, 4];
       final result = list.padStart(3, padding: 5);
-      expect(result, orderedEquals([1, 2, 3, 4]));
+      expect(result, orderedEquals(<int>[1, 2, 3, 4]));
     });
   });
 }

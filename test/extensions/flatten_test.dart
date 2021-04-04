@@ -10,7 +10,7 @@ void main() {
         ['c', 'd']
       ];
       final result = list.flatten();
-      expect(result, orderedEquals(['a', 'b', 'c', 'd']));
+      expect(result, orderedEquals(<String>['a', 'b', 'c', 'd']));
     });
   });
 }

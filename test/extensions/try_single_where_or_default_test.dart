@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 void main() {
   group('trySingleWhereOrDefault', () {
     test('on empty list', () {
-      final list = [];
+      final list = <int>[];
       final result = list.trySingleWhereOrDefault((x) => x == 2);
       expect(result, isNull);
     });
@@ -22,7 +22,7 @@ void main() {
     });
 
     test('on empty list with default value', () {
-      final list = [];
+      final list = <int>[];
       final result =
           list.trySingleWhereOrDefault((x) => x == 2, defaultValue: 3);
       expect(result, equals(3));

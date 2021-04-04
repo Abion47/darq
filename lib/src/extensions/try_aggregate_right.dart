@@ -27,7 +27,7 @@ extension TryAggregateRightExtension<T> on Iterable<T> {
   ///
   ///       // Result: (a, (b, (c, d)))
   ///     }
-  T? tryAggregateRight<TResult>(
+  T? tryAggregateRight(
     T Function(T aggregate, T element) aggregator, {
     T? defaultValue,
   }) {

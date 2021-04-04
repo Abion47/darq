@@ -13,7 +13,7 @@ void main() {
       generator.consume();
       generator.consume();
       final result = generator.toList();
-      expect(result, orderedEquals([1]));
+      expect(result, orderedEquals(<int>[1]));
       expect(called, 3);
     });
 
@@ -27,7 +27,7 @@ void main() {
       generator.consume();
       generator.consume();
       final result = generator.toList();
-      expect(result, orderedEquals([1]));
+      expect(result, orderedEquals(<int>[1]));
       expect(called, 1);
     });
   });

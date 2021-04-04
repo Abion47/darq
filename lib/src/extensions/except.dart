@@ -24,13 +24,13 @@ extension ExceptExtension<T> on Iterable<T> {
   ///
   ///       // Result: [1, 2]
   ///     }
-  Iterable<T> except<TKey>(
+  Iterable<T> except(
     Iterable<T> other, [
-    TKey Function(T element)? selector,
+    dynamic Function(T element)? selector,
   ]) sync* {
-    selector ??= (T v) => v as TKey;
+    selector ??= (T v) => v;
 
-    final set = Set<TKey>.from(other.map(selector));
+    final set = Set<dynamic>.from(other.map<dynamic>(selector));
     for (var v in this) {
       if (!set.contains(selector(v))) yield v;
     }

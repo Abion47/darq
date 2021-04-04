@@ -6,13 +6,13 @@ void main() {
     test('Positive offset with default value', () {
       final list = ['a', 'b', 'c', 'd'];
       final result = list.leadSelect(2, (a, b) => '$a$b', defaultValue: 'e');
-      expect(result, orderedEquals(['ac', 'bd', 'ce', 'de']));
+      expect(result, orderedEquals(<String>['ac', 'bd', 'ce', 'de']));
     });
 
     test('Negative offset with default value', () {
       final list = ['a', 'b', 'c', 'd'];
       final result = list.leadSelect(-2, (a, b) => '$a$b', defaultValue: 'e');
-      expect(result, orderedEquals(['ac', 'bd', 'ce', 'de']));
+      expect(result, orderedEquals(<String>['ac', 'bd', 'ce', 'de']));
     });
   });
 }

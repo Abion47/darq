@@ -7,14 +7,14 @@ void main() {
       var list = [0, 1, 2];
       var other = [3, 4, 5];
       var result = list.interleave(other);
-      expect(result, orderedEquals([0, 3, 1, 4, 2, 5]));
+      expect(result, orderedEquals(<int>[0, 3, 1, 4, 2, 5]));
     });
 
     test('Interleave unequal lists', () {
       var list = [0, 1];
       var others = [5];
       var result = list.interleave(others);
-      expect(result, orderedEquals([0, 5, 1]));
+      expect(result, orderedEquals(<int>[0, 5, 1]));
     });
   });
 }

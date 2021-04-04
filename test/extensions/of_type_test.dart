@@ -12,12 +12,12 @@ void main() {
         1.0,
         '2',
         true,
-        [],
+        <int>[],
         <String>{},
         <String, int>{},
         Pet('Spot', 4),
         Person('Bill'),
-        () => {},
+        () => <String, dynamic>{},
       ];
       final result = test.ofType<int>();
       expect(result, orderedEquals(test.take(1)));
@@ -29,12 +29,12 @@ void main() {
         1.0,
         '2',
         true,
-        [],
+        <int>[],
         <String>{},
         <String, int>{},
         Pet('Spot', 4),
         Person('Bill'),
-        () => {},
+        () => <String, dynamic>{},
       ];
       final result = test.ofType2<int, double>();
       expect(result, orderedEquals(test.take(2)));
@@ -46,12 +46,12 @@ void main() {
         1.0,
         '2',
         true,
-        [],
+        <int>[],
         <String>{},
         <String, int>{},
         Pet('Spot', 4),
         Person('Bill'),
-        () => {},
+        () => <String, dynamic>{},
       ];
       final result = test.ofType3<int, double, String>();
       expect(result, orderedEquals(test.take(3)));
@@ -63,12 +63,12 @@ void main() {
         1.0,
         '2',
         true,
-        [],
+        <int>[],
         <String>{},
         <String, int>{},
         Pet('Spot', 4),
         Person('Bill'),
-        () => {},
+        () => <String, dynamic>{},
       ];
       var result = test.ofType4<int, double, String, bool>();
       expect(result, orderedEquals(test.take(4)));
@@ -80,12 +80,12 @@ void main() {
         1.0,
         '2',
         true,
-        [],
+        <int>[],
         <String>{},
         <String, int>{},
         Pet('Spot', 4),
         Person('Bill'),
-        () => {},
+        () => <String, dynamic>{},
       ];
       final result = test.ofType5<int, double, String, bool, List>();
       expect(result, orderedEquals(test.take(5)));
@@ -97,12 +97,12 @@ void main() {
         1.0,
         '2',
         true,
-        [],
+        <int>[],
         <String>{},
         <String, int>{},
         Pet('Spot', 4),
         Person('Bill'),
-        () => {},
+        () => <String, dynamic>{},
       ];
       final result = test.ofType6<int, double, String, bool, List, Set>();
       expect(result, orderedEquals(test.take(6)));
@@ -114,12 +114,12 @@ void main() {
         1.0,
         '2',
         true,
-        [],
+        <int>[],
         <String>{},
         <String, int>{},
         Pet('Spot', 4),
         Person('Bill'),
-        () => {},
+        () => <String, dynamic>{},
       ];
       final result = test.ofType7<int, double, String, bool, List, Set, Map>();
       expect(result, orderedEquals(test.take(7)));
@@ -131,12 +131,12 @@ void main() {
         1.0,
         '2',
         true,
-        [],
+        <int>[],
         <String>{},
         <String, int>{},
         Pet('Spot', 4),
         Person('Bill'),
-        () => {},
+        () => <String, dynamic>{},
       ];
       final result =
           test.ofType8<int, double, String, bool, List, Set, Map, Pet>();
@@ -149,12 +149,12 @@ void main() {
         1.0,
         '2',
         true,
-        [],
+        <int>[],
         <String>{},
         <String, int>{},
         Pet('Spot', 4),
         Person('Bill'),
-        () => {},
+        () => <String, dynamic>{},
       ];
       final result = test
           .ofType9<int, double, String, bool, List, Set, Map, Pet, Person>();

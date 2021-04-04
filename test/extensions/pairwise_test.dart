@@ -7,9 +7,9 @@ void main() {
       final list = [1, 2, 3, 4];
       final result = list.pairwise();
       expect(result.length, 3);
-      expect(result.elementAt(0), orderedEquals([1, 2]));
-      expect(result.elementAt(1), orderedEquals([2, 3]));
-      expect(result.elementAt(2), orderedEquals([3, 4]));
+      expect(result.elementAt(0), orderedEquals(<int>[1, 2]));
+      expect(result.elementAt(1), orderedEquals(<int>[2, 3]));
+      expect(result.elementAt(2), orderedEquals(<int>[3, 4]));
     });
   });
 }

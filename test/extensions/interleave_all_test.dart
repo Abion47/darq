@@ -10,7 +10,7 @@ void main() {
         [6, 7, 8]
       ];
       var result = list.interleaveAll(others);
-      expect(result, orderedEquals([0, 3, 6, 1, 4, 7, 2, 5, 8]));
+      expect(result, orderedEquals(<int>[0, 3, 6, 1, 4, 7, 2, 5, 8]));
     });
 
     test('Interleave unequal lists', () {
@@ -20,7 +20,7 @@ void main() {
         [5]
       ];
       var result = list.interleaveAll(others);
-      expect(result, orderedEquals([0, 2, 5, 1, 3, 4]));
+      expect(result, orderedEquals(<int>[0, 2, 5, 1, 3, 4]));
     });
   });
 }

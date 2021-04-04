@@ -6,7 +6,7 @@ void main() {
     test('on ints', () {
       final list = [1, 2, 3, 4, 5];
       final result = list.skipLast(3);
-      expect(result, orderedEquals([1, 2]));
+      expect(result, orderedEquals(<int>[1, 2]));
     });
   });
 }

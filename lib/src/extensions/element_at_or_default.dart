@@ -32,7 +32,7 @@ extension ElementAtOrDefaultExtension<T> on Iterable<T> {
     }
 
     if (this is List) {
-      final asList = this as List;
+      final asList = this as List<T>;
       if (index >= asList.length) return defaultValue;
       return asList[index];
     }

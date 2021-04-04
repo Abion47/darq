@@ -4,13 +4,13 @@ import 'package:test/test.dart';
 void main() {
   group('trySingleOrDefault', () {
     test('on empty list', () {
-      final list = [];
+      final list = <int>[];
       final result = list.trySingleOrDefault();
       expect(result, isNull);
     });
 
     test('on empty list with default value', () {
-      final list = [];
+      final list = <int>[];
       final result = list.trySingleOrDefault(defaultValue: 3);
       expect(result, equals(3));
     });

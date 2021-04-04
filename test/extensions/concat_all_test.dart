@@ -10,7 +10,7 @@ void main() {
         [4],
         [5]
       ]);
-      expect(result, orderedEquals([0, 1, 2, 3, 4, 5]));
+      expect(result, orderedEquals(<int>[0, 1, 2, 3, 4, 5]));
     });
   });
 }

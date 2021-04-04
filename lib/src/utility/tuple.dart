@@ -2,35 +2,94 @@ abstract class Tuple extends Iterable<dynamic> {
   const Tuple();
 
   /// Utility method for creating a [Tuple0].
-  factory Tuple.t0() => Tuple0();
+  static Tuple t0() => Tuple0();
 
   /// Utility method for creating a [Tuple1].
-  factory Tuple.t1(a) => Tuple1(a);
+  static Tuple1 t1<T>(T a) => Tuple1<T>(a);
 
   /// Utility method for creating a [Tuple2].
-  factory Tuple.t2(a, b) => Tuple2(a, b);
+  static Tuple2 t2<T0, T1>(
+    T0 a,
+    T1 b,
+  ) =>
+      Tuple2<T0, T1>(a, b);
 
   /// Utility method for creating a [Tuple3].
-  factory Tuple.t3(a, b, c) => Tuple3(a, b, c);
+  static Tuple3 t3<T0, T1, T2>(
+    T0 a,
+    T1 b,
+    T2 c,
+  ) =>
+      Tuple3<T0, T1, T2>(a, b, c);
 
   /// Utility method for creating a [Tuple4].
-  factory Tuple.t4(a, b, c, d) => Tuple4(a, b, c, d);
+  static Tuple4 t4<T0, T1, T2, T3>(
+    T0 a,
+    T1 b,
+    T2 c,
+    T3 d,
+  ) =>
+      Tuple4<T0, T1, T2, T3>(a, b, c, d);
 
   /// Utility method for creating a [Tuple5].
-  factory Tuple.t5(a, b, c, d, e) => Tuple5(a, b, c, d, e);
+  static Tuple5 t5<T0, T1, T2, T3, T4>(
+    T0 a,
+    T1 b,
+    T2 c,
+    T3 d,
+    T4 e,
+  ) =>
+      Tuple5<T0, T1, T2, T3, T4>(a, b, c, d, e);
 
   /// Utility method for creating a [Tuple6].
-  factory Tuple.t6(a, b, c, d, e, f) => Tuple6(a, b, c, d, e, f);
+  static Tuple6 t6<T0, T1, T2, T3, T4, T5>(
+    T0 a,
+    T1 b,
+    T2 c,
+    T3 d,
+    T4 e,
+    T5 f,
+  ) =>
+      Tuple6<T0, T1, T2, T3, T4, T5>(a, b, c, d, e, f);
 
   /// Utility method for creating a [Tuple7].
-  factory Tuple.t7(a, b, c, d, e, f, g) => Tuple7(a, b, c, d, e, f, g);
+  static Tuple7 t7<T0, T1, T2, T3, T4, T5, T6>(
+    T0 a,
+    T1 b,
+    T2 c,
+    T3 d,
+    T4 e,
+    T5 f,
+    T6 g,
+  ) =>
+      Tuple7<T0, T1, T2, T3, T4, T5, T6>(a, b, c, d, e, f, g);
 
   /// Utility method for creating a [Tuple8].
-  factory Tuple.t8(a, b, c, d, e, f, g, h) => Tuple8(a, b, c, d, e, f, g, h);
+  static Tuple8 t8<T0, T1, T2, T3, T4, T5, T6, T7>(
+    T0 a,
+    T1 b,
+    T2 c,
+    T3 d,
+    T4 e,
+    T5 f,
+    T6 g,
+    T7 h,
+  ) =>
+      Tuple8<T0, T1, T2, T3, T4, T5, T6, T7>(a, b, c, d, e, f, g, h);
 
   /// Utility method for creating a [Tuple9].
-  factory Tuple.t9(a, b, c, d, e, f, g, h, i) =>
-      Tuple9(a, b, c, d, e, f, g, h, i);
+  static Tuple9 t9<T0, T1, T2, T3, T4, T5, T6, T7, T8>(
+    T0 a,
+    T1 b,
+    T2 c,
+    T3 d,
+    T4 e,
+    T5 f,
+    T6 g,
+    T7 h,
+    T8 i,
+  ) =>
+      Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8>(a, b, c, d, e, f, g, h, i);
 
   /// Creates a tuple from a map/JSON source.
   ///
@@ -48,34 +107,57 @@ abstract class Tuple extends Iterable<dynamic> {
         case 0:
           return Tuple0.fromJson(map);
         case 1:
-          return Tuple1.fromJson(map);
+          return Tuple1<dynamic>.fromJson(map);
         case 2:
-          return Tuple2.fromJson(map);
+          return Tuple2<dynamic, dynamic>.fromJson(map);
         case 3:
-          return Tuple3.fromJson(map);
+          return Tuple3<dynamic, dynamic, dynamic>.fromJson(map);
         case 4:
-          return Tuple4.fromJson(map);
+          return Tuple4<dynamic, dynamic, dynamic, dynamic>.fromJson(map);
         case 5:
-          return Tuple5.fromJson(map);
+          return Tuple5<dynamic, dynamic, dynamic, dynamic, dynamic>.fromJson(
+              map);
         case 6:
-          return Tuple6.fromJson(map);
+          return Tuple6<dynamic, dynamic, dynamic, dynamic, dynamic,
+              dynamic>.fromJson(map);
         case 7:
-          return Tuple7.fromJson(map);
+          return Tuple7<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+              dynamic>.fromJson(map);
         case 8:
-          return Tuple8.fromJson(map);
+          return Tuple8<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+              dynamic, dynamic>.fromJson(map);
         case 9:
-          return Tuple9.fromJson(map);
+          return Tuple9<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+              dynamic, dynamic, dynamic>.fromJson(map);
       }
     }
-    if (map.containsKey('item8')) return Tuple9.fromJson(map);
-    if (map.containsKey('item7')) return Tuple8.fromJson(map);
-    if (map.containsKey('item6')) return Tuple7.fromJson(map);
-    if (map.containsKey('item5')) return Tuple6.fromJson(map);
-    if (map.containsKey('item4')) return Tuple5.fromJson(map);
-    if (map.containsKey('item3')) return Tuple4.fromJson(map);
-    if (map.containsKey('item2')) return Tuple3.fromJson(map);
-    if (map.containsKey('item1')) return Tuple2.fromJson(map);
-    if (map.containsKey('item')) return Tuple1.fromJson(map);
+    if (map.containsKey('item8')) {
+      return Tuple9<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+          dynamic, dynamic, dynamic>.fromJson(map);
+    }
+    if (map.containsKey('item7')) {
+      return Tuple8<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+          dynamic, dynamic>.fromJson(map);
+    }
+    if (map.containsKey('item6')) {
+      return Tuple7<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+          dynamic>.fromJson(map);
+    }
+    if (map.containsKey('item5')) {
+      return Tuple6<dynamic, dynamic, dynamic, dynamic, dynamic,
+          dynamic>.fromJson(map);
+    }
+    if (map.containsKey('item4')) {
+      return Tuple5<dynamic, dynamic, dynamic, dynamic, dynamic>.fromJson(map);
+    }
+    if (map.containsKey('item3')) {
+      return Tuple4<dynamic, dynamic, dynamic, dynamic>.fromJson(map);
+    }
+    if (map.containsKey('item2')) {
+      return Tuple3<dynamic, dynamic, dynamic>.fromJson(map);
+    }
+    if (map.containsKey('item1')) return Tuple2<dynamic, dynamic>.fromJson(map);
+    if (map.containsKey('item')) return Tuple1<dynamic>.fromJson(map);
     return Tuple0.fromJson(map);
   }
 
@@ -90,23 +172,28 @@ abstract class Tuple extends Iterable<dynamic> {
       case 0:
         return Tuple0();
       case 1:
-        return Tuple1.fromList(items);
+        return Tuple1<dynamic>.fromList(items);
       case 2:
-        return Tuple2.fromList(items);
+        return Tuple2<dynamic, dynamic>.fromList(items);
       case 3:
-        return Tuple3.fromList(items);
+        return Tuple3<dynamic, dynamic, dynamic>.fromList(items);
       case 4:
-        return Tuple4.fromList(items);
+        return Tuple4<dynamic, dynamic, dynamic, dynamic>.fromList(items);
       case 5:
-        return Tuple5.fromList(items);
+        return Tuple5<dynamic, dynamic, dynamic, dynamic, dynamic>.fromList(
+            items);
       case 6:
-        return Tuple6.fromList(items);
+        return Tuple6<dynamic, dynamic, dynamic, dynamic, dynamic,
+            dynamic>.fromList(items);
       case 7:
-        return Tuple7.fromList(items);
+        return Tuple7<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+            dynamic>.fromList(items);
       case 8:
-        return Tuple8.fromList(items);
+        return Tuple8<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+            dynamic, dynamic>.fromList(items);
       case 9:
-        return Tuple9.fromList(items);
+        return Tuple9<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+            dynamic, dynamic, dynamic>.fromList(items);
     }
 
     throw StateError('Unknown error, this shouldn\'t happen');
@@ -169,7 +256,7 @@ class Tuple0 extends Tuple {
   /// Converts this tuple into a map for JSON serialization.
   ///
   /// (For [Tuple0], this method returns an empty map.)
-  Map<String, dynamic> toJson() => {};
+  Map<String, dynamic> toJson() => <String, dynamic>{};
 
   /// A utility method for mapping a function to every item in this tuple.
   ///
@@ -210,7 +297,7 @@ class Tuple1<T> extends Tuple {
   const Tuple1(this.item);
 
   /// Creates an tuple from a map/JSON source.
-  factory Tuple1.fromJson(Map<String, dynamic> map) => Tuple1(map['item']);
+  factory Tuple1.fromJson(Map<String, dynamic> map) => Tuple1(map['item'] as T);
 
   /// Creates an tuple from a list source.
   factory Tuple1.fromList(List list, [bool trim = false]) {
@@ -239,7 +326,7 @@ class Tuple1<T> extends Tuple {
 
   /// Creates a copy tuple with the elements from this tuple with the value of
   /// each item optionally overridden.
-  Tuple1 copyWith(T? item) => Tuple1(item ?? this.item);
+  Tuple1 copyWith(T? item) => Tuple1<T>(item ?? this.item);
 
   /// A list of boolean values indicating whether certain items in this
   /// tuple should be retained or discarded. The length of the list must
@@ -248,7 +335,7 @@ class Tuple1<T> extends Tuple {
     assert(indices.length == 1,
         'Length of given list must be same length as tuple.');
 
-    var values = [];
+    var values = <dynamic>[];
     for (var i = 0; i < indices.length; i++) {
       if (indices[i]) {
         values.add(this[i]);
@@ -259,7 +346,7 @@ class Tuple1<T> extends Tuple {
   }
 
   /// Converts this tuple into a map for JSON serialization.
-  Map<String, dynamic> toJson() => {'item': item};
+  Map<String, dynamic> toJson() => <String, dynamic>{'item': item};
 
   /// A utility method for mapping a function to every item in this tuple.
   void mapActions({
@@ -316,8 +403,8 @@ class Tuple2<T0, T1> extends Tuple {
 
   /// Creates an tuple from a map/JSON source.
   factory Tuple2.fromJson(Map<String, dynamic> map) => Tuple2(
-        map['item0'],
-        map['item1'],
+        map['item0'] as T0,
+        map['item1'] as T1,
       );
 
   /// Creates an tuple from a list source.
@@ -357,7 +444,7 @@ class Tuple2<T0, T1> extends Tuple {
     T0? item0,
     T1? item1,
   }) =>
-      Tuple2(
+      Tuple2<T0, T1>(
         item0 ?? this.item0,
         item1 ?? this.item1,
       );
@@ -369,7 +456,7 @@ class Tuple2<T0, T1> extends Tuple {
     assert(indices.length == 2,
         'Length of given list must be same length as tuple.');
 
-    var values = [];
+    var values = <dynamic>[];
     for (var i = 0; i < indices.length; i++) {
       if (indices[i]) {
         values.add(this[i]);
@@ -380,7 +467,7 @@ class Tuple2<T0, T1> extends Tuple {
   }
 
   /// Converts this tuple into a map for JSON serialization.
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'item0': item0,
         'item1': item1,
       };
@@ -446,9 +533,9 @@ class Tuple3<T0, T1, T2> extends Tuple {
 
   /// Creates an tuple from a map/JSON source.
   factory Tuple3.fromJson(Map<String, dynamic> map) => Tuple3(
-        map['item0'],
-        map['item1'],
-        map['item2'],
+        map['item0'] as T0,
+        map['item1'] as T1,
+        map['item2'] as T2,
       );
 
   /// Creates an tuple from a list source.
@@ -490,7 +577,7 @@ class Tuple3<T0, T1, T2> extends Tuple {
       );
 
   /// Converts this tuple into a map for JSON serialization.
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'item0': item0,
         'item1': item1,
         'item2': item2,
@@ -503,7 +590,7 @@ class Tuple3<T0, T1, T2> extends Tuple {
     T1? item1,
     T2? item2,
   }) =>
-      Tuple3(
+      Tuple3<T0, T1, T2>(
         item0 ?? this.item0,
         item1 ?? this.item1,
         item2 ?? this.item2,
@@ -516,7 +603,7 @@ class Tuple3<T0, T1, T2> extends Tuple {
     assert(indices.length == 3,
         'Length of given list must be same length as tuple.');
 
-    var values = [];
+    var values = <dynamic>[];
     for (var i = 0; i < indices.length; i++) {
       if (indices[i]) {
         values.add(this[i]);
@@ -598,10 +685,10 @@ class Tuple4<T0, T1, T2, T3> extends Tuple {
 
   /// Creates an tuple from a map/JSON source.
   factory Tuple4.fromJson(Map<String, dynamic> map) => Tuple4(
-        map['item0'],
-        map['item1'],
-        map['item2'],
-        map['item3'],
+        map['item0'] as T0,
+        map['item1'] as T1,
+        map['item2'] as T2,
+        map['item3'] as T3,
       );
 
   /// Creates an tuple from a list source.
@@ -646,7 +733,7 @@ class Tuple4<T0, T1, T2, T3> extends Tuple {
       );
 
   /// Converts this tuple into a map for JSON serialization.
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'item0': item0,
         'item1': item1,
         'item2': item2,
@@ -661,7 +748,7 @@ class Tuple4<T0, T1, T2, T3> extends Tuple {
     T2? item2,
     T3? item3,
   }) =>
-      Tuple4(
+      Tuple4<T0, T1, T2, T3>(
         item0 ?? this.item0,
         item1 ?? this.item1,
         item2 ?? this.item2,
@@ -675,7 +762,7 @@ class Tuple4<T0, T1, T2, T3> extends Tuple {
     assert(indices.length == 4,
         'Length of given list must be same length as tuple.');
 
-    var values = [];
+    var values = <dynamic>[];
     for (var i = 0; i < indices.length; i++) {
       if (indices[i]) {
         values.add(this[i]);
@@ -765,11 +852,11 @@ class Tuple5<T0, T1, T2, T3, T4> extends Tuple {
 
   /// Creates an tuple from a map/JSON source.
   factory Tuple5.fromJson(Map<String, dynamic> map) => Tuple5(
-        map['item0'],
-        map['item1'],
-        map['item2'],
-        map['item3'],
-        map['item4'],
+        map['item0'] as T0,
+        map['item1'] as T1,
+        map['item2'] as T2,
+        map['item3'] as T3,
+        map['item4'] as T4,
       );
 
   /// Creates an tuple from a list source.
@@ -821,7 +908,7 @@ class Tuple5<T0, T1, T2, T3, T4> extends Tuple {
       );
 
   /// Converts this tuple into a map for JSON serialization.
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'item0': item0,
         'item1': item1,
         'item2': item2,
@@ -838,7 +925,7 @@ class Tuple5<T0, T1, T2, T3, T4> extends Tuple {
     T3? item3,
     T4? item4,
   }) =>
-      Tuple5(
+      Tuple5<T0, T1, T2, T3, T4>(
         item0 ?? this.item0,
         item1 ?? this.item1,
         item2 ?? this.item2,
@@ -853,7 +940,7 @@ class Tuple5<T0, T1, T2, T3, T4> extends Tuple {
     assert(indices.length == 5,
         'Length of given list must be same length as tuple.');
 
-    var values = [];
+    var values = <dynamic>[];
     for (var i = 0; i < indices.length; i++) {
       if (indices[i]) {
         values.add(this[i]);
@@ -951,12 +1038,12 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Tuple {
 
   /// Creates an tuple from a map/JSON source.
   factory Tuple6.fromJson(Map<String, dynamic> map) => Tuple6(
-        map['item0'],
-        map['item1'],
-        map['item2'],
-        map['item3'],
-        map['item4'],
-        map['item5'],
+        map['item0'] as T0,
+        map['item1'] as T1,
+        map['item2'] as T2,
+        map['item3'] as T3,
+        map['item4'] as T4,
+        map['item5'] as T5,
       );
 
   /// Creates an tuple from a list source.
@@ -1012,7 +1099,7 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Tuple {
       );
 
   /// Converts this tuple into a map for JSON serialization.
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'item0': item0,
         'item1': item1,
         'item2': item2,
@@ -1031,7 +1118,7 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Tuple {
     T4? item4,
     T5? item5,
   }) =>
-      Tuple6(
+      Tuple6<T0, T1, T2, T3, T4, T5>(
         item0 ?? this.item0,
         item1 ?? this.item1,
         item2 ?? this.item2,
@@ -1047,7 +1134,7 @@ class Tuple6<T0, T1, T2, T3, T4, T5> extends Tuple {
     assert(indices.length == 6,
         'Length of given list must be same length as tuple.');
 
-    var values = [];
+    var values = <dynamic>[];
     for (var i = 0; i < indices.length; i++) {
       if (indices[i]) {
         values.add(this[i]);
@@ -1153,13 +1240,13 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Tuple {
 
   /// Creates an tuple from a map/JSON source.
   factory Tuple7.fromJson(Map<String, dynamic> map) => Tuple7(
-        map['item0'],
-        map['item1'],
-        map['item2'],
-        map['item3'],
-        map['item4'],
-        map['item5'],
-        map['item6'],
+        map['item0'] as T0,
+        map['item1'] as T1,
+        map['item2'] as T2,
+        map['item3'] as T3,
+        map['item4'] as T4,
+        map['item5'] as T5,
+        map['item6'] as T6,
       );
 
   /// Creates an tuple from a list source.
@@ -1220,7 +1307,7 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Tuple {
           );
 
   /// Converts this tuple into a map for JSON serialization.
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'item0': item0,
         'item1': item1,
         'item2': item2,
@@ -1241,7 +1328,7 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Tuple {
     T5? item5,
     T6? item6,
   }) =>
-      Tuple7(
+      Tuple7<T0, T1, T2, T3, T4, T5, T6>(
         item0 ?? this.item0,
         item1 ?? this.item1,
         item2 ?? this.item2,
@@ -1258,7 +1345,7 @@ class Tuple7<T0, T1, T2, T3, T4, T5, T6> extends Tuple {
     assert(indices.length == 7,
         'Length of given list must be same length as tuple.');
 
-    var values = [];
+    var values = <dynamic>[];
     for (var i = 0; i < indices.length; i++) {
       if (indices[i]) {
         values.add(this[i]);
@@ -1373,14 +1460,14 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Tuple {
 
   /// Creates an tuple from a map/JSON source.
   factory Tuple8.fromJson(Map<String, dynamic> map) => Tuple8(
-        map['item0'],
-        map['item1'],
-        map['item2'],
-        map['item3'],
-        map['item4'],
-        map['item5'],
-        map['item6'],
-        map['item7'],
+        map['item0'] as T0,
+        map['item1'] as T1,
+        map['item2'] as T2,
+        map['item3'] as T3,
+        map['item4'] as T4,
+        map['item5'] as T5,
+        map['item6'] as T6,
+        map['item7'] as T7,
       );
 
   /// Creates an tuple from a list source.
@@ -1446,7 +1533,7 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Tuple {
           );
 
   /// Converts this tuple into a map for JSON serialization.
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'item0': item0,
         'item1': item1,
         'item2': item2,
@@ -1469,7 +1556,7 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Tuple {
     T6? item6,
     T7? item7,
   }) =>
-      Tuple8(
+      Tuple8<T0, T1, T2, T3, T4, T5, T6, T7>(
         item0 ?? this.item0,
         item1 ?? this.item1,
         item2 ?? this.item2,
@@ -1487,7 +1574,7 @@ class Tuple8<T0, T1, T2, T3, T4, T5, T6, T7> extends Tuple {
     assert(indices.length == 8,
         'Length of given list must be same length as tuple.');
 
-    var values = [];
+    var values = <dynamic>[];
     for (var i = 0; i < indices.length; i++) {
       if (indices[i]) {
         values.add(this[i]);
@@ -1610,15 +1697,15 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Tuple {
 
   /// Creates an tuple from a map/JSON source.
   factory Tuple9.fromJson(Map<String, dynamic> map) => Tuple9(
-        map['item0'],
-        map['item1'],
-        map['item2'],
-        map['item3'],
-        map['item4'],
-        map['item5'],
-        map['item6'],
-        map['item7'],
-        map['item8'],
+        map['item0'] as T0,
+        map['item1'] as T1,
+        map['item2'] as T2,
+        map['item3'] as T3,
+        map['item4'] as T4,
+        map['item5'] as T5,
+        map['item6'] as T6,
+        map['item7'] as T7,
+        map['item8'] as T8,
       );
 
   /// Creates an tuple from a list source.
@@ -1688,7 +1775,7 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Tuple {
       );
 
   /// Converts this tuple into a map for JSON serialization.
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'item0': item0,
         'item1': item1,
         'item2': item2,
@@ -1713,7 +1800,7 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Tuple {
     T7? item7,
     T8? item8,
   }) =>
-      Tuple9(
+      Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8>(
         item0 ?? this.item0,
         item1 ?? this.item1,
         item2 ?? this.item2,
@@ -1732,7 +1819,7 @@ class Tuple9<T0, T1, T2, T3, T4, T5, T6, T7, T8> extends Tuple {
     assert(indices.length == 9,
         'Length of given list must be same length as tuple.');
 
-    var values = [];
+    var values = <dynamic>[];
     for (var i = 0; i < indices.length; i++) {
       if (indices[i]) {
         values.add(this[i]);

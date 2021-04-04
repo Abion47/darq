@@ -6,13 +6,13 @@ void main() {
     test('Reverse list', () {
       final test = [0, 1, 2, 3];
       final result = test.reverse();
-      expect(result, orderedEquals([3, 2, 1, 0]));
+      expect(result, orderedEquals(<int>[3, 2, 1, 0]));
     });
 
     test('Reverse empty list', () {
-      final test = [];
+      final test = <int>[];
       final result = test.reverse();
-      expect(result, orderedEquals([]));
+      expect(result, orderedEquals(<int>[]));
     });
   });
 }

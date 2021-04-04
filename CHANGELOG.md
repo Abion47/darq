@@ -1,3 +1,13 @@
+## [1.1.0]
+
+* New method to shuffle the elements of an iterable: `randomize` (@rodion-m)
+* Internal buffer in `randomize` and `randomSubset` have been moved to dedicated iterator classes so that the resulting iterables aren't inherently memoized. (Memoization can still be done explicitly by calling `memoize` on the resulting iterable.)
+* Internal buffer in `reverse` has been moved to a dedicated iterator class so that its generation is deferred until iteration.
+* In an effort to crack down on why type inferrence is failing on some methods, I've enabled strong-mode and disabled implicit casts and implicit dynamic in the analysis options. As a result, some elements have received breaking changes to their type signatures. (#9)
+  * `distinct`, `except`, `intersect`, and `union` no longer take a generic type parameter. The `keySelector` passed to these methods now returns `dynamic` instead of `TKey`.
+  * `aggregateRight` and `tryAggregateRight` no longer take a generic type parameter.
+  * `sequenceEquals` no longer takes generic type parameters or selector methods. The previous behavior has been moved to a new method: `sequenceEqualsSelect`.
+
 ## [1.0.1+1]
 
 * Updating references to the repository following transfer.

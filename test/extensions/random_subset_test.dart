@@ -11,5 +11,22 @@ void main() {
         expect(list.contains(i), isTrue);
       }
     });
+
+    test('memoizable', () {
+      final list = Iterable.generate(10, (i) => i);
+      final randomizedIterable = list.randomSubset(3);
+
+      final random1 = randomizedIterable.toList();
+      final random2 = randomizedIterable.toList();
+
+      expect(random1, isNot(equals(random2)));
+
+      final memoizedIterable = randomizedIterable.memoize();
+
+      final memoized1 = memoizedIterable.toList();
+      final memoized2 = memoizedIterable.toList();
+
+      expect(memoized1, equals(memoized2));
+    });
   });
 }

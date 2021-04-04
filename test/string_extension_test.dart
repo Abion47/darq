@@ -9,7 +9,7 @@ void main() {
 
       expect(e, isA<Iterable<String>>());
       expect(e.length, 6);
-      expect(e, orderedEquals(['a', 'b', 'c', 'd', 'e', 'f']));
+      expect(e, orderedEquals(<String>['a', 'b', 'c', 'd', 'e', 'f']));
 
       var string2 = String.fromCharCode(0x1F01C); // 🀜
       var e2 = string2.iterable;
@@ -19,7 +19,7 @@ void main() {
       expect(
         e2,
         orderedEquals(
-          [
+          <String>[
             String.fromCharCode(0xD83C),
             String.fromCharCode(0xDc1c),
           ],
@@ -32,14 +32,14 @@ void main() {
       var e = string.iterableRunes;
 
       expect(e, isA<Iterable<String>>());
-      expect(e, orderedEquals(['a', 'b', 'c', 'd', 'e', 'f']));
+      expect(e, orderedEquals(<String>['a', 'b', 'c', 'd', 'e', 'f']));
 
       var string2 = String.fromCharCode(0x1F01C); // 🀜
       var e2 = string2.iterableRunes;
 
       expect(e2, isA<Iterable<String>>());
       expect(e2.length, 1);
-      expect(e2, orderedEquals([String.fromCharCode(0x1F01c)]));
+      expect(e2, orderedEquals(<String>[String.fromCharCode(0x1F01c)]));
     });
   });
 }

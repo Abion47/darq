@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 void main() {
   group('lastWhereOrDefault', () {
     test('empty list with defaultValue', () {
-      final test = [];
+      final test = <int>[];
       final result = test.lastWhereOrDefault((i) => i.isOdd, defaultValue: -1);
       expect(result, -1);
     });

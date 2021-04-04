@@ -50,9 +50,7 @@ void benchmark() {
 
     // ======================BENCHMARK START=============================
     final result = source.groupBy((i) => i % 3).select((g, i) => g.average());
-    for (var _ in result) {
-      // Do something with the value
-    }
+    result.consume();
     // ======================BENCHMARK END===============================
 
     final end = DateTime.now();

@@ -7,18 +7,18 @@ void main() {
       final list = [0, 1, 2, 3, 4, 5, 6];
       final result = list.batch(2);
       expect(result.length, 3);
-      expect(result.elementAt(0), orderedEquals([0, 1]));
-      expect(result.elementAt(1), orderedEquals([2, 3]));
-      expect(result.elementAt(2), orderedEquals([4, 5]));
+      expect(result.elementAt(0), orderedEquals(<int>[0, 1]));
+      expect(result.elementAt(1), orderedEquals(<int>[2, 3]));
+      expect(result.elementAt(2), orderedEquals(<int>[4, 5]));
     });
 
     test('Group in trios with tail', () {
       final list = [0, 1, 2, 3, 4, 5, 6];
       final result = list.batch(3, includeTail: true);
       expect(result.length, 3);
-      expect(result.elementAt(0), orderedEquals([0, 1, 2]));
-      expect(result.elementAt(1), orderedEquals([3, 4, 5]));
-      expect(result.elementAt(2), orderedEquals([6]));
+      expect(result.elementAt(0), orderedEquals(<int>[0, 1, 2]));
+      expect(result.elementAt(1), orderedEquals(<int>[3, 4, 5]));
+      expect(result.elementAt(2), orderedEquals(<int>[6]));
     });
 
     test('Error: zero count', () {

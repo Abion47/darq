@@ -41,7 +41,7 @@ coverage_badge.svg
 .vscode/
 
 # Flutter/Dart/Pub related
-**/doc/api/
+**/doc/
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies

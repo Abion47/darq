@@ -1,6 +1,6 @@
 ## [1.1.1]
 
-* Previous change to `distinct`, `except`, `intersect`, and `union` altered. Return type of `dynamic` for `keySelector` is now `Object` to prevent a dynamic return type of `void`.
+* Previous change to `distinct`, `except`, `intersect`, and `union` altered. Return type of `dynamic` for `keySelector` is now `Object` to prevent a dynamic return type of `void`. (@rodion-m)
 
 ## [1.1.0]
 

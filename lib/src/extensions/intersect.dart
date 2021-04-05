@@ -5,7 +5,8 @@ extension IntersectExtension<T> on Iterable<T> {
   /// After applying the [intersect] method to an iterable, the resulting
   /// iterable will consist of all the elements in the source iterable that
   /// are also present in the given [other] collection. This is equivalent to
-  /// taking the set intersection of the two sequences.
+  /// taking the set intersection of the two sequences. (The "uniqueness" of each
+  /// element is determined by calling `hashCode` on each element.)
   ///
   /// Optionally, a [selector] can be supplied to refine the comparison. If
   /// one is provided, the [intersect] method will use the [selector] function in
@@ -26,9 +27,9 @@ extension IntersectExtension<T> on Iterable<T> {
   ///     }
   Iterable<T> intersect(
     Iterable<T> other, [
-    dynamic Function(T element)? selector,
+    Object Function(T element)? selector,
   ]) sync* {
-    selector ??= (T v) => v;
+    selector ??= (T v) => v as Object;
 
     final set = Set<dynamic>.from(other.map<dynamic>(selector));
     for (var v in this) {

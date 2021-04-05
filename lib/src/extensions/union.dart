@@ -6,7 +6,8 @@ extension UnionExtension<T> on Iterable<T> {
   /// iterable will consist of all the distinct elements in the source
   /// iterable as well as the distinct elements in the given [other]
   /// collection. This is equivalent to taking the set union of the two
-  /// sequences.
+  /// sequences. (The "uniqueness" of each element is determined by calling
+  /// `hashCode` on each element.)
   ///
   /// Optionally, a [selector] can be supplied to refine the comparison. If
   /// one is provided, the [union] method will use the [selector] function in
@@ -28,8 +29,8 @@ extension UnionExtension<T> on Iterable<T> {
   ///       // Result: [1, 2, 3, 4, 5, 6]
   ///     }
   Iterable<T> union(Iterable<T> other,
-      [dynamic Function(T element)? selector]) sync* {
-    selector ??= (T v) => v as dynamic;
+      [Object Function(T element)? selector]) sync* {
+    selector ??= (T v) => v as Object;
 
     final set = <dynamic>{};
 

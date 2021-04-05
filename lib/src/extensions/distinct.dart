@@ -3,15 +3,18 @@ extension DistinctExtension<T> on Iterable<T> {
   ///
   /// After applying the [distinct] method to an iterable, the resulting
   /// iterable will consist of distinct values in the source iterable.
+  /// (Distinctness is determined by calling `hashCode` on each value.)
   ///
   /// Optionally, a [keySelector] can be supplied to handle comparisons. If
-  /// one is provided, the [distinct] method will use the [comparer] property in
-  /// order to determine equivalency. If omitted, [distinct] will resort to strict
-  /// equivalency (i.e. checking `if (value == element)`).
+  /// one is provided, the [distinct] method will pass each element in the
+  /// iterable to the [keySelector] callback and use the returned value to
+  /// determine equivalency. Otherwise, the [distinct] method will use the
+  /// element itself.
   ///
-  /// Each element will be the first element found in the source iterable,
-  /// meaning elements with unique data that are deemed non-distinct by the
-  /// [keySelector] will be dropped.
+  /// Each element will be the first element found in the source iterable in
+  /// iteration order, meaning subsequent elements with unique data that are
+  /// deemed non-distinct by their hash code (or by the [keySelector]) will be
+  /// dropped.
   ///
   /// If none of the elements in the iterable match any other element in the
   /// iterable, the iterable will be unchanged.\

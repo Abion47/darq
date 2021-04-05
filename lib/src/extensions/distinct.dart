@@ -24,8 +24,8 @@ extension DistinctExtension<T> on Iterable<T> {
   ///
   ///       // Result: [0, 1, 2, 3]
   ///     }
-  Iterable<T> distinct([dynamic Function(T element)? keySelector]) sync* {
-    keySelector ??= (T v) => v;
+  Iterable<T> distinct([Object Function(T element)? keySelector]) sync* {
+    keySelector ??= (T v) => v as Object;
     final set = <dynamic>{};
 
     for (var t in this) {

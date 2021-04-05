@@ -2,6 +2,12 @@ import 'package:darq/darq.dart';
 
 void main() {
   benchmark();
+  // sandbox();
+}
+
+void sandbox() {
+  final list = ['a', 'b', 'b', 'c'];
+  print(list.distinct((s) => s.hashCode).toList());
 }
 
 typedef Foo2<T1, T2> = T2 Function(T1 a);

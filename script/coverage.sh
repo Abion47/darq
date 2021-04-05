@@ -5,6 +5,6 @@ set -e
 
 dart pub global activate coverage
 
-dart test --coverage="coverage"
+dart test --coverage="coverage" --concurrency=8
 
 format_coverage --lcov --in=coverage --out=coverage.lcov --packages=.packages --report-on=lib

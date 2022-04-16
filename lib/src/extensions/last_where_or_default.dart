@@ -17,8 +17,7 @@ extension LastWhereOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T lastWhereOrDefault(bool Function(T element) condition,
-      {required T defaultValue}) {
+  T? lastWhereOrDefault(bool Function(T element) condition, {T? defaultValue}) {
     if (isEmpty) return defaultValue;
 
     var found = false;

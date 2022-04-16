@@ -13,7 +13,7 @@ extension FirstOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T firstOrDefault({required T defaultValue}) {
+  T? firstOrDefault({T? defaultValue}) {
     if (isEmpty) return defaultValue;
     return first;
   }

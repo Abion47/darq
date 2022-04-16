@@ -13,7 +13,7 @@ extension LastOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T lastOrDefault({required T defaultValue}) {
+  T? lastOrDefault({T? defaultValue}) {
     if (isEmpty) return defaultValue;
     return last;
   }

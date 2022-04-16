@@ -22,8 +22,7 @@ extension FirstWhereOrDefaultExtension<T> on Iterable<T> {
   ///
   ///       // Result: -1
   ///     }
-  T firstWhereOrDefault(bool Function(T value) condition,
-      {required T defaultValue}) {
+  T? firstWhereOrDefault(bool Function(T value) condition, {T? defaultValue}) {
     if (isEmpty) return defaultValue;
 
     for (var v in this) {

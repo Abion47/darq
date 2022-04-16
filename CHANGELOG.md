@@ -1,3 +1,6 @@
+## [1.2.0]
+* **BREAKING:** Signature of `firstOrDefault`, `firstWhereOrDefault`, `lastOrDefault`, and `lastWhereOrDefault` changed from `T` to `T?`.
+
 ## [1.1.1]
 
 * Previous change to `distinct`, `except`, `intersect`, and `union` altered. Return type of `dynamic` for `keySelector` is now `Object` to prevent a dynamic return type of `void`. (@rodion-m)

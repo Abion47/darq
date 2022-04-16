@@ -1,4 +1,4 @@
-import 'package:darq/src/utility/equality_comparer.dart';
+import '../utility/equality_comparer.dart';
 
 extension BetweenExtension<T> on Iterable<T> {
   /// Returns true if all elements in the iterable are between [minimum] and [maximum].

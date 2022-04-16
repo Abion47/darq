@@ -1,6 +1,6 @@
+import '../extensions/non_null.dart';
 import 'equality_comparer.dart';
 import 'grouping.dart';
-import '../extensions/non_null.dart';
 
 abstract class ILookup<TKey, TValue> {
   int get count;

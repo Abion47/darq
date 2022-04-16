@@ -23,10 +23,10 @@ void main() {
       expect(result, 15);
     });
 
-    test('Error: on empty list', () {
+    test('on empty list', () {
       final list = <int>[];
-      final result = () => list.sum();
-      expect(result, throwsA(isA<StateError>()));
+      final result = list.sum();
+      expect(result, 0);
     });
 
     test('Error: on unsupported type with no selector', () {

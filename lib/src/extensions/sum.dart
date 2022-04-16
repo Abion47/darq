@@ -19,6 +19,8 @@ extension SumExtension<T> on Iterable<T> {
   /// If the type of the iterable is not a numeric primitive, the [selector]
   /// function must be provided. Otherwise, a [StateError] is thrown.
   ///
+  /// If the iterable is empty, 0 is returned.
+  ///
   /// Example:
   ///
   ///     void main() {
@@ -28,12 +30,9 @@ extension SumExtension<T> on Iterable<T> {
   ///       // Result: 10
   ///     }
   TNum sum<TNum extends num>([TNum Function(T)? selector]) {
-    if (isEmpty) {
-      throw StateError('Iterator must not be empty.');
-    }
-
     var _selector = selector;
     var total = TNum == int ? 0 : 0.0;
+
     if (_selector == null) {
       if (T == num || T == int || T == double) {
         _selector = (n) => n as TNum;

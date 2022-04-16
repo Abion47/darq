@@ -1,5 +1,6 @@
 ## [1.2.0]
 * **BREAKING:** Signature of `firstOrDefault`, `firstWhereOrDefault`, `lastOrDefault`, and `lastWhereOrDefault` changed from `T` to `T?`.
+* Change `sum` to return 0 on an empty iterable to be consistent with C#'s `Enumerable.Sum` method.
 
 ## [1.1.1]
 

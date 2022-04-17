@@ -1,4 +1,3 @@
-import '../extensions/non_null.dart';
 import 'equality_comparer.dart';
 import 'grouping.dart';
 
@@ -114,7 +113,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
   }
 
   Grouping<TKey, TValue>? getGrouping(TKey key, bool shouldCreate) {
-    var hash = _internalGetHash(key);
+    final hash = _internalGetHash(key);
     for (var g = groupings[hash % groupings.length];
         g != null;
         g = g.hashNext) {
@@ -145,7 +144,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
   }
 
   void resizeBuffer() {
-    var newSize = count * 2 + 1;
+    final newSize = count * 2 + 1;
     if (newSize < count) throw Exception('Integer overflow');
 
     final newGroupings = List<Grouping<TKey, TValue>?>.filled(newSize, null);
@@ -160,6 +159,6 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
       newGroupings[index] = g;
     } while (g != lastGrouping);
 
-    groupings = newGroupings.nonNull().toList();
+    groupings = newGroupings.toList();
   }
 }

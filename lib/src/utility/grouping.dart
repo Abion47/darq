@@ -162,4 +162,7 @@ class Grouping<TKey, TValue> extends Iterable<TValue> {
 
   @override
   int get hashCode => hash;
+
+  @override
+  String toString() => '{$key: $elements}';
 }

@@ -1,8 +1,10 @@
 ## [1.2.0]
-* **BREAKING:** Signature of `firstOrDefault`, `firstWhereOrDefault`, `lastOrDefault`, and `lastWhereOrDefault` changed from `T` to `T?` to match corresponding signatures in LINQ.
-* Change `sum` to return 0 on an empty iterable to be consistent with C#'s `Enumerable.Sum` method.
-* Added `DateTime` to list of known equality comparers.
-* Added convenience factory method `EqualityComparer.of` for creating default comparers of types that implement `Comparable`.
+* **BREAKING:** Signature of `firstOrDefault`, `firstWhereOrDefault`, `lastOrDefault`, and `lastWhereOrDefault` changed from `T` to `T?` to match behavior with corresponding functions in LINQ. (#14)
+* **IMPORTANT:** Removed `Iterable` from list of known equality comparers as type matching for any arbitrary `Iterable<T>` has turned out to be impractical if not impossible without major breaking changes.
+* Added `DateTime` to list of known equality comparers. (#10)
+* Added convenience factory method `EqualityComparer.of` for creating default comparers of types that implement `Comparable`. (#10)
+* Change `sum` to return 0 on an empty iterable to be consistent with C#'s `Enumerable.Sum` method. (#12)
+* Fixed a bug that prevented `Lookup` from properly grouping objects when the number of groups was greater than 7. (#13)
 
 ## [1.1.1]
 

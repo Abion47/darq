@@ -1,6 +1,3 @@
-import '../extensions/sequence_equals.dart';
-import '../extensions/compare_count.dart';
-
 /// Takes two elements of type `T` and checks them for equality, returning `true`
 /// if the elements are equal and `false` otherwise.
 typedef Comparer<T> = bool Function(T left, T right);
@@ -66,7 +63,6 @@ typedef Sorter<T> = int Function(T left, T right);
 /// - `Duration` will default to using [Duration.compareTo]
 /// - `BigInt` will default to using [BigInt.compareTo]
 /// - `DateTime` will default to using [DateTime.compareTo]
-/// - `Iterable` will default to comparing lengths using [ComparisonConsumerExtensions.compareCount]
 /// - All other types will default to a non-sorting function:
 ///
 /// ```dart
@@ -158,11 +154,6 @@ class EqualityComparer<T> {
       comparer: (left, right) => left == right,
       hasher: (value) => value.hashCode,
       sorter: (left, right) => left.compareTo(right),
-    ),
-    Iterable: EqualityComparer<Iterable>(
-      comparer: (left, right) => left.sequenceEquals(right),
-      hasher: (value) => value.hashCode,
-      sorter: (left, right) => left.compareCount(right),
     ),
   };
 

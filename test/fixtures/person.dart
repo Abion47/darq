@@ -1,5 +1,5 @@
-class Person {
-  Person(this.name);
+class Person implements Comparable<Person> {
+  const Person(this.name);
 
   final String name;
 
@@ -13,4 +13,9 @@ class Person {
 
   @override
   String toString() => '{name: $name}';
+
+  @override
+  int compareTo(Person other) {
+    return name.compareTo(other.name);
+  }
 }

@@ -117,7 +117,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
     for (var g = groupings[hash % groupings.length];
         g != null;
         g = g.hashNext) {
-      if (g.hashCode == hash && comparer.compare(g.key, key)) return g;
+      if (g.hash == hash && comparer.compare(g.key, key)) return g;
     }
 
     if (shouldCreate) {
@@ -154,7 +154,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
       if (g == null) {
         throw StateError('There shouldn\'t be a null group in groupings');
       }
-      final index = g.hashCode % newSize;
+      final index = g.hash % newSize;
       g.hashNext = newGroupings[index];
       newGroupings[index] = g;
     } while (g != lastGrouping);

@@ -1,3 +1,4 @@
+import '../extensions/sequence_equals.dart';
 import 'equality_comparer.dart';
 import 'lookup.dart';
 
@@ -161,7 +162,13 @@ class Grouping<TKey, TValue> extends Iterable<TValue> {
   TValue operator [](int index) => elements[index];
 
   @override
-  int get hashCode => hash;
+  int get hashCode => (13 * hash) ^ elements.hashCode;
+
+  @override
+  bool operator ==(Object? other) {
+    if (other is! Grouping<TKey, TValue>) return false;
+    return hash == other.hash && elements.sequenceEquals(other.elements);
+  }
 
   @override
   String toString() => '{$key: $elements}';

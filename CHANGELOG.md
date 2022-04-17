@@ -1,3 +1,7 @@
+## [1.2.1]
+* Reimplemented `Grouping.hashCode` to take elements into account.
+* Implemented `Grouping.==` to adhere to Dart best practices when overriding `hashCode`.
+
 ## [1.2.0]
 * **BREAKING:** Signature of `firstOrDefault`, `firstWhereOrDefault`, `lastOrDefault`, and `lastWhereOrDefault` changed from `T` to `T?` to match behavior with corresponding functions in LINQ. (#14)
 * **IMPORTANT:** Removed `Iterable` from list of known equality comparers as type matching for any arbitrary `Iterable<T>` has turned out to be impractical if not impossible without major breaking changes.

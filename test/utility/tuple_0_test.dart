@@ -53,9 +53,9 @@ void main() {
       testTuple(copy0);
 
       // copyWithout
-      final testCopyWithout = () => reference.copyWithout(indices: <bool>[]);
+      void task() => reference.copyWithout(indices: <bool>[]);
 
-      expect(testCopyWithout, throwsA(isA<StateError>()));
+      expect(task, throwsA(isA<StateError>()));
     });
   });
 }

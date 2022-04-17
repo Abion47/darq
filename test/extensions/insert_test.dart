@@ -61,55 +61,55 @@ void main() {
 
     test('Error: Append one value', () {
       Iterable<int> list = [0, 1, 2, 3];
-      var task = () => list.insert(5, 4);
+      void task() => list.insert(5, 4);
       expect(task, throwsA(isA<RangeError>()));
     });
 
     test('Error: Append two values', () {
       var list = [0, 1, 2, 3];
-      var task = () => list.insert2(5, 4, 5);
+      void task() => list.insert2(5, 4, 5);
       expect(task, throwsA(isA<RangeError>()));
     });
 
     test('Error: Append three values', () {
       var list = [0, 1, 2, 3];
-      var task = () => list.insert3(5, 4, 5, 6);
+      void task() => list.insert3(5, 4, 5, 6);
       expect(task, throwsA(isA<RangeError>()));
     });
 
     test('Error: Append four values', () {
       var list = [0, 1, 2, 3];
-      var task = () => list.insert4(5, 4, 5, 6, 7);
+      void task() => list.insert4(5, 4, 5, 6, 7);
       expect(task, throwsA(isA<RangeError>()));
     });
 
     test('Error: Append five values', () {
       var list = [0, 1, 2, 3];
-      var task = () => list.insert5(5, 4, 5, 6, 7, 8);
+      void task() => list.insert5(5, 4, 5, 6, 7, 8);
       expect(task, throwsA(isA<RangeError>()));
     });
 
     test('Error: Append six values', () {
       var list = [0, 1, 2, 3];
-      var task = () => list.insert6(5, 4, 5, 6, 7, 8, 9);
+      void task() => list.insert6(5, 4, 5, 6, 7, 8, 9);
       expect(task, throwsA(isA<RangeError>()));
     });
 
     test('Error: Append seven values', () {
       var list = [0, 1, 2, 3];
-      var task = () => list.insert7(5, 4, 5, 6, 7, 8, 9, 10);
+      void task() => list.insert7(5, 4, 5, 6, 7, 8, 9, 10);
       expect(task, throwsA(isA<RangeError>()));
     });
 
     test('Error: Append eight values', () {
       var list = [0, 1, 2, 3];
-      var task = () => list.insert8(5, 4, 5, 6, 7, 8, 9, 10, 11);
+      void task() => list.insert8(5, 4, 5, 6, 7, 8, 9, 10, 11);
       expect(task, throwsA(isA<RangeError>()));
     });
 
     test('Error: Append nine values', () {
       var list = [0, 1, 2, 3];
-      var task = () => list.insert9(5, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+      void task() => list.insert9(5, 4, 5, 6, 7, 8, 9, 10, 11, 12);
       expect(task, throwsA(isA<RangeError>()));
     });
   });

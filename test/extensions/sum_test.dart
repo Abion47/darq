@@ -31,8 +31,8 @@ void main() {
 
     test('Error: on unsupported type with no selector', () {
       final list = [true, false];
-      final result = () => list.sum();
-      expect(result, throwsA(isA<ArgumentError>()));
+      void task() => list.sum();
+      expect(task, throwsA(isA<ArgumentError>()));
     });
   });
 }

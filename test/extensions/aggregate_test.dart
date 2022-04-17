@@ -28,8 +28,8 @@ void main() {
 
     test('Error: on empty list', () {
       final list = <int>[];
-      final result = () => list.aggregate((a, b) => a + b);
-      expect(result, throwsA(isA<StateError>()));
+      void task() => list.aggregate((a, b) => a + b);
+      expect(task, throwsA(isA<StateError>()));
     });
   });
 }

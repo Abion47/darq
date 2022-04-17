@@ -16,8 +16,8 @@ extension AtMostExtension<T> on Iterable<T> {
     T value, {
     int Function(T element, T value)? sorter,
   }) {
-    final _sorter = sorter ?? EqualityComparer.tryForType<T>()?.sort;
-    if (_sorter == null) {
+    final sorterImpl = sorter ?? EqualityComparer.tryForType<T>()?.sort;
+    if (sorterImpl == null) {
       throw ArgumentError.notNull('sorter');
     }
 
@@ -27,7 +27,7 @@ extension AtMostExtension<T> on Iterable<T> {
     }
 
     do {
-      if (_sorter(iterator.current, value) > 0) {
+      if (sorterImpl(iterator.current, value) > 0) {
         return false;
       }
     } while (iterator.moveNext());

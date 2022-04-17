@@ -13,7 +13,7 @@ void main() {
 
       final pets = [barley, boots, whiskers, daisy];
 
-      final ageComparer = (Pet p1, Pet p2) => p1.age.compareTo(p2.age);
+      int ageComparer(Pet p1, Pet p2) => p1.age.compareTo(p2.age);
 
       final result = pets.groupSelect(
         (age, pets) => {
@@ -55,7 +55,7 @@ void main() {
 
       final pets = [barley, boots, whiskers, daisy];
 
-      final ageComparer = (Pet p1, Pet p2) => p1.age.compareTo(p2.age);
+      int ageComparer(Pet p1, Pet p2) => p1.age.compareTo(p2.age);
 
       final result2 = pets.groupSelect(
         (age, pets) => {

@@ -23,8 +23,7 @@ void main() {
 
     test('Error: on list with more than one matching element', () {
       final list = [0, 1, 2, 2];
-      final task =
-          () => list.singleWhereOrDefault((x) => x == 2, defaultValue: 3);
+      void task() => list.singleWhereOrDefault((x) => x == 2, defaultValue: 3);
       expect(task, throwsA(isA<StateError>()));
     });
   });

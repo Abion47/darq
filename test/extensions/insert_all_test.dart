@@ -17,13 +17,13 @@ void main() {
 
     test('Error: index past length of source', () {
       final Iterable<int> list = [1, 2, 3];
-      final task = () => list.insertAll(5, [4, 5]);
+      void task() => list.insertAll(5, [4, 5]);
       expect(task, throwsA(isA<RangeError>()));
     });
 
     test('Error: index less than zero', () {
       final Iterable<int> list = [1, 2, 3];
-      final task = () => list.insertAll(-1, [4, 5]);
+      void task() => list.insertAll(-1, [4, 5]);
       expect(task, throwsA(isA<ArgumentError>()));
     });
   });

@@ -22,6 +22,7 @@ extension FillForwardExtension<T> on Iterable<T?> {
       }
     }
 
+    // ignore: null_check_on_nullable_type_parameter
     var lastValue = iterator.current!;
     for (var i = 0; i < nullCount; i++) {
       yield lastValue;
@@ -30,6 +31,7 @@ extension FillForwardExtension<T> on Iterable<T?> {
     do {
       if (iterator.current != null) {
         yield iterator.current!;
+        // ignore: null_check_on_nullable_type_parameter
         lastValue = iterator.current!;
       } else {
         yield lastValue;

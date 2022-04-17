@@ -55,8 +55,8 @@ void main() {
     });
 
     test('Error: calling thenBy without calling orderBy first', () {
-      final errorTest = () => [0, 1, 2].map((i) => i + 1).thenBy((i) => i);
-      expect(errorTest, throwsA(isA<UnsupportedError>()));
+      void task() => [0, 1, 2].map((i) => i + 1).thenBy((i) => i);
+      expect(task, throwsA(isA<UnsupportedError>()));
     });
   });
 }

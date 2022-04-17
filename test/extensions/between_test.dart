@@ -61,13 +61,13 @@ void main() {
 
     test('Error: empty iterable', () {
       final list = <int>[];
-      final task = () => list.between(1, 9);
+      void task() => list.between(1, 9);
       expect(task, throwsA(isA<StateError>()));
     });
 
     test('Error: null sorter on unsupported type', () {
       final list = [Pet('bill', 2), Pet('bill', 4), Pet('bill', 5)];
-      final task = () => list.between(Pet('', 3), Pet('', 5));
+      void task() => list.between(Pet('', 3), Pet('', 5));
       expect(task, throwsA(isA<ArgumentError>()));
     });
   });

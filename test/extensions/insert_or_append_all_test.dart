@@ -23,7 +23,7 @@ void main() {
 
     test('Error: index less than zero', () {
       final Iterable<int> list = [1, 2, 3];
-      final task = () => list.insertOrAppendAll(-1, [4, 5]);
+      void task() => list.insertOrAppendAll(-1, [4, 5]);
       expect(task, throwsA(isA<ArgumentError>()));
     });
   });

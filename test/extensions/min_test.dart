@@ -23,13 +23,13 @@ void main() {
 
     test('Error: on empty list', () {
       final list = <int>[];
-      final task = () => list.min();
+      void task() => list.min();
       expect(task, throwsA(isA<StateError>()));
     });
 
     test('Error: on unsupported type with no comparer', () {
       var list = [Symbol.empty, Symbol.empty];
-      var task = () => list.min();
+      void task() => list.min();
       expect(task, throwsA(isA<ArgumentError>()));
     });
   });

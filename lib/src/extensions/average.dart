@@ -22,11 +22,11 @@ extension AverageExtension<T> on Iterable<T> {
       throw StateError('Iterator must not be empty.');
     }
 
-    var _selector = selector;
+    var selectorImpl = selector;
     var total = TNum == int ? 0 : 0.0;
-    if (_selector == null) {
+    if (selectorImpl == null) {
       if (T == num || T == int || T == double) {
-        _selector = (n) => n as TNum;
+        selectorImpl = (n) => n as TNum;
         total = T == int ? 0 : 0.0;
       } else {
         throw ArgumentError(
@@ -37,7 +37,7 @@ extension AverageExtension<T> on Iterable<T> {
     var count = 0;
 
     for (var n in this) {
-      total += _selector(n);
+      total += selectorImpl(n);
       count++;
     }
 

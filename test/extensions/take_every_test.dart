@@ -17,13 +17,13 @@ void main() {
 
     test('Error: zero step', () {
       final list = [1, 2, 3];
-      final task = () => list.takeEvery(0);
+      void task() => list.takeEvery(0);
       expect(task, throwsA(isA<RangeError>()));
     });
 
     test('Error: negative step', () {
       final list = [1, 2, 3];
-      final task = () => list.takeEvery(-1);
+      void task() => list.takeEvery(-1);
       expect(task, throwsA(isA<RangeError>()));
     });
   });

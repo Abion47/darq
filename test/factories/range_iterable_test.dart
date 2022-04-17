@@ -74,12 +74,12 @@ void main() {
     });
 
     test('Error: end < start', () {
-      final task = () => RangeIterable(5, 2);
+      void task() => RangeIterable(5, 2);
       expect(task, throwsA(isA<AssertionError>()));
     });
 
     test('Error: zero interval', () {
-      final task = () => RangeIterable(2, 5, step: 0);
+      void task() => RangeIterable(2, 5, step: 0);
       expect(task, throwsA(isA<AssertionError>()));
     });
   });

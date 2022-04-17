@@ -17,7 +17,7 @@ void main() {
 
     test('Error: on list with more than one element', () {
       final list = [0, 1];
-      final task = () => list.singleOrDefault(defaultValue: 3);
+      void task() => list.singleOrDefault(defaultValue: 3);
       expect(task, throwsA(isA<StateError>()));
     });
   });

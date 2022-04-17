@@ -24,13 +24,13 @@ void main() {
 
     test('Error: zero count', () {
       final list = [0, 1, 2, 3, 4, 5, 6];
-      final task = () => list.batchSelect(0, (group) => group);
+      void task() => list.batchSelect(0, (group) => group);
       expect(task, throwsA(isA<ArgumentError>()));
     });
 
     test('Error: negative count', () {
       final list = [0, 1, 2, 3, 4, 5, 6];
-      final task = () => list.batchSelect(-1, (group) => group);
+      void task() => list.batchSelect(-1, (group) => group);
       expect(task, throwsA(isA<ArgumentError>()));
     });
   });

@@ -14,7 +14,7 @@ void main() {
       final result =
           input.toMap((x) => MapEntry(x, x.toString()), modifiable: false);
       expect(result, equals({1: '1', 2: '2', 3: '3', 4: '4', 5: '5'}));
-      final task = () => result[6] = '6';
+      void task() => result[6] = '6';
       expect(task, throwsA(isA<UnsupportedError>()));
     });
   });

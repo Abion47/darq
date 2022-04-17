@@ -17,7 +17,7 @@ void main() {
 
     test('Error: Index less than zero', () {
       final list = [1, 2, 3, 4, 5];
-      final task = () => list.excludeAt(-1);
+      void task() => list.excludeAt(-1);
       expect(task, throwsA(isA<RangeError>()));
     });
   });

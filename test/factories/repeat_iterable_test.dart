@@ -17,7 +17,7 @@ void main() {
     });
 
     test('Error: negative count', () {
-      final task = () => RepeatIterable('abc', -1);
+      void task() => RepeatIterable('abc', -1);
       expect(task, throwsA(isA<AssertionError>()));
     });
   });

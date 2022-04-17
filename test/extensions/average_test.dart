@@ -29,7 +29,7 @@ void main() {
 
     test('Error: on non-numeric without selector', () {
       final list = ['a', 'ab', 'abc'];
-      final task = () => list.average();
+      void task() => list.average();
       expect(task, throwsA(isA<ArgumentError>()));
     });
   });

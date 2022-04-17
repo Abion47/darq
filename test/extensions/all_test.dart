@@ -29,7 +29,7 @@ void main() {
 
     test('Error: null condition on non-bool list', () {
       final list = [2, 4, 6, 8];
-      final task = () => list.all();
+      void task() => list.all();
       expect(task, throwsA(isA<ArgumentError>()));
     });
   });

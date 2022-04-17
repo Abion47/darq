@@ -10,7 +10,7 @@ void main() {
 
     test('on bool: one false', () {
       final list = [true, true, true, false];
-      final task = () => list.assertAll((b) => b);
+      void task() => list.assertAll((b) => b);
       expect(task, throwsA(isA<AssertionError>()));
     });
 
@@ -21,7 +21,7 @@ void main() {
 
     test('on ints: one odd', () {
       final list = [2, 4, 6, 7];
-      final task = () => list.assertAll((x) => x.isEven);
+      void task() => list.assertAll((x) => x.isEven);
       expect(task, throwsA(isA<AssertionError>()));
     });
   });

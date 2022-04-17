@@ -125,14 +125,14 @@ class InternalIterableSorter<TValue, TKey> extends IterableSorter<TValue> {
   }
 
   @override
-  int compareKeys(int index1, int index2) {
+  int compareKeys(int idx1, int idx2) {
     if (keys == null) {
       throw StateError('Cannot sort keys when the keys list is null');
     }
-    final c = comparer.sort(keys![index1], keys![index2]);
+    final c = comparer.sort(keys![idx1], keys![idx2]);
     if (c == 0) {
-      if (next == null) return index1 - index2;
-      return next!.compareKeys(index1, index2);
+      if (next == null) return idx1 - idx2;
+      return next!.compareKeys(idx1, idx2);
     }
     return descending ? -c : c;
   }

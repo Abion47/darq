@@ -30,12 +30,12 @@ extension SumExtension<T> on Iterable<T> {
   ///       // Result: 10
   ///     }
   TNum sum<TNum extends num>([TNum Function(T)? selector]) {
-    var _selector = selector;
+    var selectorImpl = selector;
     var total = TNum == int ? 0 : 0.0;
 
-    if (_selector == null) {
+    if (selectorImpl == null) {
       if (T == num || T == int || T == double) {
-        _selector = (n) => n as TNum;
+        selectorImpl = (n) => n as TNum;
         total = T == int ? 0 : 0.0;
       } else {
         throw ArgumentError(
@@ -44,7 +44,7 @@ extension SumExtension<T> on Iterable<T> {
     }
 
     for (final n in this) {
-      total += _selector(n);
+      total += selectorImpl(n);
     }
 
     return total as TNum;

@@ -17,7 +17,7 @@ void main() {
 
     test('Error: list of nulls', () {
       final list = [null, null, null];
-      final task = () => list.fillForward();
+      void task() => list.fillForward();
       expect(task, throwsA(isA<StateError>()));
     });
   });

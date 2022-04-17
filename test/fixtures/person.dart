@@ -4,6 +4,9 @@ class Person implements Comparable<Person> {
   final String name;
 
   @override
+  int get hashCode => name.hashCode;
+
+  @override
   bool operator ==(dynamic other) {
     if (other is Person) {
       return name == other.name;

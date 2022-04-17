@@ -10,7 +10,7 @@ void main() {
 
     test('Assert fails', () {
       final list = [0, 1, 2, 3, 4, 5];
-      final task = () => list.assertCount(0);
+      void task() => list.assertCount(0);
       expect(task, throwsA(isA<AssertionError>()));
     });
   });

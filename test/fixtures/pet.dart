@@ -5,6 +5,9 @@ class Pet {
   final double age;
 
   @override
+  int get hashCode => name.hashCode ^ age.hashCode;
+
+  @override
   bool operator ==(dynamic other) {
     if (other is Pet) {
       return name == other.name && age == other.age;

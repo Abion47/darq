@@ -17,7 +17,7 @@ void main() {
 
     test('Error: on ints with negative count', () {
       final list = [1, 2, 3];
-      final task = () => list.repeat(-1);
+      void task() => list.repeat(-1);
       expect(task, throwsA(isA<ArgumentError>()));
     });
   });

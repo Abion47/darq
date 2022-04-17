@@ -1,6 +1,7 @@
 ## [1.2.1]
 * Reimplemented `Grouping.hashCode` to take elements into account.
 * Implemented `Grouping.==` to adhere to Dart best practices when overriding `hashCode`.
+* Updated linting options to latest pub.dev recommended.
 
 ## [1.2.0]
 * **BREAKING:** Signature of `firstOrDefault`, `firstWhereOrDefault`, `lastOrDefault`, and `lastWhereOrDefault` changed from `T` to `T?` to match behavior with corresponding functions in LINQ. (#14)

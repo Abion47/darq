@@ -1,6 +1,8 @@
 ## [1.2.0]
-* **BREAKING:** Signature of `firstOrDefault`, `firstWhereOrDefault`, `lastOrDefault`, and `lastWhereOrDefault` changed from `T` to `T?`.
+* **BREAKING:** Signature of `firstOrDefault`, `firstWhereOrDefault`, `lastOrDefault`, and `lastWhereOrDefault` changed from `T` to `T?` to match corresponding signatures in LINQ.
 * Change `sum` to return 0 on an empty iterable to be consistent with C#'s `Enumerable.Sum` method.
+* Added `DateTime` to list of known equality comparers.
+* Added convenience factory method `EqualityComparer.of` for creating default comparers of types that implement `Comparable`.
 
 ## [1.1.1]
 

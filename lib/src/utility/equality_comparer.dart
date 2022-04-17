@@ -34,9 +34,9 @@ typedef Sorter<T> = int Function(T left, T right);
 /// `Iterable`, which will default to using `BooleanConsumerExceptions.sequenceEqual`.)
 ///
 /// ```dart
-/// (left, right) { return left == right; }
+/// (left, right) => left == right;
 /// // For iterables
-/// (left, right) { return left.sequenceEqual(right); }
+/// (left, right) => left.sequenceEqual(right);
 /// ```
 ///
 /// The [EqualityComparer.hash] field generates hash codes. An element is passed
@@ -45,7 +45,7 @@ typedef Sorter<T> = int Function(T left, T right);
 /// object's `hashCode` property:
 ///
 /// ```dart
-/// (value) { return value.hashCode; }
+/// (value) => value.hashCode;
 /// ```
 ///
 /// The [EqualityComparer.sort] field tests for sorting order. Two elements of a
@@ -65,11 +65,12 @@ typedef Sorter<T> = int Function(T left, T right);
 /// - `String` will default to using [String.compareTo]
 /// - `Duration` will default to using [Duration.compareTo]
 /// - `BigInt` will default to using [BigInt.compareTo]
+/// - `DateTime` will default to using [DateTime.compareTo]
 /// - `Iterable` will default to comparing lengths using [ComparisonConsumerExtensions.compareCount]
 /// - All other types will default to a non-sorting function:
 ///
 /// ```dart
-/// (left, right) { return 0; }
+/// (left, right) => return 0;
 /// ```
 class EqualityComparer<T> {
   final Comparer<T> compare;
@@ -89,13 +90,32 @@ class EqualityComparer<T> {
   static Hasher<T> _getDefaultHasher<T>() => (T value) => value.hashCode;
   static Sorter<T> _getDefaultSorter<T>() => (left, right) => 0;
 
+  /// Returns an [EqualityComparer] where the [sorter] and optionally [comparer] methods
+  /// are set to call the [Comparable.compareTo] method of the provided type.
+  /// The [hasher] method is set to the default hasher behavior of calling
+  /// [Object.hashCode].
+  ///
+  /// If [useEquals] is true, [comparer] will use the default comparer behavior
+  /// `(a, b) => a == b`. Otherwise, it will use [Comparable.compareTo] to
+  /// determine equality, e.g. `(a, b) => a.compareTo(b) == 0`.
+  static EqualityComparer<T> of<T extends Comparable<T>>(
+      {bool useEquals = false}) {
+    return EqualityComparer<T>(
+      comparer: useEquals
+          ? _getDefaultComparer<T>()
+          : (T left, T right) => left.compareTo(right) == 0,
+      sorter: (T left, T right) => left.compareTo(right),
+      hasher: _getDefaultHasher<T>(),
+    );
+  }
+
   /// Returns the default [EqualityComparer] that has been registered for type
   /// `T`.
   ///
   /// The returned [EqualityComparer] will be the type registered to `T` for use
   /// as the comparer when the `comparer` parameter in various LINQ methods is
   /// omitted. The [EqualityComparer] will be one of the built-in default comparers
-  /// (for [dynamic], [num], [int], [double], [String], [Duration], or [BigInt])
+  /// (for [dynamic], [num], [int], [double], [String], [Duration], [DateTime], or [BigInt])
   /// or will be a comparer that has been registered via a call to
   /// [EqualityComparer.addDefaultEqualityComparer].
   ///
@@ -123,37 +143,18 @@ class EqualityComparer<T> {
   }
 
   static final Map<Type, EqualityComparer> _registeredEqualityComparers = {
-    dynamic: EqualityComparer<dynamic>(
-      comparer: (dynamic left, dynamic right) => left == right,
-      hasher: (dynamic value) => value.hashCode,
-      sorter: (dynamic left, dynamic right) => 0,
-    ),
-    num: EqualityComparer<num>(
-      comparer: (left, right) => left == right,
-      hasher: (value) => value.hashCode,
-      sorter: (left, right) => left.compareTo(right),
-    ),
+    dynamic: EqualityComparer<dynamic>(),
+    Duration: EqualityComparer.of<Duration>(),
+    DateTime: EqualityComparer.of<DateTime>(),
+    BigInt: EqualityComparer.of<BigInt>(),
+    String: EqualityComparer.of<String>(useEquals: true),
+    num: EqualityComparer.of<num>(useEquals: true),
     int: EqualityComparer<int>(
       comparer: (left, right) => left == right,
       hasher: (value) => value.hashCode,
       sorter: (left, right) => left.compareTo(right),
     ),
     double: EqualityComparer<double>(
-      comparer: (left, right) => left == right,
-      hasher: (value) => value.hashCode,
-      sorter: (left, right) => left.compareTo(right),
-    ),
-    String: EqualityComparer<String>(
-      comparer: (left, right) => left == right,
-      hasher: (value) => value.hashCode,
-      sorter: (left, right) => left.compareTo(right),
-    ),
-    Duration: EqualityComparer<Duration>(
-      comparer: (left, right) => left == right,
-      hasher: (value) => value.hashCode,
-      sorter: (left, right) => left.compareTo(right),
-    ),
-    BigInt: EqualityComparer<BigInt>(
       comparer: (left, right) => left == right,
       hasher: (value) => value.hashCode,
       sorter: (left, right) => left.compareTo(right),

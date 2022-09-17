@@ -10,4 +10,4 @@ environment:
 
 dev_dependencies: 
   test: ^1.16.4
-  lints: ^1.0.1
+  lints: ^2.0.0

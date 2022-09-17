@@ -53,7 +53,11 @@ extension MoveExtension<T> on Iterable<T> {
       }
 
       for (var i = 0; i < length; i++) {
-        yield buffer[i]!;
+        final item = buffer[i];
+        if (item == null) {
+          throw StateError('Buffer element should not be null');
+        }
+        yield item;
       }
 
       while (moveNext(e)) {

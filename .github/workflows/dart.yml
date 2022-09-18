@@ -36,7 +36,7 @@ jobs:
         run: dart test --coverage="coverage"
 
       - name: Generate code coverage report
-        run: format_coverage --lcov --in=coverage --out=coverage.lcov --packages=.packages --report-on=lib
+        run: format_coverage --lcov --in=coverage --out=coverage.lcov --packages=.dart_tool/package_config.json --report-on=lib
 
       - name: Upload coverage to codecov
         run: curl -s https://codecov.io/bash | bash

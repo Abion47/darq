@@ -15,14 +15,17 @@ void main() {
       BigInt.zero,
     );
 
-    void testTuple(Tuple9 tuple) {
+    void testTuple(
+        Tuple9<int, double, String, bool, List<dynamic>, Set<dynamic>,
+                Map<String, dynamic>, Symbol, BigInt>
+            tuple) {
       expect(tuple.item0, isA<int>());
       expect(tuple.item1, isA<double>());
       expect(tuple.item2, isA<String>());
       expect(tuple.item3, isA<bool>());
-      expect(tuple.item4, isA<List>());
-      expect(tuple.item5, isA<Set>());
-      expect(tuple.item6, isA<Map>());
+      expect(tuple.item4, isA<List<dynamic>>());
+      expect(tuple.item5, isA<Set<dynamic>>());
+      expect(tuple.item6, isA<Map<String, dynamic>>());
       expect(tuple.item7, isA<Symbol>());
       expect(tuple.item8, isA<BigInt>());
 
@@ -54,7 +57,15 @@ void main() {
       testTuple(constructed);
 
       // From list
-      final fromList = Tuple9<int, double, String, bool, List, Set, Map, Symbol,
+      final fromList = Tuple9<
+          int,
+          double,
+          String,
+          bool,
+          List<dynamic>,
+          Set<dynamic>,
+          Map<String, dynamic>,
+          Symbol,
           BigInt>.fromList(<dynamic>[
         0,
         0.1,
@@ -70,7 +81,15 @@ void main() {
       testTuple(fromList);
 
       // From map
-      final fromMap = Tuple9<int, double, String, bool, List, Set, Map, Symbol,
+      final fromMap = Tuple9<
+          int,
+          double,
+          String,
+          bool,
+          List<dynamic>,
+          Set<dynamic>,
+          Map<String, dynamic>,
+          Symbol,
           BigInt>.fromJson(<String, dynamic>{
         'item0': 0,
         'item1': 0.1,
@@ -84,6 +103,22 @@ void main() {
       });
 
       testTuple(fromMap);
+
+      // From record
+      final fromRecord = Tuple9<int, double, String, bool, List<dynamic>,
+          Set<dynamic>, Map<String, dynamic>, Symbol, BigInt>.fromRecord((
+        0,
+        0.1,
+        'a',
+        false,
+        const <dynamic>[],
+        const <dynamic>{},
+        const <String, dynamic>{},
+        const Symbol('empty'),
+        BigInt.zero,
+      ));
+
+      testTuple(fromRecord);
     });
 
     test('index accessor', () {
@@ -142,14 +177,14 @@ void main() {
       expect(
           reference,
           isA<
-              Tuple9<int, double, String, bool, List, Set, Map, Symbol,
-                  BigInt>>());
+              Tuple9<int, double, String, bool, List<dynamic>, Set<dynamic>,
+                  Map<String, dynamic>, Symbol, BigInt>>());
       expect(
-          reference.asType<num, double, String, bool, List, Set, Map, Symbol,
-              BigInt>(),
+          reference.asType<num, double, String, bool, List<dynamic>,
+              Set<dynamic>, Map<String, dynamic>, Symbol, BigInt>(),
           isA<
-              Tuple9<num, double, String, bool, List, Set, Map, Symbol,
-                  BigInt>>());
+              Tuple9<num, double, String, bool, List<dynamic>, Set<dynamic>,
+                  Map<String, dynamic>, Symbol, BigInt>>());
       expect(
           reference.asDynamic(),
           isA<
@@ -187,12 +222,14 @@ void main() {
         false,
         false,
         false,
-      ]);
+      ]) as Tuple3;
 
-      expect(copy2, isA<Tuple3>());
-      expect((copy2 as Tuple3).item0, isA<int>());
+      expect(copy2, isA<Tuple3<dynamic, dynamic, dynamic>>());
+      expect(copy2.asType<int, String, List<dynamic>>(),
+          isA<Tuple3<int, String, List<dynamic>>>());
+      expect(copy2.item0, isA<int>());
       expect(copy2.item1, isA<String>());
-      expect(copy2.item2, isA<List>());
+      expect(copy2.item2, isA<List<dynamic>>());
     });
 
     test('mapActions', () {
@@ -207,6 +244,35 @@ void main() {
         item7: (i) => expect(i, equals(const Symbol('empty'))),
         item8: (i) => expect(i, equals(BigInt.zero)),
       );
+    });
+
+    test('deconstructing', () {
+      // toRecord
+      final record = reference.toRecord();
+
+      expect(
+          record,
+          isA<
+              (
+                int,
+                double,
+                String,
+                bool,
+                List<dynamic>,
+                Set<dynamic>,
+                Map<String, dynamic>,
+                Symbol,
+                BigInt,
+              )>());
+      expect(record.$1, 0);
+      expect(record.$2, 0.1);
+      expect(record.$3, 'a');
+      expect(record.$4, false);
+      expect(record.$5, const <dynamic>[]);
+      expect(record.$6, const <dynamic>{});
+      expect(record.$7, const <String, dynamic>{});
+      expect(record.$8, const Symbol('empty'));
+      expect(record.$9, BigInt.zero);
     });
   });
 }

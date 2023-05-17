@@ -106,6 +106,26 @@ var result = list.select((i, idx) => i * 2 + idx)     // [6, 3, 14, 8, 10, 10, 1
                  .orderBy((i) => i)                   // [6, 8, 9, 10, 14]
                  .map((i) => i.toRadixString(16));    // [6, 8, 9, A, E]
 ```
+**NEW in 2.0.0**
+
+With record support added in Dart 3, A new method has been added called `deconstruct`. It's purpose is to easily unwrap iterables of records, resulting in separate iterables containing the corresponding fields of the internal records.
+
+```dart
+var johns = [
+  ("John Doe", 26, "E145326"),
+  ("John Wick", 58, "E645091"),
+  ("John Teesonter", 15, "E997123"),
+];
+var (names, ages, ids) = johns.deconstruct();
+
+print(names); // ["John Doe", "John Wick", "John Teesonter"]
+print(ages);  // [26, 58, 15]
+print(ids);   // ["E145326", "E645091", "E997123"]
+```
+
+This extension method is implemented on lists containing records with up to nine fields.
+
+(Note: Due to apparent current language restrictions, records containing named fields are not supported.)
 
 ## Tuples
 
@@ -126,6 +146,7 @@ This package exposes tuple classes from `Tuple0` up to `Tuple9`, depending on ho
 * A `mapActions` method allows you to iterate over each item with an exhaustive list of type-safe callbacks.
 * Each tuple class extends `Iterable<dynamic>`, so it can be treated as a normal iterable (and thus combined with any darq extension method).
 * As `==` and `hashCode` are both implemented, tuples can be directly compared for equality or used as keys for maps and other hash sets.
+* (2.0.0) Can be converted to and from Dart 3 records.
 
 ## MoreLINQ Extension Methods
 
@@ -213,8 +234,13 @@ var split = list.split(' ');
 
 ## String Extension Methods
 
- - [iterable](https://pub.dev/documentation/darq/latest/darq/StringExtension/iterable.html)
- - [iterableRunes](https://pub.dev/documentation/darq/latest/darq/StringExtension/iterableRunes.html)
+ - [iterable](https://pub.dev/documentation/darq/latest/darq/DarqStringExtension/iterable.html)
+ - [iterableRunes](https://pub.dev/documentation/darq/latest/darq/DarqStringExtension/iterableRunes.html)
+
+ ## Map Extension Methods
+
+ - [entryRecords](https://pub.dev/documentation/darq/latest/darq/DarqMapExtension/entryRecords.html)
+ - [entryTuples](https://pub.dev/documentation/darq/latest/darq/DarqMapExtension/entryTuples.html)
 
 ## Iterable Extension Methods
 
@@ -273,6 +299,7 @@ var split = list.split(' ');
  - [concat9](https://pub.dev/documentation/darq/latest/darq/ConcatExtension/concat9.html)
  - [consume](https://pub.dev/documentation/darq/latest/darq/ConsumeExtension/consume.html)
  - [countBy](https://pub.dev/documentation/darq/latest/darq/CountByExtension/countBy.html)
+ - deconstruct ([1](https://pub.dev/documentation/darq/latest/darq/Deconstruct1Extension/deconstruct.html), [2](https://pub.dev/documentation/darq/latest/darq/Deconstruct2Extension/deconstruct.html), [3](https://pub.dev/documentation/darq/latest/darq/Deconstruct3Extension/deconstruct.html), [4](https://pub.dev/documentation/darq/latest/darq/Deconstruct4Extension/deconstruct.html), [5](https://pub.dev/documentation/darq/latest/darq/Deconstruct5Extension/deconstruct.html), [6](https://pub.dev/documentation/darq/latest/darq/Deconstruct6Extension/deconstruct.html), [7](https://pub.dev/documentation/darq/latest/darq/Deconstruct7Extension/deconstruct.html), [8](https://pub.dev/documentation/darq/latest/darq/Deconstruct8Extension/deconstruct.html), [9](https://pub.dev/documentation/darq/latest/darq/Deconstruct9Extension/deconstruct.html))
  - [defaultIfEmpty](https://pub.dev/documentation/darq/latest/darq/DefaultIfEmptyExtension/defaultIfEmpty.html)
  - [defaultRangeIfEmpty](https://pub.dev/documentation/darq/latest/darq/DefaultRangeIfEmptyExtension/defaultRangeIfEmpty.html)
  - [distinct](https://pub.dev/documentation/darq/latest/darq/DistinctExtension/distinct.html)

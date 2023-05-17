@@ -60,7 +60,7 @@ class GroupJoinIterable<TSource, TInner, TKey, TResult>
 /// This class is created by calls to `Iterable.groupJoinIterator` and isn't intended to be
 /// instantiated directly.
 class GroupJoinIterator<TSource, TInner, TKey, TResult>
-    extends Iterator<TResult> {
+    implements Iterator<TResult> {
   final GroupJoinIterable<TSource, TInner, TKey, TResult> iterable;
 
   GroupJoinIterator(this.iterable) {

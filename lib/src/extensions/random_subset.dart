@@ -52,7 +52,7 @@ class _RandomizedSubsetIterable<T> extends Iterable<T> {
   Iterator<T> get iterator => _RandomizedSubsetIterator(this);
 }
 
-class _RandomizedSubsetIterator<T> extends Iterator<T> {
+class _RandomizedSubsetIterator<T> implements Iterator<T> {
   final _RandomizedSubsetIterable<T> _iterable;
 
   _RandomizedSubsetIterator(this._iterable);

@@ -28,7 +28,7 @@ class _ReversedIterable<T> extends Iterable<T> {
   Iterator<T> get iterator => _ReversedIterator(this);
 }
 
-class _ReversedIterator<T> extends Iterator<T> {
+class _ReversedIterator<T> implements Iterator<T> {
   final _ReversedIterable<T> _iterable;
 
   _ReversedIterator(this._iterable);

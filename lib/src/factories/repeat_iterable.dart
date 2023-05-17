@@ -15,7 +15,7 @@ class RepeatIterable<T> extends Iterable<T> {
   Iterator<T> get iterator => _RepeatIterator(element, count);
 }
 
-class _RepeatIterator<T> extends Iterator<T> {
+class _RepeatIterator<T> implements Iterator<T> {
   final T element;
   final int count;
 

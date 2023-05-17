@@ -24,6 +24,11 @@ void main() {
       final fromMap = Tuple0.fromJson(<String, dynamic>{});
 
       testTuple(fromMap);
+
+      // From record
+      final fromRecord = Tuple0.fromRecord(());
+
+      testTuple(fromRecord);
     });
 
     test('index accessor', () {
@@ -56,6 +61,13 @@ void main() {
       void task() => reference.copyWithout(indices: <bool>[]);
 
       expect(task, throwsA(isA<StateError>()));
+    });
+
+    test('deconstructing', () {
+      // toRecord
+      final record = reference.toRecord();
+
+      expect(record, isA<()>());
     });
   });
 }

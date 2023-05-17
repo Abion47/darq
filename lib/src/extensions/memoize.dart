@@ -34,7 +34,7 @@ class MemoizedIterable<T> extends Iterable<T> {
   }
 }
 
-class _MemoizedIterator<T> extends Iterator<T> {
+class _MemoizedIterator<T> implements Iterator<T> {
   _MemoizedIterator(this._iterable);
   final MemoizedIterable<T> _iterable;
 

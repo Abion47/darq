@@ -8,7 +8,7 @@ void main() {
     test('int list to map', () {
       final input = [1, 2, 3, 4, 5];
       final result = input.toHashMap((x) => MapEntry(x, x.toString()));
-      expect(result, isA<HashMap>());
+      expect(result, isA<HashMap<int, String>>());
       expect(result, equals({1: '1', 2: '2', 3: '3', 4: '4', 5: '5'}));
     });
   });

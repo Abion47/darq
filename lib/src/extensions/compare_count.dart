@@ -9,7 +9,7 @@ extension CompareCountExtension<T> on Iterable<T> {
   /// If [other] is longer than this iterable, this method returns -1.
   ///
   /// If this iterable and [other] are the same length, this method returns 0.
-  int compareCount(Iterable other) {
+  int compareCount(Iterable<dynamic> other) {
     return count().compareTo(other.count());
   }
 }

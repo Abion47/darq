@@ -8,7 +8,7 @@ void main() {
     test('int list to map', () {
       final input = [1, 2, 3, 4, 5];
       final result = input.toSplayTreeMap((x) => MapEntry(x, x.toString()));
-      expect(result, isA<SplayTreeMap>());
+      expect(result, isA<SplayTreeMap<int, String>>());
       expect(result, equals({1: '1', 2: '2', 3: '3', 4: '4', 5: '5'}));
     });
   });

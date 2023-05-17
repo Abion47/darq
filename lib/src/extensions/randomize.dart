@@ -36,7 +36,7 @@ class _RandomizableIterable<T> extends Iterable<T> {
   Iterator<T> get iterator => _RandomizableIterator(this);
 }
 
-class _RandomizableIterator<T> extends Iterator<T> {
+class _RandomizableIterator<T> implements Iterator<T> {
   final _RandomizableIterable<T> _iterable;
 
   _RandomizableIterator(this._iterable);

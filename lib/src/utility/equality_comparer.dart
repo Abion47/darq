@@ -138,7 +138,8 @@ class EqualityComparer<T> {
     return null;
   }
 
-  static final Map<Type, EqualityComparer> _registeredEqualityComparers = {
+  static final Map<Type, EqualityComparer<dynamic>>
+      _registeredEqualityComparers = {
     dynamic: EqualityComparer<dynamic>(),
     Duration: EqualityComparer.of<Duration>(),
     DateTime: EqualityComparer.of<DateTime>(),

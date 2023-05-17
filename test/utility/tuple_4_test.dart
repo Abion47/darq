@@ -10,7 +10,7 @@ void main() {
       false,
     );
 
-    void testTuple(Tuple4 tuple) {
+    void testTuple(Tuple4<int, double, String, bool> tuple) {
       expect(tuple.item0, isA<int>());
       expect(tuple.item1, isA<double>());
       expect(tuple.item2, isA<String>());
@@ -53,6 +53,16 @@ void main() {
       });
 
       testTuple(fromMap);
+
+      // From record
+      final fromRecord = Tuple4<int, double, String, bool>.fromRecord((
+        0,
+        0.1,
+        'a',
+        false,
+      ));
+
+      testTuple(fromRecord);
     });
 
     test('index accessor', () {
@@ -113,10 +123,10 @@ void main() {
         false,
         true,
         false,
-      ]);
+      ]) as Tuple2;
 
-      expect(copy2, isA<Tuple2>());
-      expect((copy2 as Tuple2).item0, isA<int>());
+      expect(copy2, isA<Tuple2<dynamic, dynamic>>());
+      expect(copy2.asType<int, String>(), isA<Tuple2<int, String>>());
       expect(copy2.item0, isA<int>());
       expect(copy2.item1, isA<String>());
     });
@@ -128,6 +138,17 @@ void main() {
         item2: (i) => expect(i, equals('a')),
         item3: (i) => expect(i, equals(false)),
       );
+    });
+
+    test('deconstructing', () {
+      // toRecord
+      final record = reference.toRecord();
+
+      expect(record, isA<(int, double, String, bool)>());
+      expect(record.$1, 0);
+      expect(record.$2, 0.1);
+      expect(record.$3, 'a');
+      expect(record.$4, false);
     });
   });
 }

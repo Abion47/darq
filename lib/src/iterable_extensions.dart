@@ -24,6 +24,7 @@ export 'extensions/concat_all.dart';
 export 'extensions/consume.dart';
 export 'extensions/count.dart';
 export 'extensions/count_by.dart';
+export 'extensions/deconstruct.dart';
 export 'extensions/default_if_empty.dart';
 export 'extensions/default_range_if_empty.dart';
 export 'extensions/distinct.dart';

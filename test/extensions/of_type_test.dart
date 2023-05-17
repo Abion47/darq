@@ -87,7 +87,7 @@ void main() {
         Person('Bill'),
         () => <String, dynamic>{},
       ];
-      final result = test.ofType5<int, double, String, bool, List>();
+      final result = test.ofType5<int, double, String, bool, List<int>>();
       expect(result, orderedEquals(test.take(5)));
     });
 
@@ -104,7 +104,8 @@ void main() {
         Person('Bill'),
         () => <String, dynamic>{},
       ];
-      final result = test.ofType6<int, double, String, bool, List, Set>();
+      final result =
+          test.ofType6<int, double, String, bool, List<int>, Set<String>>();
       expect(result, orderedEquals(test.take(6)));
     });
 
@@ -121,7 +122,8 @@ void main() {
         Person('Bill'),
         () => <String, dynamic>{},
       ];
-      final result = test.ofType7<int, double, String, bool, List, Set, Map>();
+      final result = test.ofType7<int, double, String, bool, List<int>,
+          Set<String>, Map<String, dynamic>>();
       expect(result, orderedEquals(test.take(7)));
     });
 
@@ -138,8 +140,8 @@ void main() {
         Person('Bill'),
         () => <String, dynamic>{},
       ];
-      final result =
-          test.ofType8<int, double, String, bool, List, Set, Map, Pet>();
+      final result = test.ofType8<int, double, String, bool, List<int>,
+          Set<String>, Map<String, dynamic>, Pet>();
       expect(result, orderedEquals(test.take(8)));
     });
 
@@ -156,8 +158,8 @@ void main() {
         Person('Bill'),
         () => <String, dynamic>{},
       ];
-      final result = test
-          .ofType9<int, double, String, bool, List, Set, Map, Pet, Person>();
+      final result = test.ofType9<int, double, String, bool, List<int>,
+          Set<String>, Map<String, dynamic>, Pet, Person>();
       expect(result, orderedEquals(test.take(9)));
     });
   });

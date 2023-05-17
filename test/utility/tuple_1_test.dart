@@ -7,7 +7,7 @@ void main() {
       0,
     );
 
-    void testTuple(Tuple1 tuple) {
+    void testTuple(Tuple1<int> tuple) {
       expect(tuple.item, isA<int>());
 
       expect(tuple.item, equals(reference.item));
@@ -34,6 +34,11 @@ void main() {
       });
 
       testTuple(fromMap);
+
+      // From record
+      final fromRecord = Tuple1<int>.fromRecord((0,));
+
+      testTuple(fromRecord);
     });
 
     test('index accessor', () {
@@ -80,6 +85,14 @@ void main() {
       reference.mapActions(
         item: (i) => expect(i, equals(0)),
       );
+    });
+
+    test('deconstructing', () {
+      // toRecord
+      final record = reference.toRecord();
+
+      expect(record, isA<(int,)>());
+      expect(record.$1, 0);
     });
   });
 }

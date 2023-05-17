@@ -56,7 +56,7 @@ class RangeIterable extends Iterable<int> {
   Iterator<int> get iterator => _RangeIterator(start, end, step);
 }
 
-class _RangeIterator extends Iterator<int> {
+class _RangeIterator implements Iterator<int> {
   _RangeIterator(this.start, this.end, this.interval) {
     _descending = interval < 0;
 

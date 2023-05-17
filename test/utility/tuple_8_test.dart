@@ -14,14 +14,17 @@ void main() {
       const Symbol('empty'),
     );
 
-    void testTuple(Tuple8 tuple) {
+    void testTuple(
+        Tuple8<int, double, String, bool, List<dynamic>, Set<dynamic>,
+                Map<String, dynamic>, Symbol>
+            tuple) {
       expect(tuple.item0, isA<int>());
       expect(tuple.item1, isA<double>());
       expect(tuple.item2, isA<String>());
       expect(tuple.item3, isA<bool>());
-      expect(tuple.item4, isA<List>());
-      expect(tuple.item5, isA<Set>());
-      expect(tuple.item6, isA<Map>());
+      expect(tuple.item4, isA<List<dynamic>>());
+      expect(tuple.item5, isA<Set<dynamic>>());
+      expect(tuple.item6, isA<Map<String, dynamic>>());
       expect(tuple.item7, isA<Symbol>());
 
       expect(tuple.item0, equals(reference.item0));
@@ -50,8 +53,8 @@ void main() {
       testTuple(constructed);
 
       // From list
-      final fromList = Tuple8<int, double, String, bool, List, Set, Map,
-          Symbol>.fromList(<dynamic>[
+      final fromList = Tuple8<int, double, String, bool, List<dynamic>,
+          Set<dynamic>, Map<String, dynamic>, Symbol>.fromList(<dynamic>[
         0,
         0.1,
         'a',
@@ -65,7 +68,14 @@ void main() {
       testTuple(fromList);
 
       // From map
-      final fromMap = Tuple8<int, double, String, bool, List, Set, Map,
+      final fromMap = Tuple8<
+          int,
+          double,
+          String,
+          bool,
+          List<dynamic>,
+          Set<dynamic>,
+          Map<String, dynamic>,
           Symbol>.fromJson(<String, dynamic>{
         'item0': 0,
         'item1': 0.1,
@@ -78,6 +88,21 @@ void main() {
       });
 
       testTuple(fromMap);
+
+      // From record
+      final fromRecord = Tuple8<int, double, String, bool, List<dynamic>,
+          Set<dynamic>, Map<String, dynamic>, Symbol>.fromRecord((
+        0,
+        0.1,
+        'a',
+        false,
+        const <dynamic>[],
+        const <dynamic>{},
+        const <String, dynamic>{},
+        const Symbol('empty'),
+      ));
+
+      testTuple(fromRecord);
     });
 
     test('index accessor', () {
@@ -129,11 +154,17 @@ void main() {
     });
 
     test('casting', () {
-      expect(reference,
-          isA<Tuple8<int, double, String, bool, List, Set, Map, Symbol>>());
       expect(
-          reference.asType<num, double, String, bool, List, Set, Map, Symbol>(),
-          isA<Tuple8<num, double, String, bool, List, Set, Map, Symbol>>());
+          reference,
+          isA<
+              Tuple8<int, double, String, bool, List<dynamic>, Set<dynamic>,
+                  Map<String, dynamic>, Symbol>>());
+      expect(
+          reference.asType<num, double, String, bool, List<dynamic>,
+              Set<dynamic>, Map<String, dynamic>, Symbol>(),
+          isA<
+              Tuple8<num, double, String, bool, List<dynamic>, Set<dynamic>,
+                  Map<String, dynamic>, Symbol>>());
       expect(
           reference.asDynamic(),
           isA<
@@ -169,12 +200,14 @@ void main() {
         false,
         false,
         false,
-      ]);
+      ]) as Tuple3;
 
-      expect(copy2, isA<Tuple3>());
-      expect((copy2 as Tuple3).item0, isA<int>());
+      expect(copy2, isA<Tuple3<dynamic, dynamic, dynamic>>());
+      expect(copy2.asType<int, String, List<dynamic>>(),
+          isA<Tuple3<int, String, List<dynamic>>>());
+      expect(copy2.item0, isA<int>());
       expect(copy2.item1, isA<String>());
-      expect(copy2.item2, isA<List>());
+      expect(copy2.item2, isA<List<dynamic>>());
     });
 
     test('mapActions', () {
@@ -188,6 +221,33 @@ void main() {
         item6: (i) => expect(i, equals(const <String, dynamic>{})),
         item7: (i) => expect(i, equals(const Symbol('empty'))),
       );
+    });
+
+    test('deconstructing', () {
+      // toRecord
+      final record = reference.toRecord();
+
+      expect(
+          record,
+          isA<
+              (
+                int,
+                double,
+                String,
+                bool,
+                List<dynamic>,
+                Set<dynamic>,
+                Map<String, dynamic>,
+                Symbol,
+              )>());
+      expect(record.$1, 0);
+      expect(record.$2, 0.1);
+      expect(record.$3, 'a');
+      expect(record.$4, false);
+      expect(record.$5, const <dynamic>[]);
+      expect(record.$6, const <dynamic>{});
+      expect(record.$7, const <String, dynamic>{});
+      expect(record.$8, const Symbol('empty'));
     });
   });
 }

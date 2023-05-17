@@ -11,12 +11,12 @@ void main() {
       const <dynamic>[],
     );
 
-    void testTuple(Tuple5 tuple) {
+    void testTuple(Tuple5<int, double, String, bool, List<dynamic>> tuple) {
       expect(tuple.item0, isA<int>());
       expect(tuple.item1, isA<double>());
       expect(tuple.item2, isA<String>());
       expect(tuple.item3, isA<bool>());
-      expect(tuple.item4, isA<List>());
+      expect(tuple.item4, isA<List<dynamic>>());
 
       expect(tuple.item0, equals(reference.item0));
       expect(tuple.item1, equals(reference.item1));
@@ -39,7 +39,7 @@ void main() {
 
       // From list
       final fromList =
-          Tuple5<int, double, String, bool, List>.fromList(<dynamic>[
+          Tuple5<int, double, String, bool, List<dynamic>>.fromList(<dynamic>[
         0,
         0.1,
         'a',
@@ -50,8 +50,8 @@ void main() {
       testTuple(fromList);
 
       // From map
-      final fromMap =
-          Tuple5<int, double, String, bool, List>.fromJson(<String, dynamic>{
+      final fromMap = Tuple5<int, double, String, bool,
+          List<dynamic>>.fromJson(<String, dynamic>{
         'item0': 0,
         'item1': 0.1,
         'item2': 'a',
@@ -60,6 +60,18 @@ void main() {
       });
 
       testTuple(fromMap);
+
+      // From record
+      final fromRecord =
+          Tuple5<int, double, String, bool, List<dynamic>>.fromRecord((
+        0,
+        0.1,
+        'a',
+        false,
+        const <dynamic>[],
+      ));
+
+      testTuple(fromRecord);
     });
 
     test('index accessor', () {
@@ -99,9 +111,10 @@ void main() {
     });
 
     test('casting', () {
-      expect(reference, isA<Tuple5<int, double, String, bool, List>>());
-      expect(reference.asType<num, double, String, bool, List>(),
-          isA<Tuple5<num, double, String, bool, List>>());
+      expect(
+          reference, isA<Tuple5<int, double, String, bool, List<dynamic>>>());
+      expect(reference.asType<num, double, String, bool, List<dynamic>>(),
+          isA<Tuple5<num, double, String, bool, List<dynamic>>>());
       expect(reference.asDynamic(),
           isA<Tuple5<dynamic, dynamic, dynamic, dynamic, dynamic>>());
 
@@ -126,12 +139,14 @@ void main() {
         true,
         false,
         true,
-      ]);
+      ]) as Tuple3;
 
-      expect(copy2, isA<Tuple3>());
-      expect((copy2 as Tuple3).item0, isA<int>());
+      expect(copy2, isA<Tuple3<dynamic, dynamic, dynamic>>());
+      expect(copy2.asType<int, String, List<dynamic>>(),
+          isA<Tuple3<int, String, List<dynamic>>>());
+      expect(copy2.item0, isA<int>());
       expect(copy2.item1, isA<String>());
-      expect(copy2.item2, isA<List>());
+      expect(copy2.item2, isA<List<dynamic>>());
     });
 
     test('mapActions', () {
@@ -142,6 +157,18 @@ void main() {
         item3: (i) => expect(i, equals(false)),
         item4: (i) => expect(i, equals(const <dynamic>[])),
       );
+    });
+
+    test('deconstructing', () {
+      // toRecord
+      final record = reference.toRecord();
+
+      expect(record, isA<(int, double, String, bool, List<dynamic>)>());
+      expect(record.$1, 0);
+      expect(record.$2, 0.1);
+      expect(record.$3, 'a');
+      expect(record.$4, false);
+      expect(record.$5, const <dynamic>[]);
     });
   });
 }

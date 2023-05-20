@@ -4,7 +4,7 @@ extension ExcludeRangeExtension<T> on Iterable<T> {
   ///
   /// If [start] is greater than the length of the iterable or if [count] is zero,
   /// the iterable is unchanged. If [start] or [count] are less than zero, a
-  /// [RangeException] is thrown.
+  /// [RangeError] is thrown.
   Iterable<T> excludeRange(int start, int count) sync* {
     if (start < 0) {
       throw RangeError.index(start, this, 'start',

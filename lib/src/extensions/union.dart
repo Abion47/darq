@@ -15,9 +15,9 @@ extension UnionExtension<T> on Iterable<T> {
   /// hash code implementation for `T`;
   ///
   /// Due to the nature of set unions, the resulting iterable will be as though
-  /// [distinct] was applied to it, so duplicate elements after the first found
-  /// will be discarded. If the intention is to combine elements of two
-  /// iterables/collections, use [concat] instead.
+  /// [distinct](https://pub.dev/documentation/darq/latest/darq/DistinctExtension/distinct.html) was applied to it, so duplicate elements
+  /// will be discarded. If the intention is to combine elements of two iterables/collections,
+  /// use [concat](https://pub.dev/documentation/darq/latest/darq/ConcatExtension/concat.html) instead.
   ///
   /// Example:
   ///

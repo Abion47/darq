@@ -2,7 +2,7 @@ extension ExcludeAtExtension<T> on Iterable<T> {
   /// Returns all elements in this iterable except the element at [index].
   ///
   /// If [index] is greater than the length of the iterable, the iterable is
-  /// unchanged. If [index] is less than zero, a [RangeException] is thrown.
+  /// unchanged. If [index] is less than zero, a [RangeError] is thrown.
   Iterable<T> excludeAt(int index) sync* {
     if (index < 0) {
       throw RangeError.index(index, this, 'index',

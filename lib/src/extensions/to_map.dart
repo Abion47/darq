@@ -11,7 +11,8 @@ extension ToMapExtension<T> on Iterable<T> {
   /// overwritten. As such, the length of the resulting [Map] is not guaranteed
   /// to be the same length as the iterable.
   ///
-  /// (This method is equivalent to calling [toLinkedHashMap].)
+  /// (Because the underlying type of Dart Map natives is [LinkedHashMap](https://api.flutter.dev/flutter/dart-collection/LinkedHashMap-class.html),
+  /// this method is a convenience method that is equivalent to calling [toLinkedHashMap](https://pub.dev/documentation/darq/latest/darq/ToLinkedHashMapExtension/toLinkedHashMap.html).)
   ///
   /// Example:
   ///

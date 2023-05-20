@@ -3,13 +3,11 @@ import '../utility/equality_comparer.dart';
 extension BetweenExtension<T> on Iterable<T> {
   /// Returns true if all elements in the iterable are between [minimum] and [maximum].
   ///
-  /// Iterates over the entire iterable and uses a sorting function to compare [value] to
-  /// each element in the iterable. If any element is not between [minimum] and [maximum], this
-  /// method returns false. Otherwise, if every element is less than or equal to [value], this
-  /// method returns true.
+  /// Consumes the iterable and examines each element. If any element is not between
+  /// [minimum] and [maximum], this method returns false. Otherwise, this method returns true.
   ///
   /// Exclusivity on this method is controlled by the [minimumInclusive] and [maximumInclusive]
-  /// parameters. These parameters default to true.
+  /// parameters. These parameters default to false.
   ///
   /// If [sorter] is omitted, the method checks [EqualityComparer.forType] to see if a default
   /// sorting function exists. If one is found, it is used. If one is not found, this method

@@ -7,7 +7,7 @@ extension InsertOrAppendAll<T> on Iterable<T> {
   /// If [index] is less than zero, an [ArgumentError] is thrown.
   ///
   /// If iteration of this iterable is exausted before the position [index]
-  /// is reached, the elements in [other] are added to the end iterable as if calling [append].
+  /// is reached, the elements in [other] are added to the end iterable as if calling [appendAll](https://pub.dev/documentation/darq/latest/darq/AppendAllExtension/appendAll.html).
   Iterable<T> insertOrAppendAll(int index, Iterable<T> other) sync* {
     if (index == 0) {
       yield* other.followedBy(this);

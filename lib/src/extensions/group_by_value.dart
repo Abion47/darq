@@ -12,12 +12,13 @@ extension GroupByValueExtension<T> on Iterable<T> {
   /// passed to the [valueSelector] to retrieve the value stored under the key.
   ///
   /// Optionally, an [EqualityComparer] can be supplied to handle key comparisons.
-  /// If one is provided, the [groupByValue] method will use the [comparer] and
-  /// [hasher] properties in order to determine equivalency. If omitted,
+  /// If one is provided, the [groupByValue] method will use the [compare](https://pub.dev/documentation/darq/latest/darq/EqualityComparer/compare.html) and
+  /// [hash](https://pub.dev/documentation/darq/latest/darq/EqualityComparer/hash.html) properties in order to determine equivalency. If omitted,
   /// [groupByValue] will resort to strict equivalency (i.e. checking `if (value == element)`).
   ///
-  /// (For the [groupByValue] method, only the [comparer] and [hasher] properties of
-  /// the [EqualityComparer] need be supplied.)
+  /// (For the [groupByValue] method, only the [compare](https://pub.dev/documentation/darq/latest/darq/EqualityComparer/compare.html)
+  /// and [hash](https://pub.dev/documentation/darq/latest/darq/EqualityComparer/hash.html)
+  /// properties of the [EqualityComparer] need be supplied.)
   ///
   /// The resulting iterable will consist of a series of [Grouping] constructs
   /// that contain the elements. If no two elements in the iterable share a

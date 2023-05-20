@@ -14,12 +14,13 @@ extension GroupSelectExtension<T> on Iterable<T> {
   /// an element of the resulting iterable.
   ///
   /// Optionally, an [EqualityComparer] can be supplied to handle key comparisons.
-  /// If one is provided, the [groupSelect] method will use the [comparer] and
-  /// [hasher] properties in order to determine equivalency. If omitted,
+  /// If one is provided, the [groupSelect] method will use the [compare](https://pub.dev/documentation/darq/latest/darq/EqualityComparer/compare.html) and
+  /// [hash](https://pub.dev/documentation/darq/latest/darq/EqualityComparer/hash.html) properties in order to determine equivalency. If omitted,
   /// [groupSelect] will resort to strict equivalency (i.e. checking `if
   /// (value == element)`).
   ///
-  /// (For the [groupSelect] method, only the [comparer] and [hasher] properties of
+  /// (For the [groupSelect] method, only the [compare](https://pub.dev/documentation/darq/latest/darq/EqualityComparer/compare.html)
+  /// and [hash](https://pub.dev/documentation/darq/latest/darq/EqualityComparer/hash.html) properties of
   /// the [EqualityComparer] need be supplied.)
   ///
   /// Example:

@@ -5,10 +5,10 @@ extension MathConsumerExtensions<T> on Iterable<T> {
   /// will be the number of elements for which the [condition] function
   /// returned `true`.
   ///
-  /// If the [condition] parameter is omitted and the underlying collection extends
-  /// or implements [EfficientLengthIterable], the [count] method will call the
-  /// `length` property of the iterable as an O(1) operation. Otherwise, the
-  /// [count] function will iterate over every element in the iterable.
+  /// If the [condition] parameter is omitted, the [count] method will call the
+  /// `length` property of the iterable. This will either be an O(1) operation or an
+  /// O(n) operation, depending on the runtime type of the iterable. (e.g. If the iterable
+  /// is a [List], calling [count] will be an O(1) operation.)
   ///
   /// Example:
   ///

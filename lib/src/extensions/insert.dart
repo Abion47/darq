@@ -8,7 +8,7 @@ extension InsertExtension<T> on Iterable<T> {
   ///
   /// If [index] is less than zero, an [ArgumentError] is thrown.
   ///
-  /// If iteration of this iterable is exausted before the position [index]
+  /// If iteration of the underlying iterable is exausted before the position [index]
   /// is reached, a [RangeError] is thrown.
   Iterable<T> insert(int index, T value) sync* {
     if (index == 0) {

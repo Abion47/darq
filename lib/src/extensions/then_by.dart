@@ -5,11 +5,13 @@ extension ThenByExtension<T> on Iterable<T> {
   /// Adds a secondary sorting pass to iteration in ascending
   /// (least-to-greatest) order.
   ///
-  /// [thenBy] applies to an iterable that has been sorted by [orderBy] or
-  /// [orderByDescending] (or another [thenBy] or [thenByDescending]). Once the
-  /// previous sorting mechanism is processed, the keys are then sorted again
+  /// [thenBy] applies to an iterable that has been sorted by
+  /// [orderBy](https://pub.dev/documentation/darq/latest/darq/OrderByExtension/orderBy.html)
+  /// or [orderByDescending](https://pub.dev/documentation/darq/latest/darq/OrderByDescendingExtension/orderByDescending.html)
+  /// (or another [thenBy] or [thenByDescending](https://pub.dev/documentation/darq/latest/darq/ThenByDescendingExtension/thenByDescending.html)).
+  /// Once the previous sorting mechanism is processed, the keys are then sorted again
   /// using the [EqualityComparer] given to this method. (The process of sorting
-  /// is identical to [groupBy].)
+  /// is identical to [groupBy](https://pub.dev/documentation/darq/latest/darq/GroupByExtension/groupBy.html).)
   ///
   /// When the type of the iterable is one of the below types, the
   /// [EqualityComparer] can be omitted. In this case, the function defaults to

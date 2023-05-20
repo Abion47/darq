@@ -1,10 +1,10 @@
 extension DefaultIfEmptyExtension<T> on Iterable<T> {
-  /// Returns a new iterable containing [value] if this iterable is empty. Otherwise,
+  /// Returns a new iterable containing [defaultVal] if this iterable is empty. Otherwise,
   /// the source iterable will be unaffected.
   ///
   /// If the number of elements in this iterable is zero, [defaultIfEmpty] will
   /// return a new iterable that consists of a single element specified by
-  /// the given [value].
+  /// the given [defaultVal].
   ///
   /// If this iterable has one or more elements, the iterable is returned
   /// without modification.

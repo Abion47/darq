@@ -113,7 +113,7 @@ class EqualityComparer<T> {
   /// omitted. The [EqualityComparer] will be one of the built-in default comparers
   /// (for [dynamic], [num], [int], [double], [String], [Duration], [DateTime], or [BigInt])
   /// or will be a comparer that has been registered via a call to
-  /// [EqualityComparer.addDefaultEqualityComparer].
+  /// [EqualityComparer.registerEqualityComparer].
   ///
   /// If no registered comparer can be found, this method returns a default `EqualityComparer`;
   static EqualityComparer<T> forType<T>() =>
@@ -128,7 +128,7 @@ class EqualityComparer<T> {
   /// omitted. The [EqualityComparer] will be one of the built-in default comparers
   /// (for [dynamic], [num], [int], [double], [String], [Duration], or [BigInt])
   /// or will be a comparer that has been registered via a call to
-  /// [EqualityComparer.addDefaultEqualityComparer].
+  /// [EqualityComparer.registerEqualityComparer].
   ///
   /// If no registered comparer can be found, this method returns null.
   static EqualityComparer<T>? tryForType<T>() {
@@ -181,7 +181,7 @@ class EqualityComparer<T> {
   /// If no comparer is registered for type `T`, the returned value is `null`.
   ///
   /// Following a call to this method, LINQ methods that attempt to call
-  /// [EqualityComparer.ofType] for the type `T` will instead get the default
+  /// [EqualityComparer.forType] for the type `T` will instead get the default
   /// comparer until a comparer for `T` is provided again with a call to
   /// [EqualityComparer.registerEqualityComparer].
   static EqualityComparer<T> unregisterEqualityComparer<T>() {

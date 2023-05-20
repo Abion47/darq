@@ -1,7 +1,7 @@
 extension DefaultRangeIfEmptyExtension<T> on Iterable<T> {
   /// Returns this iterable, or [defaultVal] if this iterable is empty.
   ///
-  /// If the number of elements in this iterable is zero, [defaultIfEmpty] will
+  /// If the number of elements in this iterable is zero, [defaultRangeIfEmpty] will
   /// return [defaultVal] instead.
   ///
   /// If this iterable has one or more elements, the iterable is returned

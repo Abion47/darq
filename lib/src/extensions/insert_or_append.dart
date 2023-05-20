@@ -9,7 +9,7 @@ extension InsertOrAppendExtension<T> on Iterable<T> {
   /// If [index] is less than zero, an [ArgumentError] is thrown.
   ///
   /// If iteration of the underlying iterable is exausted before the position [index]
-  /// is reached, [value] is added to the end iterable as if calling [append].
+  /// is reached, [value] is added to the end iterable as if calling [append](https://pub.dev/documentation/darq/latest/darq/AppendExtension/append.html).
   Iterable<T> insertOrAppend(int index, T value) sync* {
     if (index == 0) {
       yield* prepend(value);
@@ -43,7 +43,7 @@ extension InsertOrAppendExtension<T> on Iterable<T> {
   /// If [index] is less than zero, an [ArgumentError] is thrown.
   ///
   /// If iteration of the underlying iterable is exausted before the position [index]
-  /// is reached, the elements are added to the end iterable as if calling [append].
+  /// is reached, the elements are added to the end iterable as if calling [append](https://pub.dev/documentation/darq/latest/darq/AppendExtension/append.html).
   Iterable<T> insertOrAppend2(int index, T v1, T v2) sync* {
     if (index == 0) {
       yield* prepend2(v1, v2);
@@ -79,7 +79,7 @@ extension InsertOrAppendExtension<T> on Iterable<T> {
   /// If [index] is less than zero, an [ArgumentError] is thrown.
   ///
   /// If iteration of the underlying iterable is exausted before the position [index]
-  /// is reached, the elements are added to the end iterable as if calling [append].
+  /// is reached, the elements are added to the end iterable as if calling [append](https://pub.dev/documentation/darq/latest/darq/AppendExtension/append.html).
   Iterable<T> insertOrAppend3(int index, T v1, T v2, T v3) sync* {
     if (index == 0) {
       yield* prepend3(v1, v2, v3);
@@ -117,7 +117,7 @@ extension InsertOrAppendExtension<T> on Iterable<T> {
   /// If [index] is less than zero, an [ArgumentError] is thrown.
   ///
   /// If iteration of the underlying iterable is exausted before the position [index]
-  /// is reached, the elements are added to the end iterable as if calling [append].
+  /// is reached, the elements are added to the end iterable as if calling [append](https://pub.dev/documentation/darq/latest/darq/AppendExtension/append.html).
   Iterable<T> insertOrAppend4(int index, T v1, T v2, T v3, T v4) sync* {
     if (index == 0) {
       yield* prepend4(v1, v2, v3, v4);
@@ -157,7 +157,7 @@ extension InsertOrAppendExtension<T> on Iterable<T> {
   /// If [index] is less than zero, an [ArgumentError] is thrown.
   ///
   /// If iteration of the underlying iterable is exausted before the position [index]
-  /// is reached, the elements are added to the end iterable as if calling [append].
+  /// is reached, the elements are added to the end iterable as if calling [append](https://pub.dev/documentation/darq/latest/darq/AppendExtension/append.html).
   Iterable<T> insertOrAppend5(int index, T v1, T v2, T v3, T v4, T v5) sync* {
     if (index == 0) {
       yield* prepend5(v1, v2, v3, v4, v5);
@@ -199,7 +199,7 @@ extension InsertOrAppendExtension<T> on Iterable<T> {
   /// If [index] is less than zero, an [ArgumentError] is thrown.
   ///
   /// If iteration of the underlying iterable is exausted before the position [index]
-  /// is reached, the elements are added to the end iterable as if calling [append].
+  /// is reached, the elements are added to the end iterable as if calling [append](https://pub.dev/documentation/darq/latest/darq/AppendExtension/append.html).
   Iterable<T> insertOrAppend6(
       int index, T v1, T v2, T v3, T v4, T v5, T v6) sync* {
     if (index == 0) {
@@ -244,7 +244,7 @@ extension InsertOrAppendExtension<T> on Iterable<T> {
   /// If [index] is less than zero, an [ArgumentError] is thrown.
   ///
   /// If iteration of the underlying iterable is exausted before the position [index]
-  /// is reached, the elements are added to the end iterable as if calling [append].
+  /// is reached, the elements are added to the end iterable as if calling [append](https://pub.dev/documentation/darq/latest/darq/AppendExtension/append.html).
   Iterable<T> insertOrAppend7(
       int index, T v1, T v2, T v3, T v4, T v5, T v6, T v7) sync* {
     if (index == 0) {
@@ -291,7 +291,7 @@ extension InsertOrAppendExtension<T> on Iterable<T> {
   /// If [index] is less than zero, an [ArgumentError] is thrown.
   ///
   /// If iteration of the underlying iterable is exausted before the position [index]
-  /// is reached, the elements are added to the end iterable as if calling [append].
+  /// is reached, the elements are added to the end iterable as if calling [append](https://pub.dev/documentation/darq/latest/darq/AppendExtension/append.html).
   Iterable<T> insertOrAppend8(
       int index, T v1, T v2, T v3, T v4, T v5, T v6, T v7, T v8) sync* {
     if (index == 0) {
@@ -340,7 +340,7 @@ extension InsertOrAppendExtension<T> on Iterable<T> {
   /// If [index] is less than zero, an [ArgumentError] is thrown.
   ///
   /// If iteration of the underlying iterable is exausted before the position [index]
-  /// is reached, the elements are added to the end iterable as if calling [append].
+  /// is reached, the elements are added to the end iterable as if calling [append](https://pub.dev/documentation/darq/latest/darq/AppendExtension/append.html).
   Iterable<T> insertOrAppend9(
       int index, T v1, T v2, T v3, T v4, T v5, T v6, T v7, T v8, T v9) sync* {
     if (index == 0) {

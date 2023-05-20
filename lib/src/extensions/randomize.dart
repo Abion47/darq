@@ -8,21 +8,6 @@ extension RandomizeExtension<T> on Iterable<T> {
   /// Internally this method performs a partial Fisher-Yates shuffle of the list.
   Iterable<T> randomize([Random? random]) {
     return _RandomizableIterable(this, random);
-    // final list = toList();
-    // random ??= Random();
-
-    // var w = list.length;
-    // var g = w - 1;
-
-    // for (var m = 0; m < list.length; ++m) {
-    //   var k = g - random.nextInt(w);
-    //   var tmp = list[k];
-    //   list[k] = list[m];
-    //   list[m] = tmp;
-    //   w--;
-    // }
-
-    // return list;
   }
 }
 

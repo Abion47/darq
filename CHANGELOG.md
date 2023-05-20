@@ -2,14 +2,14 @@
 * Updated for Dart 3 support
 * **Potentially Breaking:** Updated class definitions to be compliant with the new "strict-casts" and "strict-raw-types" analysis rules.
 * **Potentially Breaking:** Iterator classes now implement `Iterator` instead of extending it due to `Iterator` no longer being extendable.
-* **Potentially Breaking:** Tuple Iterator classes now take type parameters that match the tuples they iterate.
+* **Potentially Breaking:** Tuple iterator classes now take type parameters that match the tuples they iterate.
 * Added `deconstruct` extension method for converting an iterable of records into a record of iterables. (This method is implemented specifically on iterables of records, up to records containing 9 fields.)
   * Note: Due to apparent language limitations, iterables of records containing named fields aren't supported.
-* Added `fromRecord` factory method to all Tuple classes, allowing them to be generated from records.
+* Added `fromRecord` factory method to all Tuple classes, allowing them to be generated from records with the same number of fields.
 * Added `toRecord` method to all Tuple classes, allowing them to be converted into records.
 * Added utility extension on `Map` that adds the following members:
-  * `entryRecords` getter: Same as `entries` but returns an iterable of named records instead of an iterable of `MapEntry`.
-  * `entryTuples` getter: Same as `entries` but returns an iterable of `Tuple2` instead of an iterable of `MapEntry`.
+  * `entryRecords` getter: Same as `entries` but returns `Iterable<({TKey key, TValue value})>` (an iterable of named records) instead of `Iterable<MapEntry>`.
+  * `entryTuples` getter: Same as `entries` but returns `Iterable<Tuple2>` instead of `Iterable<MapEntry>`.
 
 ## [1.2.1]
 * Reimplemented `Grouping.hashCode` to take elements into account.

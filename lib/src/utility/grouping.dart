@@ -165,7 +165,7 @@ class Grouping<TKey, TValue> extends Iterable<TValue> {
   int get hashCode => (13 * hash) ^ elements.hashCode;
 
   @override
-  bool operator ==(Object? other) {
+  bool operator ==(Object other) {
     if (other is! Grouping<TKey, TValue>) return false;
     return hash == other.hash && elements.sequenceEquals(other.elements);
   }

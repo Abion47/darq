@@ -8,7 +8,7 @@ class Pet {
   int get hashCode => name.hashCode ^ age.hashCode;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (other is Pet) {
       return name == other.name && age == other.age;
     }

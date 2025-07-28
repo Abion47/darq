@@ -7,7 +7,7 @@ class Person implements Comparable<Person> {
   int get hashCode => name.hashCode;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (other is Person) {
       return name == other.name;
     }

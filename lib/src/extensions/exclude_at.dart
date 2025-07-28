@@ -9,7 +9,7 @@ extension ExcludeAtExtension<T> on Iterable<T> {
           'The value of "index" must be greater than zero.');
     }
     if (index == 0) {
-      yield* skip(0);
+      yield* skip(1);
       return;
     }
 
@@ -18,7 +18,7 @@ extension ExcludeAtExtension<T> on Iterable<T> {
 
     while (iterator.moveNext()) {
       if (i == index) {
-        iterator.moveNext();
+        continue;
       }
       yield iterator.current;
       i++;

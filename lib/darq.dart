@@ -98,6 +98,7 @@
 /// - [insertOrAppend8](https://pub.dev/documentation/darq/latest/darq/InsertOrAppendExtension/insertOrAppend8.html)
 /// - [insertOrAppend9](https://pub.dev/documentation/darq/latest/darq/InsertOrAppendExtension/insertOrAppend9.html)
 /// - [interleaveAll](https://pub.dev/documentation/darq/latest/darq/InterleaveAllExtension/interleaveAll.html)
+/// - [interleaveValue](https://pub.dev/documentation/darq/latest/darq/InterleaveValueExtension/interleaveValue.html)
 /// - [interleave](https://pub.dev/documentation/darq/latest/darq/InterleaveExtension/interleave.html)
 /// - [intersect](https://pub.dev/documentation/darq/latest/darq/IntersectExtension/intersect.html)
 /// - [joinMap](https://pub.dev/documentation/darq/latest/darq/JoinMapExtension/joinMap.html)

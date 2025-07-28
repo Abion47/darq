@@ -20,5 +20,15 @@ void main() {
       void task() => list.excludeAt(-1);
       expect(task, throwsA(isA<RangeError>()));
     });
+
+    test('examples from issue #17', () {
+      final list = [0, 1, 2];
+      final result = list.excludeAt(0);
+      expect(result, orderedEquals([1, 2]));
+
+      final list2 = [0, 1, 2];
+      final result2 = list2.excludeAt(2);
+      expect(result2, orderedEquals([0, 1]));
+    });
   });
 }

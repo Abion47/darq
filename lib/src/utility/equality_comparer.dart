@@ -141,10 +141,11 @@ class EqualityComparer<T> {
   static final Map<Type, EqualityComparer<dynamic>>
       _registeredEqualityComparers = {
     dynamic: EqualityComparer<dynamic>(),
-    Duration: EqualityComparer.of<Duration>(),
-    DateTime: EqualityComparer.of<DateTime>(),
-    BigInt: EqualityComparer.of<BigInt>(),
-    String: EqualityComparer.of<String>(useEquals: true),
+    bool: EqualityComparer<bool>(
+      comparer: (left, right) => left == right,
+      hasher: (value) => value.hashCode,
+      sorter: (left, right) => (left ? 1 : 0) - (right ? 1 : 0),
+    ),
     num: EqualityComparer.of<num>(useEquals: true),
     int: EqualityComparer<int>(
       comparer: (left, right) => left == right,
@@ -156,6 +157,10 @@ class EqualityComparer<T> {
       hasher: (value) => value.hashCode,
       sorter: (left, right) => left.compareTo(right),
     ),
+    String: EqualityComparer.of<String>(useEquals: true),
+    BigInt: EqualityComparer.of<BigInt>(),
+    Duration: EqualityComparer.of<Duration>(),
+    DateTime: EqualityComparer.of<DateTime>(),
   };
 
   /// Registers an [EqualityComparer] object as the default comparer for type `T`,

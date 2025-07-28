@@ -14,5 +14,11 @@ void main() {
       final result = list.orderBy((i) => i);
       expect(result, orderedEquals(<String>['a', 'b', 'c', 'd', 'e']));
     });
+
+    test('examples from issue #18', () {
+      final list = [true, false, true, false];
+      final result = list.orderBy((b) => b);
+      expect(result, orderedEquals(<bool>[false, false, true, true]));
+    });
   });
 }

@@ -52,6 +52,7 @@ export 'extensions/insert_or_append.dart';
 export 'extensions/insert_or_append_all.dart';
 export 'extensions/interleave.dart';
 export 'extensions/interleave_all.dart';
+export 'extensions/interleave_value.dart';
 export 'extensions/intersect.dart';
 export 'extensions/join_map.dart';
 export 'extensions/lag.dart';

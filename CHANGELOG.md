@@ -1,7 +1,7 @@
 ## [2.1.0]
 * Added `interleaveValue` extension method for inserting a static element between all elements in an iterable.
 * Fixed bugs in the implementation of `excludeAt` (#17)
-* Added a default `EqualityComparer` for `bool` for the sake of convenience and completeness.
+* Added a default `EqualityComparer` for `bool` for the sake of convenience and completeness. (#18)
 
 ## [2.0.0]
 * Updated for Dart 3 support

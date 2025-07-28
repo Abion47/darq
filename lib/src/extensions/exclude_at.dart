@@ -17,10 +17,10 @@ extension ExcludeAtExtension<T> on Iterable<T> {
     var i = 0;
 
     while (iterator.moveNext()) {
-      if (i == index) {
-        continue;
+      if (i != index) {
+        yield iterator.current;
       }
-      yield iterator.current;
+      
       i++;
     }
   }

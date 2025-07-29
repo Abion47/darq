@@ -6,7 +6,7 @@ extension ExcludeAtExtension<T> on Iterable<T> {
   Iterable<T> excludeAt(int index) sync* {
     if (index < 0) {
       throw RangeError.index(index, this, 'index',
-          'The value of "index" must be greater than zero.');
+          'The value of "index" must be greater than or equal to zero.');
     }
     if (index == 0) {
       yield* skip(1);
@@ -20,7 +20,7 @@ extension ExcludeAtExtension<T> on Iterable<T> {
       if (i != index) {
         yield iterator.current;
       }
-      
+
       i++;
     }
   }

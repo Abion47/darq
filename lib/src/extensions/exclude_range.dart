@@ -8,11 +8,11 @@ extension ExcludeRangeExtension<T> on Iterable<T> {
   Iterable<T> excludeRange(int start, int count) sync* {
     if (start < 0) {
       throw RangeError.index(start, this, 'start',
-          'The value of "start" must be greater than zero.');
+          'The value of "start" must be greater than or equal to zero.');
     }
     if (count < 0) {
       throw RangeError.index(count, this, 'count',
-          'The value of "count" must be greater than zero.');
+          'The value of "count" must be greater than or equal to zero.');
     }
     if (start == 0) {
       yield* skip(count);

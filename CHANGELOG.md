@@ -1,5 +1,12 @@
 ## [2.1.0]
 * Added `interleaveValue` extension method for inserting a static element between all elements in an iterable.
+* Added the following new extension methods for replacing elements in an iterable:
+  * `replaceAll`
+  * `replaceAt`
+  * `replaceEvery`
+  * `replaceRange`
+  * `replaceRangeValue`
+  * `replaceWhere`
 * Fixed bugs in the implementation of `excludeAt` (#17)
 * Added a default `EqualityComparer` for `bool` for the sake of convenience and completeness. (#18)
 

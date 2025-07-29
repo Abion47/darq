@@ -9,6 +9,12 @@ void main() {
       expect(result, equals(3));
     });
 
+    test('Get element (non-List)', () {
+      final iterable = RangeIterable(0, 5);
+      final result = iterable.elementAtOrDefault(3, defaultValue: 5);
+      expect(result, equals(3));
+    });
+
     test('Get element outside range', () {
       final list = <int>[0, 1, 2, 3, 4];
       final result = list.elementAtOrDefault(6, defaultValue: 5);

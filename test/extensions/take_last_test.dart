@@ -9,10 +9,22 @@ void main() {
       expect(result, orderedEquals(<int>[3, 4, 5]));
     });
 
+    test('length equals zero', () {
+      final list = [1, 2, 3];
+      final result = list.takeLast(0);
+      expect(result, orderedEquals(<int>[]));
+    });
+
     test('length equals count', () {
       final list = [1, 2, 3];
       final result = list.takeLast(3);
       expect(result, orderedEquals(<int>[1, 2, 3]));
+    });
+
+    test('Error: length less than zero', () {
+      final list = [1, 2];
+      void task() => list.takeLast(-1);
+      expect(task, throwsA(isA<ArgumentError>()));
     });
 
     test('Error: length less than count', () {

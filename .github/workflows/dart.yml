@@ -39,4 +39,8 @@ jobs:
         run: format_coverage --lcov --in=coverage --out=coverage.lcov --packages=.dart_tool/package_config.json --report-on=lib
 
       - name: Upload coverage to codecov
-        run: curl -s https://codecov.io/bash | bash
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./coverage.lcov
+          token: ${{ secrets.CODECOV_API_TOKEN }}
+        # run: curl -s https://codecov.io/bash | bash

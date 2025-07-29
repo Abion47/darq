@@ -4,14 +4,16 @@ extension TryInsertAllExtension<T> on Iterable<T> {
   /// Takes the specified element and inserts it into the iterable at the
   /// position [index].
   ///
-  /// If [index] is less than zero, an [ArgumentError] is thrown.
+  /// If [index] is less than zero, a [RangeError] is thrown.
   ///
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the elements in [other] are not inserted and this iterable is unchanged.
   Iterable<T> tryInsertAll(int index, Iterable<T> other) sync* {
     if (index < 0) {
-      throw ArgumentError('Parameter "index" must be greater than zero.');
+      throw RangeError.index(index, this, 'index',
+          'Parameter "index" must be greater than or equal to zero.');
     }
+
     if (index == 0) {
       yield* other.followedBy(this);
       return;

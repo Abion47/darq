@@ -6,6 +6,30 @@ import '../fixtures/pet_with_owner.dart';
 
 void main() {
   group('Extension Methods', () {
+    test('Group on elements', () {
+      final indices = [0, 1];
+      final characters = [0, 0, 0, 1, 0, 1, 1, 1, 0, 1];
+
+      final results = indices.groupJoin(
+        characters,
+        (c, i) => {
+          'id': c,
+          'values': i,
+        },
+      );
+
+      expect(results, [
+        {
+          'id': 0,
+          'values': [0, 0, 0, 0, 0]
+        },
+        {
+          'id': 1,
+          'values': [1, 1, 1, 1, 1]
+        },
+      ]);
+    });
+
     test('Group on class members', () {
       final travis = Person('Travis');
       final terry = Person('Terry');

@@ -11,5 +11,17 @@ void main() {
       expect(result.elementAt(1), orderedEquals(<int>[2, 3]));
       expect(result.elementAt(2), orderedEquals(<int>[3, 4]));
     });
+
+    test('Error: empty iterable', () {
+      final list = [];
+      void task() => list.pairwise();
+      expect(task, throwsA(isA<StateError>()));
+    });
+
+    test('Error: iterable with one element', () {
+      final list = [1];
+      void task() => list.pairwise();
+      expect(task, throwsA(isA<StateError>()));
+    });
   });
 }

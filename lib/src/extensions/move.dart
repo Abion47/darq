@@ -12,16 +12,16 @@ extension MoveExtension<T> on Iterable<T> {
   ///     }
   Iterable<T> move(int from, int count, int to) sync* {
     if (from < 0) {
-      ArgumentError.value(
-          from, 'from', 'The value of "from" must be greater than zero.');
+      throw RangeError.index(from, this, 'from',
+          'The value of "from" must be greater than or equal to zero.');
     }
     if (count < 0) {
-      ArgumentError.value(
-          count, 'count', 'The value of "count" must be greater than zero.');
+      throw RangeError.index(count, this, 'count',
+          'The value of "count" must be greater than or equal to zero.');
     }
     if (to < 0) {
-      ArgumentError.value(
-          to, 'to', 'The value of "to" must be greater than zero.');
+      throw RangeError.index(to, this, 'to',
+          'The value of "to" must be greater than or equal to zero.');
     }
 
     if (from == to || count == 0) {

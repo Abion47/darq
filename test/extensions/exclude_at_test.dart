@@ -5,8 +5,12 @@ void main() {
   group('excludeAt', () {
     test('Exclude at index', () {
       final list = [1, 2, 3, 4, 5];
+
       final result = list.excludeAt(2);
       expect(result, orderedEquals(<int>[1, 2, 4, 5]));
+
+      final result2 = list.excludeAt(0);
+      expect(result2, orderedEquals(<int>[2, 3, 4, 5]));
     });
 
     test('Index greater than length', () {

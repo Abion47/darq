@@ -5,8 +5,12 @@ void main() {
   group('excludeRange', () {
     test('Exclude range', () {
       final list = [1, 2, 3, 4, 5];
+
       final result = list.excludeRange(1, 2);
       expect(result, orderedEquals(<int>[1, 4, 5]));
+
+      final result2 = list.excludeRange(0, 2);
+      expect(result2, orderedEquals(<int>[3, 4, 5]));
     });
 
     test('Start greater than length', () {

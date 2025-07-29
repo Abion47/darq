@@ -31,8 +31,8 @@ extension SequenceEqualsSelectExtension<T> on Iterable<T> {
   ///     }
   bool sequenceEqualsSelect<TOther, TKey>(
     Iterable<TOther> other, {
-    required TKey Function(T element)? outerSelector,
-    required TKey Function(TOther element)? innerSelector,
+    required TKey Function(T element) outerSelector,
+    required TKey Function(TOther element) innerSelector,
     bool Function(TKey outer, TKey inner)? comparer,
   }) {
     final iterA = iterator;
@@ -41,8 +41,6 @@ extension SequenceEqualsSelectExtension<T> on Iterable<T> {
     bool aHasNext;
     bool bHasNext;
 
-    outerSelector ??= (T v) => v as TKey;
-    innerSelector ??= (TOther v) => v as TKey;
     comparer ??= EqualityComparer.forType<TKey>().compare;
 
     do {

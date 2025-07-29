@@ -5,6 +5,32 @@ import '../fixtures/pet.dart';
 
 void main() {
   group('groupSelectValue', () {
+    test('Group on elements', () {
+      final list = ['a', 'a', 'b', 'c', 'c', 'c'];
+
+      final results = list.groupSelectValue(
+        (key, chars) => {
+          'key': key,
+          'chars': chars,
+        },
+      );
+
+      expect(results, [
+        {
+          'key': 'a',
+          'chars': ['a', 'a']
+        },
+        {
+          'key': 'b',
+          'chars': ['b']
+        },
+        {
+          'key': 'c',
+          'chars': ['c', 'c', 'c']
+        },
+      ]);
+    });
+
     test('Group on class members', () {
       final barley = Pet('Barley', 8.3);
       final boots = Pet('Boots', 4.9);

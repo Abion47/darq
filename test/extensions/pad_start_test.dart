@@ -20,5 +20,11 @@ void main() {
       final result = list.padStart(3, padding: 5);
       expect(result, orderedEquals(<int>[1, 2, 3, 4]));
     });
+
+    test('Error: length less than zero', () {
+      final list = [1, 2];
+      void task() => list.padStart(-1, padding: 3);
+      expect(task, throwsA(isA<ArgumentError>()));
+    });
   });
 }

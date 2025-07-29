@@ -2,7 +2,7 @@ import 'package:darq/darq.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('sequenceEquals', () {
+  group('sequenceEqualsSelect', () {
     test('Sequences match with outer selector', () {
       final list = ['a', 'b', 'c', 'd', 'e'];
       final result = list.sequenceEqualsSelect<String, String>(

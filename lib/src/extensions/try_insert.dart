@@ -6,7 +6,7 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// Takes the specified element and inserts it into the iterable at the
   /// position [index].
   ///
-  /// If [index] is less than zero, an [ArgumentError] is thrown.
+  /// If [index] is less than zero, a [RangeError] is thrown.
   ///
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, [value] is not inserted and this iterable is unchanged.
@@ -16,7 +16,8 @@ extension TryInsertExtension<T> on Iterable<T> {
       return;
     }
     if (index < 0) {
-      throw ArgumentError('Parameter "index" must be greater than zero.');
+      throw RangeError.index(index, this, 'index',
+          'Parameter "index" must be greater than or equal to zero.');
     }
 
     final iterator = this.iterator;
@@ -36,7 +37,7 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// Takes the specified elements and inserts it into the iterable at the
   /// position [index].
   ///
-  /// If [index] is less than zero, an [ArgumentError] is thrown.
+  /// If [index] is less than zero, a [RangeError] is thrown.
   ///
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
@@ -46,7 +47,8 @@ extension TryInsertExtension<T> on Iterable<T> {
       return;
     }
     if (index < 0) {
-      throw ArgumentError('Parameter "index" must be greater than zero.');
+      throw RangeError.index(index, this, 'index',
+          'Parameter "index" must be greater than or equal to zero.');
     }
 
     final iterator = this.iterator;
@@ -67,7 +69,7 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// Takes the specified elements and inserts it into the iterable at the
   /// position [index].
   ///
-  /// If [index] is less than zero, an [ArgumentError] is thrown.
+  /// If [index] is less than zero, a [RangeError] is thrown.
   ///
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
@@ -77,7 +79,8 @@ extension TryInsertExtension<T> on Iterable<T> {
       return;
     }
     if (index < 0) {
-      throw ArgumentError('Parameter "index" must be greater than zero.');
+      throw RangeError.index(index, this, 'index',
+          'Parameter "index" must be greater than or equal to zero.');
     }
 
     final iterator = this.iterator;
@@ -99,7 +102,7 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// Takes the specified elements and inserts it into the iterable at the
   /// position [index].
   ///
-  /// If [index] is less than zero, an [ArgumentError] is thrown.
+  /// If [index] is less than zero, a [RangeError] is thrown.
   ///
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
@@ -109,7 +112,8 @@ extension TryInsertExtension<T> on Iterable<T> {
       return;
     }
     if (index < 0) {
-      throw ArgumentError('Parameter "index" must be greater than zero.');
+      throw RangeError.index(index, this, 'index',
+          'Parameter "index" must be greater than or equal to zero.');
     }
 
     final iterator = this.iterator;
@@ -132,7 +136,7 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// Takes the specified elements and inserts it into the iterable at the
   /// position [index].
   ///
-  /// If [index] is less than zero, an [ArgumentError] is thrown.
+  /// If [index] is less than zero, a [RangeError] is thrown.
   ///
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
@@ -142,7 +146,8 @@ extension TryInsertExtension<T> on Iterable<T> {
       return;
     }
     if (index < 0) {
-      throw ArgumentError('Parameter "index" must be greater than zero.');
+      throw RangeError.index(index, this, 'index',
+          'Parameter "index" must be greater than or equal to zero.');
     }
 
     final iterator = this.iterator;
@@ -166,7 +171,7 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// Takes the specified elements and inserts it into the iterable at the
   /// position [index].
   ///
-  /// If [index] is less than zero, an [ArgumentError] is thrown.
+  /// If [index] is less than zero, a [RangeError] is thrown.
   ///
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
@@ -176,7 +181,8 @@ extension TryInsertExtension<T> on Iterable<T> {
       return;
     }
     if (index < 0) {
-      throw ArgumentError('Parameter "index" must be greater than zero.');
+      throw RangeError.index(index, this, 'index',
+          'Parameter "index" must be greater than or equal to zero.');
     }
 
     final iterator = this.iterator;
@@ -201,7 +207,7 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// Takes the specified elements and inserts it into the iterable at the
   /// position [index].
   ///
-  /// If [index] is less than zero, an [ArgumentError] is thrown.
+  /// If [index] is less than zero, a [RangeError] is thrown.
   ///
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
@@ -212,7 +218,8 @@ extension TryInsertExtension<T> on Iterable<T> {
       return;
     }
     if (index < 0) {
-      throw ArgumentError('Parameter "index" must be greater than zero.');
+      throw RangeError.index(index, this, 'index',
+          'Parameter "index" must be greater than or equal to zero.');
     }
 
     final iterator = this.iterator;
@@ -238,7 +245,7 @@ extension TryInsertExtension<T> on Iterable<T> {
   /// Takes the specified elements and inserts it into the iterable at the
   /// position [index].
   ///
-  /// If [index] is less than zero, an [ArgumentError] is thrown.
+  /// If [index] is less than zero, a [RangeError] is thrown.
   ///
   /// If iteration of this iterable is exausted before the position [index]
   /// is reached, the given elements are not inserted and this iterable is unchanged.
@@ -249,7 +256,8 @@ extension TryInsertExtension<T> on Iterable<T> {
       return;
     }
     if (index < 0) {
-      throw ArgumentError('Parameter "index" must be greater than zero.');
+      throw RangeError.index(index, this, 'index',
+          'Parameter "index" must be greater than or equal to zero.');
     }
 
     final iterator = this.iterator;
@@ -287,7 +295,8 @@ extension TryInsertExtension<T> on Iterable<T> {
       return;
     }
     if (index < 0) {
-      throw ArgumentError('Parameter "index" must be greater than zero.');
+      throw RangeError.index(index, this, 'index',
+          'Parameter "index" must be greater than or equal to zero.');
     }
 
     final iterator = this.iterator;

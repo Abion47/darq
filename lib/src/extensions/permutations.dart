@@ -1,3 +1,5 @@
+import 'memoize.dart';
+
 extension PermutationsExtension<T> on Iterable<T> {
   /// Returns an iterable that consists of iterables, where each iterable is
   /// a collection of all the permutations of the elements in this iterable.
@@ -17,9 +19,13 @@ extension PermutationsExtension<T> on Iterable<T> {
   ///       //   [3, 2, 1],
   ///       // ]
   ///     }
+  ///
+  /// Note: For reasons of efficiency and consistency across iterations, the
+  /// returned iterable is implicitly memoized.
   Iterable<Iterable<T>> permutations() {
     final tempList = toList();
-    return _permutationsRecursive(tempList, tempList.length, tempList.length);
+    return _permutationsRecursive(tempList, tempList.length, tempList.length)
+        .memoize();
   }
 
   Iterable<Iterable<T>> _permutationsRecursive(

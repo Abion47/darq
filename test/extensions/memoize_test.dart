@@ -10,10 +10,12 @@ void main() {
         called++;
         return c.length;
       });
-      generator.consume();
-      generator.consume();
+
       final result = generator.toList();
       expect(result, orderedEquals(<int>[1]));
+
+      generator.consume();
+      generator.consume();
       expect(called, 3);
     });
 
@@ -24,11 +26,32 @@ void main() {
         called++;
         return c.length;
       }).memoize();
-      generator.consume();
-      generator.consume();
+
       final result = generator.toList();
       expect(result, orderedEquals(<int>[1]));
+
+      generator.consume();
+      generator.consume();
       expect(called, 1);
+    });
+
+    test('Memoized list (unmodifiable)', () {
+      final list = ['a'];
+      var called = 0;
+      final generator = list.map((c) {
+        called++;
+        return c.length;
+      }).memoize();
+
+      final result = generator.toList(growable: false);
+      expect(result, orderedEquals(<int>[1]));
+
+      generator.consume();
+      generator.consume();
+      expect(called, 1);
+
+      void task() => result.add(5);
+      expect(task, throwsA(isA<UnsupportedError>()));
     });
   });
 }

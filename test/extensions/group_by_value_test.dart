@@ -5,6 +5,22 @@ import '../fixtures/pet.dart';
 
 void main() {
   group('groupByValue', () {
+    test('Group on elements', () {
+      final list = ['a', 'a', 'b', 'c', 'c', 'c'];
+
+      final results = list.groupByValue();
+
+      expect(results, [
+        ['a', 'a'],
+        ['b'],
+        ['c', 'c', 'c'],
+      ]);
+
+      expect(results.elementAt(0).key, 'a');
+      expect(results.elementAt(1).key, 'b');
+      expect(results.elementAt(2).key, 'c');
+    });
+
     test('Group on class member', () {
       final barley = Pet('Barley', 8);
       final boots = Pet('Boots', 4);

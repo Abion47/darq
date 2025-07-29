@@ -7,6 +7,9 @@ void main() {
       final Iterable<int> list = [1, 2, 3];
       final result = list.insertAll(2, [4, 5, 6]);
       expect(result, orderedEquals(<int>[1, 2, 4, 5, 6, 3]));
+
+      final result2 = list.insertAll(0, [4, 5, 6]);
+      expect(result2, orderedEquals(<int>[4, 5, 6, 1, 2, 3]));
     });
 
     test('Insert empty list', () {
@@ -24,7 +27,7 @@ void main() {
     test('Error: index less than zero', () {
       final Iterable<int> list = [1, 2, 3];
       void task() => list.insertAll(-1, [4, 5]);
-      expect(task, throwsA(isA<ArgumentError>()));
+      expect(task, throwsA(isA<RangeError>()));
     });
   });
 }

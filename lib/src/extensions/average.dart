@@ -17,28 +17,29 @@ extension AverageExtension<T> on Iterable<T> {
   ///
   ///       // Result: 5.0
   ///     }
-  TNum average<TNum extends num>([TNum Function(T value)? selector]) {
-    if (isEmpty) {
-      throw StateError('Iterator must not be empty.');
-    }
-
+  TNum average<TNum extends num>([num Function(T value)? selector]) {
     var selectorImpl = selector;
-    var total = TNum == int ? 0 : 0.0;
+    var total = 0.0;
+
     if (selectorImpl == null) {
       if (T == num || T == int || T == double) {
-        selectorImpl = (n) => n as TNum;
-        total = T == int ? 0 : 0.0;
+        selectorImpl = (n) => n as num;
       } else {
         throw ArgumentError(
             "If T isn't a subtype of num, selector must not be null.");
       }
     }
 
+    final iterator = this.iterator;
     var count = 0;
 
-    for (var n in this) {
-      total += selectorImpl(n);
+    while (iterator.moveNext()) {
+      total += selectorImpl(iterator.current);
       count++;
+    }
+
+    if (count == 0) {
+      throw StateError('Iterator must not be empty.');
     }
 
     if (TNum == int) {

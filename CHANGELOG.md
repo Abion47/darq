@@ -7,8 +7,11 @@
   * `replaceRange`
   * `replaceRangeValue`
   * `replaceWhere`
-* Fixed bugs in the implementation of `excludeAt` (#17)
+* Fixed a bug in `average` that caused integer lists to sometimes not return accurate averages.
+* Corrected a bunch of methods throwing `ArgumentError` when a `RangeError` would be more idiomatic.
+* Fixed bugs in the implementation of `excludeAt`. (#17)
 * Added a default `EqualityComparer` for `bool` for the sake of convenience and completeness. (#18)
+* Added a bunch of additional tests to improve coverage.
 
 ## [2.0.0]
 * Updated for Dart 3 support

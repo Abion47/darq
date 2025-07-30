@@ -1,8 +1,10 @@
-extension ReplaceEveryExtension<T> on Iterable<T> {
-  /// Replaces every [step]th element with [value].
+extension InsertEveryExtension<T> on Iterable<T> {
+  /// Inserts an element into the iterable after every N elements.
   ///
-  /// If [step] is greater than the length of the iterable, the iterable is
-  /// unchanged. If [step] is less than one, an [ArgumentError] is thrown.
+  /// Iterates over the iterable, and every [step] elements, inserts the
+  /// given [value]. A [value] will also be inserted at the end if the length
+  /// of this iterable is divisible by [step]. If [step] is less than one,
+  /// an [ArgumentError] is thrown.
   ///
   /// If [skip] is provided, this will skip that many elements before it
   /// starts counting elements for replacing. if [skip] is less than zero,
@@ -10,11 +12,7 @@ extension ReplaceEveryExtension<T> on Iterable<T> {
   ///
   /// If the length of this iterable is less than [step], the resulting
   /// iterable is unchanged.
-  Iterable<T> replaceEvery(
-    T value, {
-    required int step,
-    int skip = 0,
-  }) sync* {
+  Iterable<T> insertEvery(T value, {required int step, int skip = 0}) sync* {
     if (step < 1) {
       throw ArgumentError.value(
           step, 'step', 'The value of "step" must be greater than one.');
@@ -26,16 +24,19 @@ extension ReplaceEveryExtension<T> on Iterable<T> {
     }
 
     final iterator = this.iterator;
-    var i = 1 - skip;
+    var i = 0 - skip;
 
     while (iterator.moveNext()) {
       if (i == step) {
         yield value;
         i = 1;
       } else {
-        yield iterator.current;
         i++;
       }
+
+      yield iterator.current;
     }
+
+    if (i == step) yield value;
   }
 }

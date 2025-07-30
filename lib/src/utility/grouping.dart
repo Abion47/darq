@@ -162,7 +162,7 @@ class Grouping<TKey, TValue> extends Iterable<TValue> {
   TValue operator [](int index) => elements[index];
 
   @override
-  int get hashCode => (13 * hash) ^ elements.hashCode;
+  int get hashCode => Object.hashAll(elements);
 
   @override
   bool operator ==(Object other) {

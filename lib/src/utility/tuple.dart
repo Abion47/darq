@@ -102,36 +102,36 @@ abstract class Tuple extends Iterable<dynamic> {
   /// length tuple to be returned.
   factory Tuple.fromJson(Map<String, dynamic> map, {int? forceLength}) {
     if (forceLength != null) {
-      assert(forceLength >= 0 && forceLength <= 9,
-          'The value of forceLength must be between 0 and 9');
-
-      switch (forceLength) {
-        case 0:
-          return Tuple0.fromJson(map);
-        case 1:
-          return Tuple1<dynamic>.fromJson(map);
-        case 2:
-          return Tuple2<dynamic, dynamic>.fromJson(map);
-        case 3:
-          return Tuple3<dynamic, dynamic, dynamic>.fromJson(map);
-        case 4:
-          return Tuple4<dynamic, dynamic, dynamic, dynamic>.fromJson(map);
-        case 5:
-          return Tuple5<dynamic, dynamic, dynamic, dynamic, dynamic>.fromJson(
-              map);
-        case 6:
-          return Tuple6<dynamic, dynamic, dynamic, dynamic, dynamic,
-              dynamic>.fromJson(map);
-        case 7:
-          return Tuple7<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
-              dynamic>.fromJson(map);
-        case 8:
-          return Tuple8<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
-              dynamic, dynamic>.fromJson(map);
-        case 9:
-          return Tuple9<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
-              dynamic, dynamic, dynamic>.fromJson(map);
+      if (forceLength < 0) {
+        throw ArgumentError(
+          'The specified fixed length must be greater than or equal to zero',
+        );
       }
+
+      if (forceLength > 9) {
+        throw UnsupportedError(
+          'Specified fixed lengths greater than or equal to 9 are not supported.',
+        );
+      }
+
+      return switch (forceLength) {
+        0 => Tuple0.fromJson(map),
+        1 => Tuple1<dynamic>.fromJson(map),
+        2 => Tuple2<dynamic, dynamic>.fromJson(map),
+        3 => Tuple3<dynamic, dynamic, dynamic>.fromJson(map),
+        4 => Tuple4<dynamic, dynamic, dynamic, dynamic>.fromJson(map),
+        5 => Tuple5<dynamic, dynamic, dynamic, dynamic, dynamic>.fromJson(map),
+        6 =>
+          Tuple6<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic>.fromJson(
+              map),
+        7 => Tuple7<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+            dynamic>.fromJson(map),
+        8 => Tuple8<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+            dynamic, dynamic>.fromJson(map),
+        9 => Tuple9<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+            dynamic, dynamic, dynamic>.fromJson(map),
+        _ => throw StateError('Unknown error, this shouldn\'t happen')
+      };
     }
     if (map.containsKey('item8')) {
       return Tuple9<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
@@ -159,46 +159,85 @@ abstract class Tuple extends Iterable<dynamic> {
       return Tuple3<dynamic, dynamic, dynamic>.fromJson(map);
     }
     if (map.containsKey('item1')) return Tuple2<dynamic, dynamic>.fromJson(map);
-    if (map.containsKey('item')) return Tuple1<dynamic>.fromJson(map);
+    if (map.containsKey('item') || map.containsKey('item0')) {
+      return Tuple1<dynamic>.fromJson(map);
+    }
     return Tuple0.fromJson(map);
   }
 
   /// Creates a tuple from a list source.
   ///
   /// The list must have a length between 0 and 9.
-  factory Tuple.fromList(List<dynamic> items) {
-    assert(
-        items.length <= 9, 'Tuples of length greater than 9 are unsupported');
+  factory Tuple.fromList(List<dynamic> items, {int? truncateToLength}) {
+    if (truncateToLength != null) {
+      if (truncateToLength < 0) {
+        throw ArgumentError(
+          'The specified fixed length must be greater than or equal to zero',
+        );
+      }
 
-    switch (items.length) {
-      case 0:
-        return Tuple0();
-      case 1:
-        return Tuple1<dynamic>.fromList(items);
-      case 2:
-        return Tuple2<dynamic, dynamic>.fromList(items);
-      case 3:
-        return Tuple3<dynamic, dynamic, dynamic>.fromList(items);
-      case 4:
-        return Tuple4<dynamic, dynamic, dynamic, dynamic>.fromList(items);
-      case 5:
-        return Tuple5<dynamic, dynamic, dynamic, dynamic, dynamic>.fromList(
-            items);
-      case 6:
-        return Tuple6<dynamic, dynamic, dynamic, dynamic, dynamic,
-            dynamic>.fromList(items);
-      case 7:
-        return Tuple7<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
-            dynamic>.fromList(items);
-      case 8:
-        return Tuple8<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
-            dynamic, dynamic>.fromList(items);
-      case 9:
-        return Tuple9<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
-            dynamic, dynamic, dynamic>.fromList(items);
+      if (truncateToLength > 9) {
+        throw UnsupportedError(
+          'Specified fixed lengths greater than or equal to 9 are not supported.',
+        );
+      }
+
+      if (items.length < truncateToLength) {
+        throw ArgumentError(
+          'When specifying the `truncateToLength` parameter, the length of the '
+          'given list must be greater than or equal to the specified length.',
+        );
+      }
+
+      return switch (truncateToLength) {
+        0 => Tuple0(),
+        1 => Tuple1<dynamic>.fromList(items, true),
+        2 => Tuple2<dynamic, dynamic>.fromList(items, true),
+        3 => Tuple3<dynamic, dynamic, dynamic>.fromList(items, true),
+        4 => Tuple4<dynamic, dynamic, dynamic, dynamic>.fromList(items, true),
+        5 => Tuple5<dynamic, dynamic, dynamic, dynamic, dynamic>.fromList(
+            items, true),
+        6 =>
+          Tuple6<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic>.fromList(
+              items, true),
+        7 => Tuple7<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+            dynamic>.fromList(items, true),
+        8 => Tuple8<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+            dynamic, dynamic>.fromList(items, true),
+        9 => Tuple9<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+            dynamic, dynamic, dynamic>.fromList(items, true),
+        _ => throw StateError('Unknown error, this shouldn\'t happen'),
+      };
     }
 
-    throw StateError('Unknown error, this shouldn\'t happen');
+    if (items.length > 9) {
+      throw UnsupportedError(
+        'Tuples of length greater than 9 are unsupported by `Tuple.fromList`. '
+        'If you wish to dynamically truncate lists to a fixed length Tuple, '
+        'include the `truncateToLength` parameter to specify a fixed length or use '
+        'one of the derived Tuple classes\' `fromList` factories with the `trim` '
+        'parameter set to true. (For example, `Tuple4.fromList(list, true)`)',
+      );
+    }
+
+    return switch (items.length) {
+      0 => Tuple0(),
+      1 => Tuple1<dynamic>.fromList(items),
+      2 => Tuple2<dynamic, dynamic>.fromList(items),
+      3 => Tuple3<dynamic, dynamic, dynamic>.fromList(items),
+      4 => Tuple4<dynamic, dynamic, dynamic, dynamic>.fromList(items),
+      5 => Tuple5<dynamic, dynamic, dynamic, dynamic, dynamic>.fromList(items),
+      6 =>
+        Tuple6<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic>.fromList(
+            items),
+      7 => Tuple7<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+          dynamic>.fromList(items),
+      8 => Tuple8<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+          dynamic>.fromList(items),
+      9 => Tuple9<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic,
+          dynamic, dynamic>.fromList(items),
+      _ => throw StateError('Unknown error, this shouldn\'t happen'),
+    };
   }
 }
 
@@ -235,13 +274,13 @@ class Tuple0 extends Tuple {
 
   /// Clones this tuple where the clone is cast with the specified type arguments.
   Tuple0 asType() {
-    throw StateError(
+    throw UnsupportedError(
         'Tuple0 does not have any items and therefore no types to cast');
   }
 
   /// Clones this tuple where the clone is cast with dynamically-typed items.
   Tuple1<dynamic> asDynamic() {
-    throw StateError(
+    throw UnsupportedError(
         'Tuple0 does not have any items and therefore no types to cast');
   }
 
@@ -258,7 +297,8 @@ class Tuple0 extends Tuple {
   /// This method is unsupported on [Tuple0] as there are no items to either
   /// retain or support.
   Tuple copyWithout({required List<bool> indices}) {
-    throw StateError('Tuple0 does not have any items to retain or discard.');
+    throw UnsupportedError(
+        'Tuple0 does not have any items to retain or discard.');
   }
 
   /// Converts this tuple into a map for JSON serialization.
@@ -314,7 +354,8 @@ class Tuple1<T> extends Tuple {
   factory Tuple1.fromRecord((T,) record) => Tuple1(record.$1);
 
   /// Creates an tuple from a map/JSON source.
-  factory Tuple1.fromJson(Map<String, dynamic> map) => Tuple1(map['item'] as T);
+  factory Tuple1.fromJson(Map<String, dynamic> map) =>
+      Tuple1((map['item'] ?? map['item0']) as T);
 
   /// Creates an tuple from a list source.
   factory Tuple1.fromList(List<dynamic> list, [bool trim = false]) {
@@ -353,8 +394,10 @@ class Tuple1<T> extends Tuple {
   /// not have typing preserved. This can be fixed by calling [asType] on the
   /// result.
   Tuple copyWithout({required List<bool> indices}) {
-    assert(indices.length == 1,
-        'Length of given list must be same length as tuple.');
+    if (indices.length != 1) {
+      throw ArgumentError(
+          'Length of given list must be same length as this tuple.');
+    }
 
     var values = <dynamic>[];
     for (var i = 0; i < indices.length; i++) {

@@ -11,18 +11,9 @@ void main() {
       const <dynamic>[],
     );
 
-    void testTuple(Tuple5<int, double, String, bool, List<dynamic>> tuple) {
-      expect(tuple.item0, isA<int>());
-      expect(tuple.item1, isA<double>());
-      expect(tuple.item2, isA<String>());
-      expect(tuple.item3, isA<bool>());
-      expect(tuple.item4, isA<List<dynamic>>());
-
-      expect(tuple.item0, equals(reference.item0));
-      expect(tuple.item1, equals(reference.item1));
-      expect(tuple.item2, equals(reference.item2));
-      expect(tuple.item3, equals(reference.item3));
-      expect(tuple.item4, equals(reference.item4));
+    void testTuple(Tuple tuple) {
+      expect(tuple, isA<Tuple5<int, double, String, bool, List<dynamic>>>());
+      expect(tuple, reference);
     }
 
     test('construction', () {
@@ -32,9 +23,8 @@ void main() {
         0.1,
         'a',
         false,
-        const <dynamic>[],
+        const [],
       );
-
       testTuple(constructed);
 
       // From list
@@ -46,19 +36,24 @@ void main() {
         false,
         const <dynamic>[],
       ]);
-
       testTuple(fromList);
 
+      void fromListErrorTooShort() => Tuple5.fromList([]);
+      expect(fromListErrorTooShort, throwsA(isA<ArgumentError>()));
+
+      void fromListErrorNotTrimmed() =>
+          Tuple5.fromList([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      expect(fromListErrorNotTrimmed, throwsA(isA<ArgumentError>()));
+
       // From map
-      final fromMap = Tuple5<int, double, String, bool,
-          List<dynamic>>.fromJson(<String, dynamic>{
+      final fromMap =
+          Tuple5<int, double, String, bool, List<dynamic>>.fromJson({
         'item0': 0,
         'item1': 0.1,
         'item2': 'a',
         'item3': false,
-        'item4': const <dynamic>[],
+        'item4': const [],
       });
-
       testTuple(fromMap);
 
       // From record
@@ -68,9 +63,8 @@ void main() {
         0.1,
         'a',
         false,
-        const <dynamic>[],
+        const [],
       ));
-
       testTuple(fromRecord);
     });
 
@@ -169,6 +163,36 @@ void main() {
       expect(record.$3, 'a');
       expect(record.$4, false);
       expect(record.$5, const <dynamic>[]);
+    });
+
+    test('toJson', () {
+      final json = reference.toJson();
+      expect(json, {
+        'item0': 0,
+        'item1': 0.1,
+        'item2': 'a',
+        'item3': false,
+        'item4': const [],
+      });
+    });
+
+    test('comparison', () {
+      final otherA = Tuple5(0, 0.1, 'a', false, const []);
+      final otherB = Tuple5(10, 0.1, 'a', false, const []);
+
+      expect(reference == otherA, isTrue);
+      expect(reference.hashCode, otherA.hashCode);
+
+      expect(reference == otherB, isFalse);
+      expect(reference.hashCode, isNot(otherB.hashCode));
+    });
+
+    test('length', () {
+      expect(reference.length, 5);
+    });
+
+    test('toString', () {
+      expect(reference.toString(), '(0, 0.1, a, false, [])');
     });
   });
 }

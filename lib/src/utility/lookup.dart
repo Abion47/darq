@@ -19,7 +19,7 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
 
   Grouping<TKey, TValue>? lastGrouping;
 
-  Lookup._internal(EqualityComparer<TKey>? comparer) {
+  Lookup._internal([EqualityComparer<TKey>? comparer]) {
     this.comparer = comparer ?? EqualityComparer.forType<TKey>();
     groupings = List<Grouping<TKey, TValue>?>.filled(7, null);
     _count = 0;
@@ -28,9 +28,9 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
   static Lookup<TKey, TValue> create<TSource, TKey, TValue>(
     Iterable<TSource> source,
     TKey Function(TSource) keySelector,
-    TValue Function(TSource) valueSelector,
-    EqualityComparer<TKey> comparer,
-  ) {
+    TValue Function(TSource) valueSelector, [
+    EqualityComparer<TKey>? comparer,
+  ]) {
     final lookup = Lookup<TKey, TValue>._internal(comparer);
     for (final item in source) {
       lookup.getGrouping(keySelector(item), true)?.add(valueSelector(item));
@@ -39,9 +39,9 @@ class Lookup<TKey, TValue> extends Iterable<Grouping<TKey, TValue>>
   }
 
   static Lookup<TKey, TValue> createFromMap<TKey, TValue>(
-    Map<TKey, TValue> map,
-    EqualityComparer<TKey> comparer,
-  ) {
+    Map<TKey, TValue> map, [
+    EqualityComparer<TKey>? comparer,
+  ]) {
     return Lookup.create<MapEntry<TKey, TValue>, TKey, TValue>(
       map.entries,
       (entry) => entry.key,

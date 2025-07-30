@@ -9,14 +9,9 @@ void main() {
       'a',
     );
 
-    void testTuple(Tuple3<int, double, String> tuple) {
-      expect(tuple.item0, isA<int>());
-      expect(tuple.item1, isA<double>());
-      expect(tuple.item2, isA<String>());
-
-      expect(tuple.item0, equals(reference.item0));
-      expect(tuple.item1, equals(reference.item1));
-      expect(tuple.item2, equals(reference.item2));
+    void testTuple(Tuple tuple) {
+      expect(tuple, isA<Tuple3<int, double, String>>());
+      expect(tuple, reference);
     }
 
     test('construction', () {
@@ -26,25 +21,29 @@ void main() {
         0.1,
         'a',
       );
-
       testTuple(constructed);
 
       // From list
-      final fromList = Tuple3<int, double, String>.fromList(<dynamic>[
+      final fromList = Tuple3<int, double, String>.fromList([
         0,
         0.1,
         'a',
       ]);
-
       testTuple(fromList);
 
+      void fromListErrorTooShort() => Tuple3.fromList([]);
+      expect(fromListErrorTooShort, throwsA(isA<ArgumentError>()));
+
+      void fromListErrorNotTrimmed() =>
+          Tuple3.fromList([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      expect(fromListErrorNotTrimmed, throwsA(isA<ArgumentError>()));
+
       // From map
-      final fromMap = Tuple3<int, double, String>.fromJson(<String, dynamic>{
+      final fromMap = Tuple3<int, double, String>.fromJson({
         'item0': 0,
         'item1': 0.1,
         'item2': 'a',
       });
-
       testTuple(fromMap);
 
       // From record
@@ -53,7 +52,6 @@ void main() {
         0.1,
         'a',
       ));
-
       testTuple(fromRecord);
     });
 
@@ -132,6 +130,30 @@ void main() {
       expect(record.$1, 0);
       expect(record.$2, 0.1);
       expect(record.$3, 'a');
+    });
+
+    test('toJson', () {
+      final json = reference.toJson();
+      expect(json, {'item0': 0, 'item1': 0.1, 'item2': 'a'});
+    });
+
+    test('comparison', () {
+      final otherA = Tuple3(0, 0.1, 'a');
+      final otherB = Tuple3(10, 0.1, 'a');
+
+      expect(reference == otherA, isTrue);
+      expect(reference.hashCode, otherA.hashCode);
+
+      expect(reference == otherB, isFalse);
+      expect(reference.hashCode, isNot(otherB.hashCode));
+    });
+
+    test('length', () {
+      expect(reference.length, 3);
+    });
+
+    test('toString', () {
+      expect(reference.toString(), '(0, 0.1, a)');
     });
   });
 }

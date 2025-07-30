@@ -7,27 +7,32 @@ void main() {
 
     void testTuple(Tuple tuple) {
       expect(tuple, isA<Tuple0>());
+      expect(tuple, reference);
     }
 
     test('construction', () {
       // From Constructor
       final constructed = Tuple0();
-
       testTuple(constructed);
 
       // From list
-      final fromList = Tuple0.fromList(<dynamic>[]);
-
+      final fromList = Tuple0.fromList([]);
       testTuple(fromList);
 
-      // From map
-      final fromMap = Tuple0.fromJson(<String, dynamic>{});
+      final fromListTrimmed =
+          Tuple0.fromList([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], true);
+      testTuple(fromListTrimmed);
 
+      void fromListErrorNotTrimmed() =>
+          Tuple0.fromList([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      expect(fromListErrorNotTrimmed, throwsA(isA<ArgumentError>()));
+
+      // From map
+      final fromMap = Tuple0.fromJson({});
       testTuple(fromMap);
 
       // From record
       final fromRecord = Tuple0.fromRecord(());
-
       testTuple(fromRecord);
     });
 
@@ -47,8 +52,8 @@ void main() {
 
     test('casting', () {
       expect(reference, isA<Tuple0>());
-      expect(() => reference.asType(), throwsA(isA<StateError>()));
-      expect(() => reference.asDynamic(), throwsA(isA<StateError>()));
+      expect(() => reference.asType(), throwsA(isA<UnsupportedError>()));
+      expect(() => reference.asDynamic(), throwsA(isA<UnsupportedError>()));
     });
 
     test('cloning', () {
@@ -60,7 +65,7 @@ void main() {
       // copyWithout
       void task() => reference.copyWithout(indices: <bool>[]);
 
-      expect(task, throwsA(isA<StateError>()));
+      expect(task, throwsA(isA<UnsupportedError>()));
     });
 
     test('deconstructing', () {
@@ -68,6 +73,30 @@ void main() {
       final record = reference.toRecord();
 
       expect(record, isA<()>());
+    });
+
+    test('toJson', () {
+      final json = reference.toJson();
+      expect(json, {});
+    });
+
+    test('mapActions', () {
+      reference.mapActions();
+    });
+
+    test('comparison', () {
+      final other = Tuple0();
+
+      expect(reference == other, isTrue);
+      expect(reference.hashCode, other.hashCode);
+    });
+
+    test('length', () {
+      expect(reference.length, 0);
+    });
+
+    test('toString', () {
+      expect(reference.toString(), '()');
     });
   });
 }

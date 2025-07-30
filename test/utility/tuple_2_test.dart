@@ -8,12 +8,9 @@ void main() {
       0.1,
     );
 
-    void testTuple(Tuple2<int, double> tuple) {
-      expect(tuple.item0, isA<int>());
-      expect(tuple.item1, isA<double>());
-
-      expect(tuple.item0, equals(reference.item0));
-      expect(tuple.item1, equals(reference.item1));
+    void testTuple(Tuple tuple) {
+      expect(tuple, isA<Tuple2<int, double>>());
+      expect(tuple, reference);
     }
 
     test('construction', () {
@@ -22,7 +19,6 @@ void main() {
         0,
         0.1,
       );
-
       testTuple(constructed);
 
       // From list
@@ -30,20 +26,24 @@ void main() {
         0,
         0.1,
       ]);
-
       testTuple(fromList);
+
+      void fromListErrorTooShort() => Tuple2.fromList([]);
+      expect(fromListErrorTooShort, throwsA(isA<ArgumentError>()));
+
+      void fromListErrorNotTrimmed() =>
+          Tuple2.fromList([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      expect(fromListErrorNotTrimmed, throwsA(isA<ArgumentError>()));
 
       // From map
       final fromMap = Tuple2<int, double>.fromJson(<String, dynamic>{
         'item0': 0,
         'item1': 0.1,
       });
-
       testTuple(fromMap);
 
       // From record
       final fromRecord = Tuple2<int, double>.fromRecord((0, 0.1));
-
       testTuple(fromRecord);
     });
 
@@ -112,6 +112,30 @@ void main() {
       expect(record, isA<(int, double)>());
       expect(record.$1, 0);
       expect(record.$2, 0.1);
+    });
+
+    test('toJson', () {
+      final json = reference.toJson();
+      expect(json, {'item0': 0, 'item1': 0.1});
+    });
+
+    test('comparison', () {
+      final otherA = Tuple2(0, 0.1);
+      final otherB = Tuple2(10, 0.1);
+
+      expect(reference == otherA, isTrue);
+      expect(reference.hashCode, otherA.hashCode);
+
+      expect(reference == otherB, isFalse);
+      expect(reference.hashCode, isNot(otherB.hashCode));
+    });
+
+    test('length', () {
+      expect(reference.length, 2);
+    });
+
+    test('toString', () {
+      expect(reference.toString(), '(0, 0.1)');
     });
   });
 }

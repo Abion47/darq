@@ -9,6 +9,7 @@
   * `replaceWhere`
 * Fixed a bug in `average` that caused integer lists to sometimes not return accurate averages.
 * Corrected a bunch of methods throwing `ArgumentError` when a `RangeError` would be more idiomatic.
+* Corrected a bunch of methods throwing `StateError` when an `UnsupportedError` would be more idiomatic.
 * Fixed bugs in the implementation of `excludeAt`. (#17)
 * Added a default `EqualityComparer` for `bool` for the sake of convenience and completeness. (#18)
 * Added a bunch of additional tests to improve coverage.
@@ -16,7 +17,7 @@
 ## [2.0.0]
 * Updated for Dart 3 support
 * **Potentially Breaking:** Updated class definitions to be compliant with the new "strict-casts" and "strict-raw-types" analysis rules.
-* **Potentially Breaking:** Iterator classes now implement `Iterator` instead of extending it due to `Iterator` no longer being extendable.
+* **Potentially Breaking:** Derived iterator classes now extend `Iterator` instead of implementing it due to `Iterator` now being `abstract mixin`.
 * **Potentially Breaking:** Tuple iterator classes now take type parameters that match the tuples they iterate.
 * Added `deconstruct` extension method for converting an iterable of records into a record of iterables. (This method is implemented specifically on iterables of records, up to records containing 9 fields.)
   * Note: Due to apparent language limitations, iterables of records containing named fields aren't supported.

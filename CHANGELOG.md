@@ -22,6 +22,7 @@
     * Replaces every element in the specified range with the given value.
   * `replaceWhere`
     * Replaces every element that satisfies a condition with the given value.
+* Added an optional `delay` parameter to `toStream` to optionally delay the speed at which the elements are fed to the stream.
 * Fixed a bug in `average` that caused integer lists to sometimes not return accurate averages.
 * Corrected a bunch of methods throwing `ArgumentError` when a `RangeError` would be more idiomatic.
 * Corrected a bunch of methods throwing `StateError` when an `UnsupportedError` would be more idiomatic.

@@ -1,16 +1,27 @@
 ## [2.1.0]
-* Added `interleaveValue` extension method for inserting a static element between all elements in an iterable.
-* Added `interleaveValueWhere` extension method for inserting a static element between every two elements in an iterable that satisfy a condition.
-* Added `insertEvery` extension method for inserting a value into an iterable every N elements.
-* Added `insertWhere` extension method for inserting a single value into an iterable at the position of the first element to satisfy a condition.
-  * Added `insertOrAppendWhere` extension method which does the same thing, but if no satisfying element is found, appends the value at the end.
-* Added the following new extension methods for replacing elements in an iterable:
+* Added the following new extension methods:
+  * `insertEvery`:
+    * Inserts a value into an iterable every N elements.
+  * `insertWhere`:
+    * Inserts a single value into an iterable at the position of the first element to satisfy a condition.
+  * `insertOrAppendWhere`:
+    * Similar to `insertWhere`, but if no satisfying element is found, appends the value at the end.
+  * `interleaveValue`:
+    * Inserts a static element between all elements in an iterable.
+  * `interleaveValueWhere`:
+    * Inserts a static element between every two elements in an iterable that satisfy a condition.
   * `replaceAll`
+    * Replaces all values in an iterable with a given value. (Identical to `RepeatIterator(value, iterable.count())`.)
   * `replaceAt`
+    * Replaces the element at the specified index with a given value.
   * `replaceEvery`
+    * Replaces every Nth element with the given value.
   * `replaceRange`
+    * Replaces every element in the specified range with the elements from the given iterable.
   * `replaceRangeValue`
+    * Replaces every element in the specified range with the given value.
   * `replaceWhere`
+    * Replaces every element that satisfies a condition with the given value.
 * Fixed a bug in `average` that caused integer lists to sometimes not return accurate averages.
 * Corrected a bunch of methods throwing `ArgumentError` when a `RangeError` would be more idiomatic.
 * Corrected a bunch of methods throwing `StateError` when an `UnsupportedError` would be more idiomatic.

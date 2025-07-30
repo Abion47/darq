@@ -34,7 +34,7 @@ var stringI = 'abcdef'.iterable;
 var stringIR = 'abcdef'.iterableRunes;
 ```
 
-You can call any of 40 new methods on it to modify or analyze it. For example, the native method `map` is expanded upon with `select`, which combines the element with the index at which the element is found within the iterable:
+You can call any of 110+ new methods on it to modify or analyze it. For example, the native method `map` is expanded upon with `select`, which combines the element with the index at which the element is found within the iterable:
 
 ```dart
 var list = [10, 20, 30];

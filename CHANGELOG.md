@@ -1,5 +1,6 @@
 ## [2.1.0]
 * Added `interleaveValue` extension method for inserting a static element between all elements in an iterable.
+* Added `interleaveValueWhere` extension method for inserting a static element between every two elements in an iterable that satisfy a condition.
 * Added the following new extension methods for replacing elements in an iterable:
   * `replaceAll`
   * `replaceAt`

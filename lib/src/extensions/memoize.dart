@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 extension MemoizeExtension<T> on Iterable<T> {
   /// Returns an iterable whose elements are cached during the
   /// first iteration.
@@ -27,9 +29,11 @@ class MemoizedIterable<T> extends Iterable<T> {
   @override
   List<T> toList({bool growable = true}) {
     if (_isCached) {
-      if (growable) return _cache;
+      if (growable) return [..._cache];
+      if (_cache is UnmodifiableListView) return _cache;
       return List.unmodifiable(_cache);
     }
+
     return super.toList(growable: growable);
   }
 }

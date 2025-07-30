@@ -14,6 +14,14 @@ void main() {
       expect(result2, orderedEquals(<int>[1, 6, 7, 8, 6]));
     });
 
+    test('Error: Empty source iterable', () {
+      final Iterable<int> list = [1, 2, 3, 4, 5];
+      final Iterable<int> src = [];
+
+      void task() => list.replaceRange(src, start: -1, count: 1);
+      expect(task, throwsA(isA<ArgumentError>()));
+    });
+
     test('Error: Start less than zero', () {
       final Iterable<int> list = [1, 2, 3, 4, 5];
       final Iterable<int> src = [6, 7, 8];

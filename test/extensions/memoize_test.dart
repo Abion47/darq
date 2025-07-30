@@ -27,11 +27,18 @@ void main() {
         return c.length;
       }).memoize();
 
-      final result = generator.toList();
+      final result = generator.toList(growable: true);
       expect(result, orderedEquals(<int>[1]));
 
       generator.consume();
       generator.consume();
+      expect(called, 1);
+
+      result.add(5);
+      expect(result, orderedEquals(<int>[1, 5]));
+
+      final result2 = generator.toList(growable: true);
+      expect(result2, orderedEquals(<int>[1]));
       expect(called, 1);
     });
 
@@ -48,6 +55,26 @@ void main() {
 
       generator.consume();
       generator.consume();
+      expect(called, 1);
+
+      void task() => result.add(5);
+      expect(task, throwsA(isA<UnsupportedError>()));
+    });
+
+    test('Memoized list (unmodifiable, manual)', () {
+      final list = ['a'];
+      var called = 0;
+      final generator = list.map((c) {
+        called++;
+        return c.length;
+      });
+      final memoized = MemoizedIterable(generator);
+
+      final result = memoized.toList(growable: false);
+      expect(result, orderedEquals(<int>[1]));
+
+      memoized.consume();
+      memoized.consume();
       expect(called, 1);
 
       void task() => result.add(5);

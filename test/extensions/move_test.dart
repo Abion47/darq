@@ -5,8 +5,8 @@ void main() {
   group('move', () {
     test('Move elements forward', () {
       final list = [1, 2, 3, 4];
-      final result = list.move(0, 2, 1);
-      expect(result, orderedEquals(<int>[3, 1, 2, 4]));
+      final result = list.move(1, 2, 2);
+      expect(result, orderedEquals(<int>[1, 4, 2, 3]));
     });
 
     test('Move elements backward', () {

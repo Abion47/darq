@@ -34,21 +34,22 @@ extension MoveExtension<T> on Iterable<T> {
       int yieldIndex,
     ) sync* {
       var hasMore = true;
-      bool moveNext(Iterator<T> e) => hasMore && (hasMore = e.moveNext());
-
       var e = iterator;
-      for (var i = 0; i < startIndex && moveNext(e); i++) {
+
+      bool moveNext() => hasMore && (hasMore = e.moveNext());
+
+      for (var i = 0; i < startIndex && moveNext(); i++) {
         yield e.current;
       }
 
       var buffer = List<T?>.filled(bufferSize, null);
       var length = 0;
 
-      for (; length < bufferSize && moveNext(e); length++) {
+      for (; length < bufferSize && moveNext(); length++) {
         buffer[length] = e.current;
       }
 
-      for (var i = 0; i < yieldIndex && moveNext(e); i++) {
+      for (var i = 0; i < yieldIndex && moveNext(); i++) {
         yield e.current;
       }
 
@@ -60,7 +61,7 @@ extension MoveExtension<T> on Iterable<T> {
         yield item;
       }
 
-      while (moveNext(e)) {
+      while (moveNext()) {
         yield e.current;
       }
     }

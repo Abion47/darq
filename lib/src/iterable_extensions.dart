@@ -81,6 +81,7 @@ export 'extensions/permutations.dart';
 export 'extensions/prepend.dart';
 export 'extensions/prepend_all.dart';
 export 'extensions/prescan.dart';
+export 'extensions/random.dart';
 export 'extensions/random_subset.dart';
 export 'extensions/randomize.dart';
 export 'extensions/repeat.dart';

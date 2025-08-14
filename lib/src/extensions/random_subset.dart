@@ -11,33 +11,6 @@ extension RandomSubsetExtension<T> on Iterable<T> {
   /// the iterable.
   Iterable<T> randomSubset(int size, [Random? random]) {
     return _RandomizedSubsetIterable(this, size, random);
-    // final list = toList();
-    // random ??= Random();
-
-    // if (list.length < size) {
-    //   throw RangeError.range(
-    //     size,
-    //     0,
-    //     list.length,
-    //     'size',
-    //     'The value of "size" cannot be greater than the length of the iterable.',
-    //   );
-    // }
-
-    // var m = 0;
-    // var w = list.length;
-    // var g = w - 1;
-
-    // while (m < size) {
-    //   var k = g - random.nextInt(w);
-    //   var tmp = list[k];
-    //   list[k] = list[m];
-    //   list[m] = tmp;
-    //   m++;
-    //   w--;
-    // }
-
-    // return list.take(size);
   }
 }
 

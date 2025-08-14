@@ -10,6 +10,8 @@
     * Inserts a static element between all elements in an iterable.
   * `interleaveValueWhere`:
     * Inserts a static element between every two elements in an iterable that satisfy a condition.
+  * `random`
+    * Gets a single random element from the iterable.
   * `replaceAll`
     * Replaces all values in an iterable with a given value. (Identical to `RepeatIterator(value, iterable.count())`.)
   * `replaceAt`

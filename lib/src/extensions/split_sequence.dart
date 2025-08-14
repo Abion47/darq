@@ -1,6 +1,6 @@
 import '../utility/equality_comparer.dart';
 
-extension SplitExtension<T> on Iterable<T> {
+extension SplitSequenceExtension<T> on Iterable<T> {
   /// Splits the is iterable into multiple iterables on elements that match
   /// the separator.
   ///
@@ -10,36 +10,36 @@ extension SplitExtension<T> on Iterable<T> {
   /// If [keepSeparator] is true, the returned iterables will be interleaved with
   /// the value of the separator. Otherwise, the separator elements will be omitted
   /// from the output.
-  ///
-  /// Example:
-  ///
-  ///     void main() {
-  ///       final list = ['a', ' ', 'b', 'c', ' ', 'd'];
-  ///       final result = list.split(' ');
-  ///
-  ///       // Result: [
-  ///       //   ['a''],
-  ///       //   ['b', 'c'],
-  ///       //   ['d'],
-  ///       // ]
-  ///     }
-  Iterable<Iterable<T>> split(
-    T separator, {
+  Iterable<Iterable<T>> splitSequence(
+    Iterable<T> separator, {
     bool Function(T separator, T element)? comparer,
     bool keepSeparator = false,
   }) sync* {
+    final separatorList = separator.toList(growable: false);
+    var index = 0;
     var buffer = <T>[];
 
     comparer ??= EqualityComparer.forType<T>().compare;
 
     for (var o in this) {
-      if (comparer(separator, o)) {
-        yield List.unmodifiable(buffer);
-        if (keepSeparator) yield [separator];
-        buffer = <T>[];
+      if (comparer(separatorList[index], o)) {
+        index++;
+
+        if (index >= separatorList.length) {
+          yield List.unmodifiable(buffer);
+          if (keepSeparator) yield separatorList;
+          index = 0;
+          buffer = <T>[];
+        }
       } else {
+        if (index > 0) buffer.addAll(separatorList.take(index));
         buffer.add(o);
+        index = 0;
       }
+    }
+
+    if (index > 0) {
+      buffer.addAll(separatorList.take(index));
     }
 
     if (buffer.isNotEmpty) {

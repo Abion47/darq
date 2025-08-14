@@ -22,6 +22,12 @@
     * Replaces every element in the specified range with the given value.
   * `replaceWhere`
     * Replaces every element that satisfies a condition with the given value.
+  * `splitSequence`
+    * Splits an iterable into multiple iterables when a given ordered sequence is found.
+  * `splitWhere`
+    * Splits an iterable into multiple iterables when a given condition is met.
+* Added optional `keepSeparator` parameter to `split` to optionally keep the element that was specified as the separator in the resulting iterable.
+  * The new `splitSequence` and `splitWhere` methods also have this parameter.
 * Added an optional `delay` parameter to `toStream` to optionally delay the speed at which the elements are fed to the stream.
 * Fixed a bug in `average` that caused integer lists to sometimes not return accurate averages.
 * Corrected a bunch of methods throwing `ArgumentError` when a `RangeError` would be more idiomatic.

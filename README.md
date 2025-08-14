@@ -342,6 +342,8 @@ var split = list.split(' ');
  - [singleWhereOrDefault](https://pub.dev/documentation/darq/latest/darq/SingleWhereOrDefaultExtension/singleWhereOrDefault.html)
  - [skipLast](https://pub.dev/documentation/darq/latest/darq/SkipLastExtension/skipLast.html)
  - [split](https://pub.dev/documentation/darq/latest/darq/SplitExtension/split.html)
+ - [splitSequence](https://pub.dev/documentation/darq/latest/darq/SplitSequenceExtension/split_sequence.html)
+ - [splitWhere](https://pub.dev/documentation/darq/latest/darq/SplitWhereExtension/split_where.html)
  - [startsWith](https://pub.dev/documentation/darq/latest/darq/StartsWithExtension/startsWith.html)
  - [subsets](https://pub.dev/documentation/darq/latest/darq/SubsetsExtension/subsets.html)
  - [sum](https://pub.dev/documentation/darq/latest/darq/SumExtension/sum.html)

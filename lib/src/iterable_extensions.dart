@@ -100,6 +100,8 @@ export 'extensions/single_or_default.dart';
 export 'extensions/single_where_or_default.dart';
 export 'extensions/skip_last.dart';
 export 'extensions/split.dart';
+export 'extensions/split_sequence.dart';
+export 'extensions/split_where.dart';
 export 'extensions/starts_with.dart';
 export 'extensions/subsets.dart';
 export 'extensions/sum.dart';

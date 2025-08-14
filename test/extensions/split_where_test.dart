@@ -2,10 +2,10 @@ import 'package:darq/darq.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('split', () {
+  group('splitWhere', () {
     test('on strings', () {
       final list = ['a', ' ', 'b', 'c', ' ', 'd'];
-      final result = list.split(' ').memoize();
+      final result = list.splitWhere((c) => c == ' ').memoize();
       expect(result.length, 3);
       expect(result.elementAt(0), orderedEquals(<String>['a']));
       expect(result.elementAt(1), orderedEquals(<String>['b', 'c']));
@@ -14,7 +14,8 @@ void main() {
 
     test('on strings (with keepSeparator)', () {
       final list = ['a', ' ', 'b', 'c', ' ', 'd'];
-      final result = list.split(' ', keepSeparator: true).memoize();
+      final result =
+          list.splitWhere((c) => c == ' ', keepSeparator: true).memoize();
       expect(result.length, 5);
       expect(result.elementAt(0), orderedEquals(<String>['a']));
       expect(result.elementAt(1), orderedEquals(<String>[' ']));
@@ -24,8 +25,8 @@ void main() {
     });
 
     test('on ints', () {
-      final list = [1, -1, 2, 3, -1, 4];
-      final result = list.split(-1).memoize();
+      final list = [1, -1, 2, 3, -2, 4];
+      final result = list.splitWhere((e) => e < 0).memoize();
       expect(result.length, 3);
       expect(result.elementAt(0), orderedEquals([1]));
       expect(result.elementAt(1), orderedEquals([2, 3]));
@@ -34,16 +35,14 @@ void main() {
 
     test('unchanged', () {
       final list = ['a', 'b', 'c', 'd'];
-      final result = list.split(' ').memoize();
+      final result = list.splitWhere((c) => c == ' ').memoize();
       expect(result.length, 1);
       expect(result.elementAt(0), orderedEquals(<String>['a', 'b', 'c', 'd']));
     });
 
-    test('on Strings with comparer', () {
+    test('on Strings, more complex case', () {
       final list = ['a', 'e', 'b', 'c', 'E', 'd'];
-      final result = list
-          .split('e', comparer: (a, b) => a.toLowerCase() == b.toLowerCase())
-          .memoize();
+      final result = list.splitWhere((c) => c.toLowerCase() == 'e').memoize();
       expect(result.length, 3);
       expect(result.elementAt(0), orderedEquals(<String>['a']));
       expect(result.elementAt(1), orderedEquals(<String>['b', 'c']));
